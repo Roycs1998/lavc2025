@@ -32,7 +32,10 @@ const Footer = (props: Props) => {
         'is-full'
       )}
     >
-      <div className={verticalLayoutClasses.footerContentWrapper}>{children}</div>
+      <div className={verticalLayoutClasses.footerContentWrapper}>
+        {children}
+        <h1>footer</h1>
+      </div>
     </StyledFooter>
   )
 }
