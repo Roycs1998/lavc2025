@@ -12,7 +12,7 @@
 
 @media (max-width: 590px) {
   .container {
-    block-size: 400px; /* Reduce la altura en pantallas más pequeñas */
+    block-size: 40px; /* Reduce la altura en pantallas más pequeñas */
     inline-size: 100%; /* Mantiene el ancho al 100% del contenedor padre */
     max-inline-size: none; /* Elimina el límite de ancho máximo */
   }
