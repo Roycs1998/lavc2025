@@ -24,8 +24,13 @@
 }
 
 .mainLogo {
+  margin-inline-start: 60%;
   block-size: 90px;
   inline-size: 110px;
+}
+
+.hoverColor:hover {
+  color: #695fcf;
 }
 
 .dropdownMenu {
@@ -37,9 +42,9 @@
     display: none;
   }
 
-  .mainLogo {
-    block-size: 70px;
-    inline-size: 80px;
+  .mainLogoPhone {
+    block-size: 90px;
+    inline-size: 110px;
   }
 
   .dropdownMenu {
@@ -62,12 +67,23 @@
   }
 }
 
-@media (max-width: 1207px) {
+@media (max-width: 1391px) {
   .link {
     display: none;
   }
 
   .dropdownMenu {
     display: block;
+  }
+
+  .mainLogoPhone {
+    block-size: 90px;
+    inline-size: 110px;
+  }
+
+  .mainLogo {
+    margin-inline-start: 10%;
+    block-size: 90px;
+    inline-size: 110px;
   }
 }

@@ -9,6 +9,7 @@ import PersonSearchIcon from '@mui/icons-material/PersonSearch'
 import EventIcon from '@mui/icons-material/Event'
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline'
 import PublishedWithChangesIcon from '@mui/icons-material/PublishedWithChanges'
+import NavigateNextIcon from '@mui/icons-material/NavigateNext'
 
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
@@ -17,22 +18,13 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import MenuIcon from '@mui/icons-material/Menu'
 
-import { List, ListItem, ListItemText, Menu, MenuItem } from '@mui/material'
+import { Divider, Drawer, IconButton, List, ListItem, ListItemButton, ListItemText } from '@mui/material'
 
 import styles from './Navbar.module.css'
 
 export const Navbar = () => {
   const [scrolled, setScrolled] = useState(false)
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
-  const open = Boolean(anchorEl)
-
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget)
-  }
-
-  const handleClose = () => {
-    setAnchorEl(null)
-  }
+  const [mobileOpen, setMobileOpen] = React.useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,6 +36,71 @@ export const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  const handleDrawerToggle = () => {
+    setMobileOpen(prevState => !prevState)
+  }
+
+  const drawer = (
+    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center', bgcolor: '#3a3480', height: '100vh' }}>
+      <Typography variant='h6' sx={{ my: 2 }}>
+        <img className={styles.mainLogoPhone} src='/images/logolavc/logo.ico' alt='logo' />
+      </Typography>
+      <Divider sx={{ bgcolor: '#272457' }} />
+      <List sx={{ color: 'white' }}>
+        <ListItem>
+          <ListItemButton>
+            <ListItemText
+              className={styles.hoverColor}
+              primaryTypographyProps={{ sx: { fontSize: '1.1rem', fontWeight: '550' } }}
+              primary='Nosotros'
+            ></ListItemText>
+            <NavigateNextIcon sx={{ fontSize: '2.2rem', mr: -2.5 }} />
+          </ListItemButton>
+        </ListItem>
+        <ListItem>
+          <ListItemButton>
+            <ListItemText
+              className={styles.hoverColor}
+              primaryTypographyProps={{ sx: { fontSize: '1.1rem', fontWeight: '550' } }}
+              primary='LAVC 2025'
+            ></ListItemText>
+            <NavigateNextIcon sx={{ fontSize: '2.2rem', mr: -2.5 }} />
+          </ListItemButton>
+        </ListItem>
+        <ListItem>
+          <ListItemButton>
+            <ListItemText
+              className={styles.hoverColor}
+              primaryTypographyProps={{ sx: { fontSize: '1.1rem', fontWeight: '550' } }}
+              primary='Preguntas Frecuentes'
+            ></ListItemText>
+            <NavigateNextIcon sx={{ fontSize: '2.2rem', mr: -2.5 }} />
+          </ListItemButton>
+        </ListItem>
+        <ListItem>
+          <ListItemButton>
+            <ListItemText
+              className={styles.hoverColor}
+              primaryTypographyProps={{ sx: { fontSize: '1.1rem', fontWeight: '550' } }}
+              primary='Publicaciones'
+            ></ListItemText>
+            <NavigateNextIcon sx={{ fontSize: '2.2rem', mr: -2.5 }} />
+          </ListItemButton>
+        </ListItem>
+        <ListItem>
+          <ListItemButton component={Link} href='/login'>
+            <ListItemText
+              className={styles.hoverColor}
+              primaryTypographyProps={{ sx: { fontSize: '1.1rem', fontWeight: '550' } }}
+              primary='Login'
+            ></ListItemText>
+            <NavigateNextIcon sx={{ fontSize: '2.2rem', mr: -2.5 }} />
+          </ListItemButton>
+        </ListItem>
+      </List>
+    </Box>
+  )
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`} sx={{ bgcolor: 'transparent' }}>
@@ -52,13 +109,13 @@ export const Navbar = () => {
             <img className={styles.mainLogo} src='/images/logolavc/logo.ico' alt='logo' />
           </Typography>
           <Typography className={styles.list} component='div'>
-            <List className={styles.link} sx={{ display: 'flex', flexDirection: 'row', padding: 0, marginLeft: 10 }}>
+            <List className={styles.link} sx={{ display: 'flex', flexDirection: 'row', padding: 0, marginLeft: '15%' }}>
               <ListItem>
                 <PersonSearchIcon className={styles.icons} />
                 <ListItemText
+                  className={styles.hoverColor}
                   primaryTypographyProps={{
                     sx: {
-                      marginRight: 10,
                       fontWeight: 700,
                       fontSize: '1.1rem'
                     }
@@ -69,11 +126,12 @@ export const Navbar = () => {
               <ListItem className={styles.link}>
                 <EventIcon className={styles.icons} />
                 <ListItemText
+                  className={styles.hoverColor}
                   primaryTypographyProps={{
                     sx: {
-                      marginRight: 10,
                       fontWeight: 700,
-                      fontSize: '1.1rem'
+                      fontSize: '1.1rem',
+                      whiteSpace: 'nowrap'
                     }
                   }}
                   primary='LAVC 2025'
@@ -82,11 +140,12 @@ export const Navbar = () => {
               <ListItem className={styles.link}>
                 <HelpOutlineIcon className={styles.icons} />
                 <ListItemText
+                  className={styles.hoverColor}
                   primaryTypographyProps={{
                     sx: {
-                      marginRight: 10,
                       fontWeight: 700,
-                      fontSize: '1.1rem'
+                      fontSize: '1.1rem',
+                      whiteSpace: 'nowrap'
                     }
                   }}
                   primary='Preguntas Frecuentes'
@@ -95,9 +154,9 @@ export const Navbar = () => {
               <ListItem className={styles.link}>
                 <PublishedWithChangesIcon className={styles.icons} />
                 <ListItemText
+                  className={styles.hoverColor}
                   primaryTypographyProps={{
                     sx: {
-                      marginRight: 10,
                       fontWeight: 700,
                       fontSize: '1.1rem'
                     }
@@ -109,58 +168,38 @@ export const Navbar = () => {
           </Typography>
           <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}></Typography>
           <Link href={'/login'}>
-            <Button className={styles.link} color='inherit'>
+            <Button className={`${styles.link} ${styles.hoverColor}`} color='inherit' sx={{ marginRight: '250px' }}>
               <PersonIcon className={styles.icons} />
               Login
             </Button>
           </Link>
-          <Box className={styles.dropdownMenu}>
-            <Button id='basic-button' onClick={handleClick}>
-              <MenuIcon sx={{ color: 'white', fontSize: '2.3rem' }} />
-            </Button>
-            <Menu
-              id='basic-menu'
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleClose}
-              MenuListProps={{
-                'aria-labelledby': 'basic-button'
-              }}
-              slotProps={{
-                paper: {
-                  sx: {
-                    backgroundColor: '#3a3480', // Cambia esto según sea necesario
-                    color: 'white'
-                  }
-                }
-              }}
-            >
-              <MenuItem sx={{ fontSize: '1.1rem', fontWeight: '550' }} onClick={handleClose}>
-                <PersonSearchIcon className={styles.icons} />
-                Nosotros
-              </MenuItem>
-              <MenuItem sx={{ fontSize: '1.1rem', fontWeight: '550' }} onClick={handleClose}>
-                <EventIcon className={styles.icons} />
-                LAVC 2025
-              </MenuItem>
-              <MenuItem sx={{ fontSize: '1.1rem', fontWeight: '550' }} onClick={handleClose}>
-                <HelpOutlineIcon className={styles.icons} />
-                Preguntas Frecuentes
-              </MenuItem>
-              <MenuItem sx={{ fontSize: '1.1rem', fontWeight: '550' }} onClick={handleClose}>
-                <PublishedWithChangesIcon className={styles.icons} />
-                Publicaciones
-              </MenuItem>
-              <MenuItem sx={{ fontSize: '1.1rem', fontWeight: '550' }} onClick={handleClose}>
-                <Link href={'/login'}>
-                  <PersonIcon className={styles.icons} />
-                  Login
-                </Link>
-              </MenuItem>
-            </Menu>
-          </Box>
+          <IconButton
+            className={styles.dropdownMenu}
+            color='inherit'
+            aria-label='open drawer'
+            edge='start'
+            onClick={handleDrawerToggle}
+          >
+            <MenuIcon sx={{ color: 'white', fontSize: '2.3rem' }} />
+          </IconButton>
         </Toolbar>
       </AppBar>
+      <nav>
+        <Drawer
+          variant='temporary'
+          open={mobileOpen}
+          onClose={handleDrawerToggle}
+          ModalProps={{
+            keepMounted: true // Better open performance on mobile.
+          }}
+          sx={{
+            display: { xs: 'block' },
+            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 400 }
+          }}
+        >
+          {drawer}
+        </Drawer>
+      </nav>
     </Box>
   )
 }

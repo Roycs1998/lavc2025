@@ -1,0 +1,28 @@
+.hoverColor:hover {
+  color: #695fcf;
+}
+
+.footerOne {
+}
+
+.footerTwo {
+}
+
+.containerFooter {
+}
+@media (max-width: 899px) {
+  .containerFooter {
+    block-size: 600px;
+  }
+
+  .footerTwo {
+    display: flex;
+    justify-content: center;
+    margin: 30px;
+  }
+
+  .footerOne {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+  }
+}
