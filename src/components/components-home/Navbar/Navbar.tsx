@@ -42,8 +42,10 @@ export const Navbar = () => {
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center', bgcolor: '#3a3480', height: '100vh' }}>
-      <Typography variant='h6' sx={{ my: 2 }}>
-        <img className={styles.mainLogoPhone} src='/images/logolavc/logo.ico' alt='logo' />
+      <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
+        <Link href={'/'}>
+          <img className={styles.mainLogoPhone} src='/images/logolavc/logo.ico' alt='logo' />
+        </Link>
       </Typography>
       <Divider sx={{ bgcolor: '#272457' }} />
       <List sx={{ color: 'white' }}>
@@ -106,7 +108,9 @@ export const Navbar = () => {
       <AppBar className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`} sx={{ bgcolor: 'transparent' }}>
         <Toolbar sx={{ bgcolor: 'none' }}>
           <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
-            <img className={styles.mainLogo} src='/images/logolavc/logo.ico' alt='logo' />
+            <Link href={'/'}>
+              <img className={styles.mainLogo} src='/images/logolavc/logo.ico' alt='logo' />
+            </Link>
           </Typography>
           <Typography className={styles.list} component='div'>
             <List className={styles.link} sx={{ display: 'flex', flexDirection: 'row', padding: 0, marginLeft: '15%' }}>

@@ -11,6 +11,8 @@ import '@/app/globals.css'
 
 // Generated Icon CSS Imports
 import '@assets/iconify-icons/generated-icons.css'
+import { Navbar } from '@/components/components-home/Navbar'
+import { FooterTwo } from '@/components/components-home/FooterTwo'
 
 export const metadata = {
   title: 'Demo: Materio - NextJS Dashboard Free',
@@ -29,7 +31,11 @@ const RootLayout = ({ children }: ChildrenType) => {
 
   return (
     <html id='__next' dir={direction}>
-      <body className={poppins.className}>{children}</body>
+      <body className={`${poppins.className} flex is-full min-bs-full flex-auto flex-col`}>
+        <Navbar />
+        {children}
+        <FooterTwo />
+      </body>
     </html>
   )
 }

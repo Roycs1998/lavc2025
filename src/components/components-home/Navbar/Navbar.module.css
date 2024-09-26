@@ -37,36 +37,6 @@
   display: none;
 }
 
-@media (max-width: 590px) {
-  .link {
-    display: none;
-  }
-
-  .mainLogoPhone {
-    block-size: 90px;
-    inline-size: 110px;
-  }
-
-  .dropdownMenu {
-    display: block;
-  }
-
-  .navbar {
-    position: fixed;
-    background-color: transparent; /* Fondo completamente transparente */
-    transition: background-color 0.3s; /* Transición suave al cambiar el color de fondo */
-    block-size: 75px;
-    box-shadow: none;
-    display: flex; /* Activa Flexbox */
-    justify-content: center; /* Centra horizontalmente los elementos */
-  }
-
-  .scrolled {
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
-    background-color: #3a3480;
-  }
-}
-
 @media (max-width: 1391px) {
   .link {
     display: none;
@@ -85,5 +55,28 @@
     margin-inline-start: 10%;
     block-size: 90px;
     inline-size: 110px;
+  }
+}
+
+@media (max-width: 590px) {
+  .navbar {
+    position: fixed;
+    background-color: transparent; /* Fondo completamente transparente */
+    transition: background-color 0.3s; /* Transición suave al cambiar el color de fondo */
+    block-size: 75px;
+    box-shadow: none;
+    display: flex; /* Activa Flexbox */
+    justify-content: center; /* Centra horizontalmente los elementos */
+  }
+
+  .mainLogo {
+    margin-inline-start: 5%;
+    block-size: 70px;
+    inline-size: 90px;
+  }
+
+  .scrolled {
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+    background-color: #3a3480;
   }
 }

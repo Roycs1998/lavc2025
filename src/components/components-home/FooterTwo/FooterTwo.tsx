@@ -141,8 +141,8 @@ export const FooterTwo = () => {
           bgcolor: '#2d2a55'
         }}
       >
-        <Container sx={{ maxWidth: '100%', marginTop: '20px' }}>
-          <Grid container spacing={2} sx={{ marginLeft: '1%', justifyContent: 'center' }}>
+        <Container sx={{ maxWidth: '80%', marginTop: '20px' }}>
+          <Grid container spacing={2}>
             <Grid item xs={12} sm={6} md={3}>
               <Item
                 className={style.footerOne}
