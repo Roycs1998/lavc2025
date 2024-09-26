@@ -1,14 +1,7 @@
 .container {
   position: relative;
-  block-size: 955px;
   inline-size: 100%;
-  max-inline-size: 2005px;
-}
-
-.imagen {
   block-size: 955px;
-  inline-size: 100%;
-  max-inline-size: 2005px;
 }
 
 .layer {
@@ -21,57 +14,31 @@
   max-inline-size: 2005px;
 }
 
-.eventDate {
-  position: absolute;
-  inset: 0;
-  inset-block-start: 50%; /* Centra verticalmente */
-  inset-inline-start: 50%; /* Centra horizontalmente */
-  transform: translate(-20%, -40%);
+.imagen {
+  inline-size: 100%;
+  block-size: 955px;
 }
 
-.eventName {
+.textOverlay {
   position: absolute;
-  inset: 0;
-  inset-block-start: 50%; /* Centra verticalmente */
-  inset-inline-start: 50%; /* Centra horizontalmente */
-  transform: translate(-45%, -30%);
-}
-
-.eventMotto {
-  position: absolute;
-  inset: 0;
-  inset-block-start: 50%; /* Centra verticalmente */
-  inset-inline-start: 50%; /* Centra horizontalmente */
-  transform: translate(-35%, -17%);
-}
-
-.containerEvent {
-  position: absolute;
-  inset: 0;
-  inset-block-start: 10%; /* Centra verticalmente */
-  inset-inline-start: -1%; /* Centra horizontalmente */
-}
-
-.eventButtonOne {
-  position: absolute;
-  inset: 0;
-  inset-block-start: 50%; /* Centra verticalmente */
-  inset-inline-start: 50%; /* Centra horizontalmente */
-  transform: translate(-70%, -17%);
-}
-
-.eventButtonTwo {
-  position: absolute;
-  inset: 0;
-  inset-block-start: 50%; /* Centra verticalmente */
-  inset-inline-start: 50%; /* Centra horizontalmente */
-  transform: translate(100%, -17%);
+  inset-block-start: 50%; /* Centra el texto verticalmente */
+  inset-inline-start: 50%; /* Centra el texto horizontalmente */
+  transform: translate(-50%, -50%); /* Mantiene el centrado */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  inline-size: 100%;
 }
 
 @media (max-width: 590px) {
   .container {
     position: relative;
-    block-size: 770px; /* Reduce la altura en pantallas más pequeñas */
+    block-size: 800px; /* Reduce la altura en pantallas más pequeñas */
     inline-size: 100%; /* Mantiene el ancho al 100% del contenedor padre */
     max-inline-size: none; /* Elimina el límite de ancho máximo */
   }
@@ -81,73 +48,14 @@
     inset: 0;
     background-color: rgba(58, 52, 128, 0.6); /* Color morado #3a3480 con opacidad */ /* Color morado con opacidad */
     pointer-events: none;
-    block-size: 770px;
+    block-size: 800px;
     inline-size: 100%;
     max-inline-size: none;
   }
 
   .imagen {
-    block-size: 770px;
+    block-size: 800px;
     inline-size: 100%;
     max-inline-size: none;
-  }
-
-  .containerEvent {
-    position: absolute;
-    inset: 0;
-    inset-block-start: -1%; /* Centra verticalmente */
-    inset-inline-start: -10%; /* Centra horizontalmente */
-  }
-
-  .eventDate {
-    position: absolute;
-    inset: 0;
-    inset-block-start: 50%; /* Centra verticalmente */
-    inset-inline-start: 50%; /* Centra horizontalmente */
-    font-size: 30px;
-    transform: translate(-45%, -70%);
-    text-align: center;
-  }
-
-  .eventName {
-    position: absolute;
-    inset: 0;
-    inset-block-start: 50%; /* Centra verticalmente */
-    inset-inline-start: 50%; /* Centra horizontalmente */
-    font-size: 40px;
-    transform: translate(-45%, -55%);
-    text-align: center;
-  }
-
-  .eventMotto {
-    position: absolute;
-    inset: 0;
-    inset-block-start: 50%; /* Centra verticalmente */
-    inset-inline-start: 50%; /* Centra horizontalmente */
-    transform: translate(-45%, -13%);
-    text-align: center;
-  }
-
-  .eventButtonTwo {
-    position: absolute;
-    inset: 0;
-    inset-block-start: 50%; /* Centra verticalmente */
-    inset-inline-start: 50%; /* Centra horizontalmente */
-    transform: translate(90%, 70%);
-  }
-  .eventButtonOne {
-    position: absolute;
-    inset: 0;
-    inset-block-start: 50%; /* Centra verticalmente */
-    inset-inline-start: 50%; /* Centra horizontalmente */
-    transform: translate(-70%, 80%);
-  }
-
-  .containerEvent {
-    position: absolute;
-    inset: 0;
-    inset-block-start: 10%; /* Centra verticalmente */
-    inline-size: 750px;
-    inset-inline-start: -30%; /* Centra horizontalmente */
   }
 }

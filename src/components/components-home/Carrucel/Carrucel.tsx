@@ -2,7 +2,6 @@
 import { useState } from 'react'
 
 import Carousel from 'react-bootstrap/Carousel'
-
 import { Box, Button, Typography } from '@mui/material'
 import ArrowRightIcon from '@mui/icons-material/ArrowRight'
 
@@ -27,7 +26,7 @@ export const Carrucel = () => {
   }
 
   return (
-    <Box>
+    <Box sx={{ position: 'relative' }}>
       <Carousel
         className={`${style.container}`}
         activeIndex={index}
@@ -42,34 +41,53 @@ export const Carrucel = () => {
           </Carousel.Item>
         ))}
       </Carousel>
+
       <Box className={style.layer}></Box>
-      <Box className={style.containerEvent}>
-        <Box className={'contenedorText'}>
-          <Typography
-            variant='h4'
-            className={style.eventDate}
-            sx={{ color: 'white', fontWeight: 700, fontFamily: 'Arial, sans-serif' }}
-          >
-            29-31 August @ New York
-          </Typography>
-          <Typography
-            variant='h3'
-            className={style.eventName}
-            sx={{ color: 'white', fontWeight: 700, fontFamily: 'Arial, sans-serif' }}
-          >
-            AI Conference 2023: Unlocking the Future
-          </Typography>
-          <Typography
-            variant='h6'
-            className={style.eventMotto}
-            sx={{ color: 'white', fontWeight: 700, fontFamily: 'Arial, sans-serif' }}
-          >
-            Join us for the most anticipated event of the year - the AI Conference 2023!
-          </Typography>
-        </Box>
-        <Box display='flex' justifyContent='space-between' sx={{ width: '200px' }}>
+
+      {/* Contenedor del texto superpuesto al carrusel */}
+      <Box className={style.textOverlay}>
+        <Typography
+          variant='h4'
+          sx={{
+            color: 'white',
+            fontWeight: 700,
+            fontFamily: 'Arial, sans-serif',
+            marginBottom: '10px',
+            fontSize: { xs: '1.7rem', sm: '2rem', md: '2.5rem' }, // Tamaños responsivos
+            textAlign: 'center'
+          }}
+        >
+          29-31 August @ New York
+        </Typography>
+        <Typography
+          variant='h3'
+          sx={{
+            color: 'white',
+            fontWeight: 700,
+            fontFamily: 'Arial, sans-serif',
+            marginBottom: '10px',
+            fontSize: { xs: '3rem', sm: '2.5rem', md: '3rem' }, // Tamaños responsivos
+            textAlign: 'center'
+          }}
+        >
+          AI Conference 2023: Unlocking the Future
+        </Typography>
+        <Typography
+          variant='h6'
+          sx={{
+            color: 'white',
+            fontWeight: 700,
+            fontFamily: 'Arial, sans-serif',
+            fontSize: { xs: '1.5rem', sm: '1.2rem', md: '1.5rem' }, // Tamaños responsivos
+            textAlign: 'center'
+          }}
+        >
+          Join us for the most anticipated event of the year - the AI Conference 2023!
+        </Typography>
+
+        {/* Botones */}
+        <Box display='flex' justifyContent='center' sx={{ marginTop: '30px' }}>
           <Button
-            className={style.eventButtonOne}
             sx={{
               height: 55,
               width: 150,
@@ -78,8 +96,11 @@ export const Carrucel = () => {
               color: 'black',
               fontFamily: 'Arial, sans-serif',
               fontWeight: 700,
+              marginLeft: { xs: 4 },
+              fontSize: '18px',
+              marginRight: '10px',
               '&:hover': {
-                backgroundColor: 'white' // Mantiene el mismo color en hover
+                backgroundColor: 'white'
               }
             }}
             variant='contained'
@@ -87,7 +108,6 @@ export const Carrucel = () => {
             Event
           </Button>
           <Button
-            className={style.eventButtonTwo}
             sx={{
               height: 60,
               borderRadius: '50%',
@@ -95,12 +115,12 @@ export const Carrucel = () => {
               backgroundColor: 'white',
               color: 'black',
               '&:hover': {
-                backgroundColor: 'white' // Mantiene el mismo color en hover
+                backgroundColor: 'white'
               }
             }}
             variant='contained'
           >
-            <ArrowRightIcon sx={{ fontSize: 45 }} />
+            <ArrowRightIcon sx={{ fontSize: '60px' }} />
           </Button>
         </Box>
       </Box>

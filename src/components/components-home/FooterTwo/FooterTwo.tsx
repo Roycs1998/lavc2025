@@ -101,10 +101,7 @@ export const FooterTwo = () => {
             >
               Stay Connected
             </Item>
-            <Item
-              className={`${style.hoverColor} ${style.footerOne}`}
-              sx={{ backgroundColor: '#3A3480', fontSize: '1rem', color: 'white' }}
-            >
+            <Item className={style.footerOne} sx={{ backgroundColor: '#3A3480', fontSize: '1rem', color: 'white' }}>
               <FacebookIcon className={style.hoverColor} sx={{ fontSize: '40px' }} />
               <LinkedInIcon className={style.hoverColor} sx={{ fontSize: '40px' }} />
               <InstagramIcon className={style.hoverColor} sx={{ fontSize: '40px' }} />
@@ -144,9 +141,9 @@ export const FooterTwo = () => {
           bgcolor: '#2d2a55'
         }}
       >
-        <Container sx={{ maxWidth: '10%', marginTop: '20px' }}>
-          <Grid container spacing={2} sx={{ marginLeft: '1%' }}>
-            <Grid item xs={12} md={3}>
+        <Container sx={{ maxWidth: '100%', marginTop: '20px' }}>
+          <Grid container spacing={2} sx={{ marginLeft: '1%', justifyContent: 'center' }}>
+            <Grid item xs={12} sm={6} md={3}>
               <Item
                 className={style.footerOne}
                 sx={{
@@ -160,27 +157,26 @@ export const FooterTwo = () => {
                 Professional Resources
               </Item>
             </Grid>
-            <Grid item xs={12} md={3}>
+            <Grid item xs={12} sm={6} md={3}>
               <Item
                 className={`${style.hoverColor} ${style.footerOne}`}
                 sx={{ backgroundColor: '#2d2a55', fontSize: '0.9rem', color: 'white', marginBottom: '1%' }}
               >
                 NAVC Brand Guidelines
               </Item>
-              <Item className={style.footerOne} sx={{ backgroundColor: '#2d2a55', fontSize: '0.9rem', color: 'white' }}>
+              <Item
+                className={style.footerOne}
+                sx={{
+                  backgroundColor: '#2d2a55',
+                  fontSize: '0.9rem',
+                  color: 'white',
+                  textAlign: { xs: 'center', md: 'left' }
+                }}
+              >
                 © 2024 North American Veterinary Community Web Design by PHOS Creative
               </Item>
             </Grid>
-            <Grid
-              item
-              xs={12}
-              md={3}
-              sx={{
-                '@media (max-width: 1200px)': {
-                  flexBasis: '50%'
-                }
-              }}
-            >
+            <Grid item xs={12} sm={6} md={3}>
               <Item
                 className={`${style.hoverColor} ${style.footerOne}`}
                 sx={{
@@ -188,9 +184,7 @@ export const FooterTwo = () => {
                   fontSize: '1rem',
                   fontWeight: 'bold',
                   color: 'white',
-                  marginBottom: '1%',
-                  width: '20%',
-                  marginLeft: '40%'
+                  marginBottom: '1%'
                 }}
               >
                 FAQ
@@ -198,12 +192,10 @@ export const FooterTwo = () => {
               <Item
                 className={`${style.hoverColor} ${style.footerOne}`}
                 sx={{
-                  width: '40%',
                   backgroundColor: '#2d2a55',
                   fontSize: '1rem',
                   color: 'white',
-                  fontWeight: 'bold',
-                  marginLeft: '35%'
+                  fontWeight: 'bold'
                 }}
               >
                 Media Kits
@@ -211,19 +203,16 @@ export const FooterTwo = () => {
               <Item
                 className={`${style.hoverColor} ${style.footerOne}`}
                 sx={{
-                  width: '65%',
                   backgroundColor: '#2d2a55',
                   fontSize: '1rem',
                   color: 'white',
-                  fontWeight: 'bold',
-                  marginLeft: '25%',
-                  textAlign: 'center'
+                  fontWeight: 'bold'
                 }}
               >
                 Terms and Conditions
               </Item>
             </Grid>
-            <Grid item xs={12} md={2}>
+            <Grid item xs={12} sm={6} md={3}>
               <Item
                 className={`${style.hoverColor} ${style.footerOne}`}
                 sx={{
@@ -231,8 +220,7 @@ export const FooterTwo = () => {
                   fontSize: '1rem',
                   fontWeight: 'bold',
                   color: 'white',
-                  marginBottom: '1%',
-                  marginLeft: '-30%'
+                  marginBottom: '1%'
                 }}
               >
                 Privacy Policy
@@ -240,7 +228,6 @@ export const FooterTwo = () => {
               <Item
                 className={`${style.hoverColor} ${style.footerOne}`}
                 sx={{
-                  marginLeft: '-20%',
                   backgroundColor: '#2d2a55',
                   fontSize: '1rem',
                   fontWeight: 'bold',
@@ -252,7 +239,6 @@ export const FooterTwo = () => {
               <Item
                 className={`${style.hoverColor} ${style.footerOne}`}
                 sx={{
-                  marginLeft: '-5%',
                   backgroundColor: '#2d2a55',
                   fontSize: '1rem',
                   fontWeight: 'bold',
