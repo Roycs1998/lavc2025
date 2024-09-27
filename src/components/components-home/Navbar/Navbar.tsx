@@ -18,11 +18,19 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import MenuIcon from '@mui/icons-material/Menu'
 
+import {IoCartOutline} from 'react-icons/io5'
+
 import { Divider, Drawer, IconButton, List, ListItem, ListItemButton, ListItemText } from '@mui/material'
 
 import styles from './Navbar.module.css'
+import LanguageDropdown from './LanguageDropdown'
+import { getDictionary } from '@/utils/getDictionary'
 
-export const Navbar = () => {
+type Props = {
+  dictionary: Awaited<ReturnType<typeof getDictionary>>
+}
+
+export const Navbar =  ({ dictionary }: Props) => {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = React.useState(false)
 
@@ -51,10 +59,10 @@ export const Navbar = () => {
       <List sx={{ color: 'white' }}>
         <ListItem>
           <ListItemButton>
-            <ListItemText
+          <ListItemText
               className={styles.hoverColor}
               primaryTypographyProps={{ sx: { fontSize: '1.1rem', fontWeight: '550' } }}
-              primary='Nosotros'
+              primary={dictionary?.nav_main?.contact_us || 'Contacto'}
             ></ListItemText>
             <NavigateNextIcon sx={{ fontSize: '2.2rem', mr: -2.5 }} />
           </ListItemButton>
@@ -94,7 +102,7 @@ export const Navbar = () => {
             <ListItemText
               className={styles.hoverColor}
               primaryTypographyProps={{ sx: { fontSize: '1.1rem', fontWeight: '550' } }}
-              primary='Login'
+              primary={dictionary.nav_main.login}
             ></ListItemText>
             <NavigateNextIcon sx={{ fontSize: '2.2rem', mr: -2.5 }} />
           </ListItemButton>
@@ -124,7 +132,7 @@ export const Navbar = () => {
                       fontSize: '1.1rem'
                     }
                   }}
-                  primary='Nosotros'
+                  primary={dictionary.navigation.addresses}
                 />
               </ListItem>
               <ListItem className={styles.link}>
@@ -171,10 +179,13 @@ export const Navbar = () => {
             </List>
           </Typography>
           <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}></Typography>
+
+          <LanguageDropdown className='hidden md:flex' isScroled={scrolled} />
+
           <Link href={'/login'}>
             <Button className={`${styles.link} ${styles.hoverColor}`} color='inherit' sx={{ marginRight: '250px' }}>
               <PersonIcon className={styles.icons} />
-              Login
+              {dictionary.nav_main.login}
             </Button>
           </Link>
           <IconButton
