@@ -11,7 +11,7 @@
   pointer-events: none;
   block-size: 955px;
   inline-size: 100%;
-  max-inline-size: 2005px;
+  max-inline-size: 100%;
 }
 
 .imagen {

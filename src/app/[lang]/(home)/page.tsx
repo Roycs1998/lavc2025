@@ -7,9 +7,7 @@ import type { Locale } from '@/configs/i18n'
 import { getDictionary } from '@/utils/getDictionary'
 
 const Home = async ({ children, params }: ChildrenType & { params: { lang: Locale } }) => {
-
   const dictionary = await getDictionary(params.lang)
-
 
   return (
     <main>

@@ -18,19 +18,20 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import MenuIcon from '@mui/icons-material/Menu'
 
-import {IoCartOutline} from 'react-icons/io5'
+import { IoCartOutline } from 'react-icons/io5'
 
 import { Divider, Drawer, IconButton, List, ListItem, ListItemButton, ListItemText } from '@mui/material'
 
 import styles from './Navbar.module.css'
 import LanguageDropdown from './LanguageDropdown'
-import { getDictionary } from '@/utils/getDictionary'
+import type { getDictionary } from '@/utils/getDictionary'
+import { NavbarTooltip } from './NavbarTooltip'
 
 type Props = {
   dictionary: Awaited<ReturnType<typeof getDictionary>>
 }
 
-export const Navbar =  ({ dictionary }: Props) => {
+export const Navbar = ({ dictionary }: Props) => {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = React.useState(false)
 
@@ -59,7 +60,7 @@ export const Navbar =  ({ dictionary }: Props) => {
       <List sx={{ color: 'white' }}>
         <ListItem>
           <ListItemButton>
-          <ListItemText
+            <ListItemText
               className={styles.hoverColor}
               primaryTypographyProps={{ sx: { fontSize: '1.1rem', fontWeight: '550' } }}
               primary={dictionary?.nav_main?.contact_us || 'Contacto'}
@@ -124,30 +125,30 @@ export const Navbar =  ({ dictionary }: Props) => {
             <List className={styles.link} sx={{ display: 'flex', flexDirection: 'row', padding: 0, marginLeft: '15%' }}>
               <ListItem>
                 <PersonSearchIcon className={styles.icons} />
-                <ListItemText
-                  className={styles.hoverColor}
-                  primaryTypographyProps={{
-                    sx: {
-                      fontWeight: 700,
-                      fontSize: '1.1rem'
-                    }
-                  }}
-                  primary={dictionary.navigation.addresses}
-                />
+                <NavbarTooltip
+                  inicio='Nosotros'
+                  links={[
+                    { text: 'Acerca de LACV', link: 'https://example1.com' },
+                    { text: 'Contacto', link: 'https://example2.com' }
+                  ]}
+                  image='https://tse2.mm.bing.net/th?id=OIP.33VqJRpi2PsJuc9mcRwcCQHaE9&pid=Api&P=0&h=180'
+                ></NavbarTooltip>
               </ListItem>
               <ListItem className={styles.link}>
                 <EventIcon className={styles.icons} />
-                <ListItemText
-                  className={styles.hoverColor}
-                  primaryTypographyProps={{
-                    sx: {
-                      fontWeight: 700,
-                      fontSize: '1.1rem',
-                      whiteSpace: 'nowrap'
-                    }
-                  }}
-                  primary='LAVC 2025'
-                />
+
+                <NavbarTooltip
+                  inicio='LAVC 2025'
+                  links={[
+                    { text: 'Evento y Talleres', link: 'https://example1.com' },
+                    { text: 'Ponentes', link: 'https://example2.com' },
+                    { text: 'Programa', link: 'https://example2.com' },
+                    { text: '', link: 'https://example2.com' },
+                    { text: 'Empresas', link: 'https://example2.com' },
+                    { text: 'Contacto', link: 'https://example2.com' }
+                  ]}
+                  image='https://4.bp.blogspot.com/-atz5WgBqCys/VxasgrWNCEI/AAAAAAAB9Ao/ClzFWC9eEEcOWygTP4l3m0rEXVpRTX1ggCKgB/s1600/Perritos-cachorros-162.jpg'
+                ></NavbarTooltip>
               </ListItem>
               <ListItem className={styles.link}>
                 <HelpOutlineIcon className={styles.icons} />
@@ -165,16 +166,15 @@ export const Navbar =  ({ dictionary }: Props) => {
               </ListItem>
               <ListItem className={styles.link}>
                 <PublishedWithChangesIcon className={styles.icons} />
-                <ListItemText
-                  className={styles.hoverColor}
-                  primaryTypographyProps={{
-                    sx: {
-                      fontWeight: 700,
-                      fontSize: '1.1rem'
-                    }
-                  }}
-                  primary='Publicaciones'
-                />
+                <NavbarTooltip
+                  inicio='Publicaciones'
+                  links={[
+                    { text: 'Noticias', link: 'https://example1.com' },
+                    { text: 'Galeria', link: 'https://example2.com' },
+                    { text: 'Libreria LAVC', link: 'https://example2.com' }
+                  ]}
+                  image='https://www.petlife.mx/u/fotografias/m/2023/10/19/f960x540-7724_81799_0.jpg'
+                ></NavbarTooltip>
               </ListItem>
             </List>
           </Typography>
