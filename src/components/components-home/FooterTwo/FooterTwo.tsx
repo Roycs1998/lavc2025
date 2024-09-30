@@ -142,19 +142,17 @@ export const FooterTwo = () => {
         }}
       >
         <Container sx={{ maxWidth: '80%', marginTop: '20px' }}>
-          <Grid container spacing={2}>
+          <Grid container spacing={1}>
             <Grid item xs={12} sm={6} md={3}>
               <Item
                 className={style.footerOne}
                 sx={{
                   backgroundColor: '#2d2a55',
-                  fontSize: '1.3rem',
-                  fontWeight: 'bold',
-                  color: 'white',
-                  marginBottom: '1%'
+                  display: 'flex',
+                  justifyContent: 'center'
                 }}
               >
-                Professional Resources
+                <img src='images\logolavc\logo.ico' alt='logo' style={{ width: 150, height: 110 }} />
               </Item>
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
@@ -212,7 +210,7 @@ export const FooterTwo = () => {
                 Terms and Conditions
               </Item>
             </Grid>
-            <Grid item xs={12} sm={6} md={3}>
+            <Grid item xs={12} sm={6} md={2}>
               <Item
                 className={`${style.hoverColor} ${style.footerOne}`}
                 sx={{

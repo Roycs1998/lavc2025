@@ -10,6 +10,7 @@ import Fade from '@mui/material/Fade'
 import Typography from '@mui/material/Typography'
 import Avatar from '@mui/material/Avatar'
 import Divider from '@mui/material/Divider'
+import { useMediaQuery } from '@mui/material'
 
 interface LinkItem {
   text: string // Texto del enlace
@@ -26,6 +27,11 @@ export const NavbarTooltip: React.FC<TransitionsPopperProps> = ({ inicio, links,
   const [open, setOpen] = React.useState(false)
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const [mouseLeaveTimeout, setMouseLeaveTimeout] = React.useState<NodeJS.Timeout | null>(null)
+
+  const isSmallScreen = useMediaQuery('(max-width:1588px)')
+
+  // Definimos los offsets en función del tamaño de la pantalla
+  const offsetValue = isSmallScreen ? [650, 68.5] : [780, 68.5]
 
   const handleMouseEnter = () => {
     if (mouseLeaveTimeout) {
@@ -78,7 +84,7 @@ export const NavbarTooltip: React.FC<TransitionsPopperProps> = ({ inicio, links,
           {
             name: 'offset',
             options: {
-              offset: [780, 68.5] // [desplazamiento horizontal, desplazamiento vertical]
+              offset: offsetValue // [desplazamiento horizontal, desplazamiento vertical]
             }
           }
         ]}

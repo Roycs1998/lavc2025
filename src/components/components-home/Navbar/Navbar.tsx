@@ -18,8 +18,6 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import MenuIcon from '@mui/icons-material/Menu'
 
-import { IoCartOutline } from 'react-icons/io5'
-
 import { Divider, Drawer, IconButton, List, ListItem, ListItemButton, ListItemText } from '@mui/material'
 
 import styles from './Navbar.module.css'
