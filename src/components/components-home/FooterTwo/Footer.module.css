@@ -1,5 +1,5 @@
 .hoverColor:hover {
-  color: #695fcf;
+  color: var(--color-on-hover);
   cursor: pointer;
 }
 

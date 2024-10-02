@@ -48,14 +48,17 @@ export const Navbar = ({ dictionary }: Props) => {
   }
 
   const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center', bgcolor: '#3a3480', height: '100vh' }}>
+    <Box
+      onClick={handleDrawerToggle}
+      sx={{ textAlign: 'center', bgcolor: 'var(--primary-color-purple)', height: '100vh' }}
+    >
       <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
         <Link href={'/'}>
           <img className={styles.mainLogoPhone} src='/images/logolavc/logo.ico' alt='logo' />
         </Link>
       </Typography>
       <Divider sx={{ bgcolor: '#272457' }} />
-      <List sx={{ color: 'white' }}>
+      <List sx={{ color: 'var(--letter-color)' }}>
         <ListItem>
           <ListItemButton>
             <ListItemText
@@ -124,7 +127,7 @@ export const Navbar = ({ dictionary }: Props) => {
               <ListItem>
                 <PersonSearchIcon className={styles.icons} />
                 <NavbarTooltip
-                  inicio='Nosotros'
+                  start='Nosotros'
                   links={[
                     { text: 'Acerca de LACV', link: 'https://example1.com' },
                     { text: 'Contacto', link: 'https://example2.com' }
@@ -136,7 +139,7 @@ export const Navbar = ({ dictionary }: Props) => {
                 <EventIcon className={styles.icons} />
 
                 <NavbarTooltip
-                  inicio='LAVC 2025'
+                  start='LAVC 2025'
                   links={[
                     { text: 'Evento y Talleres', link: 'https://example1.com' },
                     { text: 'Ponentes', link: 'https://example2.com' },
@@ -165,7 +168,7 @@ export const Navbar = ({ dictionary }: Props) => {
               <ListItem className={styles.link}>
                 <PublishedWithChangesIcon className={styles.icons} />
                 <NavbarTooltip
-                  inicio='Publicaciones'
+                  start='Publicaciones'
                   links={[
                     { text: 'Noticias', link: 'https://example1.com' },
                     { text: 'Galeria', link: 'https://example2.com' },

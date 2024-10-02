@@ -9,6 +9,7 @@ import { Main } from '../Main'
 import { HorizontalCard } from '../HorizontalCard'
 import type { getDictionary } from '@/utils/getDictionary'
 import { InformationLetters } from '../InformationLetters'
+import { LocationLetter } from '../LocationLetter'
 
 type Props = {
   dictionary: Awaited<ReturnType<typeof getDictionary>>
@@ -55,6 +56,7 @@ export const Body = ({ dictionary }: Props) => {
       </Box>
       <h1>{dictionary.quoters.company_not_found}</h1>
 
+      <LocationLetter />
       <HorizontalCard />
     </div>
   )

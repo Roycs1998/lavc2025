@@ -15,7 +15,7 @@
 
 .scrolled {
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
-  background-color: #3a3480;
+  background-color: var(--primary-color-purple);
 }
 
 .icons {
@@ -30,7 +30,7 @@
 }
 
 .hoverColor:hover {
-  color: #695fcf;
+  color: var(--color-on-hover);
 }
 
 .dropdownMenu {
@@ -77,6 +77,6 @@
 
   .scrolled {
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
-    background-color: #3a3480;
+    background-color: var(--primary-color-purple);
   }
 }

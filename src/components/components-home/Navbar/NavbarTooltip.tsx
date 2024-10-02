@@ -18,12 +18,12 @@ interface LinkItem {
 }
 
 interface TransitionsPopperProps {
-  inicio: string // Texto que se muestra inicialmente
+  start: string // Texto que se muestra inicialmente
   links: LinkItem[] // Arreglo de objetos que contiene los textos y enlaces
   image: string // Propiedad opcional para la imagen
 }
 
-export const NavbarTooltip: React.FC<TransitionsPopperProps> = ({ inicio, links, image }) => {
+export const NavbarTooltip = ({ start, links, image }: TransitionsPopperProps) => {
   const [open, setOpen] = React.useState(false)
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const [mouseLeaveTimeout, setMouseLeaveTimeout] = React.useState<NodeJS.Timeout | null>(null)
@@ -67,11 +67,11 @@ export const NavbarTooltip: React.FC<TransitionsPopperProps> = ({ inicio, links,
           fontSize: '1.1rem',
           whiteSpace: 'nowrap',
           ':hover': {
-            color: '#695fcf'
+            color: 'var(--color-on-hover)'
           }
         }}
       >
-        {inicio}
+        {start}
       </Box>
       <Popper
         id={id}
@@ -105,7 +105,7 @@ export const NavbarTooltip: React.FC<TransitionsPopperProps> = ({ inicio, links,
                 width: 800,
                 height: 300,
                 maxWidth: '100%',
-                backgroundColor: '#3A3480'
+                backgroundColor: 'var(--primary-color-purple)'
               }}
             >
               <Avatar
@@ -126,9 +126,9 @@ export const NavbarTooltip: React.FC<TransitionsPopperProps> = ({ inicio, links,
                       variant='h6'
                       sx={{
                         fontWeight: 500,
-                        color: 'white',
+                        color: 'var(--letter-color)',
                         ':hover': {
-                          color: '#7f76d9'
+                          color: 'var(--color-on-hover)'
                         }
                       }}
                     >

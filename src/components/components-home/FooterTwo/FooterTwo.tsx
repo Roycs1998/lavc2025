@@ -15,9 +15,6 @@ const Item = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(0.3),
   textAlign: 'left',
   color: theme.palette.text.secondary,
-  ...theme.applyStyles('dark', {
-    backgroundColor: '#1A2027'
-  }),
   border: 'none', // Elimina el borde
   boxShadow: 'none' // Elimina la sombra si hay
 }))
@@ -30,7 +27,7 @@ export const FooterTwo = () => {
       sx={{
         py: 3,
         mt: 'auto',
-        bgcolor: '#3A3480',
+        bgcolor: 'var(--primary-color-purple)',
         height: '400px'
       }}
     >
@@ -40,10 +37,10 @@ export const FooterTwo = () => {
             <Item
               className={style.footerOne}
               sx={{
-                backgroundColor: '#3A3480',
+                backgroundColor: 'var(--primary-color-purple)',
                 fontSize: '1.3rem',
                 fontWeight: 'bold',
-                color: 'white',
+                color: 'var(--letter-color)',
                 marginBottom: '1%'
               }}
             >
@@ -51,13 +48,13 @@ export const FooterTwo = () => {
             </Item>
             <Item
               className={`${style.hoverColor} ${style.footerOne}`}
-              sx={{ backgroundColor: '#3A3480', fontSize: '1rem', color: 'white' }}
+              sx={{ backgroundColor: 'var(--primary-color-purple)', fontSize: '1rem', color: 'var(--letter-color)' }}
             >
               Earn Veterinary CE
             </Item>
             <Item
               className={`${style.hoverColor} ${style.footerOne}`}
-              sx={{ backgroundColor: '#3A3480', fontSize: '1rem', color: 'white' }}
+              sx={{ backgroundColor: 'var(--primary-color-purple)', fontSize: '1rem', color: 'var(--letter-color)' }}
             >
               Earn CE Online with VetFolio
             </Item>
@@ -66,10 +63,10 @@ export const FooterTwo = () => {
             <Item
               className={style.footerOne}
               sx={{
-                backgroundColor: '#3A3480',
+                backgroundColor: 'var(--primary-color-purple)',
                 fontSize: '1.3rem',
                 fontWeight: 'bold',
-                color: 'white',
+                color: 'var(--letter-color)',
                 marginBottom: '1%'
               }}
             >
@@ -77,13 +74,13 @@ export const FooterTwo = () => {
             </Item>
             <Item
               className={`${style.hoverColor} ${style.footerOne}`}
-              sx={{ backgroundColor: '#3A3480', fontSize: '1rem', color: 'white' }}
+              sx={{ backgroundColor: 'var(--primary-color-purple)', fontSize: '1rem', color: 'var(--letter-color)' }}
             >
               Event Calendar
             </Item>
             <Item
               className={`${style.hoverColor} ${style.footerOne}`}
-              sx={{ backgroundColor: '#3A3480', fontSize: '1rem', color: 'white' }}
+              sx={{ backgroundColor: 'var(--primary-color-purple)', fontSize: '1rem', color: 'var(--letter-color)' }}
             >
               Careers
             </Item>
@@ -92,16 +89,19 @@ export const FooterTwo = () => {
             <Item
               className={style.footerOne}
               sx={{
-                backgroundColor: '#3A3480',
+                backgroundColor: 'var(--primary-color-purple)',
                 fontSize: '1.3rem',
                 fontWeight: 'bold',
-                color: 'white',
+                color: 'var(--letter-color)',
                 marginBottom: '1%'
               }}
             >
               Stay Connected
             </Item>
-            <Item className={style.footerOne} sx={{ backgroundColor: '#3A3480', fontSize: '1rem', color: 'white' }}>
+            <Item
+              className={style.footerOne}
+              sx={{ backgroundColor: 'var(--primary-color-purple)', fontSize: '1rem', color: 'var(--letter-color)' }}
+            >
               <FacebookIcon className={style.hoverColor} sx={{ fontSize: '40px' }} />
               <LinkedInIcon className={style.hoverColor} sx={{ fontSize: '40px' }} />
               <InstagramIcon className={style.hoverColor} sx={{ fontSize: '40px' }} />
@@ -109,7 +109,12 @@ export const FooterTwo = () => {
             </Item>
             <Item
               className={`${style.hoverColor} ${style.footerOne}`}
-              sx={{ backgroundColor: '#3A3480', fontSize: '1rem', color: 'white', marginTop: '20px' }}
+              sx={{
+                backgroundColor: 'var(--primary-color-purple)',
+                fontSize: '1rem',
+                color: 'var(--letter-color)',
+                marginTop: '20px'
+              }}
             >
               <Button
                 variant='contained'
@@ -118,12 +123,12 @@ export const FooterTwo = () => {
                   width: '230px',
                   height: '55px',
                   bgcolor: 'white',
-                  color: '#3A3480',
+                  color: 'var(--primary-color-purple)',
                   fontWeight: 'bold',
                   fontSize: '1rem',
                   '&:hover': {
-                    backgroundColor: '#695fcf', // No cambia el color de fondo en hover
-                    color: 'white'
+                    backgroundColor: 'var(--color-on-hover)', // No cambia el color de fondo en hover
+                    color: 'var(--letter-color)'
                   }
                 }}
               >
@@ -138,7 +143,7 @@ export const FooterTwo = () => {
         sx={{
           py: 3,
           mt: '4%',
-          bgcolor: '#2d2a55'
+          bgcolor: 'var(--second-color-purple)'
         }}
       >
         <Container sx={{ maxWidth: '80%', marginTop: '20px' }}>
@@ -147,7 +152,7 @@ export const FooterTwo = () => {
               <Item
                 className={style.footerOne}
                 sx={{
-                  backgroundColor: '#2d2a55',
+                  backgroundColor: 'var(--second-color-purple)',
                   display: 'flex',
                   justifyContent: 'center'
                 }}
@@ -158,16 +163,21 @@ export const FooterTwo = () => {
             <Grid item xs={12} sm={6} md={3}>
               <Item
                 className={`${style.hoverColor} ${style.footerOne}`}
-                sx={{ backgroundColor: '#2d2a55', fontSize: '0.9rem', color: 'white', marginBottom: '1%' }}
+                sx={{
+                  backgroundColor: 'var(--second-color-purple)',
+                  fontSize: '0.9rem',
+                  color: 'var(--letter-color)',
+                  marginBottom: '1%'
+                }}
               >
                 NAVC Brand Guidelines
               </Item>
               <Item
                 className={style.footerOne}
                 sx={{
-                  backgroundColor: '#2d2a55',
+                  backgroundColor: 'var(--second-color-purple)',
                   fontSize: '0.9rem',
-                  color: 'white',
+                  color: 'var(--letter-color)',
                   textAlign: { xs: 'center', md: 'left' }
                 }}
               >
@@ -178,10 +188,10 @@ export const FooterTwo = () => {
               <Item
                 className={`${style.hoverColor} ${style.footerOne}`}
                 sx={{
-                  backgroundColor: '#2d2a55',
+                  backgroundColor: 'var(--second-color-purple)',
                   fontSize: '1rem',
                   fontWeight: 'bold',
-                  color: 'white',
+                  color: 'var(--letter-color)',
                   marginBottom: '1%'
                 }}
               >
@@ -190,9 +200,9 @@ export const FooterTwo = () => {
               <Item
                 className={`${style.hoverColor} ${style.footerOne}`}
                 sx={{
-                  backgroundColor: '#2d2a55',
+                  backgroundColor: 'var(--second-color-purple)',
                   fontSize: '1rem',
-                  color: 'white',
+                  color: 'var(--letter-color)',
                   fontWeight: 'bold'
                 }}
               >
@@ -201,9 +211,9 @@ export const FooterTwo = () => {
               <Item
                 className={`${style.hoverColor} ${style.footerOne}`}
                 sx={{
-                  backgroundColor: '#2d2a55',
+                  backgroundColor: 'var(--second-color-purple)',
                   fontSize: '1rem',
-                  color: 'white',
+                  color: 'var(--letter-color)',
                   fontWeight: 'bold'
                 }}
               >
@@ -214,10 +224,10 @@ export const FooterTwo = () => {
               <Item
                 className={`${style.hoverColor} ${style.footerOne}`}
                 sx={{
-                  backgroundColor: '#2d2a55',
+                  backgroundColor: 'var(--second-color-purple)',
                   fontSize: '1rem',
                   fontWeight: 'bold',
-                  color: 'white',
+                  color: 'var(--letter-color)',
                   marginBottom: '1%'
                 }}
               >
@@ -226,10 +236,10 @@ export const FooterTwo = () => {
               <Item
                 className={`${style.hoverColor} ${style.footerOne}`}
                 sx={{
-                  backgroundColor: '#2d2a55',
+                  backgroundColor: 'var(--second-color-purple)',
                   fontSize: '1rem',
                   fontWeight: 'bold',
-                  color: 'white'
+                  color: 'var(--letter-color)'
                 }}
               >
                 Cookie Policy
@@ -237,10 +247,10 @@ export const FooterTwo = () => {
               <Item
                 className={`${style.hoverColor} ${style.footerOne}`}
                 sx={{
-                  backgroundColor: '#2d2a55',
+                  backgroundColor: 'var(--second-color-purple)',
                   fontSize: '1rem',
                   fontWeight: 'bold',
-                  color: 'white'
+                  color: 'var(--letter-color)'
                 }}
               >
                 Privacy Statement

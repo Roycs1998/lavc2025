@@ -38,8 +38,11 @@ export function InformationLetters({ icon, qualification, link }: Data) {
             justifyContent: 'center'
           }}
         >
-          <Typography sx={{ color: 'white', textAlign: 'center' }}>{icon}</Typography>
-          <Typography variant='h5' sx={{ color: 'white', textAlign: 'center', fontWeight: 550, fontSize: 25 }}>
+          <Typography sx={{ color: 'var(--letter-color)', textAlign: 'center' }}>{icon}</Typography>
+          <Typography
+            variant='h5'
+            sx={{ color: 'var(--letter-color)', textAlign: 'center', fontWeight: 550, fontSize: 25 }}
+          >
             {qualification}
           </Typography>
         </CardContent>

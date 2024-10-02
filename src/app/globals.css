@@ -14,6 +14,10 @@
   --search-z-index: var(--mui-zIndex-tooltip);
   --drawer-z-index: var(--mui-zIndex-drawer);
   --backdrop-color: rgb(var(--mui-mainColorChannels-light) / 0.5);
+  --primary-color-purple: #3a3480;
+  --second-color-purple: #2d2a55;
+  --color-on-hover: #7f76d9;
+  --letter-color: white;
 }
 
 [data-mui-color-scheme='dark'] {
