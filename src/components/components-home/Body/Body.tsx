@@ -11,13 +11,46 @@ import type { getDictionary } from '@/utils/getDictionary'
 import { InformationLetters } from '../InformationLetters'
 import { LocationLetter } from '../LocationLetter'
 
+import { LavcLetter } from '../LavcLetter'
+
 type Props = {
   dictionary: Awaited<ReturnType<typeof getDictionary>>
 }
 
 export const Body = ({ dictionary }: Props) => {
+  const items = [
+    {
+      image: '/images/logolavc/imageneslavc/eric.jpg',
+      name: 'Eric Garcia',
+      link: 'https://www.youtube.com/watch?v=X6j6Zu-ktfk'
+    },
+    {
+      image: '/images/logolavc/imageneslavc/doug.jpg',
+      name: 'Doug Mader',
+      link: 'https://www.youtube.com/watch?v=1Kp67T30ISs'
+    },
+    {
+      image: '/images/logolavc/imageneslavc/megan.jpg',
+      name: 'Megan Brashear',
+      link: 'https://www.youtube.com/watch?v=KZADzSWL5fs'
+    },
+    {
+      image: '/images/logolavc/imageneslavc/mary.jpg',
+      name: 'Mary Gardner',
+      link: 'https://www.youtube.com/watch?v=kEgo8ZwnhII'
+    }
+  ]
+
+  const lavc = [
+    {
+      image: '/images/logolavc/imageneslavc/2024.jpg',
+      name: 'No puedes perderte el LAVC 2025, concursos, conferencias, shows y mucho más.',
+      link: 'https://www.youtube.com/watch?v=F4d8cttOYlA'
+    }
+  ]
+
   return (
-    <div>
+    <Box>
       <Main />
       <Box
         sx={{
@@ -54,10 +87,34 @@ export const Body = ({ dictionary }: Props) => {
           </Grid>
         </Grid>
       </Box>
-      <h1>{dictionary.quoters.company_not_found}</h1>
+
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center', // Centrar horizontalmente
+          alignItems: 'center', // Centrar verticalmente (opcional)
+          marginTop: { xs: '30px', md: '50px' },
+          marginBottom: { xs: '30px', md: '70px' }
+        }}
+      >
+        <Grid
+          container
+          spacing={5}
+          alignItems='center'
+          justifyContent='center'
+          sx={{ maxWidth: { xs: 'none', md: '75%' } }}
+        >
+          <Grid item xs={12} sm={12} md={6.5}>
+            <LavcLetter title='¿Estás listo para el LAVC 2025?' information={items} />
+          </Grid>
+          <Grid item xs={12} sm={12} md={5.5}>
+            <LavcLetter title='¡ASÍ FUE EL LAVC 2024!' information={lavc} />
+          </Grid>
+        </Grid>
+      </Box>
 
       <LocationLetter />
       <HorizontalCard />
-    </div>
+    </Box>
   )
 }

@@ -12,7 +12,7 @@ interface Data {
   link: string
 }
 
-export function InformationLetters({ icon, qualification, link }: Data) {
+export const InformationLetters = ({ icon, qualification, link }: Data) => {
   return (
     <Link href={link}>
       <Card
