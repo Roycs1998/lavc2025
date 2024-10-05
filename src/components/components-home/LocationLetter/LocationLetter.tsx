@@ -4,7 +4,13 @@ import Link from 'next/link'
 import { Button, Card, CardContent, Grid, Typography } from '@mui/material'
 import AddLocationIcon from '@mui/icons-material/AddLocation'
 
-export const LocationLetter = () => {
+import type { getDictionary } from '@/utils/getDictionary'
+
+type Props = {
+  dictionary: Awaited<ReturnType<typeof getDictionary>>
+}
+
+export const LocationLetter = ({ dictionary }: Props) => {
   return (
     <Card sx={{ maxWidth: '100%', border: 0, borderBottom: '10px solid #b28106' }}>
       <Grid container spacing={0} sx={{ bgcolor: '#F6A51A', padding: '20px' }}>
@@ -17,7 +23,7 @@ export const LocationLetter = () => {
               gutterBottom
               sx={{ textAlign: { xs: 'center', md: 'left' }, marginTop: '50px', color: 'white', fontWeight: 'bold' }}
             >
-              UBICACIÓN DEL EVENTO
+              {dictionary?.nav_main?.location_letter.event_location}
             </Typography>
             <Typography
               variant='h6'
@@ -28,8 +34,7 @@ export const LocationLetter = () => {
                 color: 'var(--letter-color)'
               }}
             >
-              CENTRO DE EXPOSICIONES JOCKEY Av. Javier Prado Este cruce con carretera Panamericana Sur S/N , alt. Puerta
-              1 Hipódromo de Monterrico, Parcela l, Santiago de Surco
+              {dictionary?.nav_main?.location_letter.location_description}
             </Typography>
             <Typography sx={{ marginTop: '50px', textAlign: { xs: 'center', md: 'left' } }}>
               <Link href='https://maps.app.goo.gl/eryFPrdrc6KpDuq86'>
@@ -48,7 +53,7 @@ export const LocationLetter = () => {
                   }}
                   endIcon={<AddLocationIcon />}
                 >
-                  UBICACIÓN
+                  {dictionary?.nav_main?.location_letter.location}
                 </Button>
               </Link>
             </Typography>
@@ -69,7 +74,7 @@ export const LocationLetter = () => {
           <iframe
             src='https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d62420.70570072013!2d-76.979608!3d-12.092007!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c7b0e5806cad%3A0x94a4c31cbaad2ae8!2sCentro%20de%20Exposiciones%20Jockey!5e0!3m2!1ses-419!2spe!4v1727795325243!5m2!1ses-419!2spe'
             width='100%'
-            height='380'
+            height='350'
             style={{ border: 0 }}
             allowFullScreen={true}
             loading='lazy'

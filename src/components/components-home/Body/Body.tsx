@@ -44,14 +44,14 @@ export const Body = ({ dictionary }: Props) => {
   const lavc = [
     {
       image: '/images/logolavc/imageneslavc/2024.jpg',
-      name: 'No puedes perderte el LAVC 2025, concursos, conferencias, shows y mucho más.',
+      name: dictionary?.nav_main?.lavcLetter.invitation_lavc_2025,
       link: 'https://www.youtube.com/watch?v=F4d8cttOYlA'
     }
   ]
 
   return (
     <Box>
-      <Main />
+      <Main dictionary={dictionary} />
       <Box
         sx={{
           flexGrow: 1,
@@ -67,21 +67,21 @@ export const Body = ({ dictionary }: Props) => {
           <Grid item>
             <InformationLetters
               icon={<MenuOpenIcon sx={{ fontSize: 40, margin: 1 }} />}
-              qualification='CHARLAS PROGRAMADAS'
+              qualification={dictionary?.nav_main?.informationLetters.scheduled_talks}
               link='https://www.youtube.com/watch?v=pz9O3UeM_o0&list=RDQZKrLIoMyxY&index=27'
             />
           </Grid>
           <Grid item>
             <InformationLetters
               icon={<DomainAddIcon sx={{ fontSize: 40, margin: 1 }} />}
-              qualification='HOSPEDAJES'
+              qualification={dictionary?.nav_main?.informationLetters.accommodations}
               link='a'
             />
           </Grid>
           <Grid item>
             <InformationLetters
               icon={<CameraAltIcon sx={{ fontSize: 40, margin: 1 }} />}
-              qualification='TURISMO'
+              qualification={dictionary?.nav_main?.informationLetters.tourism}
               link='a'
             />
           </Grid>
@@ -104,17 +104,25 @@ export const Body = ({ dictionary }: Props) => {
           justifyContent='center'
           sx={{ maxWidth: { xs: 'none', md: '75%' } }}
         >
-          <Grid item xs={12} sm={12} md={6.5}>
-            <LavcLetter title='¿Estás listo para el LAVC 2025?' information={items} />
+          <Grid item xs={12} sm={12} md={6}>
+            <LavcLetter
+              nameButton={dictionary?.nav_main?.lavcLetter.play_video}
+              title={dictionary?.nav_main?.lavcLetter.are_you_ready_for_lavc_2025}
+              information={items}
+            />
           </Grid>
-          <Grid item xs={12} sm={12} md={5.5}>
-            <LavcLetter title='¡ASÍ FUE EL LAVC 2024!' information={lavc} />
+          <Grid item xs={12} sm={12} md={5}>
+            <LavcLetter
+              nameButton={dictionary?.nav_main?.lavcLetter.play_video}
+              title={dictionary?.nav_main?.lavcLetter.this_was_lavc_2024}
+              information={lavc}
+            />
           </Grid>
         </Grid>
       </Box>
 
-      <LocationLetter />
-      <HorizontalCard />
+      <LocationLetter dictionary={dictionary} />
+      <HorizontalCard dictionary={dictionary} />
     </Box>
   )
 }

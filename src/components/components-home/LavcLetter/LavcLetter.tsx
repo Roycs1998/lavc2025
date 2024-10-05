@@ -14,10 +14,11 @@ interface Data {
 // Recibimos la lista de elementos como props
 interface InformationList {
   title: string
+  nameButton: string
   information: Data[]
 }
 
-export const LavcLetter = ({ title, information }: InformationList) => {
+export const LavcLetter = ({ nameButton, title, information }: InformationList) => {
   return (
     <Card sx={{ maxWidth: '100%', boxShadow: '1' }}>
       <Typography
@@ -37,23 +38,22 @@ export const LavcLetter = ({ title, information }: InformationList) => {
       >
         {title}
       </Typography>
-      <CardContent sx={{ padding: 2 }}>
-        <Grid container spacing={2} alignItems='center' justifyContent='center'>
+      <CardContent sx={{ padding: 3 }}>
+        <Grid container spacing={1}>
           {/* Mapeamos la lista de elementos */}
           {information.map((item, index) => (
-            <Grid container item xs={12} spacing={3} key={index}>
+            <Grid container item xs={12} spacing={2} key={index}>
               {/* Primera columna: Imagen */}
-              <Grid item xs={6}>
+              <Grid item xs={6} sx={{ height: 195 }}>
                 <CardMedia
                   component='img'
-                  height='200'
                   image={item.image}
                   alt={`Imagen ${index}`}
-                  sx={{ objectFit: 'cover', objectPosition: 'center', width: '100%' }}
+                  sx={{ height: '100%', width: '100%', objectFit: 'contain' }}
                 />
               </Grid>
               {/* Segunda columna: Título y descripción */}
-              <Grid item xs={5.5}>
+              <Grid item xs={5}>
                 <Typography variant='h6' sx={{ fontWeight: 700, marginTop: 2, color: '#153B8B' }}>
                   {item.name}
                 </Typography>
@@ -73,7 +73,7 @@ export const LavcLetter = ({ title, information }: InformationList) => {
                         borderRadius: '15px'
                       }}
                     >
-                      VIDEO
+                      {nameButton}
                     </Button>
                   </Link>
                 </Typography>

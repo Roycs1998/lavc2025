@@ -1,14 +1,20 @@
 'use client'
 import * as React from 'react'
 
+import Link from 'next/link'
+
 import FacebookIcon from '@mui/icons-material/Facebook'
 import LinkedInIcon from '@mui/icons-material/LinkedIn'
 import InstagramIcon from '@mui/icons-material/Instagram'
 import TwitterIcon from '@mui/icons-material/Twitter'
+import YouTubeIcon from '@mui/icons-material/YouTube'
+import WhatsAppIcon from '@mui/icons-material/WhatsApp'
+import MailOutlineIcon from '@mui/icons-material/MailOutline'
 
 import { Box, Button, Container, Grid, Paper, styled } from '@mui/material'
 
 import style from './Footer.module.css'
+import type { getDictionary } from '@/utils/getDictionary'
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -19,7 +25,12 @@ const Item = styled(Paper)(({ theme }) => ({
   boxShadow: 'none' // Elimina la sombra si hay
 }))
 
-export const FooterTwo = () => {
+type Props = {
+  dictionary: Awaited<ReturnType<typeof getDictionary>>
+}
+
+//{dictionary?.nav_main?.informationLetters.accommodations}
+export const FooterTwo = ({ dictionary }: Props) => {
   return (
     <Box
       className={style.containerFooter}
@@ -44,19 +55,19 @@ export const FooterTwo = () => {
                 marginBottom: '1%'
               }}
             >
-              Professional Resources
+              {dictionary?.nav_main?.footer.professional_resources}
             </Item>
             <Item
               className={`${style.hoverColor} ${style.footerOne}`}
               sx={{ backgroundColor: 'var(--primary-color-purple)', fontSize: '1rem', color: 'var(--letter-color)' }}
             >
-              Earn Veterinary CE
+              {dictionary?.nav_main?.footer.earn_veterinary_ce}
             </Item>
             <Item
               className={`${style.hoverColor} ${style.footerOne}`}
               sx={{ backgroundColor: 'var(--primary-color-purple)', fontSize: '1rem', color: 'var(--letter-color)' }}
             >
-              Earn CE Online with VetFolio
+              {dictionary?.nav_main?.footer.earn_veterinary_ce}
             </Item>
           </Grid>
           <Grid item xs={12} md={4}>
@@ -70,19 +81,19 @@ export const FooterTwo = () => {
                 marginBottom: '1%'
               }}
             >
-              Explore Opportunities
+              {dictionary?.nav_main?.footer.explore_opportunities}
             </Item>
             <Item
               className={`${style.hoverColor} ${style.footerOne}`}
               sx={{ backgroundColor: 'var(--primary-color-purple)', fontSize: '1rem', color: 'var(--letter-color)' }}
             >
-              Event Calendar
+              {dictionary?.nav_main?.footer.event_calendar}
             </Item>
             <Item
               className={`${style.hoverColor} ${style.footerOne}`}
               sx={{ backgroundColor: 'var(--primary-color-purple)', fontSize: '1rem', color: 'var(--letter-color)' }}
             >
-              Careers
+              {dictionary?.nav_main?.footer.event_calendar}
             </Item>
           </Grid>
           <Grid item xs={12} md={4}>
@@ -96,16 +107,24 @@ export const FooterTwo = () => {
                 marginBottom: '1%'
               }}
             >
-              Stay Connected
+              {dictionary?.nav_main?.footer.Stay_connected}
             </Item>
             <Item
               className={style.footerOne}
               sx={{ backgroundColor: 'var(--primary-color-purple)', fontSize: '1rem', color: 'var(--letter-color)' }}
             >
-              <FacebookIcon className={style.hoverColor} sx={{ fontSize: '40px' }} />
-              <LinkedInIcon className={style.hoverColor} sx={{ fontSize: '40px' }} />
-              <InstagramIcon className={style.hoverColor} sx={{ fontSize: '40px' }} />
-              <TwitterIcon className={style.hoverColor} sx={{ fontSize: '40px' }} />
+              <Link href={'https://www.facebook.com/conferencia.veterinaria.latinoamericana/'}>
+                <FacebookIcon className={style.hoverColor} sx={{ fontSize: '40px' }} />
+              </Link>
+              <Link href={'https://www.youtube.com/channel/UCBBXdp5Wohtn9yuihiREkEg?view_as=subscriber'}>
+                <YouTubeIcon className={style.hoverColor} sx={{ fontSize: '40px' }} />
+              </Link>
+              <Link href={''}>
+                <MailOutlineIcon className={style.hoverColor} sx={{ fontSize: '40px' }} />
+              </Link>
+              <Link href={'https://api.whatsapp.com/send?phone=51985174876'}>
+                <WhatsAppIcon className={style.hoverColor} sx={{ fontSize: '40px' }} />
+              </Link>
             </Item>
             <Item
               className={`${style.hoverColor} ${style.footerOne}`}
@@ -132,7 +151,7 @@ export const FooterTwo = () => {
                   }
                 }}
               >
-                Disable elevation
+                {dictionary?.nav_main?.footer.advertise_with_us}
               </Button>
             </Item>
           </Grid>
@@ -154,10 +173,12 @@ export const FooterTwo = () => {
                 sx={{
                   backgroundColor: 'var(--second-color-purple)',
                   display: 'flex',
-                  justifyContent: 'center'
+                  textAlign: 'center'
                 }}
               >
-                <img src='images\logolavc\logo.ico' alt='logo' style={{ width: 150, height: 110 }} />
+                <Link href={'/'}>
+                  <img src='images\logolavc\logo.ico' alt='logo' style={{ width: 150, height: 110 }} />
+                </Link>
               </Item>
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
@@ -170,7 +191,7 @@ export const FooterTwo = () => {
                   marginBottom: '1%'
                 }}
               >
-                NAVC Brand Guidelines
+                {dictionary?.nav_main?.footer.navc_brand}
               </Item>
               <Item
                 className={style.footerOne}
@@ -181,7 +202,7 @@ export const FooterTwo = () => {
                   textAlign: { xs: 'center', md: 'left' }
                 }}
               >
-                © 2024 North American Veterinary Community Web Design by PHOS Creative
+                {dictionary?.nav_main?.footer.comunity_veterinary}
               </Item>
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
@@ -195,7 +216,7 @@ export const FooterTwo = () => {
                   marginBottom: '1%'
                 }}
               >
-                FAQ
+                {dictionary?.nav_main?.footer.media_kits}
               </Item>
               <Item
                 className={`${style.hoverColor} ${style.footerOne}`}
@@ -206,7 +227,7 @@ export const FooterTwo = () => {
                   fontWeight: 'bold'
                 }}
               >
-                Media Kits
+                {dictionary?.nav_main?.footer.media_kits}
               </Item>
               <Item
                 className={`${style.hoverColor} ${style.footerOne}`}
@@ -217,7 +238,7 @@ export const FooterTwo = () => {
                   fontWeight: 'bold'
                 }}
               >
-                Terms and Conditions
+                {dictionary?.nav_main?.footer.media_kits}
               </Item>
             </Grid>
             <Grid item xs={12} sm={6} md={2}>
@@ -231,7 +252,7 @@ export const FooterTwo = () => {
                   marginBottom: '1%'
                 }}
               >
-                Privacy Policy
+                {dictionary?.nav_main?.footer.media_kits}
               </Item>
               <Item
                 className={`${style.hoverColor} ${style.footerOne}`}
@@ -242,7 +263,7 @@ export const FooterTwo = () => {
                   color: 'var(--letter-color)'
                 }}
               >
-                Cookie Policy
+                {dictionary?.nav_main?.footer.media_kits}
               </Item>
               <Item
                 className={`${style.hoverColor} ${style.footerOne}`}
@@ -253,7 +274,7 @@ export const FooterTwo = () => {
                   color: 'var(--letter-color)'
                 }}
               >
-                Privacy Statement
+                {dictionary?.nav_main?.footer.media_kits}
               </Item>
             </Grid>
           </Grid>

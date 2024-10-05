@@ -5,9 +5,15 @@ import Carousel from 'react-bootstrap/Carousel'
 import { Box, Button, Typography } from '@mui/material'
 import ArrowRightIcon from '@mui/icons-material/ArrowRight'
 
+import type { getDictionary } from '@/utils/getDictionary'
+
 import style from './carrucel.module.css'
 
-export const Carrucel = () => {
+type Props = {
+  dictionary: Awaited<ReturnType<typeof getDictionary>>
+}
+
+export const Carrucel = ({ dictionary }: Props) => {
   const [index, setIndex] = useState(0)
 
   const carouselItems = [
@@ -57,7 +63,7 @@ export const Carrucel = () => {
             textAlign: 'center'
           }}
         >
-          29-31 August @ New York
+          {dictionary?.nav_main?.carrucel.date}
         </Typography>
         <Typography
           variant='h3'
@@ -70,7 +76,7 @@ export const Carrucel = () => {
             textAlign: 'center'
           }}
         >
-          AI Conference 2023: Unlocking the Future
+          {dictionary?.nav_main?.carrucel.event_name}
         </Typography>
         <Typography
           variant='h6'
@@ -82,7 +88,7 @@ export const Carrucel = () => {
             textAlign: 'center'
           }}
         >
-          Join us for the most anticipated event of the year - the AI Conference 2023!
+          {dictionary?.nav_main?.carrucel.event_invitation}
         </Typography>
 
         {/* Botones */}
@@ -105,7 +111,7 @@ export const Carrucel = () => {
             }}
             variant='contained'
           >
-            Event
+            {dictionary?.nav_main?.carrucel.event}
           </Button>
           <Button
             sx={{

@@ -27,11 +27,7 @@ const poppins = Poppins({
   subsets: ['latin']
 })
 
-type Props = {
-  dictionary: Awaited<ReturnType<typeof getDictionary>>
-}
-
-const RootLayout = async ({ children, params }: ChildrenType & { params: { lang: Locale } })  => {
+const RootLayout = async ({ children, params }: ChildrenType & { params: { lang: Locale } }) => {
   // Vars
   const direction = 'ltr'
   const dictionary = await getDictionary(params.lang)
@@ -39,9 +35,9 @@ const RootLayout = async ({ children, params }: ChildrenType & { params: { lang:
   return (
     <html id='__next' dir={direction}>
       <body className={`${poppins.className} flex is-full min-bs-full flex-auto flex-col`}>
-        <Navbar dictionary={dictionary}/>
+        <Navbar dictionary={dictionary} />
         {children}
-        <FooterTwo />
+        <FooterTwo dictionary={dictionary} />
       </body>
     </html>
   )

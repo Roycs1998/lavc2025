@@ -16,6 +16,7 @@ import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
+
 import MenuIcon from '@mui/icons-material/Menu'
 
 import { Divider, Drawer, IconButton, List, ListItem, ListItemButton, ListItemText } from '@mui/material'
@@ -64,7 +65,7 @@ export const Navbar = ({ dictionary }: Props) => {
             <ListItemText
               className={styles.hoverColor}
               primaryTypographyProps={{ sx: { fontSize: '1.1rem', fontWeight: '550' } }}
-              primary={dictionary?.nav_main?.contact_us || 'Contacto'}
+              primary={dictionary?.nav_main?.navbar?.contact_us}
             ></ListItemText>
             <NavigateNextIcon sx={{ fontSize: '2.2rem', mr: -2.5 }} />
           </ListItemButton>
@@ -74,7 +75,7 @@ export const Navbar = ({ dictionary }: Props) => {
             <ListItemText
               className={styles.hoverColor}
               primaryTypographyProps={{ sx: { fontSize: '1.1rem', fontWeight: '550' } }}
-              primary='LAVC 2025'
+              primary={dictionary?.nav_main?.navbar.lacv_2025}
             ></ListItemText>
             <NavigateNextIcon sx={{ fontSize: '2.2rem', mr: -2.5 }} />
           </ListItemButton>
@@ -84,7 +85,7 @@ export const Navbar = ({ dictionary }: Props) => {
             <ListItemText
               className={styles.hoverColor}
               primaryTypographyProps={{ sx: { fontSize: '1.1rem', fontWeight: '550' } }}
-              primary='Preguntas Frecuentes'
+              primary={dictionary?.nav_main?.navbar.frequently_asked_questions}
             ></ListItemText>
             <NavigateNextIcon sx={{ fontSize: '2.2rem', mr: -2.5 }} />
           </ListItemButton>
@@ -94,7 +95,7 @@ export const Navbar = ({ dictionary }: Props) => {
             <ListItemText
               className={styles.hoverColor}
               primaryTypographyProps={{ sx: { fontSize: '1.1rem', fontWeight: '550' } }}
-              primary='Publicaciones'
+              primary={dictionary?.nav_main?.navbar.publications}
             ></ListItemText>
             <NavigateNextIcon sx={{ fontSize: '2.2rem', mr: -2.5 }} />
           </ListItemButton>
@@ -104,7 +105,7 @@ export const Navbar = ({ dictionary }: Props) => {
             <ListItemText
               className={styles.hoverColor}
               primaryTypographyProps={{ sx: { fontSize: '1.1rem', fontWeight: '550' } }}
-              primary={dictionary.nav_main.login}
+              primary={dictionary.nav_main.navbar.login}
             ></ListItemText>
             <NavigateNextIcon sx={{ fontSize: '2.2rem', mr: -2.5 }} />
           </ListItemButton>
@@ -127,10 +128,10 @@ export const Navbar = ({ dictionary }: Props) => {
               <ListItem>
                 <PersonSearchIcon className={styles.icons} />
                 <NavbarTooltip
-                  start='Nosotros'
+                  start={dictionary?.nav_main?.navbar.contact_us}
                   links={[
-                    { text: 'Acerca de LACV', link: 'https://example1.com' },
-                    { text: 'Contacto', link: 'https://example2.com' }
+                    { text: dictionary?.nav_main?.navbar.about_LAVC, link: 'https://example1.com' },
+                    { text: dictionary?.nav_main?.navbar.contact, link: 'https://example2.com' }
                   ]}
                   image='https://tse2.mm.bing.net/th?id=OIP.33VqJRpi2PsJuc9mcRwcCQHaE9&pid=Api&P=0&h=180'
                 ></NavbarTooltip>
@@ -139,14 +140,14 @@ export const Navbar = ({ dictionary }: Props) => {
                 <EventIcon className={styles.icons} />
 
                 <NavbarTooltip
-                  start='LAVC 2025'
+                  start={dictionary?.nav_main?.navbar.lacv_2025}
                   links={[
-                    { text: 'Evento y Talleres', link: 'https://example1.com' },
-                    { text: 'Ponentes', link: 'https://example2.com' },
-                    { text: 'Programa', link: 'https://example2.com' },
-                    { text: '', link: 'https://example2.com' },
-                    { text: 'Empresas', link: 'https://example2.com' },
-                    { text: 'Contacto', link: 'https://example2.com' }
+                    { text: dictionary?.nav_main?.navbar.event_and_workshops, link: 'https://example1.com' },
+                    { text: dictionary?.nav_main?.navbar.speakers, link: 'https://example2.com' },
+                    { text: dictionary?.nav_main?.navbar.program, link: 'https://example2.com' },
+                    { text: dictionary?.nav_main?.navbar.stand_out, link: 'https://example2.com' },
+                    { text: dictionary?.nav_main?.navbar.companies, link: 'https://example2.com' },
+                    { text: dictionary?.nav_main?.navbar.contact, link: 'https://example2.com' }
                   ]}
                   image='https://4.bp.blogspot.com/-atz5WgBqCys/VxasgrWNCEI/AAAAAAAB9Ao/ClzFWC9eEEcOWygTP4l3m0rEXVpRTX1ggCKgB/s1600/Perritos-cachorros-162.jpg'
                 ></NavbarTooltip>
@@ -162,17 +163,17 @@ export const Navbar = ({ dictionary }: Props) => {
                       whiteSpace: 'nowrap'
                     }
                   }}
-                  primary='Preguntas Frecuentes'
+                  primary={dictionary?.nav_main?.navbar.frequently_asked_questions}
                 />
               </ListItem>
               <ListItem className={styles.link}>
                 <PublishedWithChangesIcon className={styles.icons} />
                 <NavbarTooltip
-                  start='Publicaciones'
+                  start={dictionary?.nav_main?.navbar.publications}
                   links={[
-                    { text: 'Noticias', link: 'https://example1.com' },
-                    { text: 'Galeria', link: 'https://example2.com' },
-                    { text: 'Libreria LAVC', link: 'https://example2.com' }
+                    { text: dictionary?.nav_main?.navbar.news, link: 'https://example1.com' },
+                    { text: dictionary?.nav_main?.navbar.gallery, link: 'https://example2.com' },
+                    { text: dictionary?.nav_main?.navbar.library_lavc, link: 'https://example2.com' }
                   ]}
                   image='https://www.petlife.mx/u/fotografias/m/2023/10/19/f960x540-7724_81799_0.jpg'
                 ></NavbarTooltip>
@@ -181,12 +182,12 @@ export const Navbar = ({ dictionary }: Props) => {
           </Typography>
           <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}></Typography>
 
-          <LanguageDropdown className='hidden md:flex' isScroled={scrolled} />
+          <LanguageDropdown />
 
           <Link href={'/login'}>
             <Button className={`${styles.link} ${styles.hoverColor}`} color='inherit' sx={{ marginRight: '250px' }}>
               <PersonIcon className={styles.icons} />
-              {dictionary.nav_main.login}
+              {dictionary.nav_main.navbar.login}
             </Button>
           </Link>
           <IconButton

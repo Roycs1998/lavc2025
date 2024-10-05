@@ -2,7 +2,13 @@ import React from 'react'
 
 import { Card, CardContent, CardMedia, Typography, Box } from '@mui/material'
 
-export const HorizontalCard = () => {
+import type { getDictionary } from '@/utils/getDictionary'
+
+type Props = {
+  dictionary: Awaited<ReturnType<typeof getDictionary>>
+}
+
+export const HorizontalCard = ({ dictionary }: Props) => {
   return (
     <Card
       sx={{
@@ -67,8 +73,7 @@ export const HorizontalCard = () => {
               marginTop: '20px'
             }}
           >
-            La conferencia de educación continua en medicina veterinaria más grande de la costa del Pacífico de
-            Sudamérica.
+            {dictionary?.nav_main?.horizontal_card.motto}
           </Typography>
           <Typography
             variant='h5'
