@@ -38,7 +38,7 @@ export const LavcLetter = ({ nameButton, title, information }: InformationList) 
       >
         {title}
       </Typography>
-      <CardContent sx={{ padding: 3 }}>
+      <CardContent sx={{ padding: 2 }}>
         <Grid container spacing={1}>
           {/* Mapeamos la lista de elementos */}
           {information.map((item, index) => (

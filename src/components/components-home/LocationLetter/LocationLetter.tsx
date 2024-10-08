@@ -13,9 +13,9 @@ type Props = {
 export const LocationLetter = ({ dictionary }: Props) => {
   return (
     <Card sx={{ maxWidth: '100%', border: 0, borderBottom: '10px solid #b28106' }}>
-      <Grid container spacing={0} sx={{ bgcolor: '#F6A51A', padding: '20px' }}>
-        <Grid item xs={12} md={1.5}></Grid>
-        <Grid item xs={12} md={4}>
+      <Grid className='global-padding' container spacing={0} sx={{ bgcolor: '#F6A51A', padding: '20px' }}>
+        <Grid md={0.5}></Grid>
+        <Grid item xs={12} md={5}>
           <CardContent>
             <Typography
               variant='h4'
@@ -59,9 +59,9 @@ export const LocationLetter = ({ dictionary }: Props) => {
             </Typography>
           </CardContent>
         </Grid>
-        {/* Texto del Evento */}
+
         <Grid
-          md={4.5}
+          md={6}
           sx={{
             display: {
               xs: 'none',
@@ -81,7 +81,7 @@ export const LocationLetter = ({ dictionary }: Props) => {
             referrerPolicy='no-referrer-when-downgrade'
           ></iframe>
         </Grid>
-        <Grid item xs={12} md={1.5}></Grid>
+        <Grid md={0.5}></Grid>
       </Grid>
     </Card>
   )

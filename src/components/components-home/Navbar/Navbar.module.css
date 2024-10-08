@@ -6,6 +6,7 @@
 
 .navbar {
   position: fixed;
+
   transition: background-color 0.3s; /* Transición suave al cambiar el color de fondo */
   block-size: 110px;
   box-shadow: none;
@@ -24,7 +25,6 @@
 }
 
 .mainLogo {
-  margin-inline-start: 60%;
   block-size: 90px;
   inline-size: 110px;
 }

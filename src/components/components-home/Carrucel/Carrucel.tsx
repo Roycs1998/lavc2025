@@ -51,7 +51,7 @@ export const Carrucel = ({ dictionary }: Props) => {
       <Box className={style.layer}></Box>
 
       {/* Contenedor del texto superpuesto al carrusel */}
-      <Box className={style.textOverlay}>
+      <Box className={`${style.textOverlay}`}>
         <Typography
           variant='h4'
           sx={{

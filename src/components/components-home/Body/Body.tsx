@@ -50,9 +50,12 @@ export const Body = ({ dictionary }: Props) => {
   ]
 
   return (
-    <Box>
-      <Main dictionary={dictionary} />
+    <Box sx={{ width: '100%' }}>
+      <Box>
+        <Main dictionary={dictionary} />
+      </Box>
       <Box
+        className='global-padding'
         sx={{
           flexGrow: 1,
           display: 'flex',
@@ -89,10 +92,10 @@ export const Body = ({ dictionary }: Props) => {
       </Box>
 
       <Box
+        className='global-padding'
         sx={{
           display: 'flex',
           justifyContent: 'center', // Centrar horizontalmente
-          alignItems: 'center', // Centrar verticalmente (opcional)
           marginTop: { xs: '30px', md: '50px' },
           marginBottom: { xs: '30px', md: '70px' }
         }}
@@ -102,7 +105,7 @@ export const Body = ({ dictionary }: Props) => {
           spacing={5}
           alignItems='center'
           justifyContent='center'
-          sx={{ maxWidth: { xs: 'none', md: '75%' } }}
+          sx={{ maxWidth: { xs: 'none', md: '90%' } }}
         >
           <Grid item xs={12} sm={12} md={6}>
             <LavcLetter

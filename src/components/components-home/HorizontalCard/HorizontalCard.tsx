@@ -11,6 +11,7 @@ type Props = {
 export const HorizontalCard = ({ dictionary }: Props) => {
   return (
     <Card
+      className='global-padding'
       sx={{
         display: 'flex',
         flexDirection: { xs: 'column', md: 'row' }, // Cambia la dirección del layout en pantallas pequeñas
@@ -40,7 +41,7 @@ export const HorizontalCard = ({ dictionary }: Props) => {
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          flexGrow: 1,
+
           position: 'relative'
         }}
       >

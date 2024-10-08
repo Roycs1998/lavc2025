@@ -18,6 +18,25 @@
   --second-color-purple: #2d2a55;
   --color-on-hover: #7f76d9;
   --letter-color: white;
+  --global-padding-inline: 12%;
+}
+
+.global-padding {
+  padding-inline: var(--global-padding-inline);
+}
+
+@media (max-width: 1524px) {
+  /* Ajusta este valor según tus necesidades */
+  .global-padding {
+    padding-inline: 2%;
+  }
+}
+
+@media (max-width: 600px) {
+  /* Ajusta este valor según tus necesidades */
+  .global-padding {
+    padding-inline: 0;
+  }
 }
 
 [data-mui-color-scheme='dark'] {

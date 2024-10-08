@@ -26,7 +26,7 @@ export const InformationLetters = ({ icon, qualification, link }: Data) => {
       >
         <CardContent
           sx={{
-            width: 350,
+            width: 357,
             height: 200,
             bgcolor: '#153B8B',
             transition: 'background-color 0.3s ease',

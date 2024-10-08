@@ -116,9 +116,12 @@ export const Navbar = ({ dictionary }: Props) => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`} sx={{ bgcolor: 'transparent' }}>
+      <AppBar
+        className={`${styles.navbar} ${scrolled ? styles.scrolled : ''} global-padding`}
+        sx={{ bgcolor: 'transparent' }}
+      >
         <Toolbar sx={{ bgcolor: 'none' }}>
-          <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
+          <Typography variant='h6' component='div' sx={{ marginRight: '5%' }}>
             <Link href={'/'}>
               <img className={styles.mainLogo} src='/images/logolavc/logo.ico' alt='logo' />
             </Link>
@@ -143,7 +146,7 @@ export const Navbar = ({ dictionary }: Props) => {
                   start={dictionary?.nav_main?.navbar.lacv_2025}
                   links={[
                     { text: dictionary?.nav_main?.navbar.event_and_workshops, link: 'https://example1.com' },
-                    { text: dictionary?.nav_main?.navbar.speakers, link: 'https://example2.com' },
+                    { text: dictionary?.nav_main?.navbar.speakers, link: '/ponentes' },
                     { text: dictionary?.nav_main?.navbar.program, link: 'https://example2.com' },
                     { text: dictionary?.nav_main?.navbar.stand_out, link: 'https://example2.com' },
                     { text: dictionary?.nav_main?.navbar.companies, link: 'https://example2.com' },
@@ -185,7 +188,7 @@ export const Navbar = ({ dictionary }: Props) => {
           <LanguageDropdown />
 
           <Link href={'/login'}>
-            <Button className={`${styles.link} ${styles.hoverColor}`} color='inherit' sx={{ marginRight: '250px' }}>
+            <Button className={`${styles.link} ${styles.hoverColor}`} color='inherit' sx={{}}>
               <PersonIcon className={styles.icons} />
               {dictionary.nav_main.navbar.login}
             </Button>

@@ -34,7 +34,7 @@ const RootLayout = async ({ children, params }: ChildrenType & { params: { lang:
 
   return (
     <html id='__next' dir={direction}>
-      <body className={`${poppins.className} flex is-full min-bs-full flex-auto flex-col`}>
+      <body className={`${poppins.className} flex is-full min-bs-full flex-auto flex-col `}>
         <Navbar dictionary={dictionary} />
         {children}
         <FooterTwo dictionary={dictionary} />
