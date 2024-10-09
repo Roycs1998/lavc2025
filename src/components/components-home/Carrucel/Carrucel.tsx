@@ -55,7 +55,7 @@ export const Carrucel = ({ dictionary }: Props) => {
         <Typography
           variant='h4'
           sx={{
-            color: 'white',
+            color: 'var(--letter-color)',
             fontWeight: 700,
             fontFamily: 'Arial, sans-serif',
             marginBottom: '10px',
@@ -68,7 +68,7 @@ export const Carrucel = ({ dictionary }: Props) => {
         <Typography
           variant='h3'
           sx={{
-            color: 'white',
+            color: 'var(--letter-color)',
             fontWeight: 700,
             fontFamily: 'Arial, sans-serif',
             marginBottom: '10px',
@@ -81,7 +81,7 @@ export const Carrucel = ({ dictionary }: Props) => {
         <Typography
           variant='h6'
           sx={{
-            color: 'white',
+            color: 'var(--letter-color)',
             fontWeight: 700,
             fontFamily: 'Arial, sans-serif',
             fontSize: { xs: '1.5rem', sm: '1.2rem', md: '1.5rem' }, // Tamaños responsivos

@@ -29,7 +29,6 @@
   align-items: center;
   justify-content: center;
   z-index: 10;
-  color: var('letter-color');
   padding: 20px;
   text-align: center;
   inline-size: 100%;
