@@ -91,7 +91,7 @@ const LanguageDropdown = ({ isScroled, className }: Props) => {
       <IconButton
         ref={anchorRef}
         onClick={handleToggle}
-        className={`${className} ${isScroled ? 'text-white' : pathName.toString() === '/en' || pathName.toString() === '/es' || pathName.toString() === '/pt' ? 'text-white' : 'text-blue-800'}`}
+        className={`${className} ${isScroled ? 'text-white' : pathName.toString() === '/en' || pathName.toString() === '/es' || pathName.toString() === '/pt' ? 'text-white' : 'text-white'}`}
       >
         <TbLanguage />
       </IconButton>

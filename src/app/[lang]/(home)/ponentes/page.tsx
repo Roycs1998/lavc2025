@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 import { Box, Grid } from '@mui/material'
 
 import { Body } from '@/components/components-home/Body'
@@ -31,19 +33,19 @@ const Ponentes = async ({ children, params }: ChildrenType & { params: { lang: L
     },
     {
       image: 'https://tlavc-peru.org/tlavc/vista/upload/expositores/esther-klok.png',
-      name: 'BILL SAXON'
+      name: 'ESTHER KLOK'
     },
     {
       image: 'https://tlavc-peru.org/tlavc/vista/upload/expositores/IMG_5404.jpeg',
-      name: 'BILL SAXON'
+      name: 'BRITTANY LANCELLOTTI'
     },
     {
       image: 'https://tlavc-peru.org/tlavc/vista/upload/expositores/BENITA.jpg',
-      name: 'BILL SAXON'
+      name: 'BENITA ALTIER'
     },
     {
       image: 'https://tlavc-peru.org/tlavc/vista/upload/expositores/Headshot_Marvel.jpg',
-      name: 'BILL SAXON'
+      name: 'SARAH MARVEL'
     }
   ]
 
@@ -74,7 +76,9 @@ const Ponentes = async ({ children, params }: ChildrenType & { params: { lang: L
         >
           {ponentes.map((ponente, index) => (
             <Grid item xs={12} sm={6} md={3} key={index}>
-              <LetterImage image={ponente.image} name={ponente.name} />
+              <Link href={'/ponentes/' + ponente.name}>
+                <LetterImage image={ponente.image} name={ponente.name} />
+              </Link>
             </Grid>
           ))}
         </Grid>
