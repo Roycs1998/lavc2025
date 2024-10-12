@@ -20,7 +20,7 @@ interface InformationList {
 
 export const LavcLetter = ({ nameButton, title, information }: InformationList) => {
   return (
-    <Card sx={{ maxWidth: '100%', boxShadow: '1' }}>
+    <Card sx={{ maxWidth: '100%', boxShadow: '1', bgcolor: '#f7f7f7' }}>
       <Typography
         variant='h5'
         sx={{

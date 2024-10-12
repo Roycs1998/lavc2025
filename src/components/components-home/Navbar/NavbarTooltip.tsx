@@ -11,10 +11,17 @@ import Typography from '@mui/material/Typography'
 import Avatar from '@mui/material/Avatar'
 import Divider from '@mui/material/Divider'
 import { useMediaQuery } from '@mui/material'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore' // Ícono que indica que el menú se puede expandir
+import ExpandLessIcon from '@mui/icons-material/ExpandLess'
 
+interface SecondLevel {
+  text: string
+  link: string
+}
 interface LinkItem {
-  text: string // Texto del enlace
-  link: string // Enlace correspondiente
+  secondLevelText?: SecondLevel[]
+  text: string
+  link?: string // Enlace correspondiente
 }
 
 interface TransitionsPopperProps {
@@ -26,9 +33,14 @@ interface TransitionsPopperProps {
 export const NavbarTooltip = ({ start, links, image }: TransitionsPopperProps) => {
   const [open, setOpen] = React.useState(false)
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
+  const [openSubMenu, setOpenSubMenu] = React.useState<number | null>(null)
   const [mouseLeaveTimeout, setMouseLeaveTimeout] = React.useState<NodeJS.Timeout | null>(null)
 
   const isSmallScreen = useMediaQuery('(max-width:1588px)')
+
+  const handleSubMenuToggle = (index: number) => {
+    setOpenSubMenu(openSubMenu === index ? null : index)
+  }
 
   // Definimos los offsets en función del tamaño de la pantalla
   const offsetValue = isSmallScreen ? [650, 68.5] : [780, 68.5]
@@ -121,20 +133,49 @@ export const NavbarTooltip = ({ start, links, image }: TransitionsPopperProps) =
               <Divider orientation='vertical' flexItem sx={{ marginRight: 8 }} />
               <Box>
                 {links.map((linkItem, index) => (
-                  <Link key={index} href={linkItem.link}>
-                    <Typography
-                      variant='h6'
-                      sx={{
-                        fontWeight: 500,
-                        color: 'var(--letter-color)',
-                        ':hover': {
-                          color: 'var(--color-on-hover)'
-                        }
-                      }}
-                    >
-                      {linkItem.text}
-                    </Typography>
-                  </Link>
+                  <React.Fragment key={index}>
+                    <Box>
+                      <Link href={linkItem.link || ''}>
+                        <Typography
+                          variant='h6'
+                          onClick={() => linkItem.secondLevelText && handleSubMenuToggle(index)} // Maneja el clic
+                          sx={{
+                            fontWeight: 500,
+                            color: 'var(--letter-color)',
+                            ':hover': {
+                              color: 'var(--color-on-hover)',
+                              cursor: 'pointer' // Cambia el cursor si hay subenlaces
+                            }
+                          }}
+                        >
+                          {linkItem.text}
+                          {linkItem.secondLevelText && <ExpandMoreIcon />}
+                        </Typography>
+                      </Link>
+                      {/* Verificamos si hay un submenú para este enlace */}
+                      {linkItem.secondLevelText && openSubMenu === index && (
+                        <Box sx={{ marginLeft: 4 }}>
+                          {/* Indentación para subenlaces */}
+                          {linkItem.secondLevelText.map((subLinkItem, subIndex) => (
+                            <Link key={subIndex} href={subLinkItem.link}>
+                              <Typography
+                                variant='body2'
+                                sx={{
+                                  fontWeight: 500,
+                                  color: 'var(--letter-color)',
+                                  ':hover': {
+                                    color: 'var(--color-on-hover)'
+                                  }
+                                }}
+                              >
+                                {subLinkItem.text}
+                              </Typography>
+                            </Link>
+                          ))}
+                        </Box>
+                      )}
+                    </Box>
+                  </React.Fragment>
                 ))}
               </Box>
             </Box>

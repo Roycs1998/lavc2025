@@ -149,7 +149,14 @@ export const Navbar = ({ dictionary }: Props) => {
                     { text: dictionary?.nav_main?.navbar.speakers, link: '/ponentes' },
                     { text: dictionary?.nav_main?.navbar.program, link: 'https://example2.com' },
                     { text: dictionary?.nav_main?.navbar.stand_out, link: 'https://example2.com' },
-                    { text: dictionary?.nav_main?.navbar.companies, link: 'https://example2.com' },
+                    {
+                      text: dictionary?.nav_main?.navbar.companies,
+                      secondLevelText: [
+                        { text: dictionary?.nav_main?.navbar.sponsors, link: '/patrocinadores' },
+                        { text: dictionary?.nav_main?.navbar.official_sponsors, link: 'https://example2.com' }
+                      ],
+                      link: ''
+                    },
                     { text: dictionary?.nav_main?.navbar.contact, link: 'https://example2.com' }
                   ]}
                   image='https://4.bp.blogspot.com/-atz5WgBqCys/VxasgrWNCEI/AAAAAAAB9Ao/ClzFWC9eEEcOWygTP4l3m0rEXVpRTX1ggCKgB/s1600/Perritos-cachorros-162.jpg'
