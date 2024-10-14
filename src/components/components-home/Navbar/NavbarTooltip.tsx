@@ -11,8 +11,8 @@ import Typography from '@mui/material/Typography'
 import Avatar from '@mui/material/Avatar'
 import Divider from '@mui/material/Divider'
 import { useMediaQuery } from '@mui/material'
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore' // Ícono que indica que el menú se puede expandir
-import ExpandLessIcon from '@mui/icons-material/ExpandLess'
+
+import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 
 interface SecondLevel {
   text: string
@@ -33,14 +33,11 @@ interface TransitionsPopperProps {
 export const NavbarTooltip = ({ start, links, image }: TransitionsPopperProps) => {
   const [open, setOpen] = React.useState(false)
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
-  const [openSubMenu, setOpenSubMenu] = React.useState<number | null>(null)
+  const [hoveredLink, setHoveredLink] = React.useState<SecondLevel[] | null>(null) // Guardar subniveles al hacer hover
+
   const [mouseLeaveTimeout, setMouseLeaveTimeout] = React.useState<NodeJS.Timeout | null>(null)
 
   const isSmallScreen = useMediaQuery('(max-width:1588px)')
-
-  const handleSubMenuToggle = (index: number) => {
-    setOpenSubMenu(openSubMenu === index ? null : index)
-  }
 
   // Definimos los offsets en función del tamaño de la pantalla
   const offsetValue = isSmallScreen ? [650, 68.5] : [780, 68.5]
@@ -61,6 +58,10 @@ export const NavbarTooltip = ({ start, links, image }: TransitionsPopperProps) =
     }, 200) // Retraso antes de cerrar el Popper (200ms)
 
     setMouseLeaveTimeout(timeout)
+  }
+
+  const handleHoverLink = (secondLevelText: SecondLevel[] | undefined) => {
+    setHoveredLink(secondLevelText || null)
   }
 
   const canBeOpen = open && Boolean(anchorEl)
@@ -114,7 +115,7 @@ export const NavbarTooltip = ({ start, links, image }: TransitionsPopperProps) =
                 display: 'flex',
                 flexDirection: 'row',
                 alignItems: 'center',
-                width: 800,
+                width: 830,
                 height: 300,
                 maxWidth: '100%',
                 backgroundColor: 'var(--primary-color-purple)'
@@ -123,22 +124,21 @@ export const NavbarTooltip = ({ start, links, image }: TransitionsPopperProps) =
               <Avatar
                 src={image}
                 sx={{
-                  marginRight: 8,
+                  marginRight: 4,
                   width: 320,
                   height: 230,
                   borderRadius: 1,
                   marginLeft: 2
                 }}
               />
-              <Divider orientation='vertical' flexItem sx={{ marginRight: 8 }} />
+
               <Box>
                 {links.map((linkItem, index) => (
                   <React.Fragment key={index}>
-                    <Box>
+                    <Box onMouseEnter={() => handleHoverLink(linkItem.secondLevelText)}>
                       <Link href={linkItem.link || ''}>
                         <Typography
                           variant='h6'
-                          onClick={() => linkItem.secondLevelText && handleSubMenuToggle(index)} // Maneja el clic
                           sx={{
                             fontWeight: 500,
                             color: 'var(--letter-color)',
@@ -149,34 +149,38 @@ export const NavbarTooltip = ({ start, links, image }: TransitionsPopperProps) =
                           }}
                         >
                           {linkItem.text}
-                          {linkItem.secondLevelText && <ExpandMoreIcon />}
+                          {linkItem.secondLevelText && <ChevronRightIcon sx={{ marginLeft: 4 }} />}
                         </Typography>
                       </Link>
                       {/* Verificamos si hay un submenú para este enlace */}
-                      {linkItem.secondLevelText && openSubMenu === index && (
-                        <Box sx={{ marginLeft: 4 }}>
-                          {/* Indentación para subenlaces */}
-                          {linkItem.secondLevelText.map((subLinkItem, subIndex) => (
-                            <Link key={subIndex} href={subLinkItem.link}>
-                              <Typography
-                                variant='body2'
-                                sx={{
-                                  fontWeight: 500,
-                                  color: 'var(--letter-color)',
-                                  ':hover': {
-                                    color: 'var(--color-on-hover)'
-                                  }
-                                }}
-                              >
-                                {subLinkItem.text}
-                              </Typography>
-                            </Link>
-                          ))}
-                        </Box>
-                      )}
                     </Box>
                   </React.Fragment>
                 ))}
+              </Box>
+              <Divider orientation='vertical' flexItem sx={{ marginLeft: 2, marginRight: 3 }} />
+              <Box>
+                {hoveredLink ? (
+                  hoveredLink.map((subLink, subIndex) => (
+                    <Link key={subIndex} href={subLink.link}>
+                      <Typography
+                        variant='body2'
+                        sx={{
+                          fontWeight: 500,
+                          fontSize: 19,
+                          color: 'var(--letter-color)',
+                          ':hover': {
+                            color: 'var(--color-on-hover)',
+                            cursor: 'pointer'
+                          }
+                        }}
+                      >
+                        {subLink.text}
+                      </Typography>
+                    </Link>
+                  ))
+                ) : (
+                  <Typography variant='body2' sx={{ color: 'var(--letter-color)' }}></Typography>
+                )}
               </Box>
             </Box>
           </Fade>

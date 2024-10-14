@@ -9,7 +9,6 @@ import PersonSearchIcon from '@mui/icons-material/PersonSearch'
 import EventIcon from '@mui/icons-material/Event'
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline'
 import PublishedWithChangesIcon from '@mui/icons-material/PublishedWithChanges'
-import NavigateNextIcon from '@mui/icons-material/NavigateNext'
 
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
@@ -17,9 +16,9 @@ import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 
-import MenuIcon from '@mui/icons-material/Menu'
+import { List, ListItem, ListItemText } from '@mui/material'
 
-import { Divider, Drawer, IconButton, List, ListItem, ListItemButton, ListItemText } from '@mui/material'
+import { NavbarDrawer } from './NavbarDrawer'
 
 import styles from './Navbar.module.css'
 import LanguageDropdown from './LanguageDropdown'
@@ -32,7 +31,6 @@ type Props = {
 
 export const Navbar = ({ dictionary }: Props) => {
   const [scrolled, setScrolled] = useState(false)
-  const [mobileOpen, setMobileOpen] = React.useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -43,76 +41,6 @@ export const Navbar = ({ dictionary }: Props) => {
 
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
-
-  const handleDrawerToggle = () => {
-    setMobileOpen(prevState => !prevState)
-  }
-
-  const drawer = (
-    <Box
-      onClick={handleDrawerToggle}
-      sx={{ textAlign: 'center', bgcolor: 'var(--primary-color-purple)', height: '100vh' }}
-    >
-      <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
-        <Link href={'/'}>
-          <img className={styles.mainLogoPhone} src='/images/logolavc/logo.ico' alt='logo' />
-        </Link>
-      </Typography>
-      <Divider sx={{ bgcolor: '#272457' }} />
-      <List sx={{ color: 'var(--letter-color)' }}>
-        <ListItem>
-          <ListItemButton>
-            <ListItemText
-              className={styles.hoverColor}
-              primaryTypographyProps={{ sx: { fontSize: '1.1rem', fontWeight: '550' } }}
-              primary={dictionary?.nav_main?.navbar?.contact_us}
-            ></ListItemText>
-            <NavigateNextIcon sx={{ fontSize: '2.2rem', mr: -2.5 }} />
-          </ListItemButton>
-        </ListItem>
-        <ListItem>
-          <ListItemButton>
-            <ListItemText
-              className={styles.hoverColor}
-              primaryTypographyProps={{ sx: { fontSize: '1.1rem', fontWeight: '550' } }}
-              primary={dictionary?.nav_main?.navbar.lacv_2025}
-            ></ListItemText>
-            <NavigateNextIcon sx={{ fontSize: '2.2rem', mr: -2.5 }} />
-          </ListItemButton>
-        </ListItem>
-        <ListItem>
-          <ListItemButton>
-            <ListItemText
-              className={styles.hoverColor}
-              primaryTypographyProps={{ sx: { fontSize: '1.1rem', fontWeight: '550' } }}
-              primary={dictionary?.nav_main?.navbar.frequently_asked_questions}
-            ></ListItemText>
-            <NavigateNextIcon sx={{ fontSize: '2.2rem', mr: -2.5 }} />
-          </ListItemButton>
-        </ListItem>
-        <ListItem>
-          <ListItemButton>
-            <ListItemText
-              className={styles.hoverColor}
-              primaryTypographyProps={{ sx: { fontSize: '1.1rem', fontWeight: '550' } }}
-              primary={dictionary?.nav_main?.navbar.publications}
-            ></ListItemText>
-            <NavigateNextIcon sx={{ fontSize: '2.2rem', mr: -2.5 }} />
-          </ListItemButton>
-        </ListItem>
-        <ListItem>
-          <ListItemButton component={Link} href='/login'>
-            <ListItemText
-              className={styles.hoverColor}
-              primaryTypographyProps={{ sx: { fontSize: '1.1rem', fontWeight: '550' } }}
-              primary={dictionary.nav_main.navbar.login}
-            ></ListItemText>
-            <NavigateNextIcon sx={{ fontSize: '2.2rem', mr: -2.5 }} />
-          </ListItemButton>
-        </ListItem>
-      </List>
-    </Box>
-  )
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -154,8 +82,7 @@ export const Navbar = ({ dictionary }: Props) => {
                       secondLevelText: [
                         { text: dictionary?.nav_main?.navbar.sponsors, link: '/patrocinadores' },
                         { text: dictionary?.nav_main?.navbar.official_sponsors, link: 'https://example2.com' }
-                      ],
-                      link: ''
+                      ]
                     },
                     { text: dictionary?.nav_main?.navbar.contact, link: 'https://example2.com' }
                   ]}
@@ -191,42 +118,16 @@ export const Navbar = ({ dictionary }: Props) => {
             </List>
           </Typography>
           <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}></Typography>
-
           <LanguageDropdown />
-
           <Link href={'/login'}>
             <Button className={`${styles.link} ${styles.hoverColor}`} color='inherit' sx={{}}>
               <PersonIcon className={styles.icons} />
               {dictionary.nav_main.navbar.login}
             </Button>
           </Link>
-          <IconButton
-            className={styles.dropdownMenu}
-            color='inherit'
-            aria-label='open drawer'
-            edge='start'
-            onClick={handleDrawerToggle}
-          >
-            <MenuIcon sx={{ color: 'white', fontSize: '2.3rem' }} />
-          </IconButton>
+          <NavbarDrawer dictionary={dictionary} />
         </Toolbar>
       </AppBar>
-      <nav>
-        <Drawer
-          variant='temporary'
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true // Better open performance on mobile.
-          }}
-          sx={{
-            display: { xs: 'block' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 400 }
-          }}
-        >
-          {drawer}
-        </Drawer>
-      </nav>
     </Box>
   )
 }
