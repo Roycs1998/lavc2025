@@ -81,7 +81,7 @@ export const Navbar = ({ dictionary }: Props) => {
                       text: dictionary?.nav_main?.navbar.companies,
                       secondLevelText: [
                         { text: dictionary?.nav_main?.navbar.sponsors, link: '/patrocinadores' },
-                        { text: dictionary?.nav_main?.navbar.official_sponsors, link: 'https://example2.com' }
+                        { text: dictionary?.nav_main?.navbar.official_sponsors, link: '/patrocinadoresoficiales' }
                       ]
                     },
                     { text: dictionary?.nav_main?.navbar.contact, link: 'https://example2.com' }

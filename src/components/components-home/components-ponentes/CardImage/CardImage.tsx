@@ -43,12 +43,13 @@ export const CardImage = ({ image, title }: Attributes) => {
         variant='h1'
         component='div'
         sx={{
-          fontSize: { xs: '4rem', md: '6rem' },
+          fontSize: { xs: '3.1rem', sm: '4rem', md: '6rem' },
           position: 'absolute', // Posición absoluta para estar encima de la imagen
           color: 'var(--letter-color)', // Color del texto
           fontWeight: 'bold',
           textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)', // Sombra para que el texto se destaque
-          zIndex: 1 // Asegura que esté por encima de la imagen
+          zIndex: 1, // Asegura que esté por encima de la imagen
+          textAlign: 'center'
         }}
       >
         {title}

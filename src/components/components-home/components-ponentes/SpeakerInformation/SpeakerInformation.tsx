@@ -40,7 +40,7 @@ export const SpeakerInformation = ({
             sx={{
               textAlign: { xs: 'center', md: 'center' },
               marginTop: '50px',
-              height: '50px',
+              height: { xs: '80px', md: '50px' },
               fontWeight: 'bold'
             }}
           >
@@ -173,7 +173,6 @@ export const SpeakerInformation = ({
                 sx={{
                   bgcolor: 'var(--primary-color-purple)',
                   color: 'var(--letter-color)',
-
                   width: 250,
                   height: 65,
                   fontWeight: 'bold',
