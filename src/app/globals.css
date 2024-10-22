@@ -19,6 +19,8 @@
   --color-on-hover: #7f76d9;
   --letter-color: white;
   --global-padding-inline: 12%;
+  --background-form: #f2f3f4;
+  --color-card-background: white;
 }
 
 .global-padding {

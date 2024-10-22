@@ -109,7 +109,7 @@ const Ponente = async ({ params }: PonenteParams) => {
         />
       </Box>
 
-      <Box className='global-padding'>
+      <Box className='global-padding' sx={{ bgcolor: 'var(--background-form)', paddingTop: 10, paddingBottom: 10 }}>
         {matchedSpeaker ? (
           <SpeakerInformation
             name={matchedSpeaker.name}

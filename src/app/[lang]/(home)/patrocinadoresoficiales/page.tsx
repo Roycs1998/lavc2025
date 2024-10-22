@@ -1,16 +1,10 @@
 import { Box } from '@mui/material'
 
-import type { ChildrenType } from '@/@core/types'
-
-import type { Locale } from '@/configs/i18n'
-import { getDictionary } from '@/utils/getDictionary'
 import { CardImage } from '@/components/components-home/components-ponentes/CardImage'
 
 import { OfficialSponsors } from '@/components/components-home/components-sponsors/OfficialSponsors'
 
-const PatrocinadoresOficiales = async ({ children, params }: ChildrenType & { params: { lang: Locale } }) => {
-  const dictionary = await getDictionary(params.lang)
-
+const PatrocinadoresOficiales = async () => {
   const officialSponsors = [
     {
       image: 'https://tlavc-peru.org/tlavc/vista/upload/enlaces/NAVC.jpg'

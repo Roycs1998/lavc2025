@@ -1,15 +1,9 @@
 import { Box } from '@mui/material'
 
-import type { ChildrenType } from '@/@core/types'
-
-import type { Locale } from '@/configs/i18n'
-import { getDictionary } from '@/utils/getDictionary'
 import { CardImage } from '@/components/components-home/components-ponentes/CardImage'
 import { CardExhibitors } from '@/components/components-home/components-sponsors/CardExhibitors'
 
-const Patrocinadores = async ({ children, params }: ChildrenType & { params: { lang: Locale } }) => {
-  const dictionary = await getDictionary(params.lang)
-
+const Patrocinadores = async () => {
   const sponsorImages = [
     {
       category: 'A',

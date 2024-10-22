@@ -30,8 +30,8 @@ export const SpeakerInformation = ({
   achievements
 }: Speaker) => {
   return (
-    <Card sx={{ maxWidth: '100%', border: 0, marginTop: 10, marginBottom: 10 }}>
-      <Grid container spacing={0} sx={{ bgcolor: '#f7f7f7', padding: '5%' }}>
+    <Card sx={{ maxWidth: '100%', border: 0 }}>
+      <Grid container spacing={0} sx={{ bgcolor: 'var(--color-card-background)', padding: '5%' }}>
         <Grid xs={12} md={12}>
           <Typography
             variant='h2'

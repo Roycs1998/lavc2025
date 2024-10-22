@@ -63,7 +63,7 @@ export const Body = ({ dictionary }: Props) => {
           padding: 2, // Añadir un poco de espacio
           justifyContent: 'center', // Centrar horizontalmente
           alignItems: 'center', // Centrar verticalmente (opcional)
-          bgcolor: '#e5f8fb'
+          bgcolor: 'var(--background-form)'
         }}
       >
         <Grid container spacing={7} justifyContent='center'>
@@ -96,8 +96,9 @@ export const Body = ({ dictionary }: Props) => {
         sx={{
           display: 'flex',
           justifyContent: 'center', // Centrar horizontalmente
-          marginTop: { xs: '30px', md: '50px' },
-          marginBottom: { xs: '30px', md: '70px' }
+          paddingTop: { xs: '30px', md: '50px' },
+          paddingBottom: { xs: '30px', md: '70px' },
+          bgcolor: 'var(--background-form)'
         }}
       >
         <Grid

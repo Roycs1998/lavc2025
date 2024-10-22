@@ -2,7 +2,6 @@ import Link from 'next/link'
 
 import { Box, Grid } from '@mui/material'
 
-import { Body } from '@/components/components-home/Body'
 import type { ChildrenType } from '@core/types'
 
 import type { Locale } from '@/configs/i18n'

@@ -21,7 +21,9 @@
       "gallery": "Galeria",
       "library_lavc": "Libreria LAVC",
       "sponsors": "Patrocionadores",
-      "official_sponsors": "Patrocionadores Oficiales"
+      "official_sponsors": "Patrocionadores Oficiales",
+      "official_supplier": "Proveedor Oficial",
+      "contact": "Contacto"
     },
     "carrucel": {
       "date": "29-31 de agosto @ Nueva York",
