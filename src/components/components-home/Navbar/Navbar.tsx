@@ -73,7 +73,7 @@ export const Navbar = ({ dictionary }: Props) => {
                 <NavbarTooltip
                   start={dictionary?.nav_main?.navbar.lacv_2025}
                   links={[
-                    { text: dictionary?.nav_main?.navbar.event_and_workshops, link: 'https://example1.com' },
+                    { text: dictionary?.nav_main?.navbar.event_and_workshops, link: '/eventos-talleres' },
                     { text: dictionary?.nav_main?.navbar.speakers, link: '/ponentes' },
                     { text: dictionary?.nav_main?.navbar.program, link: 'https://example2.com' },
                     { text: dictionary?.nav_main?.navbar.stand_out, link: 'https://example2.com' },

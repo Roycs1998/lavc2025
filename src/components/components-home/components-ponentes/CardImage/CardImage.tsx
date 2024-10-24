@@ -1,3 +1,6 @@
+'use client'
+import React, { useEffect, useState } from 'react'
+
 import { Box, Typography } from '@mui/material'
 
 interface Attributes {
@@ -6,24 +9,40 @@ interface Attributes {
 }
 
 export const CardImage = ({ image, title }: Attributes) => {
+  const [offsetY, setOffsetY] = useState(0)
+
+  const handleScroll = () => {
+    setOffsetY(window.scrollY)
+  }
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll)
+
+    // Cleanup event listener on unmount
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   return (
     <Box
       sx={{
         position: 'relative',
         width: '100%',
-        height: '500px', // Ajusta la altura de la imagen como quieras
+        height: '500px',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        overflow: 'hidden' // Para ocultar el exceso de la imagen cuando se aplica el parallax
       }}
     >
       <Box
         component='img'
-        src={image} // URL de la imagen
+        src={image}
         alt='example'
         sx={{
           width: '100%',
-          height: '100%'
+          height: '100%',
+          transform: `translateY(${offsetY * 0.5}px)`, // Aplicación del efecto parallax
+          transition: 'transform 0.1s ease-out' // Suaviza el desplazamiento
         }}
       />
 
@@ -31,11 +50,11 @@ export const CardImage = ({ image, title }: Attributes) => {
         sx={{
           position: 'absolute',
           inset: 0,
-          backgroundColor: 'rgba(58, 52, 128, 0.6)', // Usa 'backgroundColor' en lugar de 'bg'
-          height: '500px', // Cambiado 'block-size' a 'height'
-          width: '100%' // Cambiado 'inline-size' a 'width'
+          backgroundColor: 'rgba(58, 52, 128, 0.6)',
+          height: '500px',
+          width: '100%'
         }}
-      ></Box>
+      />
 
       {/* Título sobre la imagen */}
       <Typography
@@ -44,11 +63,11 @@ export const CardImage = ({ image, title }: Attributes) => {
         component='div'
         sx={{
           fontSize: { xs: '3.1rem', sm: '4rem', md: '6rem' },
-          position: 'absolute', // Posición absoluta para estar encima de la imagen
-          color: 'var(--letter-color)', // Color del texto
+          position: 'absolute',
+          color: 'var(--letter-color)',
           fontWeight: 'bold',
-          textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)', // Sombra para que el texto se destaque
-          zIndex: 1, // Asegura que esté por encima de la imagen
+          textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)',
+          zIndex: 1,
           textAlign: 'center'
         }}
       >
