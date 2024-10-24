@@ -1,7 +1,10 @@
 'use client'
 import { useState } from 'react'
 
-import { Button, Card, CardContent, Grid, MenuItem, TextField, Typography } from '@mui/material'
+import { Box, Button, Card, CardContent, Grid, MenuItem, TextField, Typography } from '@mui/material'
+
+import { getInformationForMail } from '@/Services/Emailservice'
+import { SimpleAlert } from './Alert'
 
 interface FormErrors {
   username?: string
@@ -20,8 +23,10 @@ export const Form = () => {
   const [phoneNumber, setPhoneNumber] = useState('')
   const [message, setMessage] = useState('')
   const [errors, setErrors] = useState<FormErrors>({})
+  const [answer, setAnswer] = useState<string>('')
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     const newErrors: FormErrors = {}
@@ -51,6 +56,7 @@ export const Form = () => {
       setErrors(newErrors)
     } else {
       setErrors({}) // Limpia errores si todo es válido
+      setIsButtonDisabled(true)
 
       // Procesar el formulario aquí
       const formData = {
@@ -62,7 +68,9 @@ export const Form = () => {
         message
       }
 
-      console.log(formData) // Aquí puedes enviar el formulario a tu API
+      const result = await getInformationForMail(formData)
+
+      setAnswer(result)
 
       setUsername('')
       setEmail('')
@@ -70,6 +78,12 @@ export const Form = () => {
       setMessage('')
       setProblemType('')
       setPhoneNumber('')
+
+      setIsButtonDisabled(false)
+
+      setTimeout(() => {
+        setAnswer('')
+      }, 4000)
     }
   }
 
@@ -180,6 +194,7 @@ export const Form = () => {
               <Button
                 type='submit'
                 fullWidth
+                disabled={isButtonDisabled}
                 sx={{
                   bgcolor: 'var(--primary-color-purple)',
                   color: 'var(--letter-color)',
@@ -195,6 +210,7 @@ export const Form = () => {
           </Grid>
         </form>
       </CardContent>
+      <Box sx={{ paddingLeft: '24px', paddingRight: '24px' }}>{answer && <SimpleAlert message={answer} />}</Box>
     </Card>
   )
 }
