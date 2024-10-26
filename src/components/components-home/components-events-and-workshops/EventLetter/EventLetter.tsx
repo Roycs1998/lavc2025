@@ -3,7 +3,8 @@ import * as React from 'react'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
-import { Box } from '@mui/material'
+import { Box, Grid } from '@mui/material'
+import PetsIcon from '@mui/icons-material/Pets'
 
 interface EventInformation {
   image: string
@@ -35,18 +36,26 @@ export const EventLetter = ({ image, eventLocation, eventDate, eventName }: Even
             width: '100%',
             height: '100%'
           }}
-        ></Box>
+        />
       </Box>
       <CardContent sx={{ bgcolor: '#ffffff', paddingLeft: '30px', paddingTop: '20px' }}>
-        <Typography variant='body1' fontWeight='bold' sx={{ fontSize: '11px' }}>
-          {eventLocation}
-        </Typography>
-        <Typography variant='h6' fontWeight='bold'>
-          {eventName}
-        </Typography>
-        <Typography variant='body1' sx={{ color: 'text.secondary', fontSize: '12px' }}>
-          {eventDate}
-        </Typography>
+        <Grid container spacing={1}>
+          {/* Columna para la ubicación del evento */}
+          <Grid item xs={1.3} sx={{ display: 'flex', alignItems: 'center' }}>
+            <PetsIcon sx={{ fontSize: '40px', color: 'var(--primary-color-purple)' }} />
+          </Grid>
+          <Grid item xs={10}>
+            <Typography variant='body1' fontWeight='bold' sx={{ fontSize: '11px' }}>
+              {eventLocation}
+            </Typography>
+            <Typography variant='h6' fontWeight='bold'>
+              {eventName}
+            </Typography>
+            <Typography variant='body1' sx={{ color: 'text.secondary', fontSize: '12px' }}>
+              {eventDate}
+            </Typography>
+          </Grid>
+        </Grid>
       </CardContent>
     </Card>
   )

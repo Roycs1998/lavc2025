@@ -12,7 +12,7 @@ const EventosTalleres = async () => {
         'https://tlavc-peru.org/tlavc/vista/upload/talleres/Portada%20presentaci%C3%B3n%20escalada%20deportiva.jpg',
       eventLocation: 'ESTADIO NACIONAL - LIMA',
       eventDate: '25 de febrero 2025',
-      eventName: ' LACV 2025'
+      eventName: ' LACV 2024'
     },
 
     {
@@ -20,7 +20,7 @@ const EventosTalleres = async () => {
       image: 'https://cdn.teleticket.com.pe/images/eventos/tes048_calugalistado.jpg',
       eventLocation: 'ESTADIO NACIONAL - LIMA',
       eventDate: '25 de febrero 2026',
-      eventName: ' LACV 2026'
+      eventName: ' LACV 2025'
     }
   ]
 
