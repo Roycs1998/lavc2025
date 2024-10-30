@@ -32,12 +32,20 @@
   .global-padding {
     padding-inline: 2%;
   }
+
+  :root {
+    --global-padding-inline: 2%;
+  }
 }
 
 @media (max-width: 600px) {
   /* Ajusta este valor según tus necesidades */
   .global-padding {
     padding-inline: 0;
+  }
+
+  :root {
+    --global-padding-inline: 0;
   }
 }
 

@@ -5,13 +5,13 @@ import { PriceTable } from '@/components/components-home/components-events-and-w
 import { EventDescriptionLetter } from '@/components/components-home/components-events-and-workshops/components-event-description/EventDescriptionLetter'
 import { PurchaseLetter } from '@/components/components-home/components-events-and-workshops/components-event-description/PurchaseLetter'
 
-interface PonenteParams {
+interface EventParameters {
   params: {
     eventos: string
   }
 }
 
-const Eventos = async ({ params }: PonenteParams) => {
+const Eventos = async ({ params }: EventParameters) => {
   const { eventos } = params
   const event = decodeURIComponent(eventos)
 
@@ -63,8 +63,25 @@ const Eventos = async ({ params }: PonenteParams) => {
               </Box>
             </Box>
           </Grid>
-          <Grid item xs={12} md={5} sx={{ bgcolor: 'var(--background-form)' }}>
-            <Box sx={{ p: 2 }}>
+
+          <Grid
+            item
+            xs={12}
+            sm={12}
+            md={5}
+            sx={{
+              bgcolor: 'var(--background-form)'
+            }}
+          >
+            <Box
+              sx={{
+                p: 2,
+                marginRight: { sx: '', sm: '4%', md: '24%' },
+                display: 'flex',
+                justifyContent: 'center',
+                height: '100%'
+              }}
+            >
               <PurchaseLetter />
             </Box>
           </Grid>
