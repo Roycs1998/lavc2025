@@ -13,6 +13,8 @@ import { Box, Button, MenuItem, TextField } from '@mui/material'
 export const PurchaseLetter = () => {
   const [problemType, setProblemType] = useState('')
 
+  const [expanded, setExpanded] = useState(true)
+
   const categories = [
     {
       value: 'MEDICO VETERINARIO'
@@ -24,6 +26,10 @@ export const PurchaseLetter = () => {
       value: 'VETERINARIO/ESTUDIANTE EXTRA'
     }
   ]
+
+  const handleChange = (event: React.SyntheticEvent, newExpanded: boolean | ((prevState: boolean) => boolean)) => {
+    setExpanded(newExpanded)
+  }
 
   return (
     <Box sx={{ paddingTop: '5%' }}>
@@ -50,7 +56,7 @@ export const PurchaseLetter = () => {
         </Typography>
       </Box>
       <Box sx={{ width: '450px' }}>
-        <Accordion sx={{ borderRadius: 'none' }}>
+        <Accordion expanded={expanded} sx={{ borderRadius: 'none' }} onChange={handleChange}>
           <AccordionSummary aria-controls='panel1-content' id='panel1-header'>
             <Box sx={{ height: '90px', width: '100%' }}>
               <Typography
@@ -125,24 +131,26 @@ export const PurchaseLetter = () => {
           <AccordionDetails>
             <Box sx={{ height: '80px' }}>
               <Typography sx={{ padding: '20px' }}>
-                <Button
-                  disabled={!problemType}
-                  sx={{
-                    bgcolor: 'var(--primary-color-purple)',
-                    color: 'var(--letter-color)',
-                    width: '100%',
-                    height: 55,
-                    fontWeight: 'bold',
-                    fontSize: '15px',
+                <Link href={problemType ? `/compra/${problemType}` : '#'}>
+                  <Button
+                    disabled={!problemType}
+                    sx={{
+                      bgcolor: 'var(--primary-color-purple)',
+                      color: 'var(--letter-color)',
+                      width: '100%',
+                      height: 55,
+                      fontWeight: 'bold',
+                      fontSize: '15px',
 
-                    '&:hover': {
-                      color: 'var(--letter-color)', // Cambiar color si es necesario
-                      bgcolor: '#7f76d9'
-                    }
-                  }}
-                >
-                  <Link href={`/compra/${problemType}`}>COMPRAR TU ENTRADA</Link>
-                </Button>
+                      '&:hover': {
+                        color: 'var(--letter-color)', // Cambiar color si es necesario
+                        bgcolor: '#7f76d9'
+                      }
+                    }}
+                  >
+                    COMPRAR TU ENTRADA
+                  </Button>
+                </Link>
               </Typography>
             </Box>
           </AccordionDetails>

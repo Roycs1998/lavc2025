@@ -9,7 +9,7 @@ export const CostTable = ({ ticketName, price }: Ticket) => {
   return (
     <Box sx={{ marginTop: '40px' }}>
       <Box>
-        <Typography variant='body1' component='div' sx={{ fontSize: '0.9rem', marginBottom: '60px' }}>
+        <Typography variant='body1' component='div' sx={{ fontSize: '0.9rem', marginBottom: '30px' }}>
           RESUMEN
         </Typography>
       </Box>

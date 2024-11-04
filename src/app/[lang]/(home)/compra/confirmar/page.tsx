@@ -2,30 +2,21 @@
 
 import { useEffect, useState } from 'react'
 
-import Link from 'next/link'
-
-import { Box, Button, Grid, Typography, useMediaQuery } from '@mui/material'
+import { Box, Button, Grid, Link, Typography, useMediaQuery } from '@mui/material'
 
 import { CardImage } from '@/components/components-home/components-ponentes/CardImage'
-import { TicketInformation } from '@/components/components-home/components-buys/TicketInformation'
-import { CostTable } from '@/components/components-home/components-buys/CostTable'
 import { PurchaseEventLetter } from '@/components/components-home/components-buys/PurchaseEventLetter'
 import { SubtitleTag } from '@/components/components-home/components-reusable/SubtitleTag'
 
-interface TicketParameters {
-  params: {
-    ticket: string
-  }
-}
+import { CostTable } from '@/components/components-home/components-buys/CostTable'
+import { AcceptanceCriteria } from '@/components/components-home/components-buys/components-confirm/AcceptanceCriteria'
 
-export const InformacionDeTicket = ({ params }: TicketParameters) => {
-  const { ticket } = params
-  const eventTicket = decodeURIComponent(ticket)
-
+export const Confirm = () => {
   const isSmallScreen = useMediaQuery('(max-width:1275px)')
-
   const [offsetY, setOffsetY] = useState(0)
   const maxOffsetY = 300
+
+  const [allSelected, setAllSelected] = useState(false)
 
   const handleScroll = () => {
     const newOffsetY = window.scrollY * 0.5 // Ajusta el multiplicador para un efecto más o menos fuerte
@@ -39,12 +30,16 @@ export const InformacionDeTicket = ({ params }: TicketParameters) => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  const handleRadioChange = (isSelected: boolean) => {
+    setAllSelected(isSelected) // Actualiza el estado según el valor que pase el componente de los radios
+  }
+
   return (
     <Box>
       <Box>
         <CardImage
-          image='http://blackbeltreview.files.wordpress.com/2010/11/raffle-tickets.jpg'
-          title='INFORMACION TICKET'
+          image='http://4.bp.blogspot.com/-APWtYanIkJQ/UXY6C3qtIvI/AAAAAAAAFIo/c4JXBPicD8c/s1600/perros.jpg'
+          title='CONFIRMAR'
         />
       </Box>
       <Box sx={{}}>
@@ -73,13 +68,28 @@ export const InformacionDeTicket = ({ params }: TicketParameters) => {
                 </Typography>
               </Box>
             )}
-            <Box sx={{ paddingRight: '30px', paddingLeft: '30px' }}>
+            <Box sx={{ paddingRight: '10px', paddingLeft: '30px' }}>
               <Box>
-                <SubtitleTag caption='Informacion de Ticket' />
+                <Box>
+                  <Typography
+                    variant='h6'
+                    fontWeight='bold'
+                    sx={{ paddingTop: '12px', fontSize: '1.2rem', fontWeight: 700 }}
+                  >
+                    Ismael Jonas Villarruel Ngrete
+                  </Typography>
+                </Box>
+                <Box>
+                  <CostTable ticketName='ESTUDIANTE O BACHILLER' price={159.0} />
+                </Box>
+                <Box sx={{ marginTop: '50px' }}>
+                  <SubtitleTag caption='SELECCIONA PARA CONTINUAR' />
+                </Box>
+                <Box>
+                  <AcceptanceCriteria onChange={handleRadioChange} />
+                </Box>
               </Box>
-              <TicketInformation />
 
-              <CostTable ticketName={eventTicket} price={159.0} />
               {isSmallScreen && (
                 <Typography sx={{ width: '100%', marginTop: '50px' }}>
                   <Link href='/compra/adicionales'>
@@ -133,7 +143,8 @@ export const InformacionDeTicket = ({ params }: TicketParameters) => {
                   eventLocation='ESTADIO NACIONAL - LIMA'
                   eventDate='25 de febrero 2025'
                   eventName='LACV 2024'
-                  pageRoute='/compra/adicionales'
+                  pageRoute='/compra/confirmar'
+                  disableButton={!allSelected}
                 />
               </Box>
             </Grid>
@@ -144,4 +155,4 @@ export const InformacionDeTicket = ({ params }: TicketParameters) => {
   )
 }
 
-export default InformacionDeTicket
+export default Confirm

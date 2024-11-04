@@ -2,7 +2,6 @@ import Link from 'next/link'
 
 import {
   Box,
-  Divider,
   Grid,
   Paper,
   Table,

@@ -7,9 +7,18 @@ interface EventInformation {
   eventLocation: string
   eventDate: string
   eventName: string
+  pageRoute: string
+  disableButton?: boolean
 }
 
-export const PurchaseEventLetter = ({ image, eventLocation, eventDate, eventName }: EventInformation) => {
+export const PurchaseEventLetter = ({
+  image,
+  eventLocation,
+  eventDate,
+  eventName,
+  pageRoute,
+  disableButton = false
+}: EventInformation) => {
   return (
     <Card
       sx={{
@@ -43,8 +52,9 @@ export const PurchaseEventLetter = ({ image, eventLocation, eventDate, eventName
               {eventDate}
             </Typography>
             <Typography sx={{ minWidth: '300px', width: '400px', marginTop: '30px' }}>
-              <Link href='/compra/adicionales'>
+              <Link href={!disableButton && pageRoute ? pageRoute : '#'}>
                 <Button
+                  disabled={disableButton}
                   sx={{
                     bgcolor: 'var(--primary-color-purple)',
                     color: 'var(--letter-color)',

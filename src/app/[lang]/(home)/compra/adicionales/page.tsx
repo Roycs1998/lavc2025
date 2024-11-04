@@ -1,11 +1,14 @@
 'use client'
 import { useEffect, useState } from 'react'
 
-import { Box, Button, Grid, Link, Typography, useMediaQuery } from '@mui/material'
+import Link from 'next/link'
+
+import { Box, Button, Grid, Typography, useMediaQuery } from '@mui/material'
 
 import { PurchaseEventLetter } from '@/components/components-home/components-buys/PurchaseEventLetter'
 import { CardImage } from '@/components/components-home/components-ponentes/CardImage'
 import { AdditionalInformationLetter } from '@/components/components-home/components-buys/components-additional/AdditionalInformationLetter'
+import { SubtitleTag } from '@/components/components-home/components-reusable/SubtitleTag'
 
 export const Additional = () => {
   const isSmallScreen = useMediaQuery('(max-width:1275px)')
@@ -59,11 +62,15 @@ export const Additional = () => {
                 </Typography>
               </Box>
             )}
+
             <Box sx={{ paddingRight: '10px', paddingLeft: '30px' }}>
+              <Box sx={{ marginTop: '50px' }}>
+                <SubtitleTag caption='INFORMACION ADICIONAL' />
+              </Box>
               <AdditionalInformationLetter />
               {isSmallScreen && (
                 <Typography sx={{ width: '100%', marginTop: '50px' }}>
-                  <Link href='/compra/adicionales'>
+                  <Link href='/compra/pago'>
                     <Button
                       sx={{
                         bgcolor: 'var(--primary-color-purple)',
@@ -114,6 +121,7 @@ export const Additional = () => {
                   eventLocation='ESTADIO NACIONAL - LIMA'
                   eventDate='25 de febrero 2025'
                   eventName='LACV 2024'
+                  pageRoute='/compra/pago'
                 />
               </Box>
             </Grid>
