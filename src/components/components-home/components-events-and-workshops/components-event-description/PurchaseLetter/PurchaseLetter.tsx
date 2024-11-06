@@ -10,7 +10,11 @@ import Typography from '@mui/material/Typography'
 
 import { Box, Button, MenuItem, TextField } from '@mui/material'
 
-export const PurchaseLetter = () => {
+interface Route {
+  route: string
+}
+
+export const PurchaseLetter = ({ route }: Route) => {
   const [problemType, setProblemType] = useState('')
 
   const [expanded, setExpanded] = useState(true)
@@ -131,7 +135,7 @@ export const PurchaseLetter = () => {
           <AccordionDetails>
             <Box sx={{ height: '80px' }}>
               <Typography sx={{ padding: '20px' }}>
-                <Link href={problemType ? `/compra/${problemType}` : '#'}>
+                <Link href={problemType ? route : '#'}>
                   <Button
                     disabled={!problemType}
                     sx={{

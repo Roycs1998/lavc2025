@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react'
 
 import Link from 'next/link'
 
+import { useSearchParams } from 'next/navigation'
+
 import { Box, Button, Grid, Typography, useMediaQuery } from '@mui/material'
 
 import { CardImage } from '@/components/components-home/components-ponentes/CardImage'
@@ -12,17 +14,18 @@ import { CostTable } from '@/components/components-home/components-buys/CostTabl
 import { PurchaseEventLetter } from '@/components/components-home/components-buys/PurchaseEventLetter'
 import { SubtitleTag } from '@/components/components-home/components-reusable/SubtitleTag'
 
-interface TicketParameters {
-  params: {
-    ticket: string
-  }
-}
+export const InformacionDeTicket = () => {
+  const searchParams = useSearchParams()
 
-export const InformacionDeTicket = ({ params }: TicketParameters) => {
-  const { ticket } = params
-  const eventTicket = decodeURIComponent(ticket)
+  const [parameterOne, setParameterOne] = useState<string | null>(null)
+  const [parameterTwo, setParameterTwo] = useState<string | null>(null)
 
   const isSmallScreen = useMediaQuery('(max-width:1275px)')
+
+  useEffect(() => {
+    setParameterOne(searchParams.get('EventoId'))
+    setParameterTwo(searchParams.get('ticketId'))
+  }, [searchParams])
 
   const [offsetY, setOffsetY] = useState(0)
   const maxOffsetY = 300
@@ -79,7 +82,7 @@ export const InformacionDeTicket = ({ params }: TicketParameters) => {
               </Box>
               <TicketInformation />
 
-              <CostTable ticketName={eventTicket} price={159.0} />
+              <CostTable ticketName='MEDICO VETERINARIO' price={159.0} />
               {isSmallScreen && (
                 <Typography sx={{ width: '100%', marginTop: '50px' }}>
                   <Link href='/compra/adicionales'>

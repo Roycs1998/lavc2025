@@ -9,6 +9,7 @@ import { PaymentDocuments } from '@/components/components-home/components-buys/c
 import { PaymentMethod } from '@/components/components-home/components-buys/components-pay/PaymentMethod'
 import { CostTable } from '@/components/components-home/components-buys/CostTable'
 import { SubtitleTag } from '@/components/components-home/components-reusable/SubtitleTag'
+import { AlertIndications } from '@/components/components-home/components-reusable/AlertIndications'
 
 export const Payments = () => {
   const isSmallScreen = useMediaQuery('(max-width:1275px)')
@@ -138,6 +139,11 @@ export const Payments = () => {
                     informationThree='Revisa el detalle de la compra y el monto a pagar antes de Continuar, una vez procesado el pago no existen cambios ni devoluciones'
                   />
                 </Box>
+                {!expandedId && (
+                  <Box sx={{ paddingLeft: '2%', paddingRight: '2%', marginTop: '30px' }}>
+                    <AlertIndications alert='Debe seleccionar un medio de pago' />
+                  </Box>
+                )}
                 <Box>
                   <CostTable ticketName='ESTUDIANTE O BACHILLER' price={159.0} />
                 </Box>

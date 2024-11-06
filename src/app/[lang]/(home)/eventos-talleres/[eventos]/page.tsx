@@ -15,6 +15,9 @@ const Eventos = async ({ params }: EventParameters) => {
   const { eventos } = params
   const event = decodeURIComponent(eventos)
 
+  const eventId = '123'
+  const ticketCategoryId = '456'
+
   return (
     <Box>
       <Box>
@@ -82,7 +85,7 @@ const Eventos = async ({ params }: EventParameters) => {
                 height: '100%'
               }}
             >
-              <PurchaseLetter />
+              <PurchaseLetter route={`/compra/ticket?EventoId=${eventId}&ticketId=${ticketCategoryId}`} />
             </Box>
           </Grid>
         </Grid>

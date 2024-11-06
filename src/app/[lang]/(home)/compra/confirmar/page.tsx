@@ -10,6 +10,7 @@ import { SubtitleTag } from '@/components/components-home/components-reusable/Su
 
 import { CostTable } from '@/components/components-home/components-buys/CostTable'
 import { AcceptanceCriteria } from '@/components/components-home/components-buys/components-confirm/AcceptanceCriteria'
+import { AlertIndications } from '@/components/components-home/components-reusable/AlertIndications'
 
 export const Confirm = () => {
   const isSmallScreen = useMediaQuery('(max-width:1275px)')
@@ -88,6 +89,11 @@ export const Confirm = () => {
                 <Box>
                   <AcceptanceCriteria onChange={handleRadioChange} />
                 </Box>
+                {!allSelected && (
+                  <Box sx={{ paddingLeft: '2%', paddingRight: '2%', marginTop: '30px' }}>
+                    <AlertIndications alert='Recuerde que, si no aprueba los Términos y Condiciones, la Política de Compra y la Política de Privacidad de LAVC, no podremos gestionar su solicitud, toda vez que para realizar esta actividad es imprescindible obtener y tratar sus datos personales.' />
+                  </Box>
+                )}
               </Box>
 
               {isSmallScreen && (
