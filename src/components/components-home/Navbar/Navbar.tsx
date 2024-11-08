@@ -62,7 +62,7 @@ export const Navbar = ({ dictionary }: Props) => {
                   start={dictionary?.nav_main?.navbar.contact_us}
                   links={[
                     { text: dictionary?.nav_main?.navbar.about_LAVC, link: 'https://example1.com' },
-                    { text: dictionary?.nav_main?.navbar.contact, link: 'https://example2.com' }
+                    { text: dictionary?.nav_main?.navbar.contact, link: '/soporte' }
                   ]}
                   image='https://tse2.mm.bing.net/th?id=OIP.33VqJRpi2PsJuc9mcRwcCQHaE9&pid=Api&P=0&h=180'
                 ></NavbarTooltip>

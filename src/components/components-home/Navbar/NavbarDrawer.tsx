@@ -69,7 +69,7 @@ export const NavbarDrawer = ({ dictionary }: Props) => {
                     start={dictionary?.nav_main?.navbar?.contact_us}
                     links={[
                       { text: dictionary?.nav_main?.navbar.about_LAVC, link: 'https://example1.com' },
-                      { text: dictionary?.nav_main?.navbar.contact, link: 'https://example2.com' }
+                      { text: dictionary?.nav_main?.navbar.contact, link: '/soporte' }
                     ]}
                   />
                 </ListItemText>
@@ -83,7 +83,7 @@ export const NavbarDrawer = ({ dictionary }: Props) => {
                     links={[
                       { text: dictionary?.nav_main?.navbar.event_and_workshops, link: '/eventos-talleres' },
                       { text: dictionary?.nav_main?.navbar.speakers, link: '/ponentes' },
-                      { text: dictionary?.nav_main?.navbar.program, link: 'https://example2.com' },
+                      { text: dictionary?.nav_main?.navbar.program, link: '/programa' },
                       { text: dictionary?.nav_main?.navbar.stand_out, link: 'https://example2.com' },
                       {
                         text: dictionary?.nav_main?.navbar.companies,

@@ -12,7 +12,7 @@ const Program = async () => {
           title='PROGRAMA'
         />
       </Box>
-      <Box className='global-padding' sx={{ marginTop: '5%', paddingBottom: '5%' }}>
+      <Box sx={{ paddingTop: '3%' }}>
         <EventProgram />
       </Box>
     </Box>
