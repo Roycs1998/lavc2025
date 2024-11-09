@@ -61,7 +61,7 @@ export const Navbar = ({ dictionary }: Props) => {
                 <NavbarTooltip
                   start={dictionary?.nav_main?.navbar.contact_us}
                   links={[
-                    { text: dictionary?.nav_main?.navbar.about_LAVC, link: 'https://example1.com' },
+                    { text: dictionary?.nav_main?.navbar.about_LAVC, link: '/nosotros' },
                     { text: dictionary?.nav_main?.navbar.contact, link: '/soporte' }
                   ]}
                   image='https://tse2.mm.bing.net/th?id=OIP.33VqJRpi2PsJuc9mcRwcCQHaE9&pid=Api&P=0&h=180'
@@ -76,7 +76,7 @@ export const Navbar = ({ dictionary }: Props) => {
                     { text: dictionary?.nav_main?.navbar.event_and_workshops, link: '/eventos-talleres' },
                     { text: dictionary?.nav_main?.navbar.speakers, link: '/ponentes' },
                     { text: dictionary?.nav_main?.navbar.program, link: '/programa' },
-                    { text: dictionary?.nav_main?.navbar.stand_out, link: 'https://example2.com' },
+                    { text: dictionary?.nav_main?.navbar.stand_out, link: '/diferenciate' },
                     {
                       text: dictionary?.nav_main?.navbar.companies,
                       secondLevelText: [
