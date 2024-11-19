@@ -58,11 +58,12 @@ const Illustrations = (props: IllustrationsProp) => {
       <>
         {typeof image1 === 'undefined' || isImageObj(image1) ? (
           <img
-            alt={image1?.alt || 'tree-1'}
-            src={image1?.src || '/images/illustrations/objects/tree-1.png'}
+            alt={image1?.alt || 'huella'}
+            src={image1?.src || '/images/illustrations/objects/huella.png'}
             className={image1?.className || 'absolute inline-start-0 block-end-0'}
+            style={{ bottom: '20px', marginBottom: '20px', objectFit: 'contain' }}
             width={image1?.width}
-            height={image1?.height || 200}
+            height={image1?.height || 150}
           />
         ) : (
           image1
@@ -80,11 +81,12 @@ const Illustrations = (props: IllustrationsProp) => {
         )}
         {typeof image2 === 'undefined' || isImageObj(image2) ? (
           <img
-            alt={image2?.alt || 'tree-2'}
-            src={image2?.src || '/images/illustrations/objects/tree-2.png'}
+            alt={image2?.alt || 'cachorros'}
+            src={image2?.src || '/images/illustrations/objects/cachorros.png'}
             className={image2?.className || 'absolute inline-end-0 block-end-0'}
+            style={{ bottom: '20px', marginBottom: '15px', objectFit: 'contain', marginRight: '30px' }}
             width={image2?.width}
-            height={image2?.height || 200}
+            height={image2?.height || 150}
           />
         ) : (
           image2

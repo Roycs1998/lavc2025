@@ -20,6 +20,8 @@ export const Payments = () => {
 
   const handleChange = (id: string) => {
     setExpandedId(prevId => (prevId === id ? id : id))
+
+    //console.log('estado' + expandedId)
   }
 
   const handleScroll = () => {
@@ -33,6 +35,10 @@ export const Payments = () => {
 
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  useEffect(() => {
+    localStorage.setItem('typeOfPayment', String(expandedId))
+  }, [expandedId])
 
   return (
     <Box>
@@ -77,7 +83,7 @@ export const Payments = () => {
                 </Box>
                 <Box sx={{ marginTop: '10px' }}>
                   <PaymentMethod
-                    id='accordion1'
+                    id='NIUBIZ'
                     expandedId={expandedId}
                     onChange={handleChange}
                     image='https://teleticket.com.pe/content/images/mediopago/mp112.png?v=20241104'
@@ -87,7 +93,7 @@ export const Payments = () => {
                     paymentTypeImage='https://cdnp.teleticket.com.pe/Content/images/mediopago/opd_niubiz.png'
                   />
                   <PaymentMethod
-                    id='accordion2'
+                    id='CULQI'
                     expandedId={expandedId}
                     onChange={handleChange}
                     image='https://teleticket.com.pe/content/images/mediopago/mp106.png?v=20241101'
@@ -113,7 +119,7 @@ export const Payments = () => {
                     informationThree='Revisa el detalle de la compra y el monto a pagar antes de Continuar, una vez procesado el pago no existen cambios ni devoluciones'
                   />
                   <PaymentMethod
-                    id='accordion3'
+                    id='PagoEfectivo'
                     expandedId={expandedId}
                     onChange={handleChange}
                     image='https://teleticket.com.pe/content/images/mediopago/mp106.png?v=20241101'

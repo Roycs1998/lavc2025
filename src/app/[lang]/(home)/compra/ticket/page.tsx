@@ -27,6 +27,16 @@ export const InformacionDeTicket = () => {
     setParameterTwo(searchParams.get('ticketId'))
   }, [searchParams])
 
+  useEffect(() => {
+    if (parameterOne !== null) {
+      localStorage.setItem('event code', parameterOne ?? '')
+    }
+
+    if (parameterTwo !== null) {
+      localStorage.setItem('ticket code', parameterTwo ?? '')
+    }
+  }, [parameterOne, parameterTwo])
+
   const [offsetY, setOffsetY] = useState(0)
   const maxOffsetY = 300
 

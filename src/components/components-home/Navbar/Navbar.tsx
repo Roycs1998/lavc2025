@@ -92,17 +92,19 @@ export const Navbar = ({ dictionary }: Props) => {
               </ListItem>
               <ListItem className={styles.link}>
                 <HelpOutlineIcon className={styles.icons} />
-                <ListItemText
-                  className={styles.hoverColor}
-                  primaryTypographyProps={{
-                    sx: {
-                      fontWeight: 700,
-                      fontSize: '1.1rem',
-                      whiteSpace: 'nowrap'
-                    }
-                  }}
-                  primary={dictionary?.nav_main?.navbar.frequently_asked_questions}
-                />
+                <Link href='/preguntas-frecuentes'>
+                  <ListItemText
+                    className={styles.hoverColor}
+                    primaryTypographyProps={{
+                      sx: {
+                        fontWeight: 700,
+                        fontSize: '1.1rem',
+                        whiteSpace: 'nowrap'
+                      }
+                    }}
+                    primary={dictionary?.nav_main?.navbar.frequently_asked_questions}
+                  />
+                </Link>
               </ListItem>
               <ListItem className={styles.link}>
                 <PublishedWithChangesIcon className={styles.icons} />

@@ -5,8 +5,8 @@ const transporter = nodemailer.createTransport({
   port: 465,
   secure: true, // true for port 465, false for other ports
   auth: {
-    user: 'jonasvillarruelnegrete@gmail.com',
-    pass: 'utyxnpnixasfoilt'
+    user: process.env.USER_MAIL,
+    pass: process.env.PASSWORD_MAIL
   }
 })
 
@@ -21,7 +21,7 @@ export async function POST(request: Request) {
   const { username, firstName, email, problemType, phoneNumber, message } = params
 
   const info = await transporter.sendMail({
-    from: '"SOPORTE LAVC 👻" <jonasvillarruelnegrete@gmail.com>', // Cambia a tu correo autenticado
+    from: `"SOPORTE LAVC 👻" <${process.env.USER_MAIL}>`, // Cambia a tu correo autenticado
     to: destinationMail, // Cambia a tu correo de destino
     subject: 'Nuevo mensaje de contacto',
     html: `<b>Nombres:</b> ${username}<br><b>Apellidos:</b> ${firstName}<br><b>Correo:</b> ${email}<br><b>Problema:</b> ${problemType}<br><b>Número:</b> ${phoneNumber}<br><b>Mensaje:</b> ${message}`

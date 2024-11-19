@@ -2,20 +2,41 @@
 
 import { useEffect, useState } from 'react'
 
-import { Box, Button, Grid, Link, Typography, useMediaQuery } from '@mui/material'
+import Script from 'next/script'
+
+import { Box, Button, Grid, Typography, useMediaQuery } from '@mui/material'
 
 import { CardImage } from '@/components/components-home/components-ponentes/CardImage'
-import { PurchaseEventLetter } from '@/components/components-home/components-buys/PurchaseEventLetter'
 import { SubtitleTag } from '@/components/components-home/components-reusable/SubtitleTag'
 
 import { CostTable } from '@/components/components-home/components-buys/CostTable'
 import { AcceptanceCriteria } from '@/components/components-home/components-buys/components-confirm/AcceptanceCriteria'
 import { AlertIndications } from '@/components/components-home/components-reusable/AlertIndications'
+import { ConfirmPayment } from '@/components/components-home/components-buys/components-confirm/ConfirmPayment'
+import { CheckPaymentGateway } from '@/components/components-home/components-buys/components-confirm/ConfirmPayment/PaymentGateway'
 
 export const Confirm = () => {
   const isSmallScreen = useMediaQuery('(max-width:1275px)')
   const [offsetY, setOffsetY] = useState(0)
+  const [eventCode, setEventCode] = useState<string | null>(null) // Estado para almacenar eventCode
+  const [ticketCode, setTicketCode] = useState<string | null>(null)
+  const [alertMessage, setAlertMessage] = useState<string | null>(null)
+  const [typeOfPayment, setTypeOfPayment] = useState<string>('')
   const maxOffsetY = 300
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      // Solo se ejecuta en el cliente
+      const storedEventCode = localStorage.getItem('event code')
+      const storedTicketCode = localStorage.getItem('ticket code')
+      const storedTypeOfPayment = localStorage.getItem('typeOfPayment') || ''
+
+      // Actualiza el estado con los valores recuperados
+      setEventCode(storedEventCode)
+      setTicketCode(storedTicketCode)
+      setTypeOfPayment(storedTypeOfPayment)
+    }
+  }, [])
 
   const [allSelected, setAllSelected] = useState(false)
 
@@ -33,6 +54,12 @@ export const Confirm = () => {
 
   const handleRadioChange = (isSelected: boolean) => {
     setAllSelected(isSelected) // Actualiza el estado según el valor que pase el componente de los radios
+  }
+
+  const handlerClickOpenPay = () => {
+    CheckPaymentGateway(10, typeOfPayment, setAlertMessage)
+
+    console.log('Pasarela' + typeOfPayment)
   }
 
   return (
@@ -97,9 +124,11 @@ export const Confirm = () => {
               </Box>
 
               {isSmallScreen && (
-                <Typography sx={{ width: '100%', marginTop: '50px' }}>
-                  <Link href='/compra/adicionales'>
+                <Box>
+                  <Typography sx={{ width: '100%', marginTop: '50px' }}>
                     <Button
+                      onClick={handlerClickOpenPay}
+                      disabled={!allSelected}
                       sx={{
                         bgcolor: 'var(--primary-color-purple)',
                         color: 'var(--letter-color)',
@@ -115,8 +144,9 @@ export const Confirm = () => {
                     >
                       CONTINUAR
                     </Button>
-                  </Link>
-                </Typography>
+                  </Typography>
+                  {alertMessage && <AlertIndications alert={alertMessage} />}
+                </Box>
               )}
             </Box>
           </Grid>
@@ -144,19 +174,21 @@ export const Confirm = () => {
                   transition: 'transform 0.1s ease-out'
                 }}
               >
-                <PurchaseEventLetter
+                <ConfirmPayment
                   image='https://tlavc-peru.org/tlavc/vista/upload/talleres/Portada%20presentaci%C3%B3n%20escalada%20deportiva.jpg'
                   eventLocation='ESTADIO NACIONAL - LIMA'
                   eventDate='25 de febrero 2025'
                   eventName='LACV 2024'
-                  pageRoute='/compra/confirmar'
                   disableButton={!allSelected}
+                  amount={10}
+                  typeOfPayment={typeOfPayment}
                 />
               </Box>
             </Grid>
           )}
         </Grid>
       </Box>
+      <Script src='https://js.culqi.com/checkout-js' />
     </Box>
   )
 }

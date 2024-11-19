@@ -27,9 +27,6 @@ import type { Mode } from '@core/types'
 import Logo from '@components/layout/shared/Logo'
 import Illustrations from '@components/Illustrations'
 
-// Config Imports
-import themeConfig from '@configs/themeConfig'
-
 // Hook Imports
 import { useImageVariant } from '@core/hooks/useImageVariant'
 
@@ -53,22 +50,25 @@ const Login = ({ mode }: { mode: Mode }) => {
   }
 
   return (
-    <div className='flex flex-col justify-center items-center min-bs-[100dvh] relative p-6'>
+    <div
+      className='flex flex-col justify-center items-center min-bs-[100dvh] relative p-6'
+      style={{ marginTop: '50px' }}
+    >
       <Card className='flex flex-col sm:is-[450px]'>
         <CardContent className='p-6 sm:!p-12'>
-          <Link href='/' className='flex justify-center items-center mbe-6'>
-            <Logo />
-          </Link>
+          <Logo />
           <div className='flex flex-col gap-5'>
             <div>
-              <Typography variant='h4'>{`Welcome to ${themeConfig.templateName}!👋🏻`}</Typography>
-              <Typography className='mbs-1'>Please sign-in to your account and start the adventure</Typography>
+              <Typography variant='h4' sx={{ textAlign: 'center' }}>{`Bienvenido a LAVC!👋🏻`}</Typography>
+              <Typography className='mbs-1' sx={{ textAlign: 'center' }}>
+                Inicia sesión en tu cuenta y comienza la aventura.
+              </Typography>
             </div>
             <form noValidate autoComplete='off' onSubmit={handleSubmit} className='flex flex-col gap-5'>
               <TextField autoFocus fullWidth label='Email' />
               <TextField
                 fullWidth
-                label='Password'
+                label='Contraseña'
                 id='outlined-adornment-password'
                 type={isPasswordShown ? 'text' : 'password'}
                 InputProps={{
@@ -93,24 +93,18 @@ const Login = ({ mode }: { mode: Mode }) => {
                 </Typography>
               </div>
               <Button fullWidth variant='contained' type='submit'>
-                Log In
+                Ingresar
               </Button>
               <div className='flex justify-center items-center flex-wrap gap-2'>
-                <Typography>New on our platform?</Typography>
+                <Typography>¿Nuevo en nuestra plataforma?</Typography>
                 <Typography component={Link} href='/register' color='primary'>
-                  Create an account
+                  Crear una cuenta
                 </Typography>
               </div>
-              <Divider className='gap-3'>or</Divider>
+              <Divider className='gap-3'>o</Divider>
               <div className='flex justify-center items-center gap-2'>
                 <IconButton size='small' className='text-facebook'>
                   <i className='ri-facebook-fill' />
-                </IconButton>
-                <IconButton size='small' className='text-twitter'>
-                  <i className='ri-twitter-fill' />
-                </IconButton>
-                <IconButton size='small' className='text-github'>
-                  <i className='ri-github-fill' />
                 </IconButton>
                 <IconButton size='small' className='text-googlePlus'>
                   <i className='ri-google-fill' />

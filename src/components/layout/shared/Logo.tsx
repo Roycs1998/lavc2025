@@ -6,12 +6,6 @@ import type { CSSProperties } from 'react'
 // Third-party Imports
 import styled from '@emotion/styled'
 
-// Component Imports
-import MaterioLogo from '@core/svg/Logo'
-
-// Config Imports
-import themeConfig from '@configs/themeConfig'
-
 type LogoTextProps = {
   color?: CSSProperties['color']
 }
@@ -26,11 +20,14 @@ const LogoText = styled.span<LogoTextProps>`
   margin-inline-start: 10px;
 `
 
-const Logo = ({ color }: { color?: CSSProperties['color'] }) => {
+const Logo = () => {
   return (
-    <div className='flex items-center min-bs-[24px]'>
-      <MaterioLogo className='text-[22px] text-primary' />
-      <LogoText color={color}>{themeConfig.templateName}</LogoText>
+    <div className='flex items-center justify-center min-h-[24px]'>
+      <img
+        src='/images/logolavc/logo.ico' // Reemplaza con la URL de tu logotipo
+        alt='Logotipo'
+        style={{ width: '65px', height: 'auto', marginBottom: '20px' }}
+      ></img>
     </div>
   )
 }

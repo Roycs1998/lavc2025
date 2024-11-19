@@ -1,12 +1,16 @@
 'use client'
 import type { SetStateAction } from 'react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { Box, FormControl, FormControlLabel, Radio, RadioGroup, TextField, Typography } from '@mui/material'
+
+import { rucStore } from '@/store/PaymentTypeStore'
 
 export const PaymentDocuments = () => {
   const [selectedOption, setSelectedOption] = useState('boleta')
   const [inputValue, setInputValue] = useState('')
+
+  const updateRuc = rucStore(state => state.updateRuc)
 
   const handleChange = (event: { target: { value: SetStateAction<string> } }) => {
     setSelectedOption(event.target.value)
@@ -16,7 +20,9 @@ export const PaymentDocuments = () => {
     setInputValue(event.target.value) // Actualiza el estado con el valor ingresado
   }
 
-  console.log(inputValue)
+  useEffect(() => {
+    updateRuc(inputValue)
+  }, [inputValue, updateRuc])
 
   return (
     <Box>
@@ -64,6 +70,7 @@ export const PaymentDocuments = () => {
                   onChange={handleInputChange}
                   variant='outlined'
                   placeholder='Ingresa el RUC de la empresa'
+                  type='number'
                   sx={{
                     width: '100%', // Ajusta el ancho
                     '& .MuiInputBase-root': {

@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import { Box, Button, Card, CardContent, CardMedia, Grid, Link, Typography } from '@mui/material'
 
@@ -35,17 +35,6 @@ export const Informationletter = ({
 }: Speaker) => {
   const [isExpanded, setIsExpanded] = useState(false)
   const toggleExpand = () => setIsExpanded(!isExpanded)
-  const [offset, setOffset] = useState(0)
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setOffset(window.scrollY * 0.3)
-    }
-
-    window.addEventListener('scroll', handleScroll)
-
-    return () => window.removeEventListener('scroll', handleScroll)
-  })
 
   const truncatedText = paragraphTwo ? paragraphTwo.slice(0, 100) : ''
 
@@ -249,8 +238,8 @@ export const Informationletter = ({
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
-              width: '620px',
-              height: '500px'
+              width: '600px',
+              height: '490px'
             }}
           >
             <CardMedia
@@ -259,9 +248,8 @@ export const Informationletter = ({
               alt='Descripción de la imagen'
               sx={{
                 maxWidth: '100%',
-                height: '200%',
-                transform: `translateY(${offset}px)`,
-                transition: 'transform 0.2s ease-out'
+                height: '100%',
+                objectFit: 'contain'
               }} // Se adapta al tamaño del contenedor
             />
           </Box>

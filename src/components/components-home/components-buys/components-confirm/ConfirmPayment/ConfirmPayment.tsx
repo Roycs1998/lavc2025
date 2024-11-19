@@ -1,26 +1,36 @@
 'use client'
-
-import Link from 'next/link'
+import { useState } from 'react'
 
 import { Box, Button, Card, CardContent, Grid, Typography } from '@mui/material'
+
+import { CheckPaymentGateway } from './PaymentGateway'
+import { AlertIndications } from '@/components/components-home/components-reusable/AlertIndications'
 
 interface EventInformation {
   image: string
   eventLocation: string
   eventDate: string
   eventName: string
-  pageRoute: string
   disableButton?: boolean
+  amount: number
+  typeOfPayment: string
 }
 
-export const PurchaseEventLetter = ({
+export const ConfirmPayment = ({
   image,
   eventLocation,
   eventDate,
   eventName,
-  pageRoute,
-  disableButton = false
+  disableButton = false,
+  amount,
+  typeOfPayment
 }: EventInformation) => {
+  const [alertMessage, setAlertMessage] = useState<string | null>(null)
+
+  const handlerClickOpenPay = () => {
+    CheckPaymentGateway(amount, typeOfPayment, setAlertMessage)
+  }
+
   return (
     <Box>
       <Card
@@ -59,29 +69,29 @@ export const PurchaseEventLetter = ({
                 {eventDate}
               </Typography>
               <Typography sx={{ minWidth: '300px', width: '400px', marginTop: '30px' }}>
-                <Link href={!disableButton && pageRoute ? pageRoute : '#'}>
-                  <Button
-                    disabled={disableButton}
-                    sx={{
-                      bgcolor: 'var(--primary-color-purple)',
-                      color: 'var(--letter-color)',
-                      width: '100%',
-                      height: 55,
-                      fontWeight: 'bold',
-                      fontSize: '15px',
-                      '&:hover': {
-                        color: 'var(--letter-color)', // Cambiar color si es necesario
-                        bgcolor: '#7f76d9'
-                      }
-                    }}
-                  >
-                    CONTINUAR
-                  </Button>
-                </Link>
+                <Button
+                  onClick={handlerClickOpenPay}
+                  disabled={disableButton}
+                  sx={{
+                    bgcolor: 'var(--primary-color-purple)',
+                    color: 'var(--letter-color)',
+                    width: '100%',
+                    height: 55,
+                    fontWeight: 'bold',
+                    fontSize: '15px',
+                    '&:hover': {
+                      color: 'var(--letter-color)', // Cambiar color si es necesario
+                      bgcolor: '#7f76d9'
+                    }
+                  }}
+                >
+                  CONTINUAR
+                </Button>
               </Typography>
             </Grid>
           </Grid>
         </CardContent>
+        {alertMessage && <AlertIndications alert={alertMessage} />}
       </Card>
     </Box>
   )
