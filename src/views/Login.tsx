@@ -30,9 +30,17 @@ import Illustrations from '@components/Illustrations'
 // Hook Imports
 import { useImageVariant } from '@core/hooks/useImageVariant'
 
+interface FormErrors {
+  email?: string
+  password?: string
+}
+
 const Login = ({ mode }: { mode: Mode }) => {
   // States
   const [isPasswordShown, setIsPasswordShown] = useState(false)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [errors, setErrors] = useState<FormErrors>({})
 
   // Vars
   const darkImg = '/images/pages/auth-v1-mask-dark.png'
@@ -46,7 +54,24 @@ const Login = ({ mode }: { mode: Mode }) => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    router.push('/')
+
+    const newErrors: FormErrors = {}
+
+    if (!email) {
+      newErrors.email = 'El correo electrónico es obligatorio.'
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      newErrors.email = 'El correo electrónico no es válido'
+    }
+
+    if (!password) newErrors.password = 'La contraseña es obligatoria.'
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors)
+    } else {
+      console.log('Email:', email)
+      console.log('Password:', password)
+      router.push('/')
+    }
   }
 
   return (
@@ -64,13 +89,25 @@ const Login = ({ mode }: { mode: Mode }) => {
                 Inicia sesión en tu cuenta y comienza la aventura.
               </Typography>
             </div>
-            <form noValidate autoComplete='off' onSubmit={handleSubmit} className='flex flex-col gap-5'>
-              <TextField autoFocus fullWidth label='Email' />
+            <form autoComplete='off' onSubmit={handleSubmit} className='flex flex-col gap-5'>
+              <TextField
+                sx={{ width: '100%' }}
+                fullWidth
+                label='Email'
+                type='email'
+                value={email} // Estado del campo de mensaje
+                onChange={e => setEmail(e.target.value)}
+                error={Boolean(errors.email)} // Marca como error si hay un mensaje
+                helperText={errors.email} // Muestra el mensaje de error
+              />
               <TextField
                 fullWidth
                 label='Contraseña'
+                onChange={e => setPassword(e.target.value)}
                 id='outlined-adornment-password'
                 type={isPasswordShown ? 'text' : 'password'}
+                error={Boolean(errors.password)}
+                helperText={errors.password}
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position='end'>

@@ -152,7 +152,6 @@ export const Form = () => {
                 id='outlined-select-currency'
                 select
                 label='Tipo de Problema'
-                defaultValue='EUR'
                 value={problemType} // Estado del campo de mensaje
                 onChange={e => setProblemType(e.target.value)}
                 error={Boolean(errors.problemType)} // Marca como error si hay un mensaje
