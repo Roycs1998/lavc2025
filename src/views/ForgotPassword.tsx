@@ -1,6 +1,8 @@
 'use client'
 
 // Next Imports
+import { useState, type FormEvent } from 'react'
+
 import Link from 'next/link'
 
 // MUI Imports
@@ -23,12 +25,31 @@ import Logo from '@components/layout/shared/Logo'
 import { useImageVariant } from '@core/hooks/useImageVariant'
 
 const ForgotPassword = ({ mode }: { mode: Mode }) => {
+  const [email, setEmail] = useState('')
+  const [errorEmail, setErrorEmail] = useState('')
+
   // Vars
   const darkImg = '/images/pages/auth-v1-mask-dark.png'
   const lightImg = '/images/pages/auth-v1-mask-light.png'
 
   // Hooks
   const authBackground = useImageVariant(mode, lightImg, darkImg)
+
+  const sendMail = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    setErrorEmail('')
+
+    if (!email) {
+      setErrorEmail('El correo electrónico es obligatorio.')
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      setErrorEmail('El correo electrónico no es válido')
+    }
+
+    if (errorEmail === '') {
+      console.log('email' + email)
+    }
+  }
 
   return (
     <div className='flex flex-col justify-center items-center min-bs-[100dvh] relative p-6'>
@@ -37,15 +58,24 @@ const ForgotPassword = ({ mode }: { mode: Mode }) => {
           <Link href='/' className='flex justify-center items-center mbe-6'>
             <Logo />
           </Link>
-          <Typography variant='h4'>Forgot Password 🔒</Typography>
+          <Typography variant='h4' sx={{ textAlign: 'center' }}>
+            ¿Olvidaste tu contraseña? 🔒
+          </Typography>
           <div className='flex flex-col gap-5'>
-            <Typography className='mbs-1'>
-              Enter your email and we&#39;ll send you instructions to reset your password
+            <Typography className='mbs-1' sx={{ textAlign: 'center' }}>
+              Ingresa tu correo electrónico y te enviaremos un enlace con instrucciones para restablecer tu contraseña
             </Typography>
-            <Form noValidate autoComplete='off' className='flex flex-col gap-5'>
-              <TextField autoFocus fullWidth label='Email' />
+            <Form onSubmit={sendMail} autoComplete='off' className='flex flex-col gap-5'>
+              <TextField
+                fullWidth
+                label='Email'
+                value={email} // Estado del campo de mensaje
+                onChange={e => setEmail(e.target.value)}
+                error={Boolean(errorEmail)} // Marca como error si hay un mensaje
+                helperText={errorEmail} // Muestra el mensaje de error
+              />
               <Button fullWidth variant='contained' type='submit'>
-                Send reset link
+                Enviar Enlace
               </Button>
               <Typography className='flex justify-center items-center' color='primary'>
                 <Link href='/login' className='flex items-center'>

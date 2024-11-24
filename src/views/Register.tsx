@@ -253,8 +253,10 @@ const Register = ({ mode }: { mode: Mode }) => {
       newErrors.academic = 'El estado academico es obligatorio.' // Error si el nombre está vacío
     }
 
-    if (activeStep === 1 && !cycleCurrentlyInProgress) {
-      newErrors.cycleCurrentlyInProgress = 'El ciclo academico es obligatorio.' // Error si el nombre está vacío
+    if (academic === 'ESTUDIANTE') {
+      if (activeStep === 1 && !cycleCurrentlyInProgress) {
+        newErrors.cycleCurrentlyInProgress = 'El ciclo academico es obligatorio.' // Error si el nombre está vacío
+      }
     }
 
     setErrors(newErrors)
@@ -354,28 +356,27 @@ const Register = ({ mode }: { mode: Mode }) => {
 
         setErrors({}) // Limpia los errores al avanzar
       }
+
+      console.log('NOMBRE', name)
+      console.log('PPATERNO', paternalSurname)
+      console.log('MATERNO', maternalSurname)
+      console.log('TYPO DE DOCUMENTO:', typeOfDocument)
+      console.log('DOCUMENTO:', document)
+      console.log('CELULAR:', phone)
+      console.log('PAIS DE PROCEDENCIA :', homeCountry)
+      console.log('CIUDAD DE PROCENDENCIA :', cityOfOrigin)
+      console.log('UNIVERSIDAD :', homeUniversity)
+      console.log('ESTADO ACADEMICO :', academic)
+      console.log('CICLO :', cycleCurrentlyInProgress)
+      console.log('EMAIL :', email)
+
+      console.log('CONTRA:', password)
+      console.log('VERIFICACION DE CONTRA:', verificationPassword)
     }
   }
 
   const handleBack = () => {
     setActiveStep(prevActiveStep => prevActiveStep - 1)
-  }
-
-  const handleSkip = () => {
-    if (!isStepOptional(activeStep)) {
-      // You probably want to guard against something like this,
-      // it should never occur unless someone's actively trying to break something.
-      throw new Error("You can't skip a step that isn't optional.")
-    }
-
-    setActiveStep(prevActiveStep => prevActiveStep + 1)
-    setSkipped(prevSkipped => {
-      const newSkipped = new Set(prevSkipped.values())
-
-      newSkipped.add(activeStep)
-
-      return newSkipped
-    })
   }
 
   const handleReset = () => {
@@ -416,10 +417,6 @@ const Register = ({ mode }: { mode: Mode }) => {
                 const labelProps: {
                   optional?: React.ReactNode
                 } = {}
-
-                if (isStepOptional(index)) {
-                  labelProps.optional = <Typography variant='caption'>Optional</Typography>
-                }
 
                 if (isStepSkipped(index)) {
                   stepProps.completed = false
@@ -507,30 +504,45 @@ const Register = ({ mode }: { mode: Mode }) => {
                           error={Boolean(errors.document)} // Marca como error si hay un mensaje
                           helperText={errors.document}
                         />
-                        <PhoneInput
-                          country={'us'}
-                          value={phone}
-                          placeholder='Celular'
-                          onChange={phone => setPhone(phone || '')}
-                          inputStyle={{
-                            width: '100%', // Ajusta el ancho
-                            height: '56px', // Ajusta la altura del campo
-                            border: '1px solid #ccc', // Borde del campo
-                            transition: 'border-color #cd4b4b 0.3s ease',
-                            boxShadow: 'none'
-                          }}
-                          containerStyle={{
-                            width: '50%'
-                          }}
-                          onFocus={e => {
-                            ;(e.target.style.borderColor = '#8c57ff'), // Cambiar el color del borde al hacer foco
-                              (e.target.style.borderWidth = '2px')
-                          }}
-                          onBlur={e => {
-                            ;(e.target.style.borderColor = '#ccc'), // Volver al color original cuando se pierde el foco
-                              (e.target.style.borderWidth = '1px')
-                          }}
-                        />
+                        <Box sx={{ width: '50%' }}>
+                          <PhoneInput
+                            country={'us'}
+                            value={phone}
+                            placeholder='Celular'
+                            onChange={phone => setPhone(phone || '')}
+                            inputStyle={{
+                              height: '56px', // Ajusta la altura del campo
+                              border: `1px solid ${errors.phone ? '#ff4c51' : '#ccc'}`, // Borde del campo
+                              transition: 'border-color 0.3s ease',
+                              boxShadow: 'none',
+                              width: '100%'
+                            }}
+                            containerStyle={{
+                              width: '100%'
+                            }}
+                            onFocus={e => {
+                              ;(e.target.style.borderColor = errors.phone ? '#ff4c51' : '#8c57ff'), // Cambiar el color del borde al hacer foco
+                                (e.target.style.borderWidth = '2px')
+                            }}
+                            onBlur={e => {
+                              ;(e.target.style.borderColor = errors.phone ? '#ff4c51' : '#ccc'), // Volver al color original cuando se pierde el foco
+                                (e.target.style.borderWidth = '1px')
+                            }}
+                          />
+                          {errors.phone && (
+                            <Typography
+                              sx={{
+                                color: '#ff4c51',
+                                fontSize: '13px',
+                                marginTop: '2px',
+                                display: 'block',
+                                marginLeft: '5%'
+                              }}
+                            >
+                              {errors.phone}
+                            </Typography>
+                          )}
+                        </Box>
                       </Box>
                       <Box sx={{ display: 'flex', gap: 3, width: '100%' }}>
                         <TextField
@@ -626,6 +638,7 @@ const Register = ({ mode }: { mode: Mode }) => {
                           id='cycleCode'
                           select
                           label='Ciclo Cursando'
+                          disabled={academic !== 'ESTUDIANTE'}
                           value={cycleCurrentlyInProgress} // Estado del campo de mensaje
                           onChange={e => setCycleCurrentlyInProgress(e.target.value)}
                           error={Boolean(errors.cycleCurrentlyInProgress)} // Marca como error si hay un mensaje
