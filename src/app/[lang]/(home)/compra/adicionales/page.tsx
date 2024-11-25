@@ -10,7 +10,7 @@ import { CardImage } from '@/components/components-home/components-ponentes/Card
 import { AdditionalInformationLetter } from '@/components/components-home/components-buys/components-additional/AdditionalInformationLetter'
 import { SubtitleTag } from '@/components/components-home/components-reusable/SubtitleTag'
 
-export const Additional = () => {
+const Additional = () => {
   const isSmallScreen = useMediaQuery('(max-width:1275px)')
 
   const [offsetY, setOffsetY] = useState(0)

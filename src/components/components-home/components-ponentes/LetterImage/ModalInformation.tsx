@@ -1,4 +1,4 @@
-import { Box, Button, CardMedia, Grid, IconButton, Modal, Typography } from '@mui/material'
+import { Box, CardMedia, Grid, IconButton, Modal, Typography } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
 
 interface ModalProps {

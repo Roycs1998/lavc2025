@@ -11,7 +11,7 @@ import { CostTable } from '@/components/components-home/components-buys/CostTabl
 import { SubtitleTag } from '@/components/components-home/components-reusable/SubtitleTag'
 import { AlertIndications } from '@/components/components-home/components-reusable/AlertIndications'
 
-export const Payments = () => {
+const Payments = () => {
   const isSmallScreen = useMediaQuery('(max-width:1275px)')
 
   const [offsetY, setOffsetY] = useState(0)

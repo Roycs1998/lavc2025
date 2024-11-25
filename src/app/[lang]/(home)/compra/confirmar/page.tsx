@@ -15,11 +15,12 @@ import { AlertIndications } from '@/components/components-home/components-reusab
 import { ConfirmPayment } from '@/components/components-home/components-buys/components-confirm/ConfirmPayment'
 import { CheckPaymentGateway } from '@/components/components-home/components-buys/components-confirm/ConfirmPayment/PaymentGateway'
 
-export const Confirm = () => {
+const Confirm = () => {
   const isSmallScreen = useMediaQuery('(max-width:1275px)')
   const [offsetY, setOffsetY] = useState(0)
-  const [eventCode, setEventCode] = useState<string | null>(null) // Estado para almacenar eventCode
-  const [ticketCode, setTicketCode] = useState<string | null>(null)
+
+  // const [eventCode, setEventCode] = useState<string | null>(null) // Estado para almacenar eventCode
+  // const [ticketCode, setTicketCode] = useState<string | null>(null)
   const [alertMessage, setAlertMessage] = useState<string | null>(null)
   const [typeOfPayment, setTypeOfPayment] = useState<string>('')
   const maxOffsetY = 300
@@ -27,13 +28,13 @@ export const Confirm = () => {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       // Solo se ejecuta en el cliente
-      const storedEventCode = localStorage.getItem('event code')
-      const storedTicketCode = localStorage.getItem('ticket code')
+      // const storedEventCode = localStorage.getItem('event code')
+      // const storedTicketCode = localStorage.getItem('ticket code')
       const storedTypeOfPayment = localStorage.getItem('typeOfPayment') || ''
 
       // Actualiza el estado con los valores recuperados
-      setEventCode(storedEventCode)
-      setTicketCode(storedTicketCode)
+      // setEventCode(storedEventCode)
+      // setTicketCode(storedTicketCode)
       setTypeOfPayment(storedTypeOfPayment)
     }
   }, [])

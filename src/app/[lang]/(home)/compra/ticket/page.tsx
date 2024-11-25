@@ -14,7 +14,7 @@ import { CostTable } from '@/components/components-home/components-buys/CostTabl
 import { PurchaseEventLetter } from '@/components/components-home/components-buys/PurchaseEventLetter'
 import { SubtitleTag } from '@/components/components-home/components-reusable/SubtitleTag'
 
-export const InformacionDeTicket = () => {
+const InformacionDeTicket = () => {
   const searchParams = useSearchParams()
 
   const [parameterOne, setParameterOne] = useState<string | null>(null)

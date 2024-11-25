@@ -1,11 +1,11 @@
 'use client'
 
 // React Imports
-import { useEffect, useState } from 'react'
+
 import type { FormEvent } from 'react'
+import React, { useEffect, useState } from 'react'
 
 // Next Imports
-import React from 'react'
 
 import Link from 'next/link'
 
@@ -154,7 +154,6 @@ const Register = ({ mode }: { mode: Mode }) => {
   // States
   const [isPasswordShown, setIsPasswordShown] = useState(false)
   const [activeStep, setActiveStep] = React.useState(0)
-  const [skipped, setSkipped] = React.useState(new Set<number>())
   const [countries, setCountries] = useState<Country[]>([])
   const [departments, setDepartments] = useState<Department[]>([])
   const [university, setUniversity] = useState<University[]>([])
@@ -185,14 +184,6 @@ const Register = ({ mode }: { mode: Mode }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [verificationPassword, setVerificationPassword] = useState('')
-
-  const isStepOptional = (step: number) => {
-    return step === 1
-  }
-
-  const isStepSkipped = (step: number) => {
-    return skipped.has(step)
-  }
 
   const validateFormOne = () => {
     const newErrors: FormErrors = {}
@@ -411,16 +402,12 @@ const Register = ({ mode }: { mode: Mode }) => {
           </div>
           <Box sx={{ width: '100%', marginTop: '40px' }}>
             <Stepper activeStep={activeStep}>
-              {steps.map((label, index) => {
+              {steps.map(label => {
                 const stepProps: { completed?: boolean } = {}
 
                 const labelProps: {
                   optional?: React.ReactNode
                 } = {}
-
-                if (isStepSkipped(index)) {
-                  stepProps.completed = false
-                }
 
                 return (
                   <Step key={label} {...stepProps}>

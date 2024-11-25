@@ -1,8 +1,6 @@
-import { useEffect, useRef, useState } from 'react'
-
 import { Box } from '@mui/material'
 
-const publicKey = process.env.VITE_APP_CULQI_PUBLICKEY
+//const publicKey = process.env.VITE_APP_CULQI_PUBLICKEY
 
 export const CulqiPaymentGateway = () => {
   return (

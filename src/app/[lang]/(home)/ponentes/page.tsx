@@ -2,16 +2,13 @@ import Link from 'next/link'
 
 import { Box, Grid } from '@mui/material'
 
-import type { ChildrenType } from '@core/types'
-
-import type { Locale } from '@/configs/i18n'
-
-import { getDictionary } from '@/utils/getDictionary'
 import { LetterImage } from '@/components/components-home/components-ponentes/LetterImage'
 import { CardImage } from '@/components/components-home/components-ponentes/CardImage'
 
-const Ponentes = async ({ children, params }: ChildrenType & { params: { lang: Locale } }) => {
-  const dictionary = await getDictionary(params.lang)
+//type SpeakersProps = { params: { lang: Locale } }
+
+const Ponentes = async () => {
+  //const dictionary = await getDictionary(params.lang)
 
   const ponentes = [
     {

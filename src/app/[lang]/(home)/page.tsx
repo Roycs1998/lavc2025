@@ -1,12 +1,12 @@
 import { Body } from '../../../components/components-home/Body'
 
-import type { ChildrenType } from '@core/types'
-
 import type { Locale } from '@/configs/i18n'
 
 import { getDictionary } from '@/utils/getDictionary'
 
-const Home = async ({ params }: ChildrenType & { params: { lang: Locale } }) => {
+type HomeProps = { params: { lang: Locale } }
+
+const Home = async ({ params }: HomeProps) => {
   const dictionary = await getDictionary(params.lang)
 
   return (
