@@ -1,9 +1,14 @@
+'use client'
+import { useEffect, useState } from 'react'
+
 import { Box, Divider, Grid } from '@mui/material'
 
 import { CardImage } from '@/components/components-home/components-ponentes/CardImage'
 import { PriceTable } from '@/components/components-home/components-events-and-workshops/components-event-description/PriceTable'
 import { EventDescriptionLetter } from '@/components/components-home/components-events-and-workshops/components-event-description/EventDescriptionLetter'
 import { PurchaseLetter } from '@/components/components-home/components-events-and-workshops/components-event-description/PurchaseLetter'
+import type { Workshop } from '../../../../../../Model/Workshop'
+import { getWorkshopsById } from '@/Services/WorkshopService'
 
 interface EventParameters {
   params: {
@@ -11,20 +16,31 @@ interface EventParameters {
   }
 }
 
-const Eventos = async ({ params }: EventParameters) => {
+const Eventos = ({ params }: EventParameters) => {
   const { eventos } = params
-  const event = decodeURIComponent(eventos)
+  const [workshop, setWorkshop] = useState<Workshop>()
 
-  const eventId = '123'
+  useEffect(() => {
+    const fetchWorkshopById = async () => {
+      const fetchedWorkshop = await getWorkshopsById(Number(eventos))
+
+      if (fetchedWorkshop) {
+        setWorkshop(fetchedWorkshop) // Actualiza el estado con los workshops obtenidos
+      }
+    }
+
+    fetchWorkshopById()
+  }, [eventos])
+
   const ticketCategoryId = '456'
+
+  console.log(workshop)
+  console.log('valor' + workshop?.workshopType?.workshopTypeName)
 
   return (
     <Box>
       <Box>
-        <CardImage
-          image='https://tlavc-peru.org/tlavc/vista/upload/talleres/Portada%20presentaci%C3%B3n%20escalada%20deportiva.jpg'
-          title={event}
-        />
+        <CardImage image={workshop?.workshopPhoto ?? ''} title={workshop?.workshopName ?? ''} />
       </Box>
       <Box sx={{ bgcolor: 'var(--color-card-background)' }}>
         <Grid container spacing={5}>
@@ -48,20 +64,28 @@ const Eventos = async ({ params }: EventParameters) => {
                   paddingRight: '4%'
                 }}
               >
-                <PriceTable />
+                <PriceTable
+                  costProfessionals={workshop?.workshopCostProfessionals}
+                  costHighSchoolStudents={workshop?.workshopCostHighschoolStudents}
+                  costForeignProfessionals={workshop?.CostOfWorkshopForForeignProfessionals}
+                  costForeignStudents={workshop?.CostOfTheWorkshopForForeignStudents}
+                  workshopCost={workshop?.workshopCost}
+                />
               </Box>
               {/* Divider con ancho completo */}
               <Divider sx={{ borderColor: 'gray', width: '100%' }} />
               <Box sx={{ marginTop: '6%' }}>
                 <EventDescriptionLetter
-                  eventImage='https://tlavc-peru.org/tlavc/vista/upload/talleres/Portada%20presentaci%C3%B3n%20escalada%20deportiva.jpg'
-                  eventName={event}
-                  eventDescription='Hablando Huevadas hoy en día se ha vuelto uno de los fenómenos más impactantes de youtube de los últimos tiempos, con más de 5.5 millones de suscriptores en la plataforma online y más de 3 billones de vistas en sus programas en la popular plataforma, Ricardo Mendoza y Jorge Luna, se han convertido en el dúo perfecto para alegrar los fines de semana de millones de personas en el mundo.'
-                  recommendedPublic='Jóvenes mayores de 14 años.'
-                  startOfEvent='7:30 PM. (Aproximadamente).'
-                  eventDuration='2 horas.'
-                  eventLocation='Teatro Canout.'
-                  aboutIncome='Deberán presentar su ticket o e-ticket para el ingreso. Todos los boletos serán escaneados al ingreso por medio de dispositivos digitales. En caso que el ticket o e-ticket esté roto, en mal estado o con indicios de falsificación, la producción u organizador podrán NO AUTORIZAR la entrada al recinto'
+                  eventImage={workshop?.workshopPhoto ?? ''}
+                  eventName={workshop?.workshopName.toUpperCase() ?? ''}
+                  eventDescription={workshop?.workshopDescription ?? 'No cuenta con descripcion'}
+                  startOfEvent={
+                    workshop?.workshopStartDate
+                      ? `${new Date(workshop.workshopStartDate).toLocaleDateString('es-PE', { day: '2-digit', month: '2-digit', year: 'numeric' })}`
+                      : 'Fecha no disponible'
+                  }
+                  eventDuration={workshop?.workshopSchedule}
+                  eventLocation={workshop?.location ?? ''}
                 />
               </Box>
             </Box>
@@ -85,7 +109,10 @@ const Eventos = async ({ params }: EventParameters) => {
                 height: '100%'
               }}
             >
-              <PurchaseLetter route={`/compra/ticket?EventoId=${eventId}&ticketId=${ticketCategoryId}`} />
+              <PurchaseLetter
+                route={`/compra/ticket?EventoId=${workshop?.codeWorkshop}&ticketId=${ticketCategoryId}`}
+                typeOfEvent={workshop?.workshopType.workshopTypeName ?? ''}
+              />
             </Box>
           </Grid>
         </Grid>

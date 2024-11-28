@@ -2,17 +2,36 @@ import * as React from 'react'
 
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Box } from '@mui/material'
 
-function createData(Color: string, Categoria: string, Precios: number) {
-  return { Color, Categoria, Precios }
+interface HighPrices {
+  costProfessionals?: number
+  costHighSchoolStudents?: number
+  costForeignProfessionals?: number
+  costForeignStudents?: number
+  workshopCost?: number
 }
 
-const rows = [
-  createData('#1F9DDC', 'MEDICO VETERINARIO', 159.0),
-  createData('#F7CA2A', 'ESTUDIANTE O BACHILLER', 237.0),
-  createData('#F6A51A', 'VETERINARIO/ESTUDIANTE EXTRA ', 237.0)
-]
+export const PriceTable = ({
+  costProfessionals,
+  costHighSchoolStudents,
+  costForeignProfessionals,
+  costForeignStudents,
+  workshopCost
+}: HighPrices) => {
+  const data = [
+    { color: '#1F9DDC', category: 'MEDICO VETERINARIO', price: costProfessionals },
+    { color: '#F7CA2A', category: 'ESTUDIANTE O BACHILLER', price: costHighSchoolStudents },
+    { color: '#F6A51A', category: 'MEDICO VETERINARIO EXTRANJERO', price: costForeignProfessionals },
+    { color: '#3a3480', category: 'ESTUDIANTE O BACHILLER EXTRANJERO', price: costForeignStudents },
+    { color: '#3a3480', category: 'VETERINARIO', price: workshopCost }
+  ]
 
-export const PriceTable = () => {
+  const filteredData = data.filter(item => item.price !== 0)
+  const rows = filteredData.map(item => createData(item.color, item.category, item.price))
+
+  function createData(Color: string, category: string, price?: number) {
+    return { Color, category, price }
+  }
+
   return (
     <TableContainer component={Paper} sx={{ boxShadow: 'none', width: '600px' }}>
       <Table sx={{ borderCollapse: 'collapse' }} aria-label='simple table'>
@@ -26,7 +45,7 @@ export const PriceTable = () => {
         </TableHead>
         <TableBody>
           {rows.map(row => (
-            <TableRow key={row.Categoria} sx={{ '&:last-child td, &:last-child th': { border: 'none' } }}>
+            <TableRow key={row.category} sx={{ '&:last-child td, &:last-child th': { border: 'none' } }}>
               <TableCell component='th' scope='row' sx={{ border: 'none', padding: '9px 8px' }}>
                 <Box sx={{ display: 'flex', alignItems: 'center', border: 'none' }}>
                   <Box
@@ -40,11 +59,13 @@ export const PriceTable = () => {
                       border: 'none'
                     }}
                   />
-                  {row.Categoria}
+                  {row.category}
                 </Box>
               </TableCell>
               <TableCell align='right' sx={{ fontWeight: 'bold', border: 'none', padding: '2px 8px' }}>
-                S/ {row.Precios.toFixed(2)}
+                {row.price?.toString().slice(-2) === '00'
+                  ? `$ ${row.price?.toFixed(2)}`
+                  : `S/ ${row.price?.toFixed(2)}`}
               </TableCell>
             </TableRow>
           ))}

@@ -1,28 +1,28 @@
+'use client'
+import { useEffect, useState } from 'react'
+
 import { Box, Grid } from '@mui/material'
 
 import { CardImage } from '@/components/components-home/components-ponentes/CardImage'
 import { EventLetter } from '@/components/components-home/components-events-and-workshops/EventLetter'
 import Link from '@/components/Link'
+import { getWorkshops } from '@/Services/WorkshopService'
+import type { Workshop } from '../../../../../Model/Workshop'
 
-const EventosTalleres = async () => {
-  const eventInformation = [
-    {
-      id: 1,
-      image:
-        'https://tlavc-peru.org/tlavc/vista/upload/talleres/Portada%20presentaci%C3%B3n%20escalada%20deportiva.jpg',
-      eventLocation: 'ESTADIO NACIONAL - LIMA',
-      eventDate: '25 de febrero 2025',
-      eventName: ' LACV 2024'
-    },
+const EventosTalleres = () => {
+  const [workshops, setWorkshops] = useState<Workshop[]>([])
 
-    {
-      id: 2,
-      image: 'https://cdn.teleticket.com.pe/images/eventos/tes048_calugalistado.jpg',
-      eventLocation: 'ESTADIO NACIONAL - LIMA',
-      eventDate: '25 de febrero 2026',
-      eventName: ' LACV 2025'
+  useEffect(() => {
+    const fetchWorkshops = async () => {
+      const fetchedWorkshops = await getWorkshops()
+
+      if (fetchedWorkshops) {
+        setWorkshops(fetchedWorkshops) // Actualiza el estado con los workshops obtenidos
+      }
     }
-  ]
+
+    fetchWorkshops()
+  }, [])
 
   return (
     <Box>
@@ -34,14 +34,18 @@ const EventosTalleres = async () => {
       </Box>
       <Box className='global-padding' sx={{ paddingTop: '3%', paddingBottom: '3%', backgroundColor: '#ffffff' }}>
         <Grid container spacing={4} justifyContent='center' alignItems='center'>
-          {eventInformation.map(event => (
-            <Grid item xs={11.5} sm={6} md={5} key={event.id}>
-              <Link href={'/eventos-talleres/' + event.eventName}>
+          {workshops.map(event => (
+            <Grid item xs={11.5} sm={6} md={5} key={event.codeWorkshop}>
+              <Link href={'/eventos-talleres/' + event.codeWorkshop}>
                 <EventLetter
-                  image={event.image}
-                  eventLocation={event.eventLocation}
-                  eventDate={event.eventDate}
-                  eventName={event.eventName}
+                  image={event.workshopPhoto}
+                  eventLocation={event.location.toUpperCase()}
+                  eventDate={
+                    event.workshopStartDate
+                      ? `${new Date(event.workshopStartDate).toLocaleDateString('es-PE', { day: '2-digit', month: '2-digit', year: 'numeric' })}`
+                      : 'Fecha no disponible'
+                  }
+                  eventName={event.workshopName.toUpperCase()}
                 />
               </Link>
             </Grid>

@@ -71,7 +71,7 @@ export const CardImage = ({ image, title }: Attributes) => {
           textAlign: 'center'
         }}
       >
-        {title}
+        {title.toUpperCase()}
       </Typography>
     </Box>
   )

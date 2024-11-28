@@ -12,9 +12,10 @@ import { Box, Button, MenuItem, TextField } from '@mui/material'
 
 interface Route {
   route: string
+  typeOfEvent: string
 }
 
-export const PurchaseLetter = ({ route }: Route) => {
+export const PurchaseLetter = ({ route, typeOfEvent }: Route) => {
   const [problemType, setProblemType] = useState('')
 
   const [expanded, setExpanded] = useState(true)
@@ -79,65 +80,67 @@ export const PurchaseLetter = ({ route }: Route) => {
               </Typography>
             </Box>
           </AccordionSummary>
-          <AccordionDetails sx={{ bgcolor: '#f9f6fe' }}>
-            <Box
-              sx={{
-                height: '150px',
-                padding: '20px',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                paddingLeft: '15px',
-                paddingRight: '15px'
-              }}
-            >
-              <TextField
-                fullWidth
+          {typeOfEvent !== 'EVENTO' && (
+            <AccordionDetails sx={{ bgcolor: '#f9f6fe' }}>
+              <Box
                 sx={{
-                  width: '100%',
-                  fontSize: '1rem',
-                  '& .MuiOutlinedInput-root': {
-                    '& fieldset': {
-                      borderColor: '#202021' // Mantiene el color actual
-                    },
-                    '&:hover fieldset': {
-                      borderColor: '#202021' // Desactiva el cambio de color al hacer hover
-                    },
-                    '&.Mui-focused fieldset': {
-                      borderColor: '#202021' // Desactiva el cambio de color al hacer focus
-                    }
-                  },
-                  '& .MuiInputLabel-root': {
-                    color: '#202021' // Color del label inicial
-                  },
-                  '& .MuiInputLabel-root.Mui-focused': {
-                    color: '#202021' // Color del label al enfocarse
-                  },
-                  '& .MuiInputLabel-shrink': {
-                    color: '#202021' // Color del label cuando sube al escribir
-                  }
+                  height: '150px',
+                  padding: '20px',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  paddingLeft: '15px',
+                  paddingRight: '15px'
                 }}
-                id='outlined-select-currency'
-                select
-                label='Categorias'
-                defaultValue=''
-                value={problemType} // Estado del campo de mensaje
-                onChange={e => setProblemType(e.target.value)}
               >
-                {categories.map(option => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.value}
-                  </MenuItem>
-                ))}
-              </TextField>
-            </Box>
-          </AccordionDetails>
+                <TextField
+                  fullWidth
+                  sx={{
+                    width: '100%',
+                    fontSize: '1rem',
+                    '& .MuiOutlinedInput-root': {
+                      '& fieldset': {
+                        borderColor: '#202021' // Mantiene el color actual
+                      },
+                      '&:hover fieldset': {
+                        borderColor: '#202021' // Desactiva el cambio de color al hacer hover
+                      },
+                      '&.Mui-focused fieldset': {
+                        borderColor: '#202021' // Desactiva el cambio de color al hacer focus
+                      }
+                    },
+                    '& .MuiInputLabel-root': {
+                      color: '#202021' // Color del label inicial
+                    },
+                    '& .MuiInputLabel-root.Mui-focused': {
+                      color: '#202021' // Color del label al enfocarse
+                    },
+                    '& .MuiInputLabel-shrink': {
+                      color: '#202021' // Color del label cuando sube al escribir
+                    }
+                  }}
+                  id='outlined-select-currency'
+                  select
+                  label='Categorias'
+                  defaultValue=''
+                  value={problemType} // Estado del campo de mensaje
+                  onChange={e => setProblemType(e.target.value)}
+                >
+                  {categories.map(option => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.value}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              </Box>
+            </AccordionDetails>
+          )}
           <AccordionDetails>
             <Box sx={{ height: '80px' }}>
               <Typography sx={{ padding: '20px' }}>
-                <Link href={problemType ? route : '#'}>
+                <Link href={typeOfEvent === 'TALLER' ? (problemType ? route : '#') : route}>
                   <Button
-                    disabled={!problemType}
+                    disabled={typeOfEvent === 'TALLER' ? !problemType : false}
                     sx={{
                       bgcolor: 'var(--primary-color-purple)',
                       color: 'var(--letter-color)',

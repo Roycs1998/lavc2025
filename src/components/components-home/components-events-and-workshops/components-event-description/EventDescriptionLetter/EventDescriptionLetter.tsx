@@ -6,11 +6,11 @@ interface EventInformation {
   eventImage: string
   eventName: string
   eventDescription: string
-  recommendedPublic: string
-  startOfEvent: string
-  eventDuration: string
-  eventLocation: string
-  aboutIncome: string
+  recommendedPublic?: string
+  startOfEvent?: string
+  eventDuration?: string
+  eventLocation?: string
+  aboutIncome?: string
 }
 
 export const EventDescriptionLetter = ({
@@ -71,48 +71,59 @@ export const EventDescriptionLetter = ({
             <Typography variant='body1' sx={{ fontSize: '0.7rem', fontWeight: 800, marginBottom: 3, color: '#3a3480' }}>
               INFORMACIÓN IMPORTANTE
             </Typography>
-            <Box display='flex' alignItems='flex-start' color='text.secondary' sx={{ marginBottom: '10px' }}>
-              <Typography variant='body1' sx={{ fontSize: '0.8rem', fontWeight: 800 }}>
-                • Público recomendado:
-              </Typography>
-              <Typography variant='body1' sx={{ fontSize: '0.8rem', marginLeft: '4px', whiteSpace: 'nowrap' }}>
-                {recommendedPublic}
-              </Typography>
-            </Box>
+            {recommendedPublic ? (
+              <Box display='flex' alignItems='flex-start' color='text.secondary' sx={{ marginBottom: '10px' }}>
+                <Typography variant='body1' sx={{ fontSize: '0.8rem', fontWeight: 800 }}>
+                  • Público recomendado:
+                </Typography>
+                <Typography variant='body1' sx={{ fontSize: '0.8rem', marginLeft: '4px', whiteSpace: 'nowrap' }}>
+                  {recommendedPublic}
+                </Typography>
+              </Box>
+            ) : null}
+            {startOfEvent ? (
+              <Box display='flex' alignItems='center' sx={{ marginBottom: '10px' }}>
+                <Typography variant='body1' color='text.secondary' sx={{ fontSize: '0.8rem', fontWeight: 800 }}>
+                  • Evento puede iniciar desde:
+                </Typography>
 
-            <Box display='flex' alignItems='center' sx={{ marginBottom: '10px' }}>
-              <Typography variant='body1' color='text.secondary' sx={{ fontSize: '0.8rem', fontWeight: 800 }}>
-                • Evento puede iniciar desde:
-              </Typography>
+                <Typography variant='body1' sx={{ fontSize: '0.8rem', marginLeft: '4px' }}>
+                  {startOfEvent}
+                </Typography>
+              </Box>
+            ) : null}
 
-              <Typography variant='body1' sx={{ fontSize: '0.8rem', marginLeft: '4px' }}>
-                {startOfEvent}
-              </Typography>
-            </Box>
-            <Box display='flex' alignItems='center' sx={{ marginBottom: '10px' }}>
-              <Typography variant='body1' color='text.secondary' sx={{ fontSize: '0.8rem', fontWeight: 800 }}>
-                • Duración aproximada del evento:
-              </Typography>
+            {eventDuration ? (
+              <Box display='flex' alignItems='center' sx={{ marginBottom: '10px' }}>
+                <Typography variant='body1' color='text.secondary' sx={{ fontSize: '0.8rem', fontWeight: 800 }}>
+                  • Duración aproximada del evento:
+                </Typography>
 
-              <Typography variant='body1' sx={{ fontSize: '0.8rem', marginLeft: '4px' }}>
-                {eventDuration}
-              </Typography>
-            </Box>
-            <Box display='flex' alignItems='center' sx={{ marginBottom: '10px' }}>
-              <Typography variant='body1' color='text.secondary' sx={{ fontSize: '0.8rem', fontWeight: 800 }}>
-                • Recinto:
-              </Typography>
+                <Typography variant='body1' sx={{ fontSize: '0.8rem', marginLeft: '4px' }}>
+                  {eventDuration}
+                </Typography>
+              </Box>
+            ) : null}
 
-              <Typography variant='body1' sx={{ fontSize: '0.8rem', marginLeft: '4px' }}>
-                {eventLocation}
-              </Typography>
-            </Box>
+            {eventLocation ? (
+              <Box display='flex' alignItems='center' sx={{ marginBottom: '10px' }}>
+                <Typography variant='body1' color='text.secondary' sx={{ fontSize: '0.8rem', fontWeight: 800 }}>
+                  • Recinto:
+                </Typography>
 
-            <Box display='flex' alignItems='center'>
-              <Typography variant='body1' sx={{ fontSize: '0.8rem', marginLeft: '4px' }}>
-                • {aboutIncome}
-              </Typography>
-            </Box>
+                <Typography variant='body1' sx={{ fontSize: '0.8rem', marginLeft: '4px' }}>
+                  {eventLocation}
+                </Typography>
+              </Box>
+            ) : null}
+
+            {aboutIncome ? (
+              <Box display='flex' alignItems='center'>
+                <Typography variant='body1' sx={{ fontSize: '0.8rem', marginLeft: '4px' }}>
+                  • {aboutIncome}
+                </Typography>
+              </Box>
+            ) : null}
           </Box>
         </Box>
       </CardContent>
