@@ -6,8 +6,6 @@ export const getWorkshops = async () => {
     const response = await fetch(LavcUrls.workshop.all)
     const workshops: Workshop[] = await response.json()
 
-    console.log(workshops)
-
     return workshops
   } catch (error) {
     console.log(error)
@@ -18,8 +16,6 @@ export const getWorkshopsById = async (id: number) => {
   try {
     const response = await fetch(LavcUrls.workshop.searchById(id))
     const workshops: Workshop = await response.json()
-
-    console.log(workshops)
 
     return workshops
   } catch (error) {

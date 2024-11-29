@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import Link from 'next/link'
 
@@ -13,28 +13,87 @@ import { Box, Button, MenuItem, TextField } from '@mui/material'
 interface Route {
   route: string
   typeOfEvent: string
+  costProfessionals?: number
+  costHighSchoolStudents?: number
+  costForeignProfessionals?: number
+  workshopCost?: number
 }
 
-export const PurchaseLetter = ({ route, typeOfEvent }: Route) => {
+type ticketStructure = { value: string; price?: number }
+
+export const PurchaseLetter = ({
+  route,
+  typeOfEvent,
+  costProfessionals,
+  costHighSchoolStudents,
+  costForeignProfessionals,
+  workshopCost
+}: Route) => {
+  const [ticket, setTicket] = useState<ticketStructure | null>(null)
+
   const [problemType, setProblemType] = useState('')
 
   const [expanded, setExpanded] = useState(true)
 
-  const categories = [
+  const tickets = [
     {
-      value: 'MEDICO VETERINARIO'
+      value: 'MEDICO VETERINARIO',
+      price: costProfessionals
     },
     {
-      value: 'ESTUDIANTE O BACHILLER'
+      value: 'ESTUDIANTE O BACHILLER',
+      price: costHighSchoolStudents
     },
     {
-      value: 'VETERINARIO/ESTUDIANTE EXTRA'
+      value: 'EXTRANJERO',
+      price: costForeignProfessionals
     }
   ]
 
   const handleChange = (event: React.SyntheticEvent, newExpanded: boolean | ((prevState: boolean) => boolean)) => {
     setExpanded(newExpanded)
   }
+
+  useEffect(() => {
+    const getTicket = async () => {
+      const selectedOption = tickets.find(option => option.value === problemType)
+
+      if (selectedOption) {
+        setTicket(selectedOption)
+      } else {
+        const defaultTicket: ticketStructure = {
+          value: 'VETERINARIO',
+          price: workshopCost
+        }
+
+        setTicket(defaultTicket)
+      }
+    }
+
+    getTicket()
+  }, [problemType])
+
+  useEffect(() => {
+    const saveTicketInEvent = () => {
+      const eventData = localStorage.getItem('eventData')
+
+      if (eventData) {
+        const parsedEvent = JSON.parse(eventData)
+
+        const updatedEventData = {
+          ...parsedEvent, // Copiamos las propiedades del evento original
+          ticket: ticket?.value,
+          price: ticket?.price
+        }
+
+        localStorage.setItem('eventData', JSON.stringify(updatedEventData))
+      }
+    }
+
+    saveTicketInEvent()
+
+    console.log(ticket)
+  }, [ticket])
 
   return (
     <Box sx={{ paddingTop: '5%' }}>
@@ -80,7 +139,7 @@ export const PurchaseLetter = ({ route, typeOfEvent }: Route) => {
               </Typography>
             </Box>
           </AccordionSummary>
-          {typeOfEvent !== 'EVENTO' && (
+          {typeOfEvent !== 'TALLER' && (
             <AccordionDetails sx={{ bgcolor: '#f9f6fe' }}>
               <Box
                 sx={{
@@ -126,7 +185,7 @@ export const PurchaseLetter = ({ route, typeOfEvent }: Route) => {
                   value={problemType} // Estado del campo de mensaje
                   onChange={e => setProblemType(e.target.value)}
                 >
-                  {categories.map(option => (
+                  {tickets.map(option => (
                     <MenuItem key={option.value} value={option.value}>
                       {option.value}
                     </MenuItem>
@@ -138,9 +197,9 @@ export const PurchaseLetter = ({ route, typeOfEvent }: Route) => {
           <AccordionDetails>
             <Box sx={{ height: '80px' }}>
               <Typography sx={{ padding: '20px' }}>
-                <Link href={typeOfEvent === 'TALLER' ? (problemType ? route : '#') : route}>
+                <Link href={typeOfEvent === 'EVENTO' ? (problemType ? route : '#') : route}>
                   <Button
-                    disabled={typeOfEvent === 'TALLER' ? !problemType : false}
+                    disabled={typeOfEvent === 'EVENTO' ? !problemType : false}
                     sx={{
                       bgcolor: 'var(--primary-color-purple)',
                       color: 'var(--letter-color)',

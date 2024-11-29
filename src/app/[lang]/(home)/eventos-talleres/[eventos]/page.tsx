@@ -16,26 +16,64 @@ interface EventParameters {
   }
 }
 
+export interface Event {
+  name: string
+  image: string
+  place: string
+  date: string
+  ticket: string
+  price: string
+  eventType: string
+}
+
 const Eventos = ({ params }: EventParameters) => {
   const { eventos } = params
   const [workshop, setWorkshop] = useState<Workshop>()
 
   useEffect(() => {
-    const fetchWorkshopById = async () => {
-      const fetchedWorkshop = await getWorkshopsById(Number(eventos))
+    const createEvent = () => {
+      const event: Event = {
+        name: '',
+        image: '',
+        place: '',
+        date: '',
+        ticket: '',
+        price: '',
+        eventType: ''
+      }
 
-      if (fetchedWorkshop) {
-        setWorkshop(fetchedWorkshop) // Actualiza el estado con los workshops obtenidos
+      localStorage.setItem('eventData', JSON.stringify(event))
+    }
+
+    createEvent()
+  }, [])
+
+  useEffect(() => {
+    const fetchWorkshopById = async () => {
+      const eventData = localStorage.getItem('eventData')
+
+      if (eventData) {
+        const parsedEvent = JSON.parse(eventData)
+        const fetchedWorkshop = await getWorkshopsById(Number(eventos))
+
+        if (fetchedWorkshop) {
+          const updatedEventData = {
+            ...parsedEvent, // Copiamos las propiedades del evento original
+            name: fetchedWorkshop.workshopName, // Actualizamos el nombre (ejemplo)
+            image: fetchedWorkshop.workshopPhoto,
+            place: fetchedWorkshop.location,
+            date: fetchedWorkshop.workshopStartDate,
+            eventType: fetchedWorkshop.workshopType.workshopTypeName
+          }
+
+          localStorage.setItem('eventData', JSON.stringify(updatedEventData))
+          setWorkshop(fetchedWorkshop) // Actualiza el estado con los workshops obtenidos
+        }
       }
     }
 
     fetchWorkshopById()
   }, [eventos])
-
-  const ticketCategoryId = '456'
-
-  console.log(workshop)
-  console.log('valor' + workshop?.workshopType?.workshopTypeName)
 
   return (
     <Box>
@@ -110,8 +148,11 @@ const Eventos = ({ params }: EventParameters) => {
               }}
             >
               <PurchaseLetter
-                route={`/compra/ticket?EventoId=${workshop?.codeWorkshop}&ticketId=${ticketCategoryId}`}
+                route={`/compra/ticket?EventoId=${workshop?.codeWorkshop}`}
                 typeOfEvent={workshop?.workshopType.workshopTypeName ?? ''}
+                costProfessionals={workshop?.workshopCostProfessionals}
+                costHighSchoolStudents={workshop?.workshopCostHighschoolStudents}
+                costForeignProfessionals={workshop?.CostOfWorkshopForForeignProfessionals}
               />
             </Box>
           </Grid>
