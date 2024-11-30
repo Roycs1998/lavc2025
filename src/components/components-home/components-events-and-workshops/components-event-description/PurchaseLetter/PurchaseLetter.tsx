@@ -34,6 +34,7 @@ export const PurchaseLetter = ({
   const [problemType, setProblemType] = useState('')
 
   const [expanded, setExpanded] = useState(true)
+  const [trigger, setTrigger] = useState<boolean>(false)
 
   const tickets = [
     {
@@ -71,11 +72,14 @@ export const PurchaseLetter = ({
     }
 
     getTicket()
-  }, [problemType])
+  }, [problemType, trigger])
 
   useEffect(() => {
     const saveTicketInEvent = () => {
       const eventData = localStorage.getItem('eventData')
+
+      console.log('ingreso')
+      console.log(ticket)
 
       if (eventData) {
         const parsedEvent = JSON.parse(eventData)
@@ -94,6 +98,10 @@ export const PurchaseLetter = ({
 
     console.log(ticket)
   }, [ticket])
+
+  const forceEffect = () => {
+    setTrigger(!trigger)
+  }
 
   return (
     <Box sx={{ paddingTop: '5%' }}>
@@ -199,6 +207,7 @@ export const PurchaseLetter = ({
               <Typography sx={{ padding: '20px' }}>
                 <Link href={typeOfEvent === 'EVENTO' ? (problemType ? route : '#') : route}>
                   <Button
+                    onClick={forceEffect}
                     disabled={typeOfEvent === 'EVENTO' ? !problemType : false}
                     sx={{
                       bgcolor: 'var(--primary-color-purple)',

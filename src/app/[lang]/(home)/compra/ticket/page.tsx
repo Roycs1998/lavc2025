@@ -4,8 +4,6 @@ import { useEffect, useState } from 'react'
 
 import Link from 'next/link'
 
-import { useSearchParams } from 'next/navigation'
-
 import { Box, Button, Grid, Typography, useMediaQuery } from '@mui/material'
 
 import { CardImage } from '@/components/components-home/components-ponentes/CardImage'
@@ -15,27 +13,29 @@ import { PurchaseEventLetter } from '@/components/components-home/components-buy
 import { SubtitleTag } from '@/components/components-home/components-reusable/SubtitleTag'
 
 const InformacionDeTicket = () => {
-  const searchParams = useSearchParams()
-
-  const [parameterOne, setParameterOne] = useState<string | null>(null)
-  const [parameterTwo, setParameterTwo] = useState<string | null>(null)
+  const [eventName, setEventName] = useState<string>('')
+  const [eventImage, setEventImage] = useState<string>('')
+  const [eventPlace, setEventPlace] = useState<string>('')
+  const [eventStartDate, setEventStartDate] = useState<string>('')
+  const [eventTicket, setEventTicket] = useState<string>('')
+  const [ticketPrice, setTicketPrice] = useState<string>('')
 
   const isSmallScreen = useMediaQuery('(max-width:1275px)')
 
   useEffect(() => {
-    setParameterOne(searchParams.get('EventoId'))
-    setParameterTwo(searchParams.get('ticketId'))
-  }, [searchParams])
+    const storedEvent = localStorage.getItem('eventData')
 
-  useEffect(() => {
-    if (parameterOne !== null) {
-      localStorage.setItem('event code', parameterOne ?? '')
-    }
+    if (storedEvent) {
+      const event = JSON.parse(storedEvent) // Recuperar como objeto
 
-    if (parameterTwo !== null) {
-      localStorage.setItem('ticket code', parameterTwo ?? '')
+      setEventName(event.name)
+      setEventImage(event.image)
+      setEventPlace(event.place)
+      setEventStartDate(event.date)
+      setEventTicket(event.ticket)
+      setTicketPrice(event.price)
     }
-  }, [parameterOne, parameterTwo])
+  }, [])
 
   const [offsetY, setOffsetY] = useState(0)
   const maxOffsetY = 300
@@ -92,7 +92,7 @@ const InformacionDeTicket = () => {
               </Box>
               <TicketInformation />
 
-              <CostTable ticketName='MEDICO VETERINARIO' price={159.0} />
+              <CostTable ticketName={eventTicket} price={Number(ticketPrice)} />
               {isSmallScreen && (
                 <Typography sx={{ width: '100%', marginTop: '50px' }}>
                   <Link href='/compra/adicionales'>
@@ -142,10 +142,10 @@ const InformacionDeTicket = () => {
                 }}
               >
                 <PurchaseEventLetter
-                  image='https://tlavc-peru.org/tlavc/vista/upload/talleres/Portada%20presentaci%C3%B3n%20escalada%20deportiva.jpg'
-                  eventLocation='ESTADIO NACIONAL - LIMA'
-                  eventDate='25 de febrero 2025'
-                  eventName='LACV 2024'
+                  image={eventImage}
+                  eventLocation={eventPlace}
+                  eventDate={eventStartDate}
+                  eventName={eventName}
                   pageRoute='/compra/adicionales'
                 />
               </Box>

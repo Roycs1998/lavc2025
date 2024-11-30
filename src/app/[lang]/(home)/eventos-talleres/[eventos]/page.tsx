@@ -24,6 +24,10 @@ export interface Event {
   ticket: string
   price: string
   eventType: string
+  typeOfPayment: string
+  paymentMethod: string
+  ruc?: string
+  companyName: string
 }
 
 const Eventos = ({ params }: EventParameters) => {
@@ -39,7 +43,11 @@ const Eventos = ({ params }: EventParameters) => {
         date: '',
         ticket: '',
         price: '',
-        eventType: ''
+        eventType: '',
+        typeOfPayment: '',
+        paymentMethod: '',
+        ruc: '',
+        companyName: ''
       }
 
       localStorage.setItem('eventData', JSON.stringify(event))
@@ -153,6 +161,7 @@ const Eventos = ({ params }: EventParameters) => {
                 costProfessionals={workshop?.workshopCostProfessionals}
                 costHighSchoolStudents={workshop?.workshopCostHighschoolStudents}
                 costForeignProfessionals={workshop?.CostOfWorkshopForForeignProfessionals}
+                workshopCost={workshop?.workshopCost}
               />
             </Box>
           </Grid>

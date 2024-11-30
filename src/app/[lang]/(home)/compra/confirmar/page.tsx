@@ -19,23 +19,30 @@ const Confirm = () => {
   const isSmallScreen = useMediaQuery('(max-width:1275px)')
   const [offsetY, setOffsetY] = useState(0)
 
-  // const [eventCode, setEventCode] = useState<string | null>(null) // Estado para almacenar eventCode
-  // const [ticketCode, setTicketCode] = useState<string | null>(null)
   const [alertMessage, setAlertMessage] = useState<string | null>(null)
   const [typeOfPayment, setTypeOfPayment] = useState<string>('')
+
+  const [eventName, setEventName] = useState<string>('')
+  const [eventImage, setEventImage] = useState<string>('')
+  const [eventPlace, setEventPlace] = useState<string>('')
+  const [eventStartDate, setEventStartDate] = useState<string>('')
+  const [eventTicket, setEventTicket] = useState<string>('')
+  const [ticketPrice, setTicketPrice] = useState<string>('')
   const maxOffsetY = 300
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      // Solo se ejecuta en el cliente
-      // const storedEventCode = localStorage.getItem('event code')
-      // const storedTicketCode = localStorage.getItem('ticket code')
-      const storedTypeOfPayment = localStorage.getItem('typeOfPayment') || ''
+    const storedEvent = localStorage.getItem('eventData')
 
-      // Actualiza el estado con los valores recuperados
-      // setEventCode(storedEventCode)
-      // setTicketCode(storedTicketCode)
-      setTypeOfPayment(storedTypeOfPayment)
+    if (storedEvent) {
+      const event = JSON.parse(storedEvent) // Recuperar como objeto
+
+      setEventName(event.name)
+      setEventImage(event.image)
+      setEventPlace(event.place)
+      setEventStartDate(event.date)
+      setEventTicket(event.ticket)
+      setTicketPrice(event.price)
+      setTypeOfPayment(event.paymentMethod)
     }
   }, [])
 
@@ -109,7 +116,7 @@ const Confirm = () => {
                   </Typography>
                 </Box>
                 <Box>
-                  <CostTable ticketName='ESTUDIANTE O BACHILLER' price={159.0} />
+                  <CostTable ticketName={eventTicket} price={Number(ticketPrice)} />
                 </Box>
                 <Box sx={{ marginTop: '50px' }}>
                   <SubtitleTag caption='SELECCIONA PARA CONTINUAR' />
@@ -176,12 +183,12 @@ const Confirm = () => {
                 }}
               >
                 <ConfirmPayment
-                  image='https://tlavc-peru.org/tlavc/vista/upload/talleres/Portada%20presentaci%C3%B3n%20escalada%20deportiva.jpg'
-                  eventLocation='ESTADIO NACIONAL - LIMA'
-                  eventDate='25 de febrero 2025'
-                  eventName='LACV 2024'
+                  image={eventImage}
+                  eventLocation={eventPlace}
+                  eventDate={eventStartDate}
+                  eventName={eventName}
                   disableButton={!allSelected}
-                  amount={10}
+                  amount={Number(ticketPrice)}
                   typeOfPayment={typeOfPayment}
                 />
               </Box>

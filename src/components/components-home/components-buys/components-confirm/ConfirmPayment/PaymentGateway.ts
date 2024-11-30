@@ -11,6 +11,9 @@ export function CheckPaymentGateway(amount: number, typeOfPayment: string, setAl
     case 'PagoEfectivo':
       setAlertMessage('Por el momento no implementamos esta forma de pago')
       break
+    case 'Paypal':
+      setAlertMessage('Por el momento no implementamos esta forma de pago')
+      break
     default:
       setAlertMessage('Seleccione un tipo de pago')
   }

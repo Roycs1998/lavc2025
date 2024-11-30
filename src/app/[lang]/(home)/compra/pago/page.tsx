@@ -12,6 +12,12 @@ import { SubtitleTag } from '@/components/components-home/components-reusable/Su
 import { AlertIndications } from '@/components/components-home/components-reusable/AlertIndications'
 
 const Payments = () => {
+  const [eventName, setEventName] = useState<string>('')
+  const [eventImage, setEventImage] = useState<string>('')
+  const [eventPlace, setEventPlace] = useState<string>('')
+  const [eventStartDate, setEventStartDate] = useState<string>('')
+  const [eventTicket, setEventTicket] = useState<string>('')
+  const [ticketPrice, setTicketPrice] = useState<string>('')
   const isSmallScreen = useMediaQuery('(max-width:1275px)')
 
   const [offsetY, setOffsetY] = useState(0)
@@ -20,9 +26,29 @@ const Payments = () => {
 
   const handleChange = (id: string) => {
     setExpandedId(prevId => (prevId === id ? id : id))
-
-    //console.log('estado' + expandedId)
   }
+
+  useEffect(() => {
+    const storedEvent = localStorage.getItem('eventData')
+
+    if (storedEvent) {
+      const event = JSON.parse(storedEvent) // Recuperar como objeto
+
+      setEventName(event.name)
+      setEventImage(event.image)
+      setEventPlace(event.place)
+      setEventStartDate(event.date)
+      setEventTicket(event.ticket)
+      setTicketPrice(event.price)
+
+      const updatedEventData = {
+        ...event, // Copiamos las propiedades del evento original
+        paymentMethod: expandedId
+      }
+
+      localStorage.setItem('eventData', JSON.stringify(updatedEventData))
+    }
+  }, [expandedId])
 
   const handleScroll = () => {
     const newOffsetY = window.scrollY * 0.5 // Ajusta el multiplicador para un efecto más o menos fuerte
@@ -82,68 +108,151 @@ const Payments = () => {
                   <SubtitleTag caption='SELECCIONA TU MEDIO DE PAGO' />
                 </Box>
                 <Box sx={{ marginTop: '10px' }}>
-                  <PaymentMethod
-                    id='NIUBIZ'
-                    expandedId={expandedId}
-                    onChange={handleChange}
-                    image='https://teleticket.com.pe/content/images/mediopago/mp112.png?v=20241104'
-                    name='NIUBIZ'
-                    paymentInstitutions='Tarjeta de crédito / débito / Yape'
-                    description='Revisa el detalle de la compra y el monto a pagar antes de Continuar, una vez procesado el pago no existen cambios ni devoluciones'
-                    paymentTypeImage='https://cdnp.teleticket.com.pe/Content/images/mediopago/opd_niubiz.png'
-                  />
-                  <PaymentMethod
-                    id='CULQI'
-                    expandedId={expandedId}
-                    onChange={handleChange}
-                    image='https://teleticket.com.pe/content/images/mediopago/mp106.png?v=20241101'
-                    name='CULQI'
-                    paymentInstitutions='Tarjeta de crédito / débito / Yape'
-                    description='Genera un código de 9 dígitos y págalo a través de:'
-                    informationOne='Banca Móvil / Internet: Paga en BBVA, BCP, Interbank, Scotiabank, BanBif, Caja Arequipa y Banco Pichincha, a través de la banca por internet o banca móvil en la opción pago de servicios.'
-                    informationTwo='Agentes y Bodegas: Deposita en BBVA, BCP, Interbank, Scotiabank, BanBif, Wester Union, Tambo+, Kasanet, Ya Ganaste, Red Digital, Comercio Multiservicios Niubiz, MoneyGram, Caja Arequipa, Disashop, Cellpower.'
-                    listOfPaymentEntities={[
-                      { paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_1.png' },
-                      { paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_7.png' },
-                      { paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_2.png' },
-                      { paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_8.png' },
-                      { paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_3.png' },
-                      { paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_9.png' },
-                      { paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_4.png' },
-                      { paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_10.png' },
-                      { paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_5.png' },
-                      { paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_11.png' },
-                      { paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_6.png' },
-                      { paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_12.png' }
-                    ]}
-                    informationThree='Revisa el detalle de la compra y el monto a pagar antes de Continuar, una vez procesado el pago no existen cambios ni devoluciones'
-                  />
-                  <PaymentMethod
-                    id='PagoEfectivo'
-                    expandedId={expandedId}
-                    onChange={handleChange}
-                    image='https://teleticket.com.pe/content/images/mediopago/mp106.png?v=20241101'
-                    name='PagoEfectivo'
-                    paymentInstitutions='Banca móvil, Agentes y Bodegas vía PagoEfectivo'
-                    description='Genera un código de 9 dígitos y págalo a través de:'
-                    informationOne='Banca Móvil / Internet: Paga en BBVA, BCP, Interbank, Scotiabank, BanBif, Caja Arequipa y Banco Pichincha, a través de la banca por internet o banca móvil en la opción pago de servicios.'
-                    informationTwo='Agentes y Bodegas: Deposita en BBVA, BCP, Interbank, Scotiabank, BanBif, Wester Union, Tambo+, Kasanet, Ya Ganaste, Red Digital, Comercio Multiservicios Niubiz, MoneyGram, Caja Arequipa, Disashop, Cellpower.'
-                    listOfPaymentEntities={[
-                      { paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_1.png' },
-                      { paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_7.png' },
-                      { paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_2.png' },
-                      { paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_8.png' },
-                      { paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_3.png' },
-                      { paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_9.png' },
-                      { paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_4.png' },
-                      { paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_10.png' },
-                      { paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_5.png' },
-                      { paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_11.png' },
-                      { paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_6.png' },
-                      { paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_12.png' }
-                    ]}
-                    informationThree='Revisa el detalle de la compra y el monto a pagar antes de Continuar, una vez procesado el pago no existen cambios ni devoluciones'
-                  />
+                  {eventTicket !== 'EXTRANJERO' ? (
+                    <Box>
+                      <PaymentMethod
+                        id='NIUBIZ'
+                        expandedId={expandedId}
+                        onChange={handleChange}
+                        image='https://teleticket.com.pe/content/images/mediopago/mp112.png?v=20241104'
+                        name='NIUBIZ'
+                        paymentInstitutions='Tarjeta de crédito / débito / Yape'
+                        description='Revisa el detalle de la compra y el monto a pagar antes de Continuar, una vez procesado el pago no existen cambios ni devoluciones'
+                        paymentTypeImage='https://cdnp.teleticket.com.pe/Content/images/mediopago/opd_niubiz.png'
+                      />
+                      <PaymentMethod
+                        id='CULQI'
+                        expandedId={expandedId}
+                        onChange={handleChange}
+                        image='https://teleticket.com.pe/content/images/mediopago/mp106.png?v=20241101'
+                        name='CULQI'
+                        paymentInstitutions='Tarjeta de crédito / débito / Yape'
+                        description='Genera un código de 9 dígitos y págalo a través de:'
+                        informationOne='Banca Móvil / Internet: Paga en BBVA, BCP, Interbank, Scotiabank, BanBif, Caja Arequipa y Banco Pichincha, a través de la banca por internet o banca móvil en la opción pago de servicios.'
+                        informationTwo='Agentes y Bodegas: Deposita en BBVA, BCP, Interbank, Scotiabank, BanBif, Wester Union, Tambo+, Kasanet, Ya Ganaste, Red Digital, Comercio Multiservicios Niubiz, MoneyGram, Caja Arequipa, Disashop, Cellpower.'
+                        listOfPaymentEntities={[
+                          {
+                            paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_1.png'
+                          },
+                          {
+                            paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_7.png'
+                          },
+                          {
+                            paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_2.png'
+                          },
+                          {
+                            paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_8.png'
+                          },
+                          {
+                            paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_3.png'
+                          },
+                          {
+                            paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_9.png'
+                          },
+                          {
+                            paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_4.png'
+                          },
+                          {
+                            paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_10.png'
+                          },
+                          {
+                            paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_5.png'
+                          },
+                          {
+                            paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_11.png'
+                          },
+                          {
+                            paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_6.png'
+                          },
+                          {
+                            paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_12.png'
+                          }
+                        ]}
+                        informationThree='Revisa el detalle de la compra y el monto a pagar antes de Continuar, una vez procesado el pago no existen cambios ni devoluciones'
+                      />
+                      <PaymentMethod
+                        id='PagoEfectivo'
+                        expandedId={expandedId}
+                        onChange={handleChange}
+                        image='https://teleticket.com.pe/content/images/mediopago/mp106.png?v=20241101'
+                        name='PagoEfectivo'
+                        paymentInstitutions='Banca móvil, Agentes y Bodegas vía PagoEfectivo'
+                        description='Genera un código de 9 dígitos y págalo a través de:'
+                        informationOne='Banca Móvil / Internet: Paga en BBVA, BCP, Interbank, Scotiabank, BanBif, Caja Arequipa y Banco Pichincha, a través de la banca por internet o banca móvil en la opción pago de servicios.'
+                        informationTwo='Agentes y Bodegas: Deposita en BBVA, BCP, Interbank, Scotiabank, BanBif, Wester Union, Tambo+, Kasanet, Ya Ganaste, Red Digital, Comercio Multiservicios Niubiz, MoneyGram, Caja Arequipa, Disashop, Cellpower.'
+                        listOfPaymentEntities={[
+                          {
+                            paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_1.png'
+                          },
+                          {
+                            paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_7.png'
+                          },
+                          {
+                            paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_2.png'
+                          },
+                          {
+                            paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_8.png'
+                          },
+                          {
+                            paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_3.png'
+                          },
+                          {
+                            paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_9.png'
+                          },
+                          {
+                            paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_4.png'
+                          },
+                          {
+                            paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_10.png'
+                          },
+                          {
+                            paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_5.png'
+                          },
+                          {
+                            paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_11.png'
+                          },
+                          {
+                            paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_6.png'
+                          },
+                          {
+                            paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_12.png'
+                          }
+                        ]}
+                        informationThree='Revisa el detalle de la compra y el monto a pagar antes de Continuar, una vez procesado el pago no existen cambios ni devoluciones'
+                      />
+                    </Box>
+                  ) : (
+                    <PaymentMethod
+                      id='Paypal'
+                      expandedId={expandedId}
+                      onChange={handleChange}
+                      image='https://static.vecteezy.com/system/resources/previews/009/469/637/original/paypal-payment-icon-editorial-logo-free-vector.jpg'
+                      name='Paypal'
+                      paymentInstitutions='Banca móvil, Agentes y Bodegas vía PagoEfectivo'
+                      description='Genera un código de 9 dígitos y págalo a través de:'
+                      informationOne='Banca Móvil / Internet: Paga en BBVA, BCP, Interbank, Scotiabank, BanBif, Caja Arequipa y Banco Pichincha, a través de la banca por internet o banca móvil en la opción pago de servicios.'
+                      informationTwo='Agentes y Bodegas: Deposita en BBVA, BCP, Interbank, Scotiabank, BanBif, Wester Union, Tambo+, Kasanet, Ya Ganaste, Red Digital, Comercio Multiservicios Niubiz, MoneyGram, Caja Arequipa, Disashop, Cellpower.'
+                      listOfPaymentEntities={[
+                        { paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_1.png' },
+                        { paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_7.png' },
+                        { paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_2.png' },
+                        { paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_8.png' },
+                        { paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_3.png' },
+                        { paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_9.png' },
+                        { paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_4.png' },
+                        {
+                          paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_10.png'
+                        },
+                        { paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_5.png' },
+                        {
+                          paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_11.png'
+                        },
+                        { paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_6.png' },
+                        { paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_12.png' }
+                      ]}
+                      informationThree='Revisa el detalle de la compra y el monto a pagar antes de Continuar, una vez procesado el pago no existen cambios ni devoluciones'
+                    />
+                  )}
                 </Box>
                 {!expandedId && (
                   <Box sx={{ paddingLeft: '2%', paddingRight: '2%', marginTop: '30px' }}>
@@ -151,7 +260,7 @@ const Payments = () => {
                   </Box>
                 )}
                 <Box>
-                  <CostTable ticketName='ESTUDIANTE O BACHILLER' price={159.0} />
+                  <CostTable ticketName={eventTicket} price={Number(ticketPrice)} />
                 </Box>
               </Box>
 
@@ -205,10 +314,10 @@ const Payments = () => {
                 }}
               >
                 <PurchaseEventLetter
-                  image='https://tlavc-peru.org/tlavc/vista/upload/talleres/Portada%20presentaci%C3%B3n%20escalada%20deportiva.jpg'
-                  eventLocation='ESTADIO NACIONAL - LIMA'
-                  eventDate='25 de febrero 2025'
-                  eventName='LACV 2024'
+                  image={eventImage}
+                  eventLocation={eventPlace}
+                  eventDate={eventStartDate}
+                  eventName={eventName}
                   pageRoute='/compra/confirmar'
                   disableButton={expandedId ? false : true}
                 />

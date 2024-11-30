@@ -49,7 +49,7 @@ export const CostTable = ({ ticketName, price }: Ticket) => {
                     color: '#bbbabd'
                   }}
                 >
-                  S/ {price.toFixed(2)}
+                  {price?.toString().slice(-2) === '00' ? `$ ${price?.toFixed(2)}` : `S/ ${price?.toFixed(2)}`}
                 </TableCell>
               </TableRow>
             </TableBody>
@@ -75,7 +75,7 @@ export const CostTable = ({ ticketName, price }: Ticket) => {
               <TableRow key={3} sx={{ '&:last-child td, &:last-child th': { border: 0 }, '& td': { padding: '4px' } }}>
                 <TableCell component='th' scope='row' sx={{ fontSize: '1.1rem', border: 'none' }}></TableCell>
                 <TableCell align='right' scope='row' sx={{ fontSize: '1.1rem', fontWeight: 'bold' }}>
-                  S/ {price.toFixed(2)}
+                  {price?.toString().slice(-2) === '00' ? `$ ${price?.toFixed(2)}` : `S/ ${price?.toFixed(2)}`}
                 </TableCell>
               </TableRow>
             </TableBody>

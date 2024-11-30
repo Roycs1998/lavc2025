@@ -4,38 +4,44 @@ import { useEffect, useState } from 'react'
 
 import { Box, FormControl, FormControlLabel, Radio, RadioGroup, TextField, Typography } from '@mui/material'
 
-import { rucStore } from '@/store/PaymentTypeStore'
-
 export const PaymentDocuments = () => {
-  const [selectedOption, setSelectedOption] = useState('boleta')
+  const [selectedOption, setSelectedOption] = useState('Boleta')
   const [inputValue, setInputValue] = useState('')
-
-  const updateRuc = rucStore(state => state.updateRuc)
+  const [companyName, setCompanyName] = useState('')
 
   const handleChange = (event: { target: { value: SetStateAction<string> } }) => {
     setSelectedOption(event.target.value)
   }
 
-  const handleInputChange = (event: { target: { value: SetStateAction<string> } }) => {
-    setInputValue(event.target.value) // Actualiza el estado con el valor ingresado
-  }
-
   useEffect(() => {
-    updateRuc(inputValue)
-  }, [inputValue, updateRuc])
+    const storedEvent = localStorage.getItem('eventData')
+
+    if (storedEvent) {
+      const event = JSON.parse(storedEvent)
+
+      const updatedEventData = {
+        ...event, // Copiamos las propiedades del evento original
+        typeOfPayment: selectedOption,
+        ruc: selectedOption === 'Factura' ? inputValue : '',
+        companyName: companyName
+      }
+
+      localStorage.setItem('eventData', JSON.stringify(updatedEventData))
+    }
+  }, [inputValue, companyName, selectedOption])
 
   return (
     <Box>
       <FormControl component='fieldset'>
         <RadioGroup row value={selectedOption} onChange={handleChange}>
           <FormControlLabel
-            value='boleta'
+            value='Boleta'
             control={<Radio sx={{ '& .MuiSvgIcon-root': { fontSize: 18 }, paddingRight: '4px' }} />}
             label='Boleta'
             sx={{ '& .MuiTypography-root': { fontSize: '0.75rem' }, marginRight: '30px' }}
           />
           <FormControlLabel
-            value='factura'
+            value='Factura'
             control={<Radio sx={{ '& .MuiSvgIcon-root': { fontSize: 18 }, paddingRight: '4px' }} />}
             label='Factura'
             sx={{ '& .MuiTypography-root': { fontSize: '0.75rem' } }}
@@ -43,7 +49,7 @@ export const PaymentDocuments = () => {
         </RadioGroup>
 
         <Box mt={1} p={0} border='none'>
-          {selectedOption === 'boleta' && (
+          {selectedOption === 'Boleta' && (
             <Box>
               <Typography variant='body1' sx={{ fontSize: '0.9rem' }}>
                 Las entradas son vendidas por TELETICKET, por cuenta y orden de la empresa organizadora del evento,
@@ -55,7 +61,7 @@ export const PaymentDocuments = () => {
               </Typography>
             </Box>
           )}
-          {selectedOption === 'factura' && (
+          {selectedOption === 'Factura' && (
             <Box>
               <Typography variant='h5' sx={{ marginBottom: '10px' }}>
                 Ingresa tus datos para generar factura por S/ 3.00
@@ -67,10 +73,33 @@ export const PaymentDocuments = () => {
                 <TextField
                   id='outlined-basic'
                   value={inputValue}
-                  onChange={handleInputChange}
+                  onChange={e => setInputValue(e.target.value)}
                   variant='outlined'
                   placeholder='Ingresa el RUC de la empresa'
                   type='number'
+                  sx={{
+                    width: '100%', // Ajusta el ancho
+                    '& .MuiInputBase-root': {
+                      height: '26px',
+                      borderRadius: '0',
+                      '& input': {
+                        fontSize: '0.8rem' // Cambia este valor al tamaño de letra que desees
+                      }
+                    }
+                  }}
+                />
+              </Box>
+              <Typography variant='body1' sx={{ fontSize: '0.7rem', fontWeight: 700, marginBottom: '5px' }}>
+                Nombre de empresa
+              </Typography>
+              <Box sx={{ marginBottom: '20px' }}>
+                <TextField
+                  id='outlined-basic'
+                  value={companyName}
+                  onChange={e => setCompanyName(e.target.value)}
+                  variant='outlined'
+                  placeholder='Ingresa el RUC de la empresa'
+                  type='text'
                   sx={{
                     width: '100%', // Ajusta el ancho
                     '& .MuiInputBase-root': {

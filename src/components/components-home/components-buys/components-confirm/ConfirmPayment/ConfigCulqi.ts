@@ -32,28 +32,28 @@ export async function getCulqiCheckout(amount: number) {
 
   _culqi.open()
 
-  if (_culqi) {
-    _culqi.close()
+  // if (_culqi) {
+  //   _culqi.close()
 
-    Swal.fire({
-      title: '¡ÉXITO!',
-      text: 'El pago se realizó correctamente.',
-      icon: 'success',
-      showCancelButton: true,
-      cancelButtonText: 'Cerrar', // Cambia el texto del botón de cancelar
-      confirmButtonText: 'Ver código QR' // Cambia el texto del botón de aceptar
-    }).then(result => {
-      // Verifica si el usuario hizo clic en el botón de confirmación
-      if (result.isConfirmed) {
-        // Aquí puedes agregar el código para mostrar la siguiente alerta (con el código QR)
-        Swal.fire({
-          title: 'Código QR',
-          imageUrl: 'https://tse4.mm.bing.net/th?id=OIP.U1S5NpMGxCdvgw4EJcMuegHaHa&pid=Api&P=0&h=180',
-          confirmButtonText: 'Cerrar' // Cambia el texto del botón de cerrar
-        })
-      }
-    })
-  }
+  //   Swal.fire({
+  //     title: '¡ÉXITO!',
+  //     text: 'El pago se realizó correctamente.',
+  //     icon: 'success',
+  //     showCancelButton: true,
+  //     cancelButtonText: 'Cerrar', // Cambia el texto del botón de cancelar
+  //     confirmButtonText: 'Ver código QR' // Cambia el texto del botón de aceptar
+  //   }).then(result => {
+  //     // Verifica si el usuario hizo clic en el botón de confirmación
+  //     if (result.isConfirmed) {
+  //       // Aquí puedes agregar el código para mostrar la siguiente alerta (con el código QR)
+  //       Swal.fire({
+  //         title: 'Código QR',
+  //         imageUrl: 'https://tse4.mm.bing.net/th?id=OIP.U1S5NpMGxCdvgw4EJcMuegHaHa&pid=Api&P=0&h=180',
+  //         confirmButtonText: 'Cerrar' // Cambia el texto del botón de cerrar
+  //       })
+  //     }
+  //   })
+  // }
 
   _culqi.culqi = () => {
     if (_culqi.token) {
@@ -106,12 +106,12 @@ export async function getCulqiCheckout(amount: number) {
 
       console.log('Se ha creado el objeto Order: ', order)
     } else {
-      Swal.fire({
-        title: '¡ERROR!',
-        text: _culqi.error,
-        icon: 'error',
-        confirmButtonText: 'Cerrar'
-      })
+      // Swal.fire({
+      //   title: '¡ERROR!',
+      //   text: _culqi.error,
+      //   icon: 'error',
+      //   confirmButtonText: 'Cerrar'
+      // })
       console.log('Error : ', _culqi.error)
     }
   }
