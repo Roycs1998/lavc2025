@@ -1,9 +1,7 @@
-import type { WorkshopType } from './WorkshopType'
-
 export interface Workshop {
   codeWorkshop: number
   workshopName: string
-  workshopStartDate?: Date
+  workshopStartDate?: string
   workshopEndDate?: Date
   workshopSchedule: string
   workshopState: number
@@ -22,4 +20,11 @@ export interface Workshop {
   certified_workshop: number
   workshopType: WorkshopType
   workshopTypeId: number
+}
+
+export interface WorkshopType {
+  workshopTypeCode: number
+  workshopTypeName: string
+  workshopTypeStatus: number
+  workshops: Workshop[]
 }

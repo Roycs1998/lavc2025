@@ -19,6 +19,7 @@ import useVerticalNav from '@menu/hooks/useVerticalNav'
 
 // Style Imports
 import navigationCustomStyles from '@core/styles/vertical/navigationCustomStyles'
+import { useSession } from 'next-auth/react'
 
 const StyledBoxForShadow = styled('div')(({ theme }) => ({
   top: 60,
@@ -39,6 +40,7 @@ const StyledBoxForShadow = styled('div')(({ theme }) => ({
 const Navigation = () => {
   // Hooks
   const theme = useTheme()
+  const {data: session, status}= useSession()
   const { isBreakpointReached, toggleVerticalNav } = useVerticalNav()
 
   // Refs
@@ -71,7 +73,7 @@ const Navigation = () => {
         {isBreakpointReached && <i className='ri-close-line text-xl' onClick={() => toggleVerticalNav(false)} />}
       </NavHeader>
       <StyledBoxForShadow ref={shadowRef} />
-      <VerticalMenu scrollMenu={scrollMenu} />
+      <VerticalMenu session={session} scrollMenu={scrollMenu} />
     </VerticalNav>
   )
 }

@@ -15,11 +15,15 @@ import { Navbar } from '@/components/components-home/Navbar'
 import { FooterTwo } from '@/components/components-home/FooterTwo'
 import { getDictionary } from '@/utils/getDictionary'
 import type { Locale } from '@/configs/i18n'
+import { SessionProvider } from 'next-auth/react'
+import SessionAuthProvider from '../../context/SessionAuthProvider'
+
+import 'react-toastify/dist/ReactToastify.css'
 
 export const metadata = {
-  title: 'Demo: Materio - NextJS Dashboard Free',
+  title: 'LAVC 2025',
   description:
-    'Develop next-level web apps with Materio Dashboard Free - NextJS. Now, updated with lightning-fast routing powered by MUI and App router.'
+    'El mejor congreso de medicina veterinaria en Latinoamérica',
 }
 
 const poppins = Poppins({
@@ -27,17 +31,18 @@ const poppins = Poppins({
   subsets: ['latin']
 })
 
-const RootLayout = async ({ children, params }: ChildrenType & { params: { lang: Locale } }) => {
+const RootLayout = async ({ children }: ChildrenType ) => {
   // Vars
   const direction = 'ltr'
-  const dictionary = await getDictionary(params.lang)
 
   return (
     <html id='__next' dir={direction}>
       <body className={`${poppins.className} flex is-full min-bs-full flex-auto flex-col `}>
-        <Navbar dictionary={dictionary} />
-        {children}
-        <FooterTwo dictionary={dictionary} />
+
+        <SessionAuthProvider>
+          {children}
+        </SessionAuthProvider>
+
       </body>
     </html>
   )

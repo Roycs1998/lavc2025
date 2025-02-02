@@ -34,7 +34,6 @@ const Footer = (props: Props) => {
     >
       <div className={verticalLayoutClasses.footerContentWrapper}>
         {children}
-        <h1>footer</h1>
       </div>
     </StyledFooter>
   )

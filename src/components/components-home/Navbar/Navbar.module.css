@@ -24,10 +24,7 @@
   margin-block-end: 5px;
 }
 
-.mainLogo {
-  block-size: 90px;
-  inline-size: 110px;
-}
+
 
 .hoverColor:hover {
   color: var(--color-on-hover);
@@ -37,7 +34,24 @@
   display: none;
 }
 
-@media (max-width: 1536px) {
+.navbar {
+  display: flex;
+  align-items: center;
+}
+
+.mainLogo {
+  max-height: 70px;
+}
+
+.link {
+  margin: 0 10px;
+}
+
+.icons {
+  margin-right: 8px;
+}
+
+@media (max-width: 1366px) {
   .link {
     display: none;
   }
@@ -57,7 +71,6 @@
     inline-size: 110px;
   }
 }
-
 @media (max-width: 590px) {
   .navbar {
     position: fixed;

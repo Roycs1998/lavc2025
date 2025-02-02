@@ -29,10 +29,13 @@ import Illustrations from '@components/Illustrations'
 
 // Hook Imports
 import { useImageVariant } from '@core/hooks/useImageVariant'
+import { signIn } from 'next-auth/react'
+import { toast } from 'react-toastify'
 
 interface FormErrors {
   email?: string
   password?: string
+  userNotFound?: string
 }
 
 const Login = ({ mode }: { mode: Mode }) => {
@@ -52,25 +55,43 @@ const Login = ({ mode }: { mode: Mode }) => {
 
   const handleClickShowPassword = () => setIsPasswordShown(show => !show)
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     const newErrors: FormErrors = {}
 
     if (!email) {
-      newErrors.email = 'El correo electrónico es obligatorio.'
+      newErrors.email = 'El correo electrónico es obligatorio.';
     } else if (!/\S+@\S+\.\S+/.test(email)) {
-      newErrors.email = 'El correo electrónico no es válido'
+      newErrors.email = 'El correo electrónico no es válido.';
     }
 
-    if (!password) newErrors.password = 'La contraseña es obligatoria.'
+    if (!password) {
+      newErrors.password = 'La contraseña es obligatoria.';
+    }
 
     if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors)
-    } else {
-      console.log('Email:', email)
-      console.log('Password:', password)
-      router.push('/')
+      setErrors(newErrors);
+      toast.error('Por favor corrige los errores antes de continuar.');
+      return;
+    }
+
+    try {
+      const responseNextAuth = await signIn('credentials', {
+        email,
+        password,
+        redirect: false,
+      });
+
+      if (responseNextAuth?.error) {
+        console.error('Error al iniciar sesión:', responseNextAuth);
+        toast.error(responseNextAuth.error);
+        return;
+      }
+
+      router.push('/eventos-talleres');
+    } catch (error) {
+      toast.error('Error al iniciar sesión');
     }
   }
 
@@ -86,7 +107,7 @@ const Login = ({ mode }: { mode: Mode }) => {
             <div>
               <Typography variant='h4' sx={{ textAlign: 'center' }}>{`Bienvenido a LAVC!👋🏻`}</Typography>
               <Typography className='mbs-1' sx={{ textAlign: 'center' }}>
-                Inicia sesión en tu cuenta y comienza la aventura.
+                Inicia sesión en tu cuenta.
               </Typography>
             </div>
             <form autoComplete='off' onSubmit={handleSubmit} className='flex flex-col gap-5'>
@@ -129,9 +150,22 @@ const Login = ({ mode }: { mode: Mode }) => {
                   Forgot password?
                 </Typography>
               </div>
-              <Button fullWidth variant='contained' type='submit'>
+              <Button
+                fullWidth
+                variant="contained"
+                type="submit"
+                disabled={!email || !password || Object.keys(errors).length > 0}
+              >
                 Ingresar
               </Button>
+              <Typography
+                variant="body2"
+                color="error"
+                sx={{ mt: 1 }}
+                aria-live="polite"
+              >
+                {errors.email}
+              </Typography>
               <div className='flex justify-center items-center flex-wrap gap-2'>
                 <Typography>¿Nuevo en nuestra plataforma?</Typography>
                 <Typography component={Link} href='/register' color='primary'>

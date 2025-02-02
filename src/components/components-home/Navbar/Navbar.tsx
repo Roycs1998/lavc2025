@@ -24,6 +24,8 @@ import styles from './Navbar.module.css'
 import LanguageDropdown from './LanguageDropdown'
 import type { getDictionary } from '@/utils/getDictionary'
 import { NavbarTooltip } from './NavbarTooltip'
+import { useSession } from 'next-auth/react'
+import UserDropdown from '@/components/layout/shared/UserDropdown'
 
 type Props = {
   dictionary: Awaited<ReturnType<typeof getDictionary>>
@@ -31,6 +33,7 @@ type Props = {
 
 export const Navbar = ({ dictionary }: Props) => {
   const [scrolled, setScrolled] = useState(false)
+  const {data: session, status} = useSession()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,15 +41,27 @@ export const Navbar = ({ dictionary }: Props) => {
     }
 
     window.addEventListener('scroll', handleScroll)
-
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  useEffect(() => {
+    if (status === 'loading') {
+      console.log('Cargando sesión...')
+    } else if (status === 'authenticated') {
+      console.log('Sesión autenticada:', session)
+    } else if (status === 'unauthenticated') {
+      console.log('No hay sesión activa')
+    }
+  }, [session, status])
 
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
-        className={`${styles.navbar} ${scrolled ? styles.scrolled : ''} global-padding`}
-        sx={{ bgcolor: 'transparent' }}
+        className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`}
+        sx={{
+          bgcolor: scrolled ? '#3a3480' : 'rgba(58, 52, 128, 0.447)',
+          transition: 'background-color 0.3s ease',
+        }}
       >
         <Toolbar sx={{ bgcolor: 'none' }}>
           <Typography variant='h6' component='div' sx={{ marginRight: '5%' }}>
@@ -55,7 +70,7 @@ export const Navbar = ({ dictionary }: Props) => {
             </Link>
           </Typography>
           <Typography className={styles.list} component='div'>
-            <List className={styles.link} sx={{ display: 'flex', flexDirection: 'row', padding: 0, marginLeft: '15%' }}>
+            <List className={styles.link} sx={{ display: 'flex', flexDirection: 'row', padding: 0, marginLeft: '15%', color: 'white' }}>
               <ListItem>
                 <PersonSearchIcon className={styles.icons} />
                 <NavbarTooltip
@@ -92,18 +107,16 @@ export const Navbar = ({ dictionary }: Props) => {
               </ListItem>
               <ListItem className={styles.link}>
                 <HelpOutlineIcon className={styles.icons} />
-                <Link href='/preguntas-frecuentes'>
-                  <ListItemText
-                    className={styles.hoverColor}
-                    primaryTypographyProps={{
-                      sx: {
-                        fontWeight: 700,
-                        fontSize: '1.1rem',
-                        whiteSpace: 'nowrap'
-                      }
-                    }}
-                    primary={dictionary?.nav_main?.navbar.frequently_asked_questions}
-                  />
+                <Link
+                  href="/preguntas-frecuentes"
+                  style={{
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    display: 'inline-block',
+                  }}
+                >
+                  {dictionary?.nav_main?.navbar.frequently_asked_questions}
                 </Link>
               </ListItem>
               <ListItem className={styles.link}>
@@ -122,12 +135,17 @@ export const Navbar = ({ dictionary }: Props) => {
           </Typography>
           <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}></Typography>
           <LanguageDropdown />
-          <Link href={'/login'}>
-            <Button className={`${styles.link} ${styles.hoverColor}`} color='inherit' sx={{}}>
-              <PersonIcon className={styles.icons} />
-              {dictionary.nav_main.navbar.login}
-            </Button>
-          </Link>
+        {/* Lógica para mostrar botón de login o UserDropdown */}
+          {status === 'authenticated' ? (
+            <UserDropdown session={session}/>
+          ) : (
+            <Link href={'/login'}>
+              <Button className={`${styles.link} ${styles.hoverColor}`} color="inherit" sx={{}}>
+                <PersonIcon className={styles.icons} />
+                {dictionary.nav_main.navbar.login}
+              </Button>
+            </Link>
+          )}
           <NavbarDrawer dictionary={dictionary} />
         </Toolbar>
       </AppBar>

@@ -7,16 +7,20 @@ import Accordion from '@mui/material/Accordion'
 import AccordionSummary from '@mui/material/AccordionSummary'
 import AccordionDetails from '@mui/material/AccordionDetails'
 import Typography from '@mui/material/Typography'
-
+import styles from '../../../Navbar/Navbar.module.css'
 import { Box, Button, MenuItem, TextField } from '@mui/material'
+import { useSession } from 'next-auth/react'
+import { toast } from 'react-toastify'
+import { formatDate } from '@/libs/utils'
 
 interface Route {
   route: string
-  typeOfEvent: string
+  typeOfEvent: number
   costProfessionals?: number
   costHighSchoolStudents?: number
   costForeignProfessionals?: number
   workshopCost?: number
+  dateWorkshop?: string
 }
 
 type ticketStructure = { value: string; price?: number }
@@ -27,10 +31,11 @@ export const PurchaseLetter = ({
   costProfessionals,
   costHighSchoolStudents,
   costForeignProfessionals,
-  workshopCost
+  workshopCost,
+  dateWorkshop
 }: Route) => {
   const [ticket, setTicket] = useState<ticketStructure | null>(null)
-
+  const {data: session, status} = useSession()
   const [problemType, setProblemType] = useState('')
 
   const [expanded, setExpanded] = useState(true)
@@ -56,6 +61,7 @@ export const PurchaseLetter = ({
   }
 
   useEffect(() => {
+
     const getTicket = async () => {
       const selectedOption = tickets.find(option => option.value === problemType)
 
@@ -63,7 +69,7 @@ export const PurchaseLetter = ({
         setTicket(selectedOption)
       } else {
         const defaultTicket: ticketStructure = {
-          value: 'VETERINARIO',
+          value: 'PRECIO GENERAL',
           price: workshopCost
         }
 
@@ -75,11 +81,17 @@ export const PurchaseLetter = ({
   }, [problemType, trigger])
 
   useEffect(() => {
+    console.log('ticket',   route,
+      typeOfEvent,
+      costProfessionals,
+      costHighSchoolStudents,
+      costForeignProfessionals,
+      workshopCost)
     const saveTicketInEvent = () => {
       const eventData = localStorage.getItem('eventData')
 
       console.log('ingreso')
-      console.log(ticket)
+      console.log(typeOfEvent)
 
       if (eventData) {
         const parsedEvent = JSON.parse(eventData)
@@ -96,11 +108,12 @@ export const PurchaseLetter = ({
 
     saveTicketInEvent()
 
-    console.log(ticket)
   }, [ticket])
 
+
   const forceEffect = () => {
-    setTrigger(!trigger)
+    status !== 'authenticated' ?
+    toast.warn('Debes iniciar sesión para comprar tu entrada'):setTrigger(!trigger)
   }
 
   return (
@@ -121,10 +134,11 @@ export const PurchaseLetter = ({
             display: 'flex',
             marginLeft: '30px',
             alignItems: 'center',
-            fontSize: '13px'
+            fontSize: '13px',
+            fontWeight: 800
           }}
         >
-          SELECCIONA FUNCIÓN
+          SELECCIÓN DE CATEGORIA
         </Typography>
       </Box>
       <Box sx={{ width: '450px' }}>
@@ -143,16 +157,17 @@ export const PurchaseLetter = ({
                   padding: '20px'
                 }}
               >
-                MAR. 12 NOVIEMBRE 19:30
+                {dateWorkshop ? formatDate(dateWorkshop) : 'FECHA NO DEFINIDA'}
               </Typography>
             </Box>
           </AccordionSummary>
-          {typeOfEvent !== 'TALLER' && (
+          {typeOfEvent !== 1 && typeOfEvent !== 3 && (
             <AccordionDetails sx={{ bgcolor: '#f9f6fe' }}>
+
               <Box
                 sx={{
-                  height: '150px',
-                  padding: '20px',
+                  height: '100px',
+                  padding: '10px',
                   display: 'flex',
                   justifyContent: 'center',
                   alignItems: 'center',
@@ -188,7 +203,7 @@ export const PurchaseLetter = ({
                   }}
                   id='outlined-select-currency'
                   select
-                  label='Categorias'
+                  label='Selecciona categoria'
                   defaultValue=''
                   value={problemType} // Estado del campo de mensaje
                   onChange={e => setProblemType(e.target.value)}
@@ -203,29 +218,59 @@ export const PurchaseLetter = ({
             </AccordionDetails>
           )}
           <AccordionDetails>
-            <Box sx={{ height: '80px' }}>
+            <Box >
               <Typography sx={{ padding: '20px' }}>
-                <Link href={typeOfEvent === 'EVENTO' ? (problemType ? route : '#') : route}>
+                <Link href={typeOfEvent === 2 ? (problemType &&  status === 'authenticated' ? route : '') : route}>
                   <Button
                     onClick={forceEffect}
-                    disabled={typeOfEvent === 'EVENTO' ? !problemType : false}
+                    disabled={typeOfEvent === 2 ? !problemType : false}
                     sx={{
-                      bgcolor: 'var(--primary-color-purple)',
-                      color: 'var(--letter-color)',
+                      bgcolor: typeOfEvent === 2 && !problemType ? '#b8b4e7' : 'var(--primary-color-purple)', // Fondo desvanecido si está deshabilitado
+                      color: typeOfEvent === 2 && !problemType ? '#ffffff' : 'var(--letter-color)', // Texto blanco si está deshabilitado
                       width: '100%',
                       height: 55,
                       fontWeight: 'bold',
                       fontSize: '15px',
-
+                      opacity: typeOfEvent === 2 && !problemType ? 0.6 : 1, // Opacidad reducida si está deshabilitado
+                      transition: 'all 0.3s ease', // Transición suave al cambiar el estado
                       '&:hover': {
-                        color: 'var(--letter-color)', // Cambiar color si es necesario
-                        bgcolor: '#7f76d9'
-                      }
+                        color: typeOfEvent === 2 && !problemType ? '#ffffff' : 'var(--letter-color)', // Color al hacer hover
+                        bgcolor: typeOfEvent === 2 && !problemType ? '#d1cfea' : '#7f76d9', // Color al hacer hover
+                      },
+                      '&.Mui-disabled': {
+                        bgcolor: '#8781dd', // Fondo más claro si está deshabilitado
+                        color: '#ffffff', // Texto blanco si está deshabilitado
+                      },
                     }}
                   >
                     COMPRAR TU ENTRADA
                   </Button>
                 </Link>
+
+                {status !== 'authenticated' && (
+                  <Link href={'/login'}>
+                      <Button
+                        sx={{
+                          bgcolor:  'var(--primary-color-purple)', // Fondo desvanecido si está deshabilitado
+                          color:  'var(--letter-color)', // Texto blanco si está deshabilitado
+                          width: '100%',
+                          height: 55,
+                          marginTop: '10px',
+                          fontWeight: 'bold',
+                          fontSize: '15px',
+                          opacity:  1, // Opacidad reducida si está deshabilitado
+                          transition: 'all 0.3s ease', // Transición suave al cambiar el estado
+                          '&:hover': {
+                            color: 'var(--letter-color)', // Color al hacer hover
+                            bgcolor: '#7f76d9', // Color al hacer hover
+                          },
+
+                        }}
+                      >
+                        INICIAR SESIÓN
+                      </Button>
+                  </Link>
+                )}
               </Typography>
             </Box>
           </AccordionDetails>

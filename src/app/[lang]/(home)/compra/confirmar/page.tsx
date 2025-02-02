@@ -12,8 +12,9 @@ import { SubtitleTag } from '@/components/components-home/components-reusable/Su
 import { CostTable } from '@/components/components-home/components-buys/CostTable'
 import { AcceptanceCriteria } from '@/components/components-home/components-buys/components-confirm/AcceptanceCriteria'
 import { AlertIndications } from '@/components/components-home/components-reusable/AlertIndications'
-import { ConfirmPayment } from '@/components/components-home/components-buys/components-confirm/ConfirmPayment'
-import { CheckPaymentGateway } from '@/components/components-home/components-buys/components-confirm/ConfirmPayment/PaymentGateway'
+import { ConfirmPayment } from '@/components/components-home/components-buys/components-confirm/confirm-payment'
+import { CheckPaymentGateway } from '@/components/components-home/components-buys/components-confirm/confirm-payment/PaymentGateway'
+import { formatDate } from '@/libs/utils'
 
 const Confirm = () => {
   const isSmallScreen = useMediaQuery('(max-width:1275px)')
@@ -65,9 +66,7 @@ const Confirm = () => {
   }
 
   const handlerClickOpenPay = () => {
-    CheckPaymentGateway(10, typeOfPayment, setAlertMessage)
-
-    console.log('Pasarela' + typeOfPayment)
+    CheckPaymentGateway(eventName || 'Sin asignar',Number(ticketPrice), typeOfPayment, setAlertMessage)
   }
 
   return (
@@ -87,23 +86,21 @@ const Confirm = () => {
             md={isSmallScreen ? 12 : 6.5}
             sx={{ marginBottom: '7%', marginTop: '7%', paddingLeft: 'var(--global-padding-inline)' }}
           >
-            {isSmallScreen && (
-              <Box sx={{ paddingLeft: '30px', marginBottom: '40px' }}>
+            <Box sx={{ paddingLeft: '30px', marginBottom: '40px' }}>
                 <Typography variant='body1' fontWeight='bold' sx={{ fontSize: '14px' }}>
-                  ESTADIO NACIONAL - LIMA
+                  Centro de Exposiciones Jockey - CEJ
                 </Typography>
                 <Typography
                   variant='h6'
                   fontWeight='bold'
                   sx={{ paddingTop: '12px', fontSize: '1.9rem', fontWeight: 700 }}
                 >
-                  LACV 2024
+                  {eventName}
                 </Typography>
                 <Typography variant='body1' sx={{ color: 'text.secondary', fontSize: '13px', paddingTop: '5px' }}>
-                  25 de febrero 2025
+                {formatDate(eventStartDate)}
                 </Typography>
-              </Box>
-            )}
+            </Box>
             <Box sx={{ paddingRight: '10px', paddingLeft: '30px' }}>
               <Box>
                 <Box>
@@ -112,7 +109,7 @@ const Confirm = () => {
                     fontWeight='bold'
                     sx={{ paddingTop: '12px', fontSize: '1.2rem', fontWeight: 700 }}
                   >
-                    Ismael Jonas Villarruel Ngrete
+                    Roy Cari Sarmiento
                   </Typography>
                 </Box>
                 <Box>

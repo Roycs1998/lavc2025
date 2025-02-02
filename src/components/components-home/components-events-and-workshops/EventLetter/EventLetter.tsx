@@ -1,3 +1,4 @@
+'use client'
 import * as React from 'react'
 
 import Card from '@mui/material/Card'
@@ -28,7 +29,7 @@ export const EventLetter = ({ image, eventLocation, eventDate, eventName }: Even
       <Box sx={{ height: '260px', width: '100%', overflow: 'hidden' }}>
         <Box
           component='img'
-          src={image}
+          src={'https://tlavc-peru.org/tlavc/vista/'+image}
           alt=''
           className='card-media'
           sx={{

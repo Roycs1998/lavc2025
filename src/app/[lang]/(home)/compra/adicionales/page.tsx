@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 import { Box, Button, Grid, Typography, useMediaQuery } from '@mui/material'
 
-import { PurchaseEventLetter } from '@/components/components-home/components-buys/PurchaseEventLetter'
+import { PurchaseEventLetter } from '@/components/components-home/components-buys/purchase-event-letter'
 import { CardImage } from '@/components/components-home/components-ponentes/CardImage'
 import { AdditionalInformationLetter } from '@/components/components-home/components-buys/components-additional/AdditionalInformationLetter'
 import { SubtitleTag } from '@/components/components-home/components-reusable/SubtitleTag'

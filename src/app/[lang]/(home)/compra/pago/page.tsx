@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 
 import { Box, Button, Grid, Link, Typography, useMediaQuery } from '@mui/material'
 
-import { PurchaseEventLetter } from '@/components/components-home/components-buys/PurchaseEventLetter'
+import { PurchaseEventLetter } from '@/components/components-home/components-buys/purchase-event-letter'
 import { CardImage } from '@/components/components-home/components-ponentes/CardImage'
 import { PaymentDocuments } from '@/components/components-home/components-buys/components-pay/PaymentDocuments'
 import { PaymentMethod } from '@/components/components-home/components-buys/components-pay/PaymentMethod'
@@ -108,7 +108,7 @@ const Payments = () => {
                   <SubtitleTag caption='SELECCIONA TU MEDIO DE PAGO' />
                 </Box>
                 <Box sx={{ marginTop: '10px' }}>
-                  {eventTicket !== 'EXTRANJERO' ? (
+                  {eventTicket !== 'EXTRANJERO1' ? (
                     <Box>
                       <PaymentMethod
                         id='NIUBIZ'

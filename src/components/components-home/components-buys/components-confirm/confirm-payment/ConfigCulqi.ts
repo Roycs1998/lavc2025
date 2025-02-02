@@ -1,9 +1,9 @@
 import Swal from 'sweetalert2'
 
-export function getConfig(amount: number) {
+export function getConfig(amount: number, title?: string) {
   return {
     settings: {
-      title: 'LAVC 2025',
+      title: title || 'LAVC 2025',
       currency: 'PEN', // Este parámetro es requerido para realizar pagos
       amount: amount * 100 // Este parámetro es requerido para realizar pagos
     },
@@ -14,9 +14,9 @@ export function getConfig(amount: number) {
   }
 }
 
-export async function getCulqiCheckout(amount: number) {
-  const _culqi = new (window as any).CulqiCheckout(process.env.NEXT_PUBLIC_CULQI_PUBLICKEY, getConfig(amount))
-
+export async function getCulqiCheckout(title: string , amount: number) {
+  const _culqi = new (window as any).CulqiCheckout(process.env.NEXT_PUBLIC_CULQI_PUBLICKEY, getConfig(amount,title))
+  
   if (!_culqi) {
     Swal.fire({
       title: '¡ERROR!',
@@ -28,7 +28,6 @@ export async function getCulqiCheckout(amount: number) {
     return
   }
 
-  console.log('public_key', process.env.NEXT_PUBLIC_CULQI_PUBLICKEY)
 
   _culqi.open()
 

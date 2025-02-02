@@ -21,7 +21,7 @@ import IconButton from '@mui/material/IconButton'
 import InputAdornment from '@mui/material/InputAdornment'
 import Button from '@mui/material/Button'
 import Divider from '@mui/material/Divider'
-
+import { signIn } from 'next-auth/react'
 // Type Imports
 import { Box, MenuItem, Step, StepLabel, Stepper } from '@mui/material'
 
@@ -33,6 +33,11 @@ import Logo from '@components/layout/shared/Logo'
 
 // Hook Imports
 import { useImageVariant } from '@core/hooks/useImageVariant'
+import { CreatePersonaUserDto } from '@/interfaces/register/inteface'
+import { toast } from 'react-toastify'
+import { registerNewUser } from '@/api/registro'
+import { Icon } from '@iconify/react/dist/iconify.js'
+import { useRouter } from 'next/navigation'
 
 const steps = ['Información Personal', 'Formación Académica', 'Credenciales de Usuario']
 
@@ -152,6 +157,7 @@ interface FormErrors {
 
 const Register = ({ mode }: { mode: Mode }) => {
   // States
+  const router = useRouter()
   const [isPasswordShown, setIsPasswordShown] = useState(false)
   const [activeStep, setActiveStep] = React.useState(0)
   const [countries, setCountries] = useState<Country[]>([])
@@ -184,6 +190,8 @@ const Register = ({ mode }: { mode: Mode }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [verificationPassword, setVerificationPassword] = useState('')
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const validateFormOne = () => {
     const newErrors: FormErrors = {}
@@ -335,9 +343,9 @@ const Register = ({ mode }: { mode: Mode }) => {
     fetchCountries()
   }, [])
 
-  const userRegistrar = (e: FormEvent<HTMLFormElement>) => {
+  const userRegistrar = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-
+    setIsLoading(true);
     if (activeStep === 2) {
       if (validateFromThree()) {
         const updatedStepValid = [...stepValid]
@@ -348,21 +356,78 @@ const Register = ({ mode }: { mode: Mode }) => {
         setErrors({}) // Limpia los errores al avanzar
       }
 
-      console.log('NOMBRE', name)
-      console.log('PPATERNO', paternalSurname)
-      console.log('MATERNO', maternalSurname)
-      console.log('TYPO DE DOCUMENTO:', typeOfDocument)
-      console.log('DOCUMENTO:', document)
-      console.log('CELULAR:', phone)
-      console.log('PAIS DE PROCEDENCIA :', homeCountry)
-      console.log('CIUDAD DE PROCENDENCIA :', cityOfOrigin)
-      console.log('UNIVERSIDAD :', homeUniversity)
-      console.log('ESTADO ACADEMICO :', academic)
-      console.log('CICLO :', cycleCurrentlyInProgress)
-      console.log('EMAIL :', email)
+      const isStepThreeValid = validateFromThree();
+      if (!isStepThreeValid) {
+        toast.error('Errores en el paso de credenciales');
+        return; // No se continúa si hay errores
+      }
 
-      console.log('CONTRA:', password)
-      console.log('VERIFICACION DE CONTRA:', verificationPassword)
+      const payload: CreatePersonaUserDto = {
+        persona: {
+          persona_nombres: name,
+          persona_apellido_paterno: paternalSurname,
+          persona_apellido_materno: maternalSurname,
+          persona_numero_documento: document, // Asegúrate de que no exceda la longitud permitida
+          // Puedes usar el mismo email para la persona, o tener otro campo si lo requieres
+          persona_correo: email,
+          persona_telefono: phone,
+          // Asigna un estado por defecto, por ejemplo 'A' de activo:
+          persona_estado: 'A',
+          // Suponiendo que el tipo de documento viene como string, conviértelo a número si es necesario
+          tipo_documento_codigo: Number(typeOfDocument) || 0,
+          // Si tienes la fecha de nacimiento, se debe enviar en formato YYYY-MM-DD
+          // Ejemplo: persona_fecha_nacimiento: '1990-05-15'
+          // Si no la tienes, podrías dejarla como undefined
+          persona_fecha_nacimiento: undefined,
+          persona_direccion: '', // Puedes agregar más campos si dispones de esa info
+          persona_lugar_trabajo: '',
+          lugar_procedencia: cityOfOrigin,
+          persona_celular: phone,
+          // Para el grado académico y profesión, puedes convertir o asignar según corresponda
+          grado_academico_codigo: 0,
+          profesion_codigo: 0,
+          persona_genero: '', // Puedes asignar 'M' o 'F' o dejar vacío
+          persona_universidad: homeUniversity,
+          pais_codigo: homeCountry,
+          // Si el departamento/ubigeo viene en otro campo, asignalo aquí
+          ubigeo_codigo: '',
+          Empresa: '',
+          persona_datos: 0,
+        },
+        user: {
+          userName: email,
+          userPassword: password,
+          // Define el profileCode según la lógica de tu aplicación (por ejemplo, 1, 2, 3, etc.)
+          profileCode: 1
+        }
+      };
+
+      try {
+        const response = await registerNewUser(payload);
+        console.log('Registro exitoso:', email, password);
+        try {
+          const responseNextAuth = await signIn('credentials', {
+            email,
+            password,
+            redirect: false,
+          });
+
+          if (responseNextAuth?.error) {
+            console.error('Error al iniciar sesión:', responseNextAuth);
+            toast.error(responseNextAuth.error);
+            return;
+          }
+
+          router.push('/eventos-talleres');
+        } catch (error) {
+          toast.error('Error al iniciar sesión');
+        }
+      } catch (error) {
+        console.error('Error en el registro:', error);
+      }finally {
+        setIsLoading(false);
+      }
+
     }
   }
 
@@ -546,7 +611,7 @@ const Register = ({ mode }: { mode: Mode }) => {
                           {countries.map(option => (
                             <MenuItem
                               key={option.shortName}
-                              value={option.shortName}
+                              value={option.ISO2}
                               sx={{ textTransform: 'uppercase' }}
                             >
                               {option.shortName}
@@ -708,12 +773,19 @@ const Register = ({ mode }: { mode: Mode }) => {
                       </Box>
                       <Box>
                         <Button
-                          disabled={!email || !password || !verificationPassword}
+                          disabled={!email || !password || !verificationPassword || isLoading}
                           fullWidth
                           variant='contained'
                           type='submit'
                         >
-                          Registrar
+
+                          {isLoading ? (
+                            <>
+                              Registrando <Icon icon={'eos-icons:three-dots-loading'} />
+                            </>
+                          ) : (
+                            'Registrar'
+                          )}
                         </Button>
                       </Box>
                     </form>

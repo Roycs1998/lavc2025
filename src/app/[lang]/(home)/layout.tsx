@@ -1,5 +1,47 @@
+import { FooterTwo } from '@/components/components-home/FooterTwo'
+import { Navbar } from '@/components/components-home/Navbar'
 import { Box } from '@mui/material'
 
-export default function HomeLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <Box>{children}</Box>
+import { getDictionary } from '@/utils/getDictionary'
+import type { Locale } from '@/configs/i18n'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import BlankLayout from '@/@layouts/BlankLayout'
+import Providers from '@components/Providers'
+
+export default async function HomeLayout({ children, params }: Readonly<{ children: React.ReactNode , params: { lang: Locale } }>) {
+
+  const dictionary = await getDictionary(params.lang)
+  const direction = 'ltr'
+
+  return (
+  <Providers direction={direction}>
+    <Navbar dictionary={dictionary} />
+    <BlankLayout>
+    <ToastContainer
+          position='bottom-center'
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme='colored'
+          closeButton={false}
+          toastStyle={{
+            padding: '16px',
+            color: 'var(--mui-palette-primary-main)',
+            border: '1px solid var(--mui-palette-primary-main)',
+            backgroundColor: 'var(--mui-palette-background-paper)'
+          }}
+          progressStyle={{ backgroundColor: 'var(--mui-palette-primary-main)' }}
+        />
+      {children}
+
+    </BlankLayout>
+    <FooterTwo dictionary={dictionary} />
+  </Providers>
+)
 }

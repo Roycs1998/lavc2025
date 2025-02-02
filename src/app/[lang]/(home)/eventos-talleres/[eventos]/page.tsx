@@ -6,9 +6,9 @@ import { Box, Divider, Grid } from '@mui/material'
 import { CardImage } from '@/components/components-home/components-ponentes/CardImage'
 import { PriceTable } from '@/components/components-home/components-events-and-workshops/components-event-description/PriceTable'
 import { EventDescriptionLetter } from '@/components/components-home/components-events-and-workshops/components-event-description/EventDescriptionLetter'
-import { PurchaseLetter } from '@/components/components-home/components-events-and-workshops/components-event-description/PurchaseLetter'
-import type { Workshop } from '../../../../../../Model/Workshop'
-import { getWorkshopsById } from '@/Services/WorkshopService'
+import { PurchaseLetter } from '@/components/components-home/components-events-and-workshops/components-event-description/purchase-letter'
+import { Workshop } from '@/interfaces';
+import { getWorkshopsById } from '@/api/workShop'
 
 interface EventParameters {
   params: {
@@ -31,6 +31,7 @@ export interface Event {
 }
 
 const Eventos = ({ params }: EventParameters) => {
+
   const { eventos } = params
   const [workshop, setWorkshop] = useState<Workshop>()
 
@@ -71,7 +72,7 @@ const Eventos = ({ params }: EventParameters) => {
             image: fetchedWorkshop.workshopPhoto,
             place: fetchedWorkshop.location,
             date: fetchedWorkshop.workshopStartDate,
-            eventType: fetchedWorkshop.workshopType.workshopTypeName
+            eventType: fetchedWorkshop.workshopType.workshopTypeCode
           }
 
           localStorage.setItem('eventData', JSON.stringify(updatedEventData))
@@ -81,12 +82,13 @@ const Eventos = ({ params }: EventParameters) => {
     }
 
     fetchWorkshopById()
+    console.log('eventos', workshop)
   }, [eventos])
 
   return (
     <Box>
       <Box>
-        <CardImage image={workshop?.workshopPhoto ?? ''} title={workshop?.workshopName ?? ''} />
+        <CardImage image={workshop?.workshopPhoto ? `https://tlavc-peru.org/tlavc/vista/${workshop?.workshopPhoto}`: ''} title={workshop?.workshopName ?? ''} />
       </Box>
       <Box sx={{ bgcolor: 'var(--color-card-background)' }}>
         <Grid container spacing={5}>
@@ -122,7 +124,7 @@ const Eventos = ({ params }: EventParameters) => {
               <Divider sx={{ borderColor: 'gray', width: '100%' }} />
               <Box sx={{ marginTop: '6%' }}>
                 <EventDescriptionLetter
-                  eventImage={workshop?.workshopPhoto ?? ''}
+                  eventImage={workshop?.workshopPhoto ? `https://tlavc-peru.org/tlavc/vista/${workshop?.workshopPhoto}`: ''}
                   eventName={workshop?.workshopName.toUpperCase() ?? ''}
                   eventDescription={workshop?.workshopDescription ?? 'No cuenta con descripcion'}
                   startOfEvent={
@@ -157,11 +159,12 @@ const Eventos = ({ params }: EventParameters) => {
             >
               <PurchaseLetter
                 route={`/compra/ticket?EventoId=${workshop?.codeWorkshop}`}
-                typeOfEvent={workshop?.workshopType.workshopTypeName ?? ''}
+                typeOfEvent={workshop?.workshopType.workshopTypeCode ?? 0}
                 costProfessionals={workshop?.workshopCostProfessionals}
                 costHighSchoolStudents={workshop?.workshopCostHighschoolStudents}
                 costForeignProfessionals={workshop?.CostOfWorkshopForForeignProfessionals}
                 workshopCost={workshop?.workshopCost}
+                dateWorkshop={workshop?.workshopStartDate}
               />
             </Box>
           </Grid>

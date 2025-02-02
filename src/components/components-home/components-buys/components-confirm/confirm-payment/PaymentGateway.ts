@@ -1,12 +1,12 @@
 import { getCulqiCheckout } from './ConfigCulqi'
 
-export function CheckPaymentGateway(amount: number, typeOfPayment: string, setAlertMessage: (message: string) => void) {
+export function CheckPaymentGateway(title:string, amount: number, typeOfPayment: string, setAlertMessage: (message: string) => void) {
   switch (typeOfPayment) {
     case 'NIUBIZ':
       setAlertMessage('Por el momento no implementamos esta forma de pago')
       break
     case 'CULQI':
-      getCulqiCheckout(amount)
+      getCulqiCheckout(title,amount)
       break
     case 'PagoEfectivo':
       setAlertMessage('Por el momento no implementamos esta forma de pago')

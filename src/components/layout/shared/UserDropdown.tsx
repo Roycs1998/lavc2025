@@ -21,6 +21,9 @@ import Divider from '@mui/material/Divider'
 import MenuItem from '@mui/material/MenuItem'
 import Button from '@mui/material/Button'
 
+import { signOut } from 'next-auth/react';
+import { Session } from '@/interfaces/session/interface'
+
 // Styled component for badge content
 const BadgeContentSpan = styled('span')({
   width: 8,
@@ -31,7 +34,13 @@ const BadgeContentSpan = styled('span')({
   boxShadow: '0 0 0 2px var(--mui-palette-background-paper)'
 })
 
-const UserDropdown = () => {
+
+interface Props{
+  session:Session
+}
+
+const UserDropdown = ({session}:Props) => {
+
   // States
   const [open, setOpen] = useState(false)
 
@@ -44,6 +53,21 @@ const UserDropdown = () => {
   const handleDropdownOpen = () => {
     !open ? setOpen(true) : setOpen(false)
   }
+
+  const handleLogout = () => {
+    signOut(); // Esto redirige al usuario fuera de la sesión
+  };
+
+  const transformRole = (role: number) => {
+    const roleMap: Record<number, string> = {
+      1: 'Usuario',
+      2: 'Admin',
+      3: 'Invitado',
+      4: 'Otro Rol' // Puedes agregar más roles aquí.
+    };
+
+    return roleMap[role] || 'Rol desconocido';
+  };
 
   const handleDropdownClose = (event?: MouseEvent<HTMLLIElement> | (MouseEvent | TouchEvent), url?: string) => {
     if (url) {
@@ -68,8 +92,8 @@ const UserDropdown = () => {
       >
         <Avatar
           ref={anchorRef}
-          alt='John Doe'
-          src='/images/avatars/1.png'
+          alt={'Usuario'}
+          src={'/images/avatars/1.png'}
           onClick={handleDropdownOpen}
           className='cursor-pointer bs-[38px] is-[38px]'
         />
@@ -95,20 +119,20 @@ const UserDropdown = () => {
                   <div className='flex items-center plb-2 pli-4 gap-2' tabIndex={-1}>
                     <Avatar alt='John Doe' src='/images/avatars/1.png' />
                     <div className='flex items-start flex-col'>
-                      <Typography className='font-medium' color='text.primary'>
-                        John Doe
+                      <Typography className="font-medium" color="text.primary" >
+                        {(session?.user?.user?.userName) || 'Usuario'}
                       </Typography>
-                      <Typography variant='caption'>Admin</Typography>
+                      <Typography variant='caption'>{transformRole(session?.user?.user?.profileCode)}</Typography>
                     </div>
                   </div>
                   <Divider className='mlb-1' />
-                  <MenuItem className='gap-3' onClick={e => handleDropdownClose(e)}>
+                  <MenuItem className='gap-3' onClick={e => handleDropdownClose(e, '/my-profile')}>
                     <i className='ri-user-3-line' />
                     <Typography color='text.primary'>My Profile</Typography>
                   </MenuItem>
-                  <MenuItem className='gap-3' onClick={e => handleDropdownClose(e)}>
+                  <MenuItem className='gap-3' onClick={e => handleDropdownClose(e, `/my-events/${session?.user?.user?.userCode}`)}>
                     <i className='ri-settings-4-line' />
-                    <Typography color='text.primary'>Settings</Typography>
+                    <Typography color='text.primary'>Mis entradas</Typography>
                   </MenuItem>
                   <MenuItem className='gap-3' onClick={e => handleDropdownClose(e)}>
                     <i className='ri-money-dollar-circle-line' />
@@ -125,7 +149,7 @@ const UserDropdown = () => {
                       color='error'
                       size='small'
                       endIcon={<i className='ri-logout-box-r-line' />}
-                      onClick={e => handleDropdownClose(e, '/login')}
+                      onClick={handleLogout}
                       sx={{ '& .MuiButton-endIcon': { marginInlineStart: 1.5 } }}
                     >
                       Logout

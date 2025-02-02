@@ -9,8 +9,9 @@ import { Box, Button, Grid, Typography, useMediaQuery } from '@mui/material'
 import { CardImage } from '@/components/components-home/components-ponentes/CardImage'
 import { TicketInformation } from '@/components/components-home/components-buys/TicketInformation'
 import { CostTable } from '@/components/components-home/components-buys/CostTable'
-import { PurchaseEventLetter } from '@/components/components-home/components-buys/PurchaseEventLetter'
+import { PurchaseEventLetter } from '@/components/components-home/components-buys/purchase-event-letter'
 import { SubtitleTag } from '@/components/components-home/components-reusable/SubtitleTag'
+import { formatDate } from '@/libs/utils'
 
 const InformacionDeTicket = () => {
   const [eventName, setEventName] = useState<string>('')
@@ -69,23 +70,21 @@ const InformacionDeTicket = () => {
             md={isSmallScreen ? 12 : 6.5}
             sx={{ marginBottom: '7%', marginTop: '7%', paddingLeft: 'var(--global-padding-inline)' }}
           >
-            {isSmallScreen && (
-              <Box sx={{ paddingLeft: '30px', marginBottom: '40px' }}>
+            <Box sx={{ paddingLeft: '30px', marginBottom: '40px' }}>
                 <Typography variant='body1' fontWeight='bold' sx={{ fontSize: '14px' }}>
-                  ESTADIO NACIONAL - LIMA
+                  Centro de Exposiciones Jockey - CEJ
                 </Typography>
                 <Typography
                   variant='h6'
                   fontWeight='bold'
                   sx={{ paddingTop: '12px', fontSize: '1.9rem', fontWeight: 700 }}
                 >
-                  LACV 2024
+                  {eventName}
                 </Typography>
                 <Typography variant='body1' sx={{ color: 'text.secondary', fontSize: '13px', paddingTop: '5px' }}>
-                  25 de febrero 2025
+                {formatDate(eventStartDate)}
                 </Typography>
-              </Box>
-            )}
+            </Box>
             <Box sx={{ paddingRight: '30px', paddingLeft: '30px' }}>
               <Box>
                 <SubtitleTag caption='Informacion de Ticket' />
