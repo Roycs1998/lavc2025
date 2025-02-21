@@ -41,7 +41,7 @@ export default async function HomeLayout({ children, params }: Readonly<{ childr
             border: '1px solid var(--mui-palette-primary-main)',
             backgroundColor: 'var(--mui-palette-background-paper)'
           }}
-          progressStyle={{ backgroundColor: 'var(--mui-palette-primary-main)' }}
+          
         />
       {children}
 
