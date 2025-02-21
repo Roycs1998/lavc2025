@@ -5,40 +5,40 @@
       "maritime_schedules": "Maritime Schedules",
       "air_schedules": "Air Schedules",
       "tracking": "Tracking",
-      "contact_us": "Us",
-      "login": "Login",
+      "contact_us": "About Us",
+      "login": "Log In",
       "lacv_2025": "LAVC 2025",
       "frequently_asked_questions": "Frequently Asked Questions",
       "publications": "Publications",
-      "about_LAVC": "About LAVC",
+      "about_LAVC": "About LACV",
       "contact": "Contact",
-      "event_and_workshops": "Event And Workshops",
+      "event_and_workshops": "Event and Workshops",
       "speakers": "Speakers",
       "program": "Program",
-      "stand_out": "STAND OUT!",
+      "stand_out": "Stand Out!",
       "companies": "Companies",
       "news": "News",
       "gallery": "Gallery",
-      "library_lavc": "Library LAVC",
+      "library_lavc": "LAVC Library",
       "sponsors": "Sponsors",
       "official_sponsors": "Official Sponsors",
       "official_supplier": "Official Supplier"
     },
     "carrucel": {
-      "date": "August 29-31 @ New York",
-      "event_name": "AI Conference 2023: Unlocking the Future",
-      "event_invitation": "Join us for the most anticipated event of the year - the AI ​​Conference 2023!",
-      "event": "Event"
+      "date": "2 - 5 June Lima, Peru",
+      "event_name": "LAVC 2025",
+      "event_invitation": "Sign up now for the largest veterinary medicine event!",
+      "event": "See Events"
     },
     "informationLetters": {
       "scheduled_talks": "SCHEDULED TALKS",
-      "accommodations": "ACCOMMODATIONS",
-      "tourism": "TOURISM"
+      "accommodations": "Accommodations",
+      "tourism": "Tourism"
     },
     "lavcLetter": {
-      "are_you_ready_for_lavc_2025": "Are you ready for LAVC 2025?",
-      "this_was_lavc_2024": "THIS WAS LAVC 2024!",
-      "invitation_lavc_2025": "You can't miss LAVC 2025, contests, conferences, shows, and much more.",
+      "are_you_ready_for_lavc_2025": "Are You Ready for LAVC 2025?",
+      "this_was_lavc_2024": "This Was LAVC 2024!",
+      "invitation_lavc_2025": "You can't miss LAVC 2025, contests, conferences, shows and much more.",
       "play_video": "Play Video"
     },
     "footer": {
@@ -48,18 +48,18 @@
       "earn_veterinary_ce": "Earn Veterinary CE",
       "event_calendar": "Event Calendar",
       "advertise_with_us": "Advertise With Us",
-      "navc_brand": "NAVC Brand Guidelines",
-      "comunity_veterinary": "© 2024 North American Veterinary Community Web Design by PHOS Creative",
+      "navc_brand": "LAVC Brand Guidelines",
+      "comunity_veterinary": "© 2025 Latin American Veterinary Community, Custom Web Design",
       "media_kits": "Media Kits"
     },
     "location_letter": {
       "event_location": "EVENT LOCATION",
-      "location_description": "JOCKEY EXHIBITION CENTER Av. Javier Prado East intersection with Panamericana Sur highway S/N, alt. Gate 1 Monterrico Racecourse, Parcela l, Santiago de Surco",
+      "location_description": "JOCKEY EXHIBITION CENTER, Av. Javier Prado Este at the intersection with Panamericana Sur Road S/N, near Gate 1, Monterrico Racecourse, Parcel I, Santiago de Surco",
       "location": "LOCATION"
     },
     "horizontal_card": {
       "motto": "The largest continuing education conference in veterinary medicine on the Pacific coast of South America",
-      "co": "Eugene O’Neill, CEO"
+      "co": "Eugene O'Neill, Executive Director"
     }
   }
 }

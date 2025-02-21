@@ -1,14 +1,20 @@
 'use client'
+
 // MUI Imports
 import Card from '@mui/material/Card'
 import Grid from '@mui/material/Grid'
 import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
 import Divider from '@mui/material/Divider'
+
 import Button from '@mui/material/Button'
+
 import QRCode from 'react-qr-code'
-import { Inscripcion } from '@/interfaces/my-events/interface'
+
 import { Icon } from "@iconify/react";
+
+import type{ Inscripcion } from '@/interfaces/my-events/interface'
+
 
 interface Props{
   EventInfo: Inscripcion

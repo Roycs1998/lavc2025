@@ -11,17 +11,13 @@ import '@/app/globals.css'
 
 // Generated Icon CSS Imports
 import '@assets/iconify-icons/generated-icons.css'
-import { Navbar } from '@/components/components-home/Navbar'
-import { FooterTwo } from '@/components/components-home/FooterTwo'
-import { getDictionary } from '@/utils/getDictionary'
-import type { Locale } from '@/configs/i18n'
-import { SessionProvider } from 'next-auth/react'
+
 import SessionAuthProvider from '../../context/SessionAuthProvider'
 
 import 'react-toastify/dist/ReactToastify.css'
 
 export const metadata = {
-  title: 'LAVC 2025',
+  title: 'Latin American Veterinary Conference',
   description:
     'El mejor congreso de medicina veterinaria en Latinoamérica',
 }

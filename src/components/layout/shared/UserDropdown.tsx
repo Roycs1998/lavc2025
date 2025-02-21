@@ -12,17 +12,26 @@ import { styled } from '@mui/material/styles'
 import Badge from '@mui/material/Badge'
 import Avatar from '@mui/material/Avatar'
 import Popper from '@mui/material/Popper'
+
 import Fade from '@mui/material/Fade'
+
 import Paper from '@mui/material/Paper'
+
 import ClickAwayListener from '@mui/material/ClickAwayListener'
+
 import MenuList from '@mui/material/MenuList'
+
 import Typography from '@mui/material/Typography'
+
 import Divider from '@mui/material/Divider'
+
 import MenuItem from '@mui/material/MenuItem'
+
 import Button from '@mui/material/Button'
 
 import { signOut } from 'next-auth/react';
-import { Session } from '@/interfaces/session/interface'
+
+import type{ Session } from '@/interfaces/session/interface'
 
 // Styled component for badge content
 const BadgeContentSpan = styled('span')({

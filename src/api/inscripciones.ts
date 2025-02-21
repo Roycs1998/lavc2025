@@ -1,4 +1,5 @@
 import { toast } from 'react-toastify'
+
 import Api from './api'
 
 export const getAllMyEvents = async (id:number) => {

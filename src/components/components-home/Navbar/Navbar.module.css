@@ -6,12 +6,18 @@
 
 .navbar {
   position: fixed;
-
-  transition: background-color 0.3s; /* Transición suave al cambiar el color de fondo */
+  transition: background-color 0.3s;
   block-size: 110px;
   box-shadow: none;
-  display: flex; /* Activa Flexbox */
-  justify-content: center; /* Centra horizontalmente los elementos */
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Asegura el espaciado entre los elementos */
+  padding: 0 20px; /* Agrega espacio interno */
+  width: 100%; /* Ocupar todo el ancho */
+}
+
+.displayMobile{
+  display: none;
 }
 
 .scrolled {
@@ -31,6 +37,7 @@
 }
 
 .dropdownMenu {
+  color: #fff !important;
   display: none;
 }
 
@@ -40,7 +47,7 @@
 }
 
 .mainLogo {
-  max-height: 70px;
+  max-height: 30px;
 }
 
 .link {
@@ -56,11 +63,16 @@
     display: none;
   }
 
+  .displayMobile{
+    display: block;
+  }
+
   .dropdownMenu {
     display: block;
   }
 
   .mainLogoPhone {
+    max-height: 30px;
     block-size: 90px;
     inline-size: 110px;
   }
@@ -73,14 +85,15 @@
 }
 @media (max-width: 590px) {
   .navbar {
-    position: fixed;
-    background-color: transparent; /* Fondo completamente transparente */
-    transition: background-color 0.3s; /* Transición suave al cambiar el color de fondo */
     block-size: 75px;
     box-shadow: none;
-    display: flex; /* Activa Flexbox */
-    justify-content: center; /* Centra horizontalmente los elementos */
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Distribuir los elementos correctamente */
+    padding: 0 15px; /* Espacio interno */
+    width: 100%;
   }
+
 
   .mainLogo {
     margin-inline-start: 5%;

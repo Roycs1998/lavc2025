@@ -9,6 +9,8 @@ import React, { useEffect, useState } from 'react'
 
 import Link from 'next/link'
 
+import { useRouter } from 'next/navigation'
+
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 
@@ -20,24 +22,32 @@ import TextField from '@mui/material/TextField'
 import IconButton from '@mui/material/IconButton'
 import InputAdornment from '@mui/material/InputAdornment'
 import Button from '@mui/material/Button'
+
 import Divider from '@mui/material/Divider'
+
 import { signIn } from 'next-auth/react'
+
 // Type Imports
+import { Icon } from '@iconify/react/dist/iconify.js'
+
 import { Box, MenuItem, Step, StepLabel, Stepper } from '@mui/material'
+
+import { toast } from 'react-toastify'
 
 import type { Mode } from '@core/types'
 
 // Component Imports
 import Illustrations from '@components/Illustrations'
+
 import Logo from '@components/layout/shared/Logo'
 
 // Hook Imports
 import { useImageVariant } from '@core/hooks/useImageVariant'
-import { CreatePersonaUserDto } from '@/interfaces/register/inteface'
-import { toast } from 'react-toastify'
+
+import type{ CreatePersonaUserDto } from '@/interfaces/register/inteface'
+
+
 import { registerNewUser } from '@/api/registro'
-import { Icon } from '@iconify/react/dist/iconify.js'
-import { useRouter } from 'next/navigation'
 
 const steps = ['Información Personal', 'Formación Académica', 'Credenciales de Usuario']
 
@@ -346,6 +356,7 @@ const Register = ({ mode }: { mode: Mode }) => {
   const userRegistrar = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsLoading(true);
+
     if (activeStep === 2) {
       if (validateFromThree()) {
         const updatedStepValid = [...stepValid]
@@ -357,8 +368,10 @@ const Register = ({ mode }: { mode: Mode }) => {
       }
 
       const isStepThreeValid = validateFromThree();
+
       if (!isStepThreeValid) {
         toast.error('Errores en el paso de credenciales');
+
         return; // No se continúa si hay errores
       }
 
@@ -371,10 +384,13 @@ const Register = ({ mode }: { mode: Mode }) => {
           // Puedes usar el mismo email para la persona, o tener otro campo si lo requieres
           persona_correo: email,
           persona_telefono: phone,
+
           // Asigna un estado por defecto, por ejemplo 'A' de activo:
           persona_estado: 'A',
+
           // Suponiendo que el tipo de documento viene como string, conviértelo a número si es necesario
           tipo_documento_codigo: Number(typeOfDocument) || 0,
+
           // Si tienes la fecha de nacimiento, se debe enviar en formato YYYY-MM-DD
           // Ejemplo: persona_fecha_nacimiento: '1990-05-15'
           // Si no la tienes, podrías dejarla como undefined
@@ -383,12 +399,14 @@ const Register = ({ mode }: { mode: Mode }) => {
           persona_lugar_trabajo: '',
           lugar_procedencia: cityOfOrigin,
           persona_celular: phone,
+
           // Para el grado académico y profesión, puedes convertir o asignar según corresponda
           grado_academico_codigo: 0,
           profesion_codigo: 0,
           persona_genero: '', // Puedes asignar 'M' o 'F' o dejar vacío
           persona_universidad: homeUniversity,
           pais_codigo: homeCountry,
+
           // Si el departamento/ubigeo viene en otro campo, asignalo aquí
           ubigeo_codigo: '',
           Empresa: '',
@@ -397,14 +415,15 @@ const Register = ({ mode }: { mode: Mode }) => {
         user: {
           userName: email,
           userPassword: password,
+
           // Define el profileCode según la lógica de tu aplicación (por ejemplo, 1, 2, 3, etc.)
           profileCode: 1
         }
       };
 
       try {
-        const response = await registerNewUser(payload);
-        console.log('Registro exitoso:', email, password);
+         await registerNewUser(payload);
+
         try {
           const responseNextAuth = await signIn('credentials', {
             email,
@@ -415,6 +434,7 @@ const Register = ({ mode }: { mode: Mode }) => {
           if (responseNextAuth?.error) {
             console.error('Error al iniciar sesión:', responseNextAuth);
             toast.error(responseNextAuth.error);
+
             return;
           }
 

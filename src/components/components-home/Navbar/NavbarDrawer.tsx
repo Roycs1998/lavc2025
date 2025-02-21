@@ -51,33 +51,39 @@ export const NavbarDrawer = ({ dictionary }: Props) => {
         }}
         sx={{
           display: { xs: 'block' },
-          '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 400 }
+          '& .MuiDrawer-paper': {
+            boxSizing: 'border-box',
+            width: 400,
+            bgcolor: 'var(--primary-color-purple)',
+            color:'white !important', // Forzamos el color blanco en todo el contenido del Drawer.
+          }
         }}
       >
         <Box sx={{ textAlign: 'center', bgcolor: 'var(--primary-color-purple)', height: '100vh' }}>
           <Typography variant='h6' component='div' sx={{ flexGrow: 1, marginTop: 1, marginBottom: 1 }}>
             <Link href={'/'}>
-              <img className={styles.mainLogoPhone} src='/images/logolavc/logo.ico' alt='logo' />
+              <img className={styles.mainLogoPhone} src='/images/logolavc/logo.png' alt='logo' />
             </Link>
           </Typography>
           <Divider sx={{ bgcolor: '#272457' }} />
-          <List sx={{ color: 'var(--letter-color)', marginTop: 3 }}>
-            <ListItem sx={{ paddingY: 0, marginY: 0 }}>
+          <List sx={{ color: 'white !important', marginTop: 3 }}>
+            <ListItem sx={{color: 'white !important', paddingY: 0, marginY: 0 }}>
               <ListItemButton>
-                <ListItemText>
+                <ListItemText primaryTypographyProps={{ sx: { color: 'white !important', fontSize: '1rem', fontWeight: '550' } }}>
                   <DrawerInformation
                     start={dictionary?.nav_main?.navbar?.contact_us}
                     links={[
                       { text: dictionary?.nav_main?.navbar.about_LAVC, link: '/nosotros' },
                       { text: dictionary?.nav_main?.navbar.contact, link: '/soporte' }
                     ]}
+
                   />
                 </ListItemText>
               </ListItemButton>
             </ListItem>
             <ListItem sx={{ paddingY: 0, marginY: 0 }}>
               <ListItemButton>
-                <ListItemText>
+                <ListItemText primaryTypographyProps={{ sx: { color: 'white !important', fontSize: '1rem', fontWeight: '550' } }}>
                   <DrawerInformation
                     start={dictionary?.nav_main?.navbar.lacv_2025}
                     links={[
@@ -102,15 +108,14 @@ export const NavbarDrawer = ({ dictionary }: Props) => {
             <ListItem sx={{ paddingY: 0, marginY: 0 }}>
               <ListItemButton>
                 <ListItemText
-                  className={styles.hoverColor}
-                  primaryTypographyProps={{ sx: { fontSize: '1rem', fontWeight: '550' } }}
+                  primaryTypographyProps={{ sx: { color: 'white !important', fontSize: '1rem', fontWeight: '550' } }}
                   primary={dictionary?.nav_main?.navbar.frequently_asked_questions}
                 ></ListItemText>
               </ListItemButton>
             </ListItem>
             <ListItem sx={{ paddingY: 0, marginY: 0 }}>
               <ListItemButton>
-                <ListItemText>
+                <ListItemText primaryTypographyProps={{ sx: { color: 'white !important', fontSize: '1rem', fontWeight: '550' } }}>
                   <DrawerInformation
                     start={dictionary?.nav_main?.navbar.publications}
                     links={[
@@ -126,7 +131,7 @@ export const NavbarDrawer = ({ dictionary }: Props) => {
               <ListItemButton component={Link} href='/login'>
                 <ListItemText
                   className={styles.hoverColor}
-                  primaryTypographyProps={{ sx: { fontSize: '1rem', fontWeight: '550' } }}
+                  primaryTypographyProps={{ sx: { color: 'white !important', fontSize: '1rem', fontWeight: '550' } }}
                   primary={dictionary.nav_main.navbar.login}
                 ></ListItemText>
               </ListItemButton>

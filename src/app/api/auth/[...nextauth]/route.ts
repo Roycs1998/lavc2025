@@ -1,7 +1,8 @@
 import NextAuth from 'next-auth';
+
 import CredentialsProvider from "next-auth/providers/credentials";
+
 import Api from '../../../../api/api';
-import Credentials from 'next-auth/providers/credentials';
 
 const handler = NextAuth({
   providers: [
@@ -24,7 +25,9 @@ const handler = NextAuth({
                 "Content-Type": "application/json",
               },
             }
+
           );
+
           return response.data;
         } catch (error) {
           throw new Error('Correo o Contraseña incorrectos');
@@ -54,10 +57,13 @@ const handler = NextAuth({
   ],
   callbacks: {
     async jwt({ token, user }) {
+
       return { ...token, ...user };
     },
+
     async session({ session, token }) {
       session.user = token as any;
+
       return session;
     },
   },

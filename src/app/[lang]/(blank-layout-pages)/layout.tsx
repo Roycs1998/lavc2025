@@ -1,11 +1,12 @@
 // Type Imports
+import { ToastContainer } from 'react-toastify'
+
 import type { ChildrenType } from '@core/types'
 
 // Component Imports
 import Providers from '@components/Providers'
-import BlankLayout from '@layouts/BlankLayout'
 
-import { ToastContainer } from 'react-toastify'
+import BlankLayout from '@layouts/BlankLayout'
 
 import 'react-toastify/dist/ReactToastify.css'
 

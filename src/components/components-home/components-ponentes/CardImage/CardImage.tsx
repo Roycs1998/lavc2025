@@ -41,8 +41,10 @@ export const CardImage = ({ image, title }: Attributes) => {
         sx={{
           width: '100%',
           height: '100%',
-          transform: `translateY(${offsetY * 0.5}px)`, // Aplicación del efecto parallax
-          transition: 'transform 0.1s ease-out' // Suaviza el desplazamiento
+          objectFit: 'cover', // Mantiene la proporción sin distorsionar
+          objectPosition: 'center', // Centra la imagen en el contenedor
+          transform: `translateY(${offsetY * 0.5}px)`, // Efecto parallax
+          transition: 'transform 0.1s ease-out'
         }}
       />
 

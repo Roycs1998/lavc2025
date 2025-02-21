@@ -1,6 +1,6 @@
 import Api from './api'
 
-import { Workshop, WorkshopType } from '@/interfaces'
+import type{ Workshop } from '@/interfaces'
 
 export const getAllworkShop = async () => {
   try {

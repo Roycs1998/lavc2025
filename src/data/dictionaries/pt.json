@@ -5,61 +5,61 @@
       "maritime_schedules": "Horários Marítimos",
       "air_schedules": "Horários Aéreos",
       "tracking": "Rastreamento",
-      "contact_us": "Nós",
-      "login": "Iniciar Sesión",
+      "contact_us": "Sobre Nós",
+      "login": "Entrar",
       "lacv_2025": "LAVC 2025",
-      "frequently_asked_questions": "Frequently Asked Questions",
-      "publications": "Publications",
-      "about_LAVC": "Acerca de LACV",
-      "contact": "Contact",
-      "event_and_workshops": "Evento y Talleres",
-      "speakers": "Speakers",
-      "program": "Program",
-      "stand_out": "STAND OUT!",
-      "companies": "Companies",
-      "news": "News",
-      "gallery": "Gallery",
-      "library_lavc": "Library LAVC",
+      "frequently_asked_questions": "Perguntas Frequentes",
+      "publications": "Publicações",
+      "about_LAVC": "Sobre o LACV",
+      "contact": "Contato",
+      "event_and_workshops": "Evento e Workshops",
+      "speakers": "Palestrantes",
+      "program": "Programa",
+      "stand_out": "Destaque-se!",
+      "companies": "Empresas",
+      "news": "Notícias",
+      "gallery": "Galeria",
+      "library_lavc": "Biblioteca LAVC",
       "sponsors": "Patrocinadores",
       "official_sponsors": "Patrocinadores Oficiais",
       "official_supplier": "Fornecedor Oficial"
     },
     "carrucel": {
-      "date": "August 29-31 @ New York",
-      "event_name": "AI Conference 2023: Unlocking the Future",
-      "event_invitation": "Join us for the most anticipated event of the year - the AI ​​Conference 2023!",
-      "event": "Event"
+      "date": "2 - 5 de Junho, Lima, Peru",
+      "event_name": "LAVC 2025",
+      "event_invitation": "Inscreva-se agora no maior evento de medicina veterinária!",
+      "event": "Ver Eventos"
     },
     "informationLetters": {
-      "scheduled_talks": "CHARLAS PROGRAMADAS",
-      "accommodations": "ACCOMMODATIONS",
-      "tourism": "TOURISM"
+      "scheduled_talks": "PALESTRAS PROGRAMADAS",
+      "accommodations": "Hospedagens",
+      "tourism": "Turismo"
     },
     "lavcLetter": {
-      "are_you_ready_for_lavc_2025": "Are you ready for LAVC 2025?",
-      "this_was_lavc_2024": "THIS WAS LAVC 2024!",
-      "invitation_lavc_2025": "You can't miss LAVC 2025, contests, conferences, shows, and much more.",
-      "play_video": "Play Video"
+      "are_you_ready_for_lavc_2025": "Você está pronto para o LAVC 2025?",
+      "this_was_lavc_2024": "Assim foi o LAVC 2024!",
+      "invitation_lavc_2025": "Você não pode perder o LAVC 2025, concursos, conferências, shows e muito mais.",
+      "play_video": "Assistir vídeo"
     },
     "footer": {
-      "professional_resources": "Professional Resources",
-      "explore_opportunities": "Explore Opportunities",
-      "Stay_connected": "Stay Connected",
-      "earn_veterinary_ce": "Earn Veterinary CE",
-      "event_calendar": "Event Calendar",
-      "advertise_with_us": "Advertise With Us",
-      "navc_brand": "NAVC Brand Guidelines",
-      "comunity_veterinary": "© 2024 North American Veterinary Community Web Design by PHOS Creative",
-      "media_kits": "Media Kits"
+      "professional_resources": "Recursos Profissionais",
+      "explore_opportunities": "Explorar Oportunidades",
+      "Stay_connected": "Fique Conectado",
+      "earn_veterinary_ce": "Obtenha educação continuada em veterinária",
+      "event_calendar": "Calendário de eventos",
+      "advertise_with_us": "Anuncie Conosco",
+      "navc_brand": "Diretrizes da marca LAVC",
+      "comunity_veterinary": "© 2025 Latin American Veterinary Community, Design de site próprio",
+      "media_kits": "Kits de mídia"
     },
     "location_letter": {
-      "event_location": "EVENT LOCATION",
-      "location_description": "JOCKEY EXHIBITION CENTER Av. Javier Prado East intersection with Panamericana Sur highway S/N, alt. Gate 1 Monterrico Racecourse, Parcela l, Santiago de Surco",
-      "location": "LOCATION"
+      "event_location": "LOCALIZAÇÃO DO EVENTO",
+      "location_description": "CENTRO DE EXPOSIÇÕES JOCKEY, Av. Javier Prado Este, cruzamento com a Rodovia Panamericana Sul S/N, próximo à Portaria 1, Hipódromo de Monterrico, Parcela I, Santiago de Surco",
+      "location": "LOCALIZAÇÃO"
     },
     "horizontal_card": {
-      "motto": "The largest continuing education conference in veterinary medicine on the Pacific coast of South America",
-      "co": "Eugene O’Neill, CEO"
+      "motto": "A maior conferência de educação continuada em medicina veterinária da costa do Pacífico da América do Sul",
+      "co": "Eugene O'Neill, Diretor Executivo"
     }
   }
 }

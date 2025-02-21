@@ -10,8 +10,12 @@ import Link from 'next/link'
 import { styled, useTheme } from '@mui/material/styles'
 
 // Component Imports
+import { useSession } from 'next-auth/react'
+
 import VerticalNav, { NavHeader } from '@menu/vertical-menu'
+
 import VerticalMenu from './VerticalMenu'
+
 import Logo from '@components/layout/shared/Logo'
 
 // Hook Imports
@@ -19,7 +23,6 @@ import useVerticalNav from '@menu/hooks/useVerticalNav'
 
 // Style Imports
 import navigationCustomStyles from '@core/styles/vertical/navigationCustomStyles'
-import { useSession } from 'next-auth/react'
 
 const StyledBoxForShadow = styled('div')(({ theme }) => ({
   top: 60,
@@ -40,7 +43,7 @@ const StyledBoxForShadow = styled('div')(({ theme }) => ({
 const Navigation = () => {
   // Hooks
   const theme = useTheme()
-  const {data: session, status}= useSession()
+  const {data: session}= useSession()
   const { isBreakpointReached, toggleVerticalNav } = useVerticalNav()
 
   // Refs

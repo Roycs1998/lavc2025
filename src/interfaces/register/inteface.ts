@@ -26,6 +26,7 @@ export interface CreateUserDto {
   userName: string;
   userPassword: string;
   profileCode: number;
+
   // Nota: No se envía 'personaCodigo' desde el front; el back se encarga de asignarlo.
 }
 

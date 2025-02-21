@@ -1,6 +1,4 @@
 'use client'
-// Next Imports
-import Link from 'next/link'
 
 // MUI Imports
 import IconButton from '@mui/material/IconButton'
@@ -9,17 +7,20 @@ import IconButton from '@mui/material/IconButton'
 import classnames from 'classnames'
 
 // Component Imports
+import { useSession } from 'next-auth/react'
+
 import NavToggle from './NavToggle'
-import NavSearch from '@components/layout/shared/search'
+
 import ModeDropdown from '@components/layout/shared/ModeDropdown'
 import UserDropdown from '@components/layout/shared/UserDropdown'
 
 // Util Imports
 import { verticalLayoutClasses } from '@layouts/utils/layoutClasses'
-import { useSession } from 'next-auth/react'
 
 const NavbarContent = () => {
+
   const {data: session, status} = useSession()
+
   return (
     <div className={classnames(verticalLayoutClasses.navbarContent, 'flex items-center justify-between gap-4 is-full')}>
       <div className='flex items-center gap-2 sm:gap-4'>

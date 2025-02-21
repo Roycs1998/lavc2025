@@ -21,6 +21,10 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 import Divider from '@mui/material/Divider'
 
 // Type Imports
+import { toast } from 'react-toastify'
+
+import { signIn } from 'next-auth/react'
+
 import type { Mode } from '@core/types'
 
 // Component Imports
@@ -29,8 +33,6 @@ import Illustrations from '@components/Illustrations'
 
 // Hook Imports
 import { useImageVariant } from '@core/hooks/useImageVariant'
-import { signIn } from 'next-auth/react'
-import { toast } from 'react-toastify'
 
 interface FormErrors {
   email?: string
@@ -73,6 +75,7 @@ const Login = ({ mode }: { mode: Mode }) => {
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       toast.error('Por favor corrige los errores antes de continuar.');
+
       return;
     }
 
@@ -86,6 +89,7 @@ const Login = ({ mode }: { mode: Mode }) => {
       if (responseNextAuth?.error) {
         console.error('Error al iniciar sesión:', responseNextAuth);
         toast.error(responseNextAuth.error);
+
         return;
       }
 

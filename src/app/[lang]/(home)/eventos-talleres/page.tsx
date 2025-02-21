@@ -2,13 +2,11 @@
 
 import { useEffect, useState } from 'react'
 
-import { Box, Grid } from '@mui/material'
+import { Box } from '@mui/material'
 
 import { CardImage } from '@/components/components-home/components-ponentes/CardImage'
-import { EventLetter } from '@/components/components-home/components-events-and-workshops/EventLetter'
-import Link from '@/components/Link'
 
-import { Workshop } from '@/interfaces/workShop/work-shop'
+import type{ Workshop } from '@/interfaces/workShop/work-shop'
 import { getAllworkShop } from '@/api/workShop'
 import WorkShopList from '@/components/work-shops/WorkShopList'
 
@@ -19,8 +17,10 @@ export default function EventosTalleres() {
   useEffect(() => {
     const getWorkshops = async () => {
       const workshops = (await getAllworkShop()) || []
+
       setWorkshops(workshops)
     }
+
     getWorkshops()
   }, [])
 

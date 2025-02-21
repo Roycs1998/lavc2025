@@ -1,12 +1,17 @@
+import 'react-toastify/dist/ReactToastify.css'
+
+import { ToastContainer } from 'react-toastify'
+
 import { FooterTwo } from '@/components/components-home/FooterTwo'
+
 import { Navbar } from '@/components/components-home/Navbar'
-import { Box } from '@mui/material'
 
 import { getDictionary } from '@/utils/getDictionary'
+
 import type { Locale } from '@/configs/i18n'
-import { ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
+
 import BlankLayout from '@/@layouts/BlankLayout'
+
 import Providers from '@components/Providers'
 
 export default async function HomeLayout({ children, params }: Readonly<{ children: React.ReactNode , params: { lang: Locale } }>) {

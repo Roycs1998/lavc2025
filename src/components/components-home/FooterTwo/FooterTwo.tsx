@@ -4,13 +4,17 @@ import * as React from 'react'
 import Link from 'next/link'
 
 import FacebookIcon from '@mui/icons-material/Facebook'
+
 import YouTubeIcon from '@mui/icons-material/YouTube'
+
 import WhatsAppIcon from '@mui/icons-material/WhatsApp'
-import MailOutlineIcon from '@mui/icons-material/MailOutline'
+
+import InstagramIcon from '@mui/icons-material/Instagram'
 
 import { Box, Button, Container, Grid, Paper, styled } from '@mui/material'
 
 import style from './Footer.module.css'
+
 import type { getDictionary } from '@/utils/getDictionary'
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -56,18 +60,22 @@ export const FooterTwo = ({ dictionary }: Props) => {
               >
                 {dictionary?.nav_main?.footer.professional_resources}
               </Item>
-              <Item
-                className={`${style.hoverColor} ${style.footerOne}`}
-                sx={{ backgroundColor: 'var(--primary-color-purple)', fontSize: '1rem', color: 'var(--letter-color)' }}
-              >
-                {dictionary?.nav_main?.footer.earn_veterinary_ce}
-              </Item>
-              <Item
-                className={`${style.hoverColor} ${style.footerOne}`}
-                sx={{ backgroundColor: 'var(--primary-color-purple)', fontSize: '1rem', color: 'var(--letter-color)' }}
-              >
-                {dictionary?.nav_main?.footer.earn_veterinary_ce}
-              </Item>
+              <Link href="/soporte">
+                <Item
+                  className={`${style.hoverColor} ${style.footerOne}`}
+                  sx={{ backgroundColor: 'var(--primary-color-purple)', fontSize: '1rem', color: 'var(--letter-color)' }}
+                >
+                  Soporte
+                </Item>
+              </Link>
+              <Link href="/programa">
+                <Item
+                  className={`${style.hoverColor} ${style.footerOne}`}
+                  sx={{ backgroundColor: 'var(--primary-color-purple)', fontSize: '1rem', color: 'var(--letter-color)' }}
+                >
+                  Programa de charlas
+                </Item>
+              </Link>
             </Grid>
             <Grid item xs={12} md={4}>
               <Item
@@ -82,18 +90,30 @@ export const FooterTwo = ({ dictionary }: Props) => {
               >
                 {dictionary?.nav_main?.footer.explore_opportunities}
               </Item>
-              <Item
-                className={`${style.hoverColor} ${style.footerOne}`}
-                sx={{ backgroundColor: 'var(--primary-color-purple)', fontSize: '1rem', color: 'var(--letter-color)' }}
-              >
-                {dictionary?.nav_main?.footer.event_calendar}
-              </Item>
-              <Item
-                className={`${style.hoverColor} ${style.footerOne}`}
-                sx={{ backgroundColor: 'var(--primary-color-purple)', fontSize: '1rem', color: 'var(--letter-color)' }}
-              >
-                {dictionary?.nav_main?.footer.event_calendar}
-              </Item>
+              <Link href="/brippie">
+                <Item
+                  className={`${style.hoverColor} ${style.footerOne}`}
+                  sx={{ backgroundColor: 'var(--primary-color-purple)', fontSize: '1rem', color: 'var(--letter-color)' }}
+                >
+                  Beca Rippie
+                </Item>
+              </Link>
+              <Link href="/embajador">
+                <Item
+                  className={`${style.hoverColor} ${style.footerOne}`}
+                  sx={{ backgroundColor: 'var(--primary-color-purple)', fontSize: '1rem', color: 'var(--letter-color)' }}
+                >
+                  Convierteté en embajador
+                </Item>
+              </Link>
+              <Link href="/ponentes">
+                <Item
+                  className={`${style.hoverColor} ${style.footerOne}`}
+                  sx={{ backgroundColor: 'var(--primary-color-purple)', fontSize: '1rem', color: 'var(--letter-color)' }}
+                >
+                  Ponentes
+                </Item>
+              </Link>
             </Grid>
             <Grid item xs={12} md={4}>
               <Item
@@ -112,16 +132,16 @@ export const FooterTwo = ({ dictionary }: Props) => {
                 className={style.footerOne}
                 sx={{ backgroundColor: 'var(--primary-color-purple)', fontSize: '1rem', color: 'var(--letter-color)' }}
               >
-                <Link href={'https://www.facebook.com/conferencia.veterinaria.latinoamericana/'}>
+                <Link href={'https://www.facebook.com/conferencia.veterinaria.latinoamericana/'} target='_blank'>
                   <FacebookIcon className={style.hoverColor} sx={{ fontSize: '50px' }} />
                 </Link>
-                <Link href={'https://www.youtube.com/channel/UCBBXdp5Wohtn9yuihiREkEg?view_as=subscriber'}>
+                <Link href={'https://www.youtube.com/channel/UCBBXdp5Wohtn9yuihiREkEg?view_as=subscriber'} target='_blank'>
                   <YouTubeIcon className={style.hoverColor} sx={{ fontSize: '50px', marginLeft: '4%' }} />
                 </Link>
-                <Link href={''}>
-                  <MailOutlineIcon className={style.hoverColor} sx={{ fontSize: '50px', marginLeft: '4%' }} />
+                <Link href={'https://www.instagram.com/the_lavc/?hl=es'} target='_blank'>
+                  <InstagramIcon className={style.hoverColor} sx={{ fontSize: '50px', marginLeft: '4%' }} />
                 </Link>
-                <Link href={'https://api.whatsapp.com/send?phone=51985174876'}>
+                <Link href={'https://api.whatsapp.com/send?phone=51985174876'} target='_blank'>
                   <WhatsAppIcon className={style.hoverColor} sx={{ fontSize: '50px', marginLeft: '4%' }} />
                 </Link>
               </Item>
@@ -177,7 +197,7 @@ export const FooterTwo = ({ dictionary }: Props) => {
                 }}
               >
                 <Link href={'/'}>
-                  <img src='images\logolavc\logo.ico' alt='logo' style={{ width: 150, height: 110 }} />
+                  <img src='images\logolavc\logo.png' alt='logo' style={{ width: 150, height: 50 }} />
                 </Link>
               </Item>
             </Grid>
@@ -206,58 +226,23 @@ export const FooterTwo = ({ dictionary }: Props) => {
               </Item>
             </Grid>
             <Grid item xs={12} sm={6} md={3} sx={{}}>
-              <Item
-                className={`${style.hoverColor} ${style.footerOne}`}
-                sx={{
-                  backgroundColor: 'var(--second-color-purple)',
-                  fontSize: '1rem',
-                  fontWeight: 'bold',
-                  color: 'var(--letter-color)',
-                  marginBottom: '1%',
-                  textAlign: 'center'
-                }}
-              >
-                {dictionary?.nav_main?.footer.media_kits}
-              </Item>
-              <Item
-                className={`${style.hoverColor} ${style.footerOne}`}
-                sx={{
-                  backgroundColor: 'var(--second-color-purple)',
-                  fontSize: '1rem',
-                  color: 'var(--letter-color)',
-                  fontWeight: 'bold',
-                  textAlign: 'center'
-                }}
-              >
-                {dictionary?.nav_main?.footer.media_kits}
-              </Item>
-              <Item
-                className={`${style.hoverColor} ${style.footerOne}`}
-                sx={{
-                  backgroundColor: 'var(--second-color-purple)',
-                  fontSize: '1rem',
-                  color: 'var(--letter-color)',
-                  fontWeight: 'bold',
-                  textAlign: 'center'
-                }}
-              >
-                {dictionary?.nav_main?.footer.media_kits}
-              </Item>
+              <Link href="/ponentes">
+                <Item
+                  className={`${style.hoverColor} ${style.footerOne}`}
+                  sx={{
+                    backgroundColor: 'var(--second-color-purple)',
+                    fontSize: '1rem',
+                    color: 'var(--letter-color)',
+                    fontWeight: 'bold',
+                    textAlign: 'center'
+                  }}
+                >
+                  Eventos
+                </Item>
+              </Link>
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
-              <Item
-                className={`${style.hoverColor} ${style.footerOne}`}
-                sx={{
-                  backgroundColor: 'var(--second-color-purple)',
-                  fontSize: '1rem',
-                  fontWeight: 'bold',
-                  color: 'var(--letter-color)',
-                  marginBottom: '1%',
-                  textAlign: 'center'
-                }}
-              >
-                {dictionary?.nav_main?.footer.media_kits}
-              </Item>
+            <Link href="/ponentes">
               <Item
                 className={`${style.hoverColor} ${style.footerOne}`}
                 sx={{
@@ -268,20 +253,9 @@ export const FooterTwo = ({ dictionary }: Props) => {
                   textAlign: 'center'
                 }}
               >
-                {dictionary?.nav_main?.footer.media_kits}
+                Libreria LAVC
               </Item>
-              <Item
-                className={`${style.hoverColor} ${style.footerOne}`}
-                sx={{
-                  backgroundColor: 'var(--second-color-purple)',
-                  fontSize: '1rem',
-                  fontWeight: 'bold',
-                  color: 'var(--letter-color)',
-                  textAlign: 'center'
-                }}
-              >
-                {dictionary?.nav_main?.footer.media_kits}
-              </Item>
+            </Link>
             </Grid>
           </Grid>
         </Container>

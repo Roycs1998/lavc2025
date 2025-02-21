@@ -4,7 +4,7 @@ import { Box, Card, CardMedia, Typography } from '@mui/material'
 
 interface Image {
   image: string
-  name: string
+  name?: string | null
 }
 
 export const LetterImage = ({ image, name }: Image) => {
@@ -74,7 +74,7 @@ export const LetterImage = ({ image, name }: Image) => {
         }}
       >
         <Typography variant='h6' sx={{ color: '#6660a5', fontWeight: 'bold', fontSize: '1.5rem', textAlign: 'center' }}>
-          {name}
+          {name || 'Sin nombre'}
         </Typography>
       </Box>
     </Box>

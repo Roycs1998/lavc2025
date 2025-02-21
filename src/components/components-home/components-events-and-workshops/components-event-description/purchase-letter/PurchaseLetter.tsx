@@ -1,16 +1,22 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 
 import Link from 'next/link'
 
 import Accordion from '@mui/material/Accordion'
+
 import AccordionSummary from '@mui/material/AccordionSummary'
+
 import AccordionDetails from '@mui/material/AccordionDetails'
+
 import Typography from '@mui/material/Typography'
-import styles from '../../../Navbar/Navbar.module.css'
+
 import { Box, Button, MenuItem, TextField } from '@mui/material'
+
 import { useSession } from 'next-auth/react'
+
 import { toast } from 'react-toastify'
+
 import { formatDate } from '@/libs/utils'
 
 interface Route {
@@ -35,13 +41,13 @@ export const PurchaseLetter = ({
   dateWorkshop
 }: Route) => {
   const [ticket, setTicket] = useState<ticketStructure | null>(null)
-  const {data: session, status} = useSession()
+  const { status} = useSession()
   const [problemType, setProblemType] = useState('')
 
   const [expanded, setExpanded] = useState(true)
   const [trigger, setTrigger] = useState<boolean>(false)
 
-  const tickets = [
+  const tickets = useMemo(() => [
     {
       value: 'MEDICO VETERINARIO',
       price: costProfessionals
@@ -54,7 +60,7 @@ export const PurchaseLetter = ({
       value: 'EXTRANJERO',
       price: costForeignProfessionals
     }
-  ]
+  ], [costProfessionals, costHighSchoolStudents, costForeignProfessionals]);
 
   const handleChange = (event: React.SyntheticEvent, newExpanded: boolean | ((prevState: boolean) => boolean)) => {
     setExpanded(newExpanded)
@@ -78,20 +84,12 @@ export const PurchaseLetter = ({
     }
 
     getTicket()
-  }, [problemType, trigger])
+  }, [problemType, trigger, tickets, workshopCost])
 
   useEffect(() => {
-    console.log('ticket',   route,
-      typeOfEvent,
-      costProfessionals,
-      costHighSchoolStudents,
-      costForeignProfessionals,
-      workshopCost)
+
     const saveTicketInEvent = () => {
       const eventData = localStorage.getItem('eventData')
-
-      console.log('ingreso')
-      console.log(typeOfEvent)
 
       if (eventData) {
         const parsedEvent = JSON.parse(eventData)

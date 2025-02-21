@@ -7,7 +7,7 @@ import { CardImage } from '@/components/components-home/components-ponentes/Card
 import { PriceTable } from '@/components/components-home/components-events-and-workshops/components-event-description/PriceTable'
 import { EventDescriptionLetter } from '@/components/components-home/components-events-and-workshops/components-event-description/EventDescriptionLetter'
 import { PurchaseLetter } from '@/components/components-home/components-events-and-workshops/components-event-description/purchase-letter'
-import { Workshop } from '@/interfaces';
+import type{ Workshop } from '@/interfaces';
 import { getWorkshopsById } from '@/api/workShop'
 
 interface EventParameters {
@@ -82,7 +82,6 @@ const Eventos = ({ params }: EventParameters) => {
     }
 
     fetchWorkshopById()
-    console.log('eventos', workshop)
   }, [eventos])
 
   return (

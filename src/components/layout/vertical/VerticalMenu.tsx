@@ -1,6 +1,13 @@
 'use client'
+
+import { useEffect } from 'react'
+
 // MUI Imports
+
+import { useRouter } from 'next/navigation'
+
 import Chip from '@mui/material/Chip'
+
 import { useTheme } from '@mui/material/styles'
 
 // Third-party Imports
@@ -20,11 +27,10 @@ import StyledVerticalNavExpandIcon from '@menu/styles/vertical/StyledVerticalNav
 
 // Style Imports
 import menuItemStyles from '@core/styles/vertical/menuItemStyles'
-import menuSectionStyles from '@core/styles/vertical/menuSectionStyles'
-import { Session } from '@/interfaces/session/interface'
-import { useEffect } from 'react'
-import { useRouter } from 'next/navigation'
 
+import menuSectionStyles from '@core/styles/vertical/menuSectionStyles'
+
+import type{ Session } from '@/interfaces/session/interface'
 
 type RenderExpandIconProps = {
   open?: boolean
@@ -46,9 +52,11 @@ const VerticalMenu = ({ scrollMenu, session }: {
   // Hooks
   const route = useRouter()
   const theme = useTheme()
-    useEffect(() => {
+
+  useEffect(() => {
       session ?? route.push('/')
-    }, [session])
+    }, [session, route])
+
   const { isBreakpointReached, transitionDuration } = useVerticalNav()
 
   const ScrollWrapper = isBreakpointReached ? 'div' : PerfectScrollbar

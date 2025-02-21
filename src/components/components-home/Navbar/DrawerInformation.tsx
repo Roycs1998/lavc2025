@@ -48,7 +48,7 @@ export const DrawerInformation = ({ start, links }: Information) => {
           fontWeight: '550'
         }}
       >
-        <Typography sx={{ fontSize: '1rem', fontWeight: '550' }}>{start}</Typography>
+        <Typography sx={{ fontSize: '1rem', fontWeight: '550', color: 'white !important' }}>{start}</Typography>
         {open ? <ExpandLessIcon sx={{ fontSize: 34 }} /> : <ExpandMoreIcon sx={{ fontSize: 34 }} />}
       </Box>
 
@@ -70,7 +70,7 @@ export const DrawerInformation = ({ start, links }: Information) => {
                       paddingBottom: 1
                     }}
                   >
-                    <Typography sx={{ fontSize: '1rem' }}>{linkItem.text}</Typography>
+                    <Typography sx={{ fontSize: '1rem', color: 'white !important'}}>{linkItem.text}</Typography>
                     {openSubMenuIndex === index ? (
                       <ExpandLessIcon sx={{ fontSize: 34 }} />
                     ) : (
@@ -83,18 +83,7 @@ export const DrawerInformation = ({ start, links }: Information) => {
                     <Box sx={{ pl: 2, marginBottom: 2 }}>
                       {linkItem.secondLevelText.map((subLink, subIndex) => (
                         <Link key={subIndex} href={subLink.link}>
-                          <Typography
-                            sx={{
-                              fontSize: '1rem',
-                              paddingY: '4px',
-                              ':hover': {
-                                color: 'var(--color-on-hover)',
-                                cursor: 'pointer'
-                              }
-                            }}
-                          >
-                            {subLink.text}
-                          </Typography>
+                        <Typography sx={{ fontSize: '1rem', paddingY: '4px', color: 'white', ':hover': { color: 'var(--color-on-hover)' } }}>{subLink.text}</Typography>
                         </Link>
                       ))}
                     </Box>
@@ -102,18 +91,7 @@ export const DrawerInformation = ({ start, links }: Information) => {
                 </React.Fragment>
               ) : (
                 <Link href={linkItem.link || ''}>
-                  <Typography
-                    sx={{
-                      fontSize: '1rem',
-                      paddingBottom: 1,
-                      ':hover': {
-                        color: 'var(--color-on-hover)',
-                        cursor: 'pointer'
-                      }
-                    }}
-                  >
-                    {linkItem.text}
-                  </Typography>
+                <Typography sx={{ fontSize: '1rem', paddingBottom: 1, color: 'white', ':hover': { color: 'var(--color-on-hover)' } }}>{linkItem.text}</Typography>
                 </Link>
               )}
             </Box>

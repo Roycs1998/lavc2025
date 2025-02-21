@@ -1,13 +1,14 @@
 'use client';
 
-import { Key, useEffect } from 'react';
+import type{ Key } from 'react';
 
 import Link from 'next/link';
 
-import { useRouter } from 'next/navigation';
-import { Workshop } from '@/interfaces';
-import { EventLetter } from '../components-home/components-events-and-workshops/EventLetter';
 import { Box, Grid } from '@mui/material';
+
+import type{ Workshop } from '@/interfaces';
+
+import { EventLetter } from '../components-home/components-events-and-workshops/EventLetter';
 
 interface Props {
   workShopsList: Workshop | any
@@ -15,7 +16,6 @@ interface Props {
 
 const WorkShopList = ({workShopsList}:Props)=>{
 
-  const router = useRouter();
   return (
     <>
     <Box>
@@ -43,4 +43,5 @@ const WorkShopList = ({workShopsList}:Props)=>{
     </>
   )
 }
+
 export default WorkShopList

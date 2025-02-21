@@ -17,6 +17,7 @@ interface Speaker {
   formText?: string
   forButton?: string
   stepsFour?: string
+  linkButton?: string
 }
 
 export const Informationletter = ({
@@ -31,7 +32,8 @@ export const Informationletter = ({
   stepsThree,
   formText,
   forButton,
-  stepsFour
+  stepsFour,
+  linkButton
 }: Speaker) => {
   const [isExpanded, setIsExpanded] = useState(false)
   const toggleExpand = () => setIsExpanded(!isExpanded)
@@ -100,7 +102,7 @@ export const Informationletter = ({
                   textTransform: 'uppercase'
                 }}
               >
-                {subtitleOne}
+                {subtitleOne || ''}
               </Typography>
               <Typography variant='body1' component='span' sx={{ marginLeft: '8px' }}>
                 {paragraphOne}
@@ -195,7 +197,7 @@ export const Informationletter = ({
                     {formText}
                   </Typography>
                   <Typography sx={{ marginTop: '40px', textAlign: { xs: 'center', md: 'center' } }}>
-                    <Link href='https://docs.google.com/forms/d/e/1FAIpQLSejP6pbPyJHZ-iRJ118voRfNh365IYi56XGJoy0HrWoeiOHdA/closedform'>
+                    <Link href={linkButton || '#'}>
                       <Button
                         sx={{
                           bgcolor: 'var(--primary-color-purple)',

@@ -10,7 +10,6 @@ import CardWithCollapse from '@views/card-basic/CardWithCollapse'
 import CardMobile from '@views/card-basic/CardMobile'
 import CardHorizontalRatings from '@views/card-basic/CardHorizontalRatings'
 import CardWatch from '@views/card-basic/CardWatch'
-import CardLifetimeMembership from '@views/card-basic/CardLifetimeMembership'
 import CardInfluencingInfluencer from '@views/card-basic/CardInfluencingInfluencer'
 import CardVerticalRatings from '@views/card-basic/CardVerticalRatings'
 import CardSupport from '@views/card-basic/CardSupport'
@@ -45,9 +44,9 @@ const CardBasic = () => {
       <Grid item xs={12} sm={6} md={4}>
         <CardWatch />
       </Grid>
-      <Grid item xs={12} md={8}>
+{/*       <Grid item xs={12} md={8}>
         <CardLifetimeMembership />
-      </Grid>
+      </Grid> */}
       <Grid item xs={12} sm={6} md={4}>
         <CardInfluencingInfluencer />
       </Grid>

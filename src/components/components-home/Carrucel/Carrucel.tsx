@@ -18,11 +18,11 @@ export const Carrucel = ({ dictionary }: Props) => {
 
   const carouselItems = [
     {
-      src: 'https://tlavc-peru.org/tlavc/vista/upload/talleres/Portada%20presentaci%C3%B3n%20escalada%20deportiva.jpg',
+      src: 'https://tlavc-peru.org/img/foto-precios.jpg',
       alt: 'First slide'
     },
     {
-      src: 'https://tlavc-peru.org/tlavc/vista/upload/talleres/LAVC2025.jpg',
+      src: 'https://tlavc-peru.org/tlavc/vista/upload/galeria/lavc20231%20(13).jpeg',
       alt: 'Second slide'
     }
   ]
@@ -38,7 +38,7 @@ export const Carrucel = ({ dictionary }: Props) => {
         activeIndex={index}
         indicators={false}
         controls={false}
-        interval={500}
+        interval={2000}
         onSelect={handleSelect}
       >
         {carouselItems.map((item, idx) => (
