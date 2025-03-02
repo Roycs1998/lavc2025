@@ -49,7 +49,7 @@ export const PaymentMethod = ({
       }}
     >
       <AccordionSummary aria-controls='panel1-content' id='panel1-header' sx={{ height: '65px' }}>
-        <Grid container spacing={3}>
+        <Grid container spacing={3} alignItems="center">
           <Grid item xs={3} md={3}>
             <Box sx={{ height: '60px' }}>
               <Box
@@ -66,7 +66,7 @@ export const PaymentMethod = ({
           </Grid>
 
           {/* Columna 2 */}
-          <Grid item xs={8} md={8.5}>
+          <Grid item xs={8} md={8}>
             <Typography
               variant='body1'
               sx={{ fontSize: '1rem', fontWeight: 700, color: '#b9b7bd', marginLeft: '6px', marginTop: '5px' }}

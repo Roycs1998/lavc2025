@@ -65,14 +65,17 @@ const Eventos = ({ params }: EventParameters) => {
         const parsedEvent = JSON.parse(eventData)
         const fetchedWorkshop = await getWorkshopsById(Number(eventos))
 
+        console.log("data:", fetchedWorkshop)
+
         if (fetchedWorkshop) {
           const updatedEventData = {
-            ...parsedEvent, // Copiamos las propiedades del evento original
-            name: fetchedWorkshop.workshopName, // Actualizamos el nombre (ejemplo)
+            ...parsedEvent,
+            name: fetchedWorkshop.workshopName,
             image: fetchedWorkshop.workshopPhoto,
             place: fetchedWorkshop.location,
             date: fetchedWorkshop.workshopStartDate,
-            eventType: fetchedWorkshop.workshopType.workshopTypeCode
+            eventType: fetchedWorkshop.workshopType.workshopTypeCode,
+            eventCode:fetchedWorkshop.codeWorkshop
           }
 
           localStorage.setItem('eventData', JSON.stringify(updatedEventData))
@@ -162,6 +165,7 @@ const Eventos = ({ params }: EventParameters) => {
                 costProfessionals={workshop?.workshopCostProfessionals}
                 costHighSchoolStudents={workshop?.workshopCostHighschoolStudents}
                 costForeignProfessionals={workshop?.CostOfWorkshopForForeignProfessionals}
+                costForeignStudents={workshop?.CostOfTheWorkshopForForeignStudents}
                 workshopCost={workshop?.workshopCost}
                 dateWorkshop={workshop?.workshopStartDate}
               />

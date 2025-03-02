@@ -24,7 +24,6 @@ export const Form = () => {
   const [message, setMessage] = useState('')
   const [errors, setErrors] = useState<FormErrors>({})
   const [answer, setAnswer] = useState<string>('')
-  const [isButtonDisabled, setIsButtonDisabled] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -45,7 +44,7 @@ export const Form = () => {
 
     if (!phoneNumber) {
       newErrors.phoneNumber = 'El número de teléfono es obligatorio'
-    } else if ((phoneNumber.length >= 1 && phoneNumber.length < 8) || phoneNumber.length > 8) {
+    } else if (phoneNumber.length < 8) {
       newErrors.phoneNumber = 'Numero no valido'
     }
 
@@ -56,7 +55,7 @@ export const Form = () => {
       setErrors(newErrors)
     } else {
       setErrors({}) // Limpia errores si todo es válido
-      setIsButtonDisabled(true)
+
 
       // Procesar el formulario aquí
       const formData = {
@@ -79,7 +78,7 @@ export const Form = () => {
       setProblemType('')
       setPhoneNumber('')
 
-      setIsButtonDisabled(false)
+
 
       setTimeout(() => {
         setAnswer('')
@@ -89,13 +88,17 @@ export const Form = () => {
 
   const currencies = [
     {
-      value: 'Inscripción'
+      value: 'inscripcion',
+      name: 'Inscripción'
+
     },
     {
-      value: 'Información sobre STAND'
+      value: 'informacion-stand',
+      name: 'Información sobre STAND'
     },
     {
-      value: 'Otros'
+      value: 'otros',
+      name: 'Otros'
     }
   ]
 
@@ -106,11 +109,11 @@ export const Form = () => {
           <Grid container spacing={2}>
             <Grid item xs={12} sx={{ marginBottom: '10px' }}>
               <Typography variant='h6' sx={{ fontWeight: 'bold', fontSize: { xs: '1.5rem', md: '2rem' } }}>
-                Lests connect constellations
+                Consúltanos
               </Typography>
 
               <Typography variant='body1' sx={{}}>
-                Let s allign our constellations! Reach out and let the magic of collaboration illuminate our skies.
+                No dudes en escribirnos tus dudas o problemas referentes al LAVC 2025
               </Typography>
             </Grid>
             <Grid item xs={12} md={12} sx={{ display: 'flex', gap: 2 }}>
@@ -159,7 +162,7 @@ export const Form = () => {
               >
                 {currencies.map(option => (
                   <MenuItem key={option.value} value={option.value}>
-                    {option.value}
+                    {option.name}
                   </MenuItem>
                 ))}
               </TextField>
@@ -193,7 +196,8 @@ export const Form = () => {
               <Button
                 type='submit'
                 fullWidth
-                disabled={isButtonDisabled}
+
+                /* disabled={isButtonDisabled} */
                 sx={{
                   bgcolor: 'var(--primary-color-purple)',
                   color: 'var(--letter-color)',
@@ -203,7 +207,7 @@ export const Form = () => {
                   }
                 }}
               >
-                Log In
+                Send message
               </Button>
             </Grid>
           </Grid>

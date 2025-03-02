@@ -1,4 +1,4 @@
-import { Box, CardMedia, Grid, Typography } from '@mui/material'
+import { Box, CardMedia, Grid } from '@mui/material'
 
 import { Form } from './Form'
 
@@ -13,7 +13,7 @@ export const Medium = () => {
         borderRadius: '10px'
       }}
     >
-      <Box sx={{ marginBottom: { xs: '0px', md: '30px' } }}>
+{/*       <Box sx={{ marginBottom: { xs: '0px', md: '30px' } }}>
         <Typography
           variant='h2'
           component='h2'
@@ -30,7 +30,7 @@ export const Medium = () => {
         <Typography variant='h6' sx={{ textAlign: 'center' }}>
           Reach out, and let s create a universe of possibilities together!
         </Typography>
-      </Box>
+      </Box> */}
       <Box>
         <Grid
           container
@@ -64,7 +64,7 @@ export const Medium = () => {
             >
               <CardMedia
                 component='img'
-                image='https://i.pinimg.com/736x/30/21/50/3021501f3738c05001f3d35d8ec648d5.jpg' // Se usa el enlace de la imagen del array
+                image='https://tlavc-peru.org/img/foto-precios.jpg' // Se usa el enlace de la imagen del array
                 alt='ola' // Alternativa para accesibilidad
                 sx={{ maxWidth: '100%', height: '100%', padding: '3px', borderRadius: '15px' }} // Ajustar al tamaño del contenedor
               />

@@ -1,17 +1,17 @@
 const nodemailer = require('nodemailer')
 
 const transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
-  port: 465,
-  secure: true, // true for port 465, false for other ports
+  host: 'smtpout.secureserver.net',
+  port: 465, // Cambiado de 465 a 587
+  secure: true, // Debe ser false si usas 587
   auth: {
     user: process.env.USER_MAIL,
     pass: process.env.PASSWORD_MAIL
   }
-})
+});
 
 transporter.verify().then(() => {
-  console.log('Red for send emails')
+  console.log('Listo para enviar correos con GoDaddy')
 })
 
 export async function POST(request: Request) {
@@ -21,9 +21,9 @@ export async function POST(request: Request) {
   const { username, firstName, email, problemType, phoneNumber, message } = params
 
   const info = await transporter.sendMail({
-    from: `"SOPORTE LAVC 👻" <${process.env.USER_MAIL}>`, // Cambia a tu correo autenticado
+    from: `"LAVC Informes" <${process.env.USER_MAIL}>`, // Cambia a tu correo autenticado
     to: destinationMail, // Cambia a tu correo de destino
-    subject: 'Nuevo mensaje de contacto',
+    subject: `${problemType} - LAVC`,
     html: `<b>Nombres:</b> ${username}<br><b>Apellidos:</b> ${firstName}<br><b>Correo:</b> ${email}<br><b>Problema:</b> ${problemType}<br><b>Número:</b> ${phoneNumber}<br><b>Mensaje:</b> ${message}`
   })
 

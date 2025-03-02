@@ -10,12 +10,12 @@ interface MailParams {
 export const getInformationForMail = async (params: MailParams) => {
   let destinationMail = ''
 
-  if (params.problemType === 'Inscripción') {
-    destinationMail = 'villlarueljonas@gmail.com'
-  } else if (params.problemType === 'Información sobre STAND') {
-    destinationMail = 'villlarueljonas@gmail.com'
+  if (params.problemType === 'inscripcion') {
+    destinationMail = 'roycarisarmiento@gmail.com'
+  } else if (params.problemType === 'informacion-stand') {
+    destinationMail = 'roycarisarmiento@gmail.com'
   } else {
-    destinationMail = 'villlarueljonas@gmail.com'
+    destinationMail = 'roycarisarmiento@gmail.com'
   }
 
   const response = await fetch('/api/mail', {

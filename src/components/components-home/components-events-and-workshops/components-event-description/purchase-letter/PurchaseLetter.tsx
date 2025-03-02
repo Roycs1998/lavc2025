@@ -25,11 +25,12 @@ interface Route {
   costProfessionals?: number
   costHighSchoolStudents?: number
   costForeignProfessionals?: number
+  costForeignStudents?:number
   workshopCost?: number
   dateWorkshop?: string
 }
 
-type ticketStructure = { value: string; price?: number }
+type ticketStructure = { value: string; price?: number, currency:string }
 
 export const PurchaseLetter = ({
   route,
@@ -37,6 +38,7 @@ export const PurchaseLetter = ({
   costProfessionals,
   costHighSchoolStudents,
   costForeignProfessionals,
+  costForeignStudents,
   workshopCost,
   dateWorkshop
 }: Route) => {
@@ -50,17 +52,32 @@ export const PurchaseLetter = ({
   const tickets = useMemo(() => [
     {
       value: 'MEDICO VETERINARIO',
-      price: costProfessionals
+      price: costProfessionals,
+      currency: 'PEN'
     },
     {
       value: 'ESTUDIANTE O BACHILLER',
-      price: costHighSchoolStudents
+      price: costHighSchoolStudents,
+      currency: 'PEN'
     },
     {
-      value: 'EXTRANJERO',
-      price: costForeignProfessionals
+      value: 'EXTRANJERO PROFESIONAL',
+      price: costForeignProfessionals,
+      currency: 'USD'
+    },
+    {
+      value: 'EXTRANJERO ESTUDIANTE',
+      price: costForeignStudents,
+      currency: 'USD'
+    },
+    {
+      value: 'PRECIO GENERAL',
+      price: workshopCost,
+      currency: 'PEN'
     }
-  ], [costProfessionals, costHighSchoolStudents, costForeignProfessionals]);
+  ], [costProfessionals, costHighSchoolStudents, costForeignProfessionals, costForeignStudents, workshopCost]);
+
+  const filteredDataTicket = tickets.filter(item => item.price !== 0)
 
   const handleChange = (event: React.SyntheticEvent, newExpanded: boolean | ((prevState: boolean) => boolean)) => {
     setExpanded(newExpanded)
@@ -76,7 +93,8 @@ export const PurchaseLetter = ({
       } else {
         const defaultTicket: ticketStructure = {
           value: 'PRECIO GENERAL',
-          price: workshopCost
+          price: workshopCost,
+          currency: 'PEN'
         }
 
         setTicket(defaultTicket)
@@ -97,7 +115,8 @@ export const PurchaseLetter = ({
         const updatedEventData = {
           ...parsedEvent, // Copiamos las propiedades del evento original
           ticket: ticket?.value,
-          price: ticket?.price
+          price: ticket?.price,
+          currency: ticket?.currency
         }
 
         localStorage.setItem('eventData', JSON.stringify(updatedEventData))
@@ -206,7 +225,7 @@ export const PurchaseLetter = ({
                   value={problemType} // Estado del campo de mensaje
                   onChange={e => setProblemType(e.target.value)}
                 >
-                  {tickets.map(option => (
+                  {filteredDataTicket.map(option => (
                     <MenuItem key={option.value} value={option.value}>
                       {option.value}
                     </MenuItem>

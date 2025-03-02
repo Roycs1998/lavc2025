@@ -20,6 +20,7 @@ const InformacionDeTicket = () => {
   const [eventStartDate, setEventStartDate] = useState<string>('')
   const [eventTicket, setEventTicket] = useState<string>('')
   const [ticketPrice, setTicketPrice] = useState<string>('')
+  const [ticketCurrency, setTicketCurrency] = useState<string>('')
 
   const isSmallScreen = useMediaQuery('(max-width:1275px)')
 
@@ -35,6 +36,7 @@ const InformacionDeTicket = () => {
       setEventStartDate(event.date)
       setEventTicket(event.ticket)
       setTicketPrice(event.price)
+      setTicketCurrency(event.currency)
     }
   }, [])
 
@@ -91,7 +93,7 @@ const InformacionDeTicket = () => {
               </Box>
               <TicketInformation />
 
-              <CostTable ticketName={eventTicket} price={Number(ticketPrice)} />
+              <CostTable ticketName={eventTicket} price={Number(ticketPrice)} currency={ticketCurrency} />
               {isSmallScreen && (
                 <Typography sx={{ width: '100%', marginTop: '50px' }}>
                   <Link href='/compra/adicionales'>

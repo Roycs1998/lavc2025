@@ -5,6 +5,7 @@ import { Box, Button, Card, CardContent, Grid, Typography } from '@mui/material'
 
 import { CheckPaymentGateway } from './PaymentGateway'
 import { AlertIndications } from '@/components/components-home/components-reusable/AlertIndications'
+import { formatDate } from '@/libs/utils'
 
 interface EventInformation {
   image: string
@@ -14,6 +15,13 @@ interface EventInformation {
   disableButton?: boolean
   amount: number
   typeOfPayment: string
+  currency:string
+  email:string
+  userCode:string
+  eventCode:string,
+  paymentMethod:string,
+  companyName:string,
+  ruc:string,
 }
 
 export const ConfirmPayment = ({
@@ -23,12 +31,20 @@ export const ConfirmPayment = ({
   eventName,
   disableButton = false,
   amount,
-  typeOfPayment
+  typeOfPayment,
+  currency,
+  email,
+  userCode,
+  eventCode,
+  paymentMethod,
+  companyName,
+  ruc,
 }: EventInformation) => {
   const [alertMessage, setAlertMessage] = useState<string | null>(null)
 
   const handlerClickOpenPay = () => {
-    CheckPaymentGateway(eventName || 'Sin Asignar', amount, typeOfPayment, setAlertMessage)
+    console.log("data pay",email)
+    CheckPaymentGateway(eventName || 'Sin Asignar', amount, typeOfPayment, setAlertMessage,currency, email, userCode,eventCode,paymentMethod,companyName,ruc)
   }
 
   return (
@@ -65,11 +81,14 @@ export const ConfirmPayment = ({
               >
                 {eventName.toUpperCase()}
               </Typography>
-              <Typography variant='body1' sx={{ color: 'text.secondary', fontSize: '12px', paddingTop: '5px' }}>
-                {eventDate
-                  ? `${new Date(eventDate).toLocaleDateString('es-PE', { day: '2-digit', month: '2-digit', year: 'numeric' })}`
-                  : 'Fecha no disponible'}
-              </Typography>
+              {eventDate
+                  ? (formatDate(eventDate))
+                  : (
+                    <Typography variant='body1' sx={{ color: 'text.secondary', fontSize: '12px', paddingTop: '5px' }}>
+                      Fecha no asignada
+                    </Typography>
+                  )}
+
               <Typography sx={{ minWidth: '300px', width: '400px', marginTop: '30px' }}>
                 <Button
                   onClick={handlerClickOpenPay}

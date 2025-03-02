@@ -4,49 +4,84 @@ import { useEffect, useState } from 'react'
 
 import Script from 'next/script'
 
+import { useRouter } from 'next/navigation'
+
 import { Box, Button, Grid, Typography, useMediaQuery } from '@mui/material'
 
+import { useSession } from 'next-auth/react'
+
 import { CardImage } from '@/components/components-home/components-ponentes/CardImage'
+
 import { SubtitleTag } from '@/components/components-home/components-reusable/SubtitleTag'
 
 import { CostTable } from '@/components/components-home/components-buys/CostTable'
+
 import { AcceptanceCriteria } from '@/components/components-home/components-buys/components-confirm/AcceptanceCriteria'
+
 import { AlertIndications } from '@/components/components-home/components-reusable/AlertIndications'
+
 import { ConfirmPayment } from '@/components/components-home/components-buys/components-confirm/confirm-payment'
+
 import { CheckPaymentGateway } from '@/components/components-home/components-buys/components-confirm/confirm-payment/PaymentGateway'
+
 import { formatDate } from '@/libs/utils'
 
 const Confirm = () => {
   const isSmallScreen = useMediaQuery('(max-width:1275px)')
   const [offsetY, setOffsetY] = useState(0)
-
+  const {data: session}= useSession()
   const [alertMessage, setAlertMessage] = useState<string | null>(null)
-  const [typeOfPayment, setTypeOfPayment] = useState<string>('')
+  const route = useRouter()
 
-  const [eventName, setEventName] = useState<string>('')
-  const [eventImage, setEventImage] = useState<string>('')
-  const [eventPlace, setEventPlace] = useState<string>('')
-  const [eventStartDate, setEventStartDate] = useState<string>('')
-  const [eventTicket, setEventTicket] = useState<string>('')
-  const [ticketPrice, setTicketPrice] = useState<string>('')
+  useEffect(() => {
+    const delayRedirect = setTimeout(() => {
+      if (!session) {
+        route.push('/');
+      }
+    }, 2000);
+
+    return () => clearTimeout(delayRedirect);
+  }, [session, route]);
   const maxOffsetY = 300
+
+  const [eventData, setEventData] = useState<{
+    name: string
+    image: string
+    place: string
+    date: string
+    ticket: string
+    price: string
+    currency: string
+    paymentMethod: string
+    eventType: string
+    typeOfPayment:string
+    ruc:string
+    companyName:string
+    eventCode:string
+
+  }>({
+    name: '',
+    image: '',
+    place: '',
+    date: '',
+    ticket: '',
+    price: '',
+    currency: '',
+    paymentMethod: '',
+    eventType: '',
+    typeOfPayment:'',
+    ruc:'',
+    companyName:'',
+    eventCode:'',
+  })
 
   useEffect(() => {
     const storedEvent = localStorage.getItem('eventData')
 
     if (storedEvent) {
-      const event = JSON.parse(storedEvent) // Recuperar como objeto
-
-      setEventName(event.name)
-      setEventImage(event.image)
-      setEventPlace(event.place)
-      setEventStartDate(event.date)
-      setEventTicket(event.ticket)
-      setTicketPrice(event.price)
-      setTypeOfPayment(event.paymentMethod)
+      setEventData(JSON.parse(storedEvent)) // Guarda todo en un solo estado
     }
   }, [])
-
   const [allSelected, setAllSelected] = useState(false)
 
   const handleScroll = () => {
@@ -66,7 +101,18 @@ const Confirm = () => {
   }
 
   const handlerClickOpenPay = () => {
-    CheckPaymentGateway(eventName || 'Sin asignar',Number(ticketPrice), typeOfPayment, setAlertMessage)
+    CheckPaymentGateway(
+      eventData.name || 'Sin asignar',
+      Number(eventData.price),
+      eventData.paymentMethod,
+      setAlertMessage,
+      eventData.currency,
+      (session as any)?.user?.user?.userName,
+      (session as any)?.user?.user?.userCode,
+      eventData.eventCode,
+      eventData.paymentMethod,
+      eventData.companyName,
+      eventData.ruc )
   }
 
   return (
@@ -88,32 +134,32 @@ const Confirm = () => {
           >
             <Box sx={{ paddingLeft: '30px', marginBottom: '40px' }}>
                 <Typography variant='body1' fontWeight='bold' sx={{ fontSize: '14px' }}>
-                  Centro de Exposiciones Jockey - CEJ
+                  {eventData.place}
                 </Typography>
                 <Typography
                   variant='h6'
                   fontWeight='bold'
                   sx={{ paddingTop: '12px', fontSize: '1.9rem', fontWeight: 700 }}
                 >
-                  {eventName}
+                  {eventData.name}
                 </Typography>
                 <Typography variant='body1' sx={{ color: 'text.secondary', fontSize: '13px', paddingTop: '5px' }}>
-                {formatDate(eventStartDate)}
+                {formatDate(eventData.date)}
                 </Typography>
             </Box>
             <Box sx={{ paddingRight: '10px', paddingLeft: '30px' }}>
               <Box>
                 <Box>
                   <Typography
-                    variant='h6'
-                    fontWeight='bold'
-                    sx={{ paddingTop: '12px', fontSize: '1.2rem', fontWeight: 700 }}
+                    variant="h6"
+                    fontWeight="bold"
+                    sx={{ paddingTop: "12px", fontSize: "1.2rem", fontWeight: 700, textTransform:'capitalize' }}
                   >
-                    Roy Cari Sarmiento
+                  {(session as any)?.user?.personaNombre || "Sin nombre"}
                   </Typography>
                 </Box>
                 <Box>
-                  <CostTable ticketName={eventTicket} price={Number(ticketPrice)} />
+                  <CostTable ticketName={eventData.ticket} price={Number(eventData.price)} currency={eventData.currency} />
                 </Box>
                 <Box sx={{ marginTop: '50px' }}>
                   <SubtitleTag caption='SELECCIONA PARA CONTINUAR' />
@@ -180,13 +226,21 @@ const Confirm = () => {
                 }}
               >
                 <ConfirmPayment
-                  image={eventImage}
-                  eventLocation={eventPlace}
-                  eventDate={eventStartDate}
-                  eventName={eventName}
+                  image={eventData.image}
+                  eventLocation={eventData.place}
+                  eventDate={eventData.date}
+                  eventName={eventData.name}
                   disableButton={!allSelected}
-                  amount={Number(ticketPrice)}
-                  typeOfPayment={typeOfPayment}
+                  amount={Number(eventData.price)}
+                  currency={eventData.currency}
+                  typeOfPayment={eventData.paymentMethod}
+                  email={(session as any)?.user?.user?.userName}
+                  userCode={(session as any)?.user?.user?.userCode}
+
+                  eventCode={eventData.eventCode}
+                  paymentMethod={eventData.paymentMethod}
+                  companyName={eventData.companyName}
+                  ruc={eventData.ruc}
                 />
               </Box>
             </Grid>
@@ -194,6 +248,7 @@ const Confirm = () => {
         </Grid>
       </Box>
       <Script src='https://js.culqi.com/checkout-js' />
+      <pre>{JSON.stringify({eventData,session},null,2)}</pre>
     </Box>
   )
 }

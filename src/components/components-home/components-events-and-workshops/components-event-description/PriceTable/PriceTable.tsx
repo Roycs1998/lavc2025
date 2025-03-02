@@ -18,18 +18,18 @@ export const PriceTable = ({
   workshopCost
 }: HighPrices) => {
   const data = [
-    { color: '#1F9DDC', category: 'MEDICO VETERINARIO', price: costProfessionals },
-    { color: '#F7CA2A', category: 'ESTUDIANTE O BACHILLER', price: costHighSchoolStudents },
-    { color: '#F6A51A', category: 'MEDICO VETERINARIO EXTRANJERO', price: costForeignProfessionals },
-    { color: '#3a3480', category: 'ESTUDIANTE O BACHILLER EXTRANJERO', price: costForeignStudents },
-    { color: '#3a3480', category: 'VETERINARIO', price: workshopCost }
+    { color: '#1F9DDC', category: 'MEDICO VETERINARIO', price: costProfessionals, currency: 'S/.' },
+    { color: '#F7CA2A', category: 'ESTUDIANTE O BACHILLER', price: costHighSchoolStudents, currency: 'S/.' },
+    { color: '#F6A51A', category: 'MEDICO VETERINARIO EXTRANJERO', price: costForeignProfessionals, currency: '$' },
+    { color: '#3a3480', category: 'ESTUDIANTE O BACHILLER EXTRANJERO', price: costForeignStudents, currency: '$' },
+    { color: '#3a3480', category: 'VETERINARIO', price: workshopCost, currency: 'S/.' }
   ]
 
   const filteredData = data.filter(item => item.price !== 0)
-  const rows = filteredData.map(item => createData(item.color, item.category, item.price))
+  const rows = filteredData.map(item => createData(item.color, item.category, item.price, item.currency))
 
-  function createData(Color: string, category: string, price?: number) {
-    return { Color, category, price }
+  function createData(Color: string, category: string, price?: number, currency?: string) {
+    return { Color, category, price, currency }
   }
 
   return (
@@ -63,9 +63,7 @@ export const PriceTable = ({
                 </Box>
               </TableCell>
               <TableCell align='right' sx={{ fontWeight: 'bold', border: 'none', padding: '2px 8px' }}>
-                {row.price?.toString().slice(-2) === '00'
-                  ? `$ ${row.price?.toFixed(2)}`
-                  : `S/ ${row.price?.toFixed(2)}`}
+                {`${row.currency} ${row.price?.toFixed(2)}`}
               </TableCell>
             </TableRow>
           ))}

@@ -10,6 +10,7 @@ import { PaymentMethod } from '@/components/components-home/components-buys/comp
 import { CostTable } from '@/components/components-home/components-buys/CostTable'
 import { SubtitleTag } from '@/components/components-home/components-reusable/SubtitleTag'
 import { AlertIndications } from '@/components/components-home/components-reusable/AlertIndications'
+import { formatDate } from '@/libs/utils'
 
 const Payments = () => {
   const [eventName, setEventName] = useState<string>('')
@@ -19,6 +20,7 @@ const Payments = () => {
   const [eventTicket, setEventTicket] = useState<string>('')
   const [ticketPrice, setTicketPrice] = useState<string>('')
   const isSmallScreen = useMediaQuery('(max-width:1275px)')
+  const [ticketCurrency, setTicketCurrency] = useState<string>('')
 
   const [offsetY, setOffsetY] = useState(0)
   const maxOffsetY = 300
@@ -40,6 +42,7 @@ const Payments = () => {
       setEventStartDate(event.date)
       setEventTicket(event.ticket)
       setTicketPrice(event.price)
+      setTicketCurrency(event.currency)
 
       const updatedEventData = {
         ...event, // Copiamos las propiedades del evento original
@@ -86,17 +89,17 @@ const Payments = () => {
             {isSmallScreen && (
               <Box sx={{ paddingLeft: '30px', marginBottom: '40px' }}>
                 <Typography variant='body1' fontWeight='bold' sx={{ fontSize: '14px' }}>
-                  ESTADIO NACIONAL - LIMA
+                  {eventPlace}
                 </Typography>
                 <Typography
                   variant='h6'
                   fontWeight='bold'
                   sx={{ paddingTop: '12px', fontSize: '1.9rem', fontWeight: 700 }}
                 >
-                  LACV 2024
+                  {eventName || "Sin nombre"}
                 </Typography>
                 <Typography variant='body1' sx={{ color: 'text.secondary', fontSize: '13px', paddingTop: '5px' }}>
-                  25 de febrero 2025
+                  {formatDate(eventStartDate)}
                 </Typography>
               </Box>
             )}
@@ -108,9 +111,9 @@ const Payments = () => {
                   <SubtitleTag caption='SELECCIONA TU MEDIO DE PAGO' />
                 </Box>
                 <Box sx={{ marginTop: '10px' }}>
-                  {eventTicket !== 'EXTRANJERO1' ? (
+                  {eventTicket !== 'EXTRANJERO' ? (
                     <Box>
-                      <PaymentMethod
+{/*                       <PaymentMethod
                         id='NIUBIZ'
                         expandedId={expandedId}
                         onChange={handleChange}
@@ -119,17 +122,17 @@ const Payments = () => {
                         paymentInstitutions='Tarjeta de crédito / débito / Yape'
                         description='Revisa el detalle de la compra y el monto a pagar antes de Continuar, una vez procesado el pago no existen cambios ni devoluciones'
                         paymentTypeImage='https://cdnp.teleticket.com.pe/Content/images/mediopago/opd_niubiz.png'
-                      />
+                      /> */}
                       <PaymentMethod
                         id='CULQI'
                         expandedId={expandedId}
                         onChange={handleChange}
-                        image='https://teleticket.com.pe/content/images/mediopago/mp106.png?v=20241101'
+                        image='https://teleticket.com.pe/content/images/mediopago/mp112.png?v=20241104'
                         name='CULQI'
                         paymentInstitutions='Tarjeta de crédito / débito / Yape'
-                        description='Genera un código de 9 dígitos y págalo a través de:'
-                        informationOne='Banca Móvil / Internet: Paga en BBVA, BCP, Interbank, Scotiabank, BanBif, Caja Arequipa y Banco Pichincha, a través de la banca por internet o banca móvil en la opción pago de servicios.'
-                        informationTwo='Agentes y Bodegas: Deposita en BBVA, BCP, Interbank, Scotiabank, BanBif, Wester Union, Tambo+, Kasanet, Ya Ganaste, Red Digital, Comercio Multiservicios Niubiz, MoneyGram, Caja Arequipa, Disashop, Cellpower.'
+                        description='Puedes pagar de diferentes entidades bancarias:'
+                        informationOne=''
+                        informationTwo=''
                         listOfPaymentEntities={[
                           {
                             paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_1.png'
@@ -148,29 +151,11 @@ const Payments = () => {
                           },
                           {
                             paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_9.png'
-                          },
-                          {
-                            paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_4.png'
-                          },
-                          {
-                            paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_10.png'
-                          },
-                          {
-                            paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_5.png'
-                          },
-                          {
-                            paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_11.png'
-                          },
-                          {
-                            paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_6.png'
-                          },
-                          {
-                            paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_12.png'
                           }
                         ]}
                         informationThree='Revisa el detalle de la compra y el monto a pagar antes de Continuar, una vez procesado el pago no existen cambios ni devoluciones'
                       />
-                      <PaymentMethod
+{/*                       <PaymentMethod
                         id='PagoEfectivo'
                         expandedId={expandedId}
                         onChange={handleChange}
@@ -219,7 +204,7 @@ const Payments = () => {
                           }
                         ]}
                         informationThree='Revisa el detalle de la compra y el monto a pagar antes de Continuar, una vez procesado el pago no existen cambios ni devoluciones'
-                      />
+                      /> */}
                     </Box>
                   ) : (
                     <PaymentMethod
@@ -260,7 +245,7 @@ const Payments = () => {
                   </Box>
                 )}
                 <Box>
-                  <CostTable ticketName={eventTicket} price={Number(ticketPrice)} />
+                <CostTable ticketName={eventTicket} price={Number(ticketPrice)} currency={ticketCurrency} />
                 </Box>
               </Box>
 

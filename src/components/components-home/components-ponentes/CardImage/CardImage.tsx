@@ -61,10 +61,10 @@ export const CardImage = ({ image, title }: Attributes) => {
       {/* Título sobre la imagen */}
       <Typography
         className='global-padding'
-        variant='h1'
+        variant='h2'
         component='div'
         sx={{
-          fontSize: { xs: '3.1rem', sm: '4rem', md: '6rem' },
+          fontSize: { xs: '2rem', sm: '3rem', md: '5rem' },
           position: 'absolute',
           color: 'var(--letter-color)',
           fontWeight: 'bold',

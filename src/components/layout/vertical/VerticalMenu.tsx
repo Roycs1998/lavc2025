@@ -50,8 +50,8 @@ const VerticalMenu = ({ scrollMenu, session }: {
 
   session: Session | null} ) => {
   // Hooks
-  const route = useRouter()
   const theme = useTheme()
+  const route = useRouter()
 
   useEffect(() => {
       session ?? route.push('/')

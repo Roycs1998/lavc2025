@@ -1,5 +1,7 @@
 'use client'
-import React from 'react'
+import React, { useEffect } from 'react'
+
+import { usePathname } from 'next/navigation'
 
 import {
   Box,
@@ -13,11 +15,13 @@ import {
   ListItemText,
   Typography
 } from '@mui/material'
+
 import MenuIcon from '@mui/icons-material/Menu'
 
 import { DrawerInformation } from './DrawerInformation'
 
 import type { getDictionary } from '@/utils/getDictionary'
+
 import styles from './Navbar.module.css'
 
 type Props = {
@@ -26,6 +30,11 @@ type Props = {
 
 export const NavbarDrawer = ({ dictionary }: Props) => {
   const [mobileOpen, setMobileOpen] = React.useState(false)
+  const pathname = usePathname()
+
+  useEffect(() => {
+    setMobileOpen(false) // Cierra el menú cuando cambia la ruta
+  }, [pathname])
 
   const handleDrawerToggle = () => {
     setMobileOpen(prevState => !prevState)
