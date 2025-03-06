@@ -1,13 +1,18 @@
 'use client'
 
 import React, { useState } from 'react';
-import { Box, Button, Card, CardContent, TextField, Typography } from '@mui/material';
-import axios from 'axios';
+
 import { useRouter, useSearchParams } from 'next/navigation';
+
 import Link from 'next/link';
-import Logo from '@components/layout/shared/Logo'
-import Api from '@/api/api';
+
+import { Box, Button, Card, CardContent, TextField, Typography } from '@mui/material';
+
 import { toast } from 'react-toastify';
+
+import Logo from '@components/layout/shared/Logo'
+
+import Api from '@/api/api';
 
 const ResetPasswordForm: React.FC = () => {
   const router = useRouter();
@@ -26,19 +31,24 @@ const ResetPasswordForm: React.FC = () => {
 
     if (newPassword !== confirmPassword) {
       toast.error('Las contraseñas no coinciden.');
+      
       return;
     }
     
     if (!token) {
       setError('Token inválido.');
+      
       return;
     }
 
     setLoading(true);
+    
     try {
       const response = await Api.post('/auth/reset', { token, newPassword });
+      
       toast.success('Contraseña actualizada correctamente.')
       setMessage(response.data.message || 'Contraseña actualizada correctamente.');
+      
       // Redirecciona a la página de inicio de sesión después de 3 segundos
       setTimeout(() => {
         router.push('/login');
