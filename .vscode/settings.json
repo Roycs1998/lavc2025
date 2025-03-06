@@ -49,5 +49,8 @@
     "iconify",
     "Informationletter",
     "paddingleft"
-  ]
+  ],
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  }
 }

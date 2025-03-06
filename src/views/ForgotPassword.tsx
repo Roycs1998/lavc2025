@@ -12,22 +12,30 @@ import Typography from '@mui/material/Typography'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 
+import { toast } from 'react-toastify'
+
 // Type Imports
 import type { Mode } from '@core/types'
 
 // Component Imports
 import Form from '@components/Form'
+
 import DirectionalIcon from '@components/DirectionalIcon'
+
 import Illustrations from '@components/Illustrations'
+
 import Logo from '@components/layout/shared/Logo'
 
 // Hook Imports
 import { useImageVariant } from '@core/hooks/useImageVariant'
 
+import { sendRequest } from '@/api/changePassword'
+
 const ForgotPassword = ({ mode }: { mode: Mode }) => {
   const [email, setEmail] = useState('')
   const [errorEmail, setErrorEmail] = useState('')
-
+  const [loading, setLoading] = useState(false);
+  
   // Vars
   const darkImg = '/images/pages/auth-v1-mask-dark.png'
   const lightImg = '/images/pages/auth-v1-mask-light.png'
@@ -35,7 +43,8 @@ const ForgotPassword = ({ mode }: { mode: Mode }) => {
   // Hooks
   const authBackground = useImageVariant(mode, lightImg, darkImg)
 
-  const sendMail = (e: FormEvent<HTMLFormElement>) => {
+  const sendMail = async (e: FormEvent<HTMLFormElement>) => {
+    
     e.preventDefault()
 
     setErrorEmail('')
@@ -48,6 +57,23 @@ const ForgotPassword = ({ mode }: { mode: Mode }) => {
 
     if (errorEmail === '') {
       console.log('email' + email)
+    }
+    
+    setLoading(true);
+
+    try {
+      // Se envía la petición al endpoint de recuperación
+      // Asegúrate de ajustar la URL al endpoint de tu backend
+       await sendRequest(email)
+      
+      // Aquí suponemos que el backend envía un mensaje o URL de recuperación,
+      // pero en este ejemplo solo mostramos un mensaje
+      toast.info("Se ha enviado un correo con el enlace para recuperar tu clave.");
+    } catch (err: any) {
+      console.error(err);
+      toast.error(err.response?.data?.message || "Ocurrió un error al enviar el correo.");
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -74,8 +100,8 @@ const ForgotPassword = ({ mode }: { mode: Mode }) => {
                 error={Boolean(errorEmail)} // Marca como error si hay un mensaje
                 helperText={errorEmail} // Muestra el mensaje de error
               />
-              <Button fullWidth variant='contained' type='submit'>
-                Enviar Enlace
+              <Button fullWidth variant='contained' type='submit' disabled={loading}>
+                {loading ? 'Enviando...' : 'Enviar'}
               </Button>
               <Typography className='flex justify-center items-center' color='primary'>
                 <Link href='/login' className='flex items-center'>

@@ -17,7 +17,7 @@ import PerfectScrollbar from 'react-perfect-scrollbar'
 import type { VerticalMenuContextProps } from '@menu/components/vertical-menu/Menu'
 
 // Component Imports
-import { Menu, SubMenu, MenuItem, MenuSection } from '@menu/vertical-menu'
+import { Menu, MenuItem } from '@menu/vertical-menu'
 
 // Hook Imports
 import useVerticalNav from '@menu/hooks/useVerticalNav'
@@ -83,7 +83,7 @@ const VerticalMenu = ({ scrollMenu, session }: {
         renderExpandedMenuItemIcon={{ icon: <i className='ri-circle-line' /> }}
         menuSectionStyles={menuSectionStyles(theme)}
       >
-        {session?.user?.user?.profileCode === 0 && (
+{/*         {session?.user?.user?.profileCode === 0 && (
           <>
             <SubMenu
                 label='Dashboards'
@@ -163,7 +163,7 @@ const VerticalMenu = ({ scrollMenu, session }: {
                 </SubMenu>
               </MenuSection>
           </>
-        )}
+        )} */}
 
         {session?.user?.user?.profileCode === 1 && (
           <>
@@ -174,11 +174,11 @@ const VerticalMenu = ({ scrollMenu, session }: {
             <MenuItem
               icon={<i className='ri-home-smile-line' />}
               href={`/my-events/${session?.user?.user?.userCode}`}
-              suffix={<Chip label='Pro' size='small' color='primary' variant='tonal' />}
+              suffix={<Chip /* label='Pro' */ size='small' color='primary' variant='tonal' />}
             >
-              My Events
+              Mis tickets
             </MenuItem>
-            <SubMenu
+{/*             <SubMenu
                 label='My Events'
                 icon={<i className='ri-home-smile-line' />}
                 suffix={<Chip label='5' size='small' color='error' />}
@@ -212,7 +212,7 @@ const VerticalMenu = ({ scrollMenu, session }: {
                 >
                   Logistics
                 </MenuItem>
-              </SubMenu>
+              </SubMenu> */}
           </>
         )}
       </Menu>
