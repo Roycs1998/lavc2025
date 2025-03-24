@@ -47,7 +47,7 @@
 }
 
 .mainLogo {
-  max-height: 30px;
+  max-height: 45px;
 }
 
 .link {
@@ -64,7 +64,8 @@
   }
 
   .displayMobile{
-    display: block;
+    display: flex;
+    justify-content: center;
   }
 
   .dropdownMenu {
@@ -72,7 +73,7 @@
   }
 
   .mainLogoPhone {
-    max-height: 30px;
+    max-height: 35px;
     block-size: 90px;
     inline-size: 110px;
   }
@@ -89,7 +90,7 @@
     box-shadow: none;
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Distribuir los elementos correctamente */
+    justify-content: center; /* Distribuir los elementos correctamente */
     padding: 0 15px; /* Espacio interno */
     width: 100%;
   }

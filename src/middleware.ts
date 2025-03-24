@@ -14,9 +14,22 @@ export function middleware(req: any) {
     return NextResponse.next()
   }
 
-  const supportedLanguages = ['en', 'es', 'pt']
-
+  // Obtener el idioma desde la cookie, o usar "en" por defecto
   const cookieLanguage = req.cookies.get('language') ? req.cookies.get('language').value : 'en'
+
+  // Modo mantenimiento: si la variable está activa y la URL no contiene ya "under-maintenance"
+  const maintenanceMode = process.env.NEXT_PUBLIC_MAINTENANCE_MODE === 'true'
+  
+  if (maintenanceMode && !url.pathname.includes('/under-maintenance')) {
+    // Se reescribe la URL conservando el prefijo del idioma
+    url.pathname = `/${cookieLanguage}/under-maintenance`
+    
+    return NextResponse.rewrite(url)
+  }
+
+  // Gestión de idiomas
+
+  const supportedLanguages = ['en', 'es', 'pt']
 
   if (pathSegments[0] !== cookieLanguage) {
     if (supportedLanguages.includes(pathSegments[0])) {

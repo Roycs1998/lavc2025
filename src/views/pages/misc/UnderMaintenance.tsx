@@ -1,10 +1,5 @@
 'use client'
 
-// Next Imports
-import Link from 'next/link'
-
-// MUI Imports
-import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 
 // Type Imports
@@ -36,9 +31,6 @@ const UnderMaintenance = ({ mode }: { mode: Mode }) => {
           src='/images/illustrations/characters/6.png'
           className='object-cover bs-[400px] md:bs-[450px] lg:bs-[500px]'
         />
-        <Button href='/' component={Link} variant='contained'>
-          Back to Home
-        </Button>
       </div>
       <Illustrations maskImg={{ src: miscBackground }} />
     </div>

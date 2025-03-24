@@ -11,7 +11,7 @@ import AccordionDetails from '@mui/material/AccordionDetails'
 
 import Typography from '@mui/material/Typography'
 
-import { Box, Button, MenuItem, TextField } from '@mui/material'
+import { Box, Button, darken, Dialog, DialogActions, DialogContent, DialogTitle, MenuItem, TextField } from '@mui/material'
 
 import { useSession } from 'next-auth/react'
 
@@ -48,6 +48,12 @@ export const PurchaseLetter = ({
 
   const [expanded, setExpanded] = useState(true)
   const [trigger, setTrigger] = useState<boolean>(false)
+
+  // Estado para controlar el modal de activar beca
+  const [openBecaModal, setOpenBecaModal] = useState(false)
+  
+  // Estado para almacenar el código de beca ingresado
+  const [becaCode, setBecaCode] = useState('')
 
   const tickets = useMemo(() => [
     {
@@ -131,6 +137,24 @@ export const PurchaseLetter = ({
   const forceEffect = () => {
     status !== 'authenticated' ?
     toast.warn('Debes iniciar sesión para comprar tu entrada'):setTrigger(!trigger)
+  }
+
+  // Función para manejar el clic en "ACTIVAR BECA"
+  const handleActivateBeca = () => {
+    if (status === 'authenticated') {
+      setOpenBecaModal(true)
+    } else {
+      toast.warn('Debes iniciar sesión para activar la beca')
+    }
+  }
+
+  // Función para procesar la activación de beca (aquí debes implementar la lógica que necesites)
+  const handleBecaActivation = () => {
+    // Ejemplo: Mostrar un toast con el código ingresado y cerrar el modal
+    toast.success(`Beca activada con el código: ${becaCode}`)
+    setOpenBecaModal(false)
+    
+    // Aquí puedes agregar la lógica para enviar el código al backend o lo que requieras.
   }
 
   return (
@@ -236,7 +260,6 @@ export const PurchaseLetter = ({
           )}
           <AccordionDetails>
             <Box >
-              <Typography sx={{ padding: '20px' }}>
                 <Link href={typeOfEvent === 2 ? (problemType &&  status === 'authenticated' ? route : '') : route}>
                   <Button
                     onClick={forceEffect}
@@ -251,8 +274,8 @@ export const PurchaseLetter = ({
                       opacity: typeOfEvent === 2 && !problemType ? 0.6 : 1, // Opacidad reducida si está deshabilitado
                       transition: 'all 0.3s ease', // Transición suave al cambiar el estado
                       '&:hover': {
-                        color: typeOfEvent === 2 && !problemType ? '#ffffff' : 'var(--letter-color)', // Color al hacer hover
-                        bgcolor: typeOfEvent === 2 && !problemType ? '#d1cfea' : '#7f76d9', // Color al hacer hover
+                        color: 'var(--letter-color)',
+                        backgroundColor: `${darken('#3a3480', 0.3)} !important`,
                       },
                       '&.Mui-disabled': {
                         bgcolor: '#8781dd', // Fondo más claro si está deshabilitado
@@ -263,6 +286,29 @@ export const PurchaseLetter = ({
                     COMPRAR TU ENTRADA
                   </Button>
                 </Link>
+
+                <Box sx={{ mt: 1 }}>
+                  <Button
+                    onClick={handleActivateBeca}
+                    sx={{
+                      backgroundColor: 'var(--primary-color-purple)',
+                      color: 'var(--letter-color)',
+                      width: '100%',
+                      height: 55,
+                      marginTop: '10px',
+                      fontWeight: 'bold',
+                      fontSize: '15px',
+                      opacity: 1,
+                      transition: 'all 0.3s ease',
+                      '&:hover': {
+                        color: 'var(--letter-color)',
+                        backgroundColor: `${darken('#3a3480', 0.3)} !important`,
+                      },
+                    }}
+                  >
+                    ACTIVAR BECA
+                  </Button>
+                </Box>
 
                 {status !== 'authenticated' && (
                   <Link href={'/login'}>
@@ -278,21 +324,43 @@ export const PurchaseLetter = ({
                           opacity:  1, // Opacidad reducida si está deshabilitado
                           transition: 'all 0.3s ease', // Transición suave al cambiar el estado
                           '&:hover': {
-                            color: 'var(--letter-color)', // Color al hacer hover
-                            bgcolor: '#7f76d9', // Color al hacer hover
+                            color: 'var(--letter-color)',
+                            backgroundColor: `${darken('#3a3480', 0.3)} !important`,
                           },
-
                         }}
                       >
                         INICIAR SESIÓN
                       </Button>
                   </Link>
                 )}
-              </Typography>
+
             </Box>
           </AccordionDetails>
         </Accordion>
       </Box>
+      <Dialog open={openBecaModal} onClose={() => setOpenBecaModal(false)}>
+        <DialogTitle>Activar Beca</DialogTitle>
+        <DialogContent>
+          <TextField
+            autoFocus
+            margin="dense"
+            label="Código de Beca"
+            type="text"
+            fullWidth
+            variant="outlined"
+            value={becaCode}
+            onChange={(e) => setBecaCode(e.target.value)}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setOpenBecaModal(false)} color="secondary">
+            Cancelar
+          </Button>
+          <Button onClick={handleBecaActivation} color="primary">
+            Activar
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   )
 }

@@ -174,7 +174,7 @@ const colorSchemes = (): Theme['colorSchemes'] => {
           lightOpacity: 'rgb(var(--mui-palette-primary-mainChannel) / 0.16)',
           mainOpacity: 'rgb(var(--mui-palette-primary-mainChannel) / 0.24)',
           darkOpacity: 'rgb(var(--mui-palette-primary-mainChannel) / 0.32)',
-          darkerOpacity: 'rgb(var(--mui-palette-primary-mainChannel) / 0.38)'
+          darkerOpacity: 'rgb(var(--mui-palette-primary-mainChannel) / 0.34)'
         },
         secondary: {
           main: '#8A8D93',
