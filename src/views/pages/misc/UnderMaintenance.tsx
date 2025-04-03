@@ -2,6 +2,8 @@
 
 import Typography from '@mui/material/Typography'
 
+import { Button } from '@mui/material'
+
 // Type Imports
 import type { Mode } from '@core/types'
 
@@ -11,7 +13,6 @@ import Illustrations from '@components/Illustrations'
 // Hook Imports
 import { useImageVariant } from '@core/hooks/useImageVariant'
 import Link from '@/components/Link'
-import { Button } from '@mui/material'
 
 const UnderMaintenance = ({ mode }: { mode: Mode }) => {
   // Vars
