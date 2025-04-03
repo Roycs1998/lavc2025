@@ -28,13 +28,13 @@ const UnderMaintenance = ({ mode }: { mode: Mode }) => {
         <div className='flex flex-col gap-2 is-[90vw] sm:is-[unset]'>
           <Typography variant='h4'>Under Maintenance! 🚧</Typography>
           <Typography>Sorry for the inconvenience but we&#39;re performing some maintenance at the moment</Typography>
+        <Link href='https://www.tlavc-peru.org/' target='_blank' > <Button variant='contained' color='primary'>Go to the main page LAVC</Button> </Link>
         </div>
         <img
           alt='error-illustration'
           src='/images/illustrations/characters/6.png'
           className='object-cover bs-[400px] md:bs-[450px] lg:bs-[500px]'
         />
-        <Link href='https://www.tlavc-peru.org/' target='_blank' > <Button variant='contained' color='primary'>Go to the main page LAVC</Button> </Link>
       </div>
       <Illustrations maskImg={{ src: miscBackground }} />
     </div>
