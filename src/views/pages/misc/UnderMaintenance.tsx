@@ -10,6 +10,8 @@ import Illustrations from '@components/Illustrations'
 
 // Hook Imports
 import { useImageVariant } from '@core/hooks/useImageVariant'
+import Link from '@/components/Link'
+import { Button } from '@mui/material'
 
 const UnderMaintenance = ({ mode }: { mode: Mode }) => {
   // Vars
@@ -31,6 +33,7 @@ const UnderMaintenance = ({ mode }: { mode: Mode }) => {
           src='/images/illustrations/characters/6.png'
           className='object-cover bs-[400px] md:bs-[450px] lg:bs-[500px]'
         />
+        <Link href='https://www.tlavc-peru.org/' target='_blank' > <Button variant='contained' color='primary'>Go to the main page LAVC</Button> </Link>
       </div>
       <Illustrations maskImg={{ src: miscBackground }} />
     </div>
