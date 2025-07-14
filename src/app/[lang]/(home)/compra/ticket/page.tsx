@@ -4,14 +4,14 @@ import { useEffect, useState } from 'react'
 
 import Link from 'next/link'
 
-import { Box, Button, Grid, Typography, useMediaQuery } from '@mui/material'
+import { Box, Grid, Typography, useMediaQuery } from '@mui/material'
 
-import { CardImage } from '@/components/components-home/components-ponentes/CardImage'
 import { TicketInformation } from '@/components/components-home/components-buys/TicketInformation'
 import { CostTable } from '@/components/components-home/components-buys/CostTable'
 import { PurchaseEventLetter } from '@/components/components-home/components-buys/purchase-event-letter'
 import { SubtitleTag } from '@/components/components-home/components-reusable/SubtitleTag'
 import { formatDate } from '@/libs/utils'
+import CustomButton from '@/components/ui/CustomButton'
 
 const InformacionDeTicket = () => {
   const [eventName, setEventName] = useState<string>('')
@@ -57,12 +57,7 @@ const InformacionDeTicket = () => {
 
   return (
     <Box>
-      <Box>
-        <CardImage
-          image='http://blackbeltreview.files.wordpress.com/2010/11/raffle-tickets.jpg'
-          title='INFORMACION TICKET'
-        />
-      </Box>
+
       <Box sx={{}}>
         <Grid container spacing={0} sx={{}}>
           <Grid
@@ -70,22 +65,22 @@ const InformacionDeTicket = () => {
             xs={12}
             sm={12}
             md={isSmallScreen ? 12 : 6.5}
-            sx={{ marginBottom: '7%', marginTop: '7%', paddingLeft: 'var(--global-padding-inline)' }}
+            sx={{ marginBottom: '7%', marginTop: isSmallScreen ? '20%' : '7%', paddingLeft: 'var(--global-padding-inline)' }}
           >
             <Box sx={{ paddingLeft: '30px', marginBottom: '40px' }}>
-                <Typography variant='body1' fontWeight='bold' sx={{ fontSize: '14px' }}>
-                  Centro de Exposiciones Jockey - CEJ
-                </Typography>
-                <Typography
-                  variant='h6'
-                  fontWeight='bold'
-                  sx={{ paddingTop: '12px', fontSize: '1.9rem', fontWeight: 700 }}
-                >
-                  {eventName}
-                </Typography>
-                <Typography variant='body1' sx={{ color: 'text.secondary', fontSize: '13px', paddingTop: '5px' }}>
+              <Typography variant='body1' fontWeight='bold' sx={{ fontSize: '14px' }}>
+                {eventPlace}
+              </Typography>
+              <Typography
+                variant='h6'
+                fontWeight='bold'
+                sx={{ paddingTop: '12px', fontSize: '1.9rem', fontWeight: 700 }}
+              >
+                {eventName}
+              </Typography>
+              <Typography variant='body1' sx={{ color: 'text.secondary', fontSize: '13px', paddingTop: '5px' }}>
                 {formatDate(eventStartDate)}
-                </Typography>
+              </Typography>
             </Box>
             <Box sx={{ paddingRight: '30px', paddingLeft: '30px' }}>
               <Box>
@@ -97,22 +92,9 @@ const InformacionDeTicket = () => {
               {isSmallScreen && (
                 <Typography sx={{ width: '100%', marginTop: '50px' }}>
                   <Link href='/compra/adicionales'>
-                    <Button
-                      sx={{
-                        bgcolor: 'var(--primary-color-purple)',
-                        color: 'var(--letter-color)',
-                        width: '100%',
-                        height: 55,
-                        fontWeight: 'bold',
-                        fontSize: '15px',
-                        '&:hover': {
-                          color: 'var(--letter-color)', // Cambiar color si es necesario
-                          bgcolor: '#7f76d9'
-                        }
-                      }}
-                    >
+                    <CustomButton>
                       CONTINUAR
-                    </Button>
+                    </CustomButton>
                   </Link>
                 </Typography>
               )}

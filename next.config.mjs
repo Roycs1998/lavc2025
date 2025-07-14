@@ -3,7 +3,7 @@ const nextConfig = {
   basePath: process.env.BASEPATH,
 
   images: {
-    domains: ['localhost']
+    domains: ['localhost','tlavc-peru.org']
   }
 }
 

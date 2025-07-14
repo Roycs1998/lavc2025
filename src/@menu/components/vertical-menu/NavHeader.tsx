@@ -1,8 +1,6 @@
-// Third-party Imports
-import styled from '@emotion/styled'
+import type { ReactNode } from 'react'
 
-// Type Imports
-import type { ChildrenType } from '../../types'
+import styled from '@emotion/styled'
 
 // Util Imports
 import { verticalNavClasses } from '../../utils/menuClasses'
@@ -15,8 +13,17 @@ const StyledNavHeader = styled.div`
   justify-content: space-between;
 `
 
-const NavHeader = ({ children }: ChildrenType) => {
-  return <StyledNavHeader className={verticalNavClasses.header}>{children}</StyledNavHeader>
+type NavHeaderProps = {
+  children: ReactNode
+  className?: string
+}
+
+const NavHeader = ({ children, className = '' }: NavHeaderProps) => {
+  return (
+    <StyledNavHeader className={`${verticalNavClasses.header} ${className}`}>
+      {children}
+    </StyledNavHeader>
+  )
 }
 
 export default NavHeader

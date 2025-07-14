@@ -27,11 +27,12 @@ export const CardImage = ({ image, title }: Attributes) => {
       sx={{
         position: 'relative',
         width: '100%',
-        height: '500px',
+        height: { xs: '300px', sm: '350px' },
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        overflow: 'hidden' // Para ocultar el exceso de la imagen cuando se aplica el parallax
+        overflow: 'hidden',
+        paddingTop: { xs: '20px'}
       }}
     >
       <Box
@@ -42,7 +43,7 @@ export const CardImage = ({ image, title }: Attributes) => {
           width: '100%',
           height: '100%',
           objectFit: 'cover', // Mantiene la proporción sin distorsionar
-          objectPosition: 'center', // Centra la imagen en el contenedor
+          objectPosition: 'top', // Centra la imagen en el contenedor
           transform: `translateY(${offsetY * 0.5}px)`, // Efecto parallax
           transition: 'transform 0.1s ease-out'
         }}
@@ -64,7 +65,7 @@ export const CardImage = ({ image, title }: Attributes) => {
         variant='h2'
         component='div'
         sx={{
-          fontSize: { xs: '2rem', sm: '3rem', md: '5rem' },
+          fontSize: { xs: '2.5rem', sm: '3rem', md: '4rem' },
           position: 'absolute',
           color: 'var(--letter-color)',
           fontWeight: 'bold',

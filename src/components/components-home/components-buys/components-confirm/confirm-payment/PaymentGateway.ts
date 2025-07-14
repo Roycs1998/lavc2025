@@ -12,12 +12,12 @@ export function CheckPaymentGateway(
   paymentMethod:string,
   companyName:string,
   ruc:string,) {
-  switch (typeOfPayment) {
+  switch (paymentMethod) {
     case 'NIUBIZ':
       setAlertMessage('Por el momento no implementamos esta forma de pago')
       break
     case 'CULQI':
-      getCulqiCheckout(title,amount,currency, email, userCode,eventCode,paymentMethod,companyName,ruc)
+      getCulqiCheckout(title,amount,currency, email, userCode,eventCode,typeOfPayment,paymentMethod,companyName,ruc)
       break
     case 'PagoEfectivo':
       setAlertMessage('Por el momento no implementamos esta forma de pago')

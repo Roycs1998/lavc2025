@@ -7,7 +7,7 @@ interface Data {
 export const SubtitleTag = ({ caption }: Data) => {
   return (
     <Box
-      sx={{
+      sx={{       
         width: { xs: '100%', md: '300px' },
         display: 'flex',
         alignItems: 'center',
@@ -15,7 +15,7 @@ export const SubtitleTag = ({ caption }: Data) => {
         background: 'var(--color-subtitle)'
       }}
     >
-      <Typography sx={{ marginLeft: '40px', fontSize: '0.8rem', padding: '5px' }}>{caption}</Typography>
+      <Typography sx={{ marginLeft: '40px', padding: '5px',  color: '#fff' }}>{caption}</Typography>
     </Box>
   )
 }

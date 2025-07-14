@@ -16,11 +16,11 @@ export function getConfig(amount: number, currency: string, title?: string) {
   };
 }
 
-async function sendPayment(token: string, amount: number, currency: string, email:string, userCode:string,eventCode:string,paymentMethod:string,companyName:string,ruc:string) {
+async function sendPayment(token: string, amount: number, currency: string, email:string, userCode:string,eventCode:string,typeOfPayment:string,paymentMethod:string,companyName:string,ruc:string) {
   try {
 
     const payload = {
-      token, amount, currency, email, userCode,eventCode,paymentMethod,companyName,ruc
+      token, amount, currency, email, userCode,eventCode,typeOfPayment,paymentMethod,companyName,ruc
     }
 
     const response = await Api.post(`/culqi/charge/`, payload);
@@ -64,7 +64,7 @@ async function sendPayment(token: string, amount: number, currency: string, emai
   }
 }
 
-export async function getCulqiCheckout(title: string, amount: number, currency: string, email:string, userCode:string,eventCode:string,paymentMethod:string,companyName:string,ruc:string) {
+export async function getCulqiCheckout(title: string, amount: number, currency: string, email:string, userCode:string,eventCode:string,typeOfPayment:string,paymentMethod:string,companyName:string,ruc:string) {
   const _culqi = new (window as any).CulqiCheckout(
     process.env.NEXT_PUBLIC_CULQI_PUBLICKEY,
     getConfig(amount, currency, title)
@@ -93,6 +93,7 @@ export async function getCulqiCheckout(title: string, amount: number, currency: 
       // Enviar token al backend para procesar el pago
       await sendPayment(token, amount, currency, email, userCode
         ,eventCode
+        ,typeOfPayment
         ,paymentMethod
         ,companyName
         ,ruc);

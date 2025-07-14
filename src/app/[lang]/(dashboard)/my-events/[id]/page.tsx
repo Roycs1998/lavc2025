@@ -3,14 +3,13 @@ import { redirect } from 'next/navigation'
 
 import Grid from '@mui/material/Grid'
 
-import Typography from '@mui/material/Typography'
-
 import Divider from '@mui/material/Divider'
 
 // Components Imports
 import ListEvent from '../../../../../components/event-list/EventList'
 
 import { getAllMyEvents } from '@/api/inscripciones'
+import SectionTitle from '@/components/SectionTitle'
 
 interface Props {
   params: {
@@ -29,16 +28,19 @@ const CardBasic = async ({ params }: Props) => {
   return (
     <Grid container spacing={6}>
       <Grid item xs={12}>
-        <Typography variant='h3'>My Events</Typography>
-        <Typography variant='h6' sx={{opacity:0.5}}>You can see all your events that you have participated</Typography>
+        <SectionTitle
+          title={'Mis eventos'}
+          subTitle={'Todos los eventos en los que participaste'}
+          showIcon={false}
+        />
         <Divider />
       </Grid>
-      <ListEvent EventList={listEvents}/>
+      <ListEvent EventList={listEvents} />
 
-{/*       <Grid item xs={12} sm={6} md={4}>
+      {/*       <Grid item xs={12} sm={6} md={4}>
         <CardInfluencingInfluencerWithImg />
       </Grid> */}
-{/*       <Grid item xs={12} sm={6} md={4}>
+      {/*       <Grid item xs={12} sm={6} md={4}>
         <CardUser />
       </Grid>
       <Grid item xs={12} sm={6} md={4}>

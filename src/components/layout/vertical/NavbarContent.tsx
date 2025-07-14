@@ -1,37 +1,51 @@
 'use client'
 
-// MUI Imports
-import IconButton from '@mui/material/IconButton'
+import Link from 'next/link'
 
-// Third-party Imports
 import classnames from 'classnames'
 
 // Component Imports
 import { useSession } from 'next-auth/react'
 
-import NavToggle from './NavToggle'
+import { Icon } from '@iconify/react/dist/iconify.js'
 
+import NavToggle from './NavToggle'
 import ModeDropdown from '@components/layout/shared/ModeDropdown'
 import UserDropdown from '@components/layout/shared/UserDropdown'
 
 // Util Imports
 import { verticalLayoutClasses } from '@layouts/utils/layoutClasses'
 
-const NavbarContent = () => {
+import CustomButton from '@/components/ui/CustomButton'
 
-  const {data: session, status} = useSession()
+const NavbarContent = () => {
+  const { data: session, status } = useSession()
 
   return (
-    <div className={classnames(verticalLayoutClasses.navbarContent, 'flex items-center justify-between gap-4 is-full')}>
-      <div className='flex items-center gap-2 sm:gap-4'>
+    <div
+      className={classnames(
+        verticalLayoutClasses.navbarContent,
+        'flex items-center justify-between flex-wrap gap-4 is-full px-4 sm:px-6 py-3 bg-white dark:bg-[#0f172a] shadow-[0_4px_10px_rgba(0,0,0,0.1)] sticky top-0 z-50'
+      )}
+    >
+      {/* Left side (toggle and logo) */}
+      <div className="flex items-center gap-2 sm:gap-4">
         <NavToggle />
+        {/* Puedes agregar un logo aquí si quieres */}
+        <Link href='/'>
+              <CustomButton
+          
+              >
+                <Icon icon='streamline:return-2-solid' className='mr-2' />
+                Regresar al inicio
+              </CustomButton>
+            </Link>
       </div>
-      <div className='flex items-center'>
+
+      {/* Right side (mode + user menu) */}
+      <div className="flex items-center gap-3 sm:gap-4">
         <ModeDropdown />
-        <IconButton className='text-textPrimary'>
-          <i className='ri-notification-2-line' />
-        </IconButton>
-        {status === 'authenticated' && (<UserDropdown session={session}/>)}
+        {status === 'authenticated' && <UserDropdown session={session} />}
       </div>
     </div>
   )

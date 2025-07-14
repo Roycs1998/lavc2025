@@ -7,7 +7,7 @@
 .layer {
   position: absolute;
   inset: 0;
-  background-color: rgba(58, 52, 128, 0.6); /* Color morado #3a3480 con opacidad */ /* Color morado con opacidad */
+  background-color: rgba(25, 22, 66, 0.726); /* Color morado #3a3480 con opacidad */ /* Color morado con opacidad */
   pointer-events: none;
   block-size: 955px;
   inline-size: 100%;
@@ -15,8 +15,13 @@
 }
 
 .imagen {
-  inline-size: 100%;
-  block-size: 955px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.carouselItem {
+  position: relative;
+  height: 955px;
 }
 
 .textOverlay {
@@ -40,6 +45,10 @@
     block-size: 800px; /* Reduce la altura en pantallas más pequeñas */
     inline-size: 100%; /* Mantiene el ancho al 100% del contenedor padre */
     max-inline-size: none; /* Elimina el límite de ancho máximo */
+  }
+
+  .carouselItem {
+    height: 800px;
   }
 
   .layer {

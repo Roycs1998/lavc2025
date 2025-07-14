@@ -8,31 +8,37 @@ import Accordion from '@mui/material/Accordion'
 import AccordionSummary from '@mui/material/AccordionSummary'
 
 import AccordionDetails from '@mui/material/AccordionDetails'
-
 import Typography from '@mui/material/Typography'
-
-import { Box, Button, darken, Dialog, DialogActions, DialogContent, DialogTitle, MenuItem, TextField } from '@mui/material'
-
+import { Box, Button, darken, Divider, MenuItem, TextField } from '@mui/material'
 import { useSession } from 'next-auth/react'
 
 import { toast } from 'react-toastify'
 
 import { formatDate } from '@/libs/utils'
 
+import CustomButton from '@/components/ui/CustomButton'
+
+import { BecaModal } from './BecaModal'
+import { registerInscripcion } from '@/api/inscripciones'
+import type{ CreateInscripcionPayload } from '@/interfaces/my-events/interface'
+
 interface Route {
+  eventos: number
   route: string
   typeOfEvent: number
   costProfessionals?: number
   costHighSchoolStudents?: number
   costForeignProfessionals?: number
-  costForeignStudents?:number
+  costForeignStudents?: number
   workshopCost?: number
   dateWorkshop?: string
 }
 
-type ticketStructure = { value: string; price?: number, currency:string }
+
+type ticketStructure = { value: string; price?: number, currency: string }
 
 export const PurchaseLetter = ({
+  eventos,
   route,
   typeOfEvent,
   costProfessionals,
@@ -43,17 +49,51 @@ export const PurchaseLetter = ({
   dateWorkshop
 }: Route) => {
   const [ticket, setTicket] = useState<ticketStructure | null>(null)
-  const { status} = useSession()
+  const { status, ...restSession } = (useSession() as any);
   const [problemType, setProblemType] = useState('')
 
   const [expanded, setExpanded] = useState(true)
   const [trigger, setTrigger] = useState<boolean>(false)
-
-  // Estado para controlar el modal de activar beca
-  const [openBecaModal, setOpenBecaModal] = useState(false)
   
-  // Estado para almacenar el código de beca ingresado
-  const [becaCode, setBecaCode] = useState('')
+  // — Estado para abrir/cerrar el modal (ya lo tienes)
+  const [openBecaModal, setOpenBecaModal] = useState(false);
+
+  // — Tus estados existentes…
+  const [becaCode, setBecaCode] = useState('');
+
+  // — **Nuevos estados para el modal**:
+  const [operationNumber, setOperationNumber] = useState('');
+  const [paymentAmount, setPaymentAmount] = useState(0);
+  const [currency, setCurrency] = useState('PEN');
+  const [file, setFile] = useState<File | null>(null);
+  const [comprobanteType, setComprobanteType] = useState<'Boleta' | 'Factura'>('Boleta')
+  const [razonSocial, setRazonSocial] = useState('')
+  const [ruc, setRuc] = useState('')
+
+  const onActivateModal = async () => {
+    try {
+
+      const payload: CreateInscripcionPayload = {
+        usuario_codigo: restSession.data?.user?.user?.userCode,
+        taller_codigo: eventos,
+        tipo_inscripcion: 5,
+        inscripcion_correo: restSession.data?.user?.user?.userName,
+        inscripcion_monto_abonado: paymentAmount,
+        inscripcion_comprobante: comprobanteType,
+        inscripcion_estado: 1,
+        inscripcion_numero_operacion: operationNumber,
+        inscripcion_razonsocial: comprobanteType === 'Factura' ? razonSocial : '',
+        inscripcion_nfactura: comprobanteType === 'Factura' ? ruc : '',
+        file: file!
+      };
+
+      await registerInscripcion(payload);
+
+      setOpenBecaModal(false);
+    } catch {
+
+    }
+  };
 
   const tickets = useMemo(() => [
     {
@@ -133,10 +173,9 @@ export const PurchaseLetter = ({
 
   }, [ticket])
 
-
   const forceEffect = () => {
     status !== 'authenticated' ?
-    toast.warn('Debes iniciar sesión para comprar tu entrada'):setTrigger(!trigger)
+      toast.warn('Debes iniciar sesión para comprar tu entrada') : setTrigger(!trigger)
   }
 
   // Función para manejar el clic en "ACTIVAR BECA"
@@ -146,15 +185,6 @@ export const PurchaseLetter = ({
     } else {
       toast.warn('Debes iniciar sesión para activar la beca')
     }
-  }
-
-  // Función para procesar la activación de beca (aquí debes implementar la lógica que necesites)
-  const handleBecaActivation = () => {
-    // Ejemplo: Mostrar un toast con el código ingresado y cerrar el modal
-    toast.success(`Beca activada con el código: ${becaCode}`)
-    setOpenBecaModal(false)
-    
-    // Aquí puedes agregar la lógica para enviar el código al backend o lo que requieras.
   }
 
   return (
@@ -168,6 +198,7 @@ export const PurchaseLetter = ({
         }}
       >
         <Typography
+          variant='h5'
           sx={{
             color: 'var(--letter-color)',
             height: '100%',
@@ -175,11 +206,10 @@ export const PurchaseLetter = ({
             display: 'flex',
             marginLeft: '30px',
             alignItems: 'center',
-            fontSize: '13px',
             fontWeight: 800
           }}
         >
-          SELECCIÓN DE CATEGORIA
+          Proceso de inscripción
         </Typography>
       </Box>
       <Box sx={{ width: '450px' }}>
@@ -187,6 +217,7 @@ export const PurchaseLetter = ({
           <AccordionSummary aria-controls='panel1-content' id='panel1-header'>
             <Box sx={{ height: '90px', width: '100%' }}>
               <Typography
+                variant='h5'
                 sx={{
                   display: 'flex',
                   justifyContent: 'center',
@@ -194,7 +225,6 @@ export const PurchaseLetter = ({
                   height: '100%',
                   width: '100%',
                   fontWeight: 800,
-                  fontSize: '1.4rem',
                   padding: '20px'
                 }}
               >
@@ -203,11 +233,11 @@ export const PurchaseLetter = ({
             </Box>
           </AccordionSummary>
           {typeOfEvent !== 1 && typeOfEvent !== 3 && (
-            <AccordionDetails sx={{ bgcolor: '#f9f6fe' }}>
+            <AccordionDetails sx={{ bgcolor: '#f9f6fe', p: 0 }}>
 
               <Box
                 sx={{
-                  height: '100px',
+                  height: '80px',
                   padding: '10px',
                   display: 'flex',
                   justifyContent: 'center',
@@ -260,107 +290,94 @@ export const PurchaseLetter = ({
           )}
           <AccordionDetails>
             <Box >
-                <Link href={typeOfEvent === 2 ? (problemType &&  status === 'authenticated' ? route : '') : route}>
-                  <Button
-                    onClick={forceEffect}
-                    disabled={typeOfEvent === 2 ? !problemType : false}
-                    sx={{
-                      bgcolor: typeOfEvent === 2 && !problemType ? '#b8b4e7' : 'var(--primary-color-purple)', // Fondo desvanecido si está deshabilitado
-                      color: typeOfEvent === 2 && !problemType ? '#ffffff' : 'var(--letter-color)', // Texto blanco si está deshabilitado
-                      width: '100%',
-                      height: 55,
-                      fontWeight: 'bold',
-                      fontSize: '15px',
-                      opacity: typeOfEvent === 2 && !problemType ? 0.6 : 1, // Opacidad reducida si está deshabilitado
-                      transition: 'all 0.3s ease', // Transición suave al cambiar el estado
-                      '&:hover': {
-                        color: 'var(--letter-color)',
-                        backgroundColor: `${darken('#3a3480', 0.3)} !important`,
-                      },
-                      '&.Mui-disabled': {
-                        bgcolor: '#8781dd', // Fondo más claro si está deshabilitado
-                        color: '#ffffff', // Texto blanco si está deshabilitado
-                      },
-                    }}
-                  >
-                    COMPRAR TU ENTRADA
-                  </Button>
-                </Link>
+              <Link href={typeOfEvent === 2 ? (problemType && status === 'authenticated' ? route : '') : route}>
+                <CustomButton
+                  size='medium'
+                  disabled={typeOfEvent === 2 ? !problemType : false}
+                  onClick={forceEffect}
+                >
+                  Pagar entrada
+                </CustomButton>
+              </Link>
+              <Divider sx={{ my: 4, bgcolor: '#000', height: 2 }} />
+              <Typography align='center' variant="h5" color="text.secondary" sx={{ fontWeight: 800 }}>¿Tienes voucher de pago?</Typography>
+              <Box sx={{ mt: 1 }}>
+                <CustomButton
+                  onClick={handleActivateBeca}
+                >
+                  Subir constancia de pago
+                </CustomButton>
+              </Box>
 
-                <Box sx={{ mt: 1 }}>
+              <Box sx={{ mt: 1 }}>
+                <Divider sx={{ my: 4, bgcolor: '#000', height: 2 }} />
+                <Typography align='center' variant="h5" color="text.secondary" sx={{ fontWeight: 800 }}>¿Tienes codigo de beca?</Typography>
+
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  label="Código de Beca"
+                  placeholder='Ingrese el código de beca'
+                  type="text"
+                  fullWidth
+                  variant="outlined"
+                  value={becaCode}
+                  onChange={(e) => setBecaCode(e.target.value)}
+                />
+                <CustomButton
+                  onClick={handleActivateBeca}
+                >
+                  ACTIVAR BECA
+                </CustomButton>
+              </Box>
+
+              {status !== 'authenticated' && (
+                <Link href={'/login'}>
                   <Button
-                    onClick={handleActivateBeca}
                     sx={{
-                      backgroundColor: 'var(--primary-color-purple)',
-                      color: 'var(--letter-color)',
+                      bgcolor: 'var(--primary-color-purple)', // Fondo desvanecido si está deshabilitado
+                      color: 'var(--letter-color)', // Texto blanco si está deshabilitado
                       width: '100%',
                       height: 55,
                       marginTop: '10px',
                       fontWeight: 'bold',
                       fontSize: '15px',
-                      opacity: 1,
-                      transition: 'all 0.3s ease',
+                      opacity: 1, // Opacidad reducida si está deshabilitado
+                      transition: 'all 0.3s ease', // Transición suave al cambiar el estado
                       '&:hover': {
                         color: 'var(--letter-color)',
                         backgroundColor: `${darken('#3a3480', 0.3)} !important`,
                       },
                     }}
                   >
-                    ACTIVAR BECA
+                    INICIAR SESIÓN
                   </Button>
-                </Box>
-
-                {status !== 'authenticated' && (
-                  <Link href={'/login'}>
-                      <Button
-                        sx={{
-                          bgcolor:  'var(--primary-color-purple)', // Fondo desvanecido si está deshabilitado
-                          color:  'var(--letter-color)', // Texto blanco si está deshabilitado
-                          width: '100%',
-                          height: 55,
-                          marginTop: '10px',
-                          fontWeight: 'bold',
-                          fontSize: '15px',
-                          opacity:  1, // Opacidad reducida si está deshabilitado
-                          transition: 'all 0.3s ease', // Transición suave al cambiar el estado
-                          '&:hover': {
-                            color: 'var(--letter-color)',
-                            backgroundColor: `${darken('#3a3480', 0.3)} !important`,
-                          },
-                        }}
-                      >
-                        INICIAR SESIÓN
-                      </Button>
-                  </Link>
-                )}
+                </Link>
+              )}
 
             </Box>
           </AccordionDetails>
         </Accordion>
       </Box>
-      <Dialog open={openBecaModal} onClose={() => setOpenBecaModal(false)}>
-        <DialogTitle>Activar Beca</DialogTitle>
-        <DialogContent>
-          <TextField
-            autoFocus
-            margin="dense"
-            label="Código de Beca"
-            type="text"
-            fullWidth
-            variant="outlined"
-            value={becaCode}
-            onChange={(e) => setBecaCode(e.target.value)}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setOpenBecaModal(false)} color="secondary">
-            Cancelar
-          </Button>
-          <Button onClick={handleBecaActivation} color="primary">
-            Activar
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <BecaModal
+        open={openBecaModal}
+        onClose={() => setOpenBecaModal(false)}
+        operationNumber={operationNumber}
+        onChangeOperation={setOperationNumber}
+        paymentAmount={paymentAmount}
+        onChangeAmount={setPaymentAmount}
+        currency={currency}
+        onChangeCurrency={setCurrency}
+        file={file}
+        onFileUpload={setFile}
+        onActivate={onActivateModal} // esta es tu función final
+        comprobanteType={comprobanteType}
+        onChangeComprobanteType={setComprobanteType}
+        razonSocial={razonSocial}
+        onChangeRazonSocial={setRazonSocial}
+        ruc={ruc}
+        onChangeRuc={setRuc}
+      />
     </Box>
   )
 }

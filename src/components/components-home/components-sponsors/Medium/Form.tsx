@@ -1,10 +1,11 @@
 'use client'
 import { useState } from 'react'
 
-import { Box, Button, Card, CardContent, Grid, MenuItem, TextField, Typography } from '@mui/material'
+import { Box, Button, Card, CardContent, Grid, MenuItem, TextField } from '@mui/material'
 
 import { getInformationForMail } from '@/Services/Emailservice'
 import { SimpleAlert } from './Alert'
+import SectionTitle from '@/components/SectionTitle'
 
 interface FormErrors {
   username?: string
@@ -107,14 +108,12 @@ export const Form = () => {
       <CardContent>
         <form onSubmit={handleSubmit} className='p-4 max-is-[100%]'>
           <Grid container spacing={2}>
-            <Grid item xs={12} sx={{ marginBottom: '10px' }}>
-              <Typography variant='h6' sx={{ fontWeight: 'bold', fontSize: { xs: '1.5rem', md: '2rem' } }}>
-                Consúltanos
-              </Typography>
-
-              <Typography variant='body1' sx={{}}>
-                No dudes en escribirnos tus dudas o problemas referentes al LAVC 2025
-              </Typography>
+            <Grid item xs={12} sx={{ marginBottom: '10px' }}>             
+              <SectionTitle
+                    title={'Contáctanos ahora'}
+                    subTitle={<span className="">No dudes en escribirnos</span>}
+                    showIcon={false}
+                />
             </Grid>
             <Grid item xs={12} md={12} sx={{ display: 'flex', gap: 2 }}>
               <TextField

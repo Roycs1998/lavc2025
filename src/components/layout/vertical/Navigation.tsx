@@ -1,28 +1,34 @@
 'use client'
 
 // React Imports
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 
-// Next Imports
-import Link from 'next/link'
+import type { Session } from 'next-auth'
 
 // MUI Imports
-import { styled, useTheme } from '@mui/material/styles'
+import { styled, useColorScheme, useTheme } from '@mui/material/styles'
+
+// Type Imports
+import type { Mode, SystemMode } from '@core/types'
 
 // Component Imports
-import { useSession } from 'next-auth/react'
-
 import VerticalNav, { NavHeader } from '@menu/vertical-menu'
-
 import VerticalMenu from './VerticalMenu'
-
 import Logo from '@components/layout/shared/Logo'
 
 // Hook Imports
 import useVerticalNav from '@menu/hooks/useVerticalNav'
+import { useSettings } from '@core/hooks/useSettings'
 
 // Style Imports
 import navigationCustomStyles from '@core/styles/vertical/navigationCustomStyles'
+
+type Props = {
+  mode: Mode
+  systemMode: SystemMode
+  session: Session
+
+}
 
 const StyledBoxForShadow = styled('div')(({ theme }) => ({
   top: 60,
@@ -34,20 +40,38 @@ const StyledBoxForShadow = styled('div')(({ theme }) => ({
   width: 'calc(100% + 15px)',
   height: theme.mixins.toolbar.minHeight,
   transition: 'opacity .15s ease-in-out',
-  background: `linear-gradient(var(--mui-palette-background-default) 5%, rgb(var(--mui-palette-background-defaultChannel) / 0.85) 30%, rgb(var(--mui-palette-background-defaultChannel) / 0.5) 65%, rgb(var(--mui-palette-background-defaultChannel) / 0.3) 75%, transparent)`,
+  background: `linear-gradient(var(--mui-palette-background-paper) ${
+    theme.direction === 'rtl' ? '95%' : '5%'
+  }, rgb(var(--mui-palette-background-paperChannel) / 0.85) 30%, rgb(var(--mui-palette-background-paperChannel) / 0.5) 65%, rgb(var(--mui-palette-background-paperChannel) / 0.3) 75%, transparent)`,
   '&.scrolled': {
     opacity: 1
   }
 }))
 
-const Navigation = () => {
+const Navigation = (props: Props) => {
+  // Props
+  const { mode, systemMode } = props
+
   // Hooks
+  const verticalNavOptions = useVerticalNav()
+  const { settings } = useSettings()
+  const { mode: muiMode, systemMode: muiSystemMode } = useColorScheme()
   const theme = useTheme()
-  const {data: session}= useSession()
-  const { isBreakpointReached, toggleVerticalNav } = useVerticalNav()
 
   // Refs
   const shadowRef = useRef(null)
+
+  // Vars
+  const { collapseVerticalNav, isBreakpointReached } = verticalNavOptions
+  const isServer = typeof window === 'undefined'
+  const isSemiDark = settings.semiDark
+  let isDark
+
+  if (isServer) {
+    isDark = mode === 'system' ? systemMode === 'dark' : mode === 'dark'
+  } else {
+    isDark = muiMode === 'system' ? muiSystemMode === 'dark' : muiMode === 'dark'
+  }
 
   const scrollMenu = (container: any, isPerfectScrollbar: boolean) => {
     container = isBreakpointReached || !isPerfectScrollbar ? container.target : container
@@ -64,19 +88,35 @@ const Navigation = () => {
     }
   }
 
+  useEffect(() => {
+    if (settings.layout === 'collapsed') {
+      collapseVerticalNav(true)
+    } else {
+      collapseVerticalNav(false)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [settings.layout])
+
   return (
-    // eslint-disable-next-line lines-around-comment
-    // Sidebar Vertical Menu
-    <VerticalNav customStyles={navigationCustomStyles(theme)}>
+
+    <VerticalNav
+      customStyles={navigationCustomStyles(theme)}
+      {...(isSemiDark &&
+        !isDark && {
+          'data-mui-color-scheme': 'dark'
+        })}
+    >
       {/* Nav Header including Logo & nav toggle icons  */}
       <NavHeader>
-        <Link href='/'>
-          <Logo />
-        </Link>
-        {isBreakpointReached && <i className='ri-close-line text-xl' onClick={() => toggleVerticalNav(false)} />}
+        <Logo />
       </NavHeader>
       <StyledBoxForShadow ref={shadowRef} />
-      <VerticalMenu session={session} scrollMenu={scrollMenu} />
+      <VerticalMenu
+        
+        scrollMenu={scrollMenu}
+        session={props.session}
+ 
+      />
     </VerticalNav>
   )
 }

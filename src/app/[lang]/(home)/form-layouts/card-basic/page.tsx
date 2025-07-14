@@ -44,9 +44,6 @@ const CardBasic = () => {
       <Grid item xs={12} sm={6} md={4}>
         <CardWatch />
       </Grid>
-{/*       <Grid item xs={12} md={8}>
-        <CardLifetimeMembership />
-      </Grid> */}
       <Grid item xs={12} sm={6} md={4}>
         <CardInfluencingInfluencer />
       </Grid>

@@ -6,11 +6,10 @@ import Script from 'next/script'
 
 import { useRouter } from 'next/navigation'
 
-import { Box, Button, Grid, Typography, useMediaQuery } from '@mui/material'
+import { Box, Grid, Typography, useMediaQuery } from '@mui/material'
 
 import { useSession } from 'next-auth/react'
 
-import { CardImage } from '@/components/components-home/components-ponentes/CardImage'
 
 import { SubtitleTag } from '@/components/components-home/components-reusable/SubtitleTag'
 
@@ -25,6 +24,7 @@ import { ConfirmPayment } from '@/components/components-home/components-buys/com
 import { CheckPaymentGateway } from '@/components/components-home/components-buys/components-confirm/confirm-payment/PaymentGateway'
 
 import { formatDate } from '@/libs/utils'
+import CustomButton from '@/components/ui/CustomButton'
 
 const Confirm = () => {
   const isSmallScreen = useMediaQuery('(max-width:1275px)')
@@ -104,7 +104,7 @@ const Confirm = () => {
     CheckPaymentGateway(
       eventData.name || 'Sin asignar',
       Number(eventData.price),
-      eventData.paymentMethod,
+      eventData.typeOfPayment,
       setAlertMessage,
       eventData.currency,
       (session as any)?.user?.user?.userName,
@@ -117,12 +117,7 @@ const Confirm = () => {
 
   return (
     <Box>
-      <Box>
-        <CardImage
-          image='http://4.bp.blogspot.com/-APWtYanIkJQ/UXY6C3qtIvI/AAAAAAAAFIo/c4JXBPicD8c/s1600/perros.jpg'
-          title='CONFIRMAR'
-        />
-      </Box>
+
       <Box sx={{}}>
         <Grid container spacing={0} sx={{}}>
           <Grid
@@ -130,7 +125,7 @@ const Confirm = () => {
             xs={12}
             sm={12}
             md={isSmallScreen ? 12 : 6.5}
-            sx={{ marginBottom: '7%', marginTop: '7%', paddingLeft: 'var(--global-padding-inline)' }}
+            sx={{ marginBottom: '7%',  marginTop: isSmallScreen ? '20%' : '7%', paddingLeft: 'var(--global-padding-inline)' }}
           >
             <Box sx={{ paddingLeft: '30px', marginBottom: '40px' }}>
                 <Typography variant='body1' fontWeight='bold' sx={{ fontSize: '14px' }}>
@@ -177,24 +172,12 @@ const Confirm = () => {
               {isSmallScreen && (
                 <Box>
                   <Typography sx={{ width: '100%', marginTop: '50px' }}>
-                    <Button
+
+                    <CustomButton 
                       onClick={handlerClickOpenPay}
-                      disabled={!allSelected}
-                      sx={{
-                        bgcolor: 'var(--primary-color-purple)',
-                        color: 'var(--letter-color)',
-                        width: '100%',
-                        height: 55,
-                        fontWeight: 'bold',
-                        fontSize: '15px',
-                        '&:hover': {
-                          color: 'var(--letter-color)', // Cambiar color si es necesario
-                          bgcolor: '#7f76d9'
-                        }
-                      }}
-                    >
-                      CONTINUAR
-                    </Button>
+                      disabled={!allSelected}>
+                    CONTINUAR
+                  </CustomButton>
                   </Typography>
                   {alertMessage && <AlertIndications alert={alertMessage} />}
                 </Box>
@@ -233,7 +216,7 @@ const Confirm = () => {
                   disableButton={!allSelected}
                   amount={Number(eventData.price)}
                   currency={eventData.currency}
-                  typeOfPayment={eventData.paymentMethod}
+                  typeOfPayment={eventData.typeOfPayment}
                   email={(session as any)?.user?.user?.userName}
                   userCode={(session as any)?.user?.user?.userCode}
 
@@ -248,7 +231,6 @@ const Confirm = () => {
         </Grid>
       </Box>
       <Script src='https://js.culqi.com/checkout-js' />
-      <pre>{JSON.stringify({eventData,session},null,2)}</pre>
     </Box>
   )
 }

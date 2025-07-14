@@ -14,16 +14,10 @@ const Soporte = async () => {
           title='SOPORTE'
         />
       </Box>
-      <Box
-        className='global-padding'
-        sx={{ paddingBottom: '2%', paddingTop: '5%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
-      >
+      <div className="max-w-7xl w-full mx-auto px-4 md:px-6 lg:px-8 flex flex-col justify-center py-10 gap-10">
         <Medium />
-      </Box>
-      <Box
-        className='global-padding'
-        sx={{ paddingBottom: '5%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
-      >
+      </div>
+      <Box className="max-w-7xl w-full mx-auto px-4 md:px-6 lg:px-8 flex flex-col justify-center py-10 gap-10">
         <PostCard></PostCard>
       </Box>
     </Box>

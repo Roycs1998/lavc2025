@@ -4,6 +4,8 @@ import { useState } from 'react'
 
 import { Box, Button, Card, CardContent, CardMedia, Grid, Link, Typography } from '@mui/material'
 
+import SectionTitle from '@/components/SectionTitle'
+
 interface Speaker {
   title: string
   image: string
@@ -41,24 +43,14 @@ export const Informationletter = ({
   const truncatedText = paragraphTwo ? paragraphTwo.slice(0, 100) : ''
 
   return (
-    <Card sx={{ maxWidth: '100%', border: 0 }}>
+    <Card className="z-2 max-w-7xl w-full mx-auto px-4 md:px-6 lg:px-8 flex flex-col justify-center py-10 gap-10">
       <Grid container spacing={0} sx={{ bgcolor: 'var(--color-card-background)', padding: '5%' }}>
         <Grid xs={12} md={12}>
-          <Typography
-            variant='h2'
-            component='div'
-            gutterBottom
-            sx={{
-              textAlign: { xs: 'center', md: 'center' },
-              marginTop: '50px',
-              height: { xs: 'auto', md: 'auto' },
-              fontWeight: 'bold',
-              textTransform: 'uppercase',
-              fontSize: { xs: '2.7rem', sm: '4rem', md: '4rem' }
-            }}
-          >
-            {title}
-          </Typography>
+        <SectionTitle
+                    title={title}
+                    subTitle={<span className="">Más Información</span>}
+                    showIcon={false}
+                />
         </Grid>
         <Grid item xs={12} sm={12} md={5.5}>
           <CardContent>

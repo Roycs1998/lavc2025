@@ -16,7 +16,7 @@ const BRippie = () => {
       <Box className='global-padding' sx={{ paddingBottom: '3%', paddingTop: '3%', bgcolor: 'var(--background-form)' }}>
         <Informationletter
           title='GANADOR'
-          image='https://tlavc-peru.org/img/brippie-2024.jpeg'
+          image='https://tlavc-peru.org/img/brippie2025.jpg'
           subtitleOne='BECA RIPPIE'
           paragraphOne='El objetivo de esta beca es generar una experiencia única para los jovenes estudiantes de medicina veterinaria ya que podran acceder a muchos conocimentos dentro de el LAVC , la Beca está dirigida a estudiantes de las diferentes regiones del Perú fuera de Lima.'
           subtitleThree='Los lineamientos establecidos de la beca RIPPIE son los siguientes:'

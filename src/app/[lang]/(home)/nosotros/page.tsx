@@ -6,17 +6,20 @@ import EmojiEventsOutlinedIcon from '@mui/icons-material/EmojiEventsOutlined'
 import { CardImage } from '@/components/components-home/components-ponentes/CardImage'
 import { Informationletter } from '@/components/components-home/components-reusable/InformationLetter'
 import { SecondInformationLetter } from '@/components/components-home/components-reusable/SecondInformationLetter'
+import { Huellas } from '@/components/ui/Huellas'
 
 const Us = async () => {
   return (
-    <Box>
+    <Box  className="w-full text-base font-light bg-[#ebeff3] text-white ">
       <Box>
         <CardImage
           image='https://www.tlavc-peru.org/tlavc/vista/upload/galeria/lavc20231%20(12).jpeg'
           title='NOSOTROS SOMOS LAVC'
         />
       </Box>
-      <Box className='global-padding' sx={{ paddingBottom: '3%', paddingTop: '3%', bgcolor: 'var(--background-form)' }}>
+
+      <Box className="max-w-7xl w-full mx-auto px-4 md:px-6 lg:px-8 flex flex-col justify-center py-10 gap-10">
+      <Huellas position={{ top: '400px', left: '40px' }} rotateDeg={30} tipoHuellas="pato" color="#3a3480" opacity={0.7} />
         <Informationletter
           title='La Conferencia Veterinaria Latinoamericana'
           image='http://www.blogerin.com/wp-content/uploads/2012/10/Fotos-tiernas-de-perritos-wallpapers-2.jpg'

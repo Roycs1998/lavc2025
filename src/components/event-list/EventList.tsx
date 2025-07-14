@@ -20,7 +20,7 @@ const ListEvent = ({ EventList }: Props) => {
         direction="column"
         alignItems="center"
         justifyContent="center"
-        sx={{ minHeight: "50vh" }}
+        
       >
         <SentimentDissatisfiedIcon sx={{ fontSize: 60, mb: 2 }} />
         <Typography variant="h6" align="center" gutterBottom>

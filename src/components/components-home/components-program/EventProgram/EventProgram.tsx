@@ -5,6 +5,8 @@ import { Box, Tab, Tabs, Typography } from '@mui/material'
 
 import PetsIcon from '@mui/icons-material/Pets'
 
+import { Icon } from '@iconify/react/dist/iconify.js'
+
 import { ProgramLetters } from './ProgramLetters'
 
 interface TabPanelProps {
@@ -44,38 +46,125 @@ export const EventProgram = () => {
       day: 'PRIMER DIA',
       content: [
         {
-          hour: '9:00 am - 11:00 am',
-          issue: 'Efficient Business Management Techniques',
-          exhibitorName: 'by Jane Smith, JCole Co.',
-          image: 'https://tlavc-peru.org/tlavc/vista/upload/expositores/802d9320-c709-4b93-86b4-6e995b5199ca.jpeg',
+          facultad: 'medicina-felina',
+          hour: '8:00 am - 10:00 am',
+          issue: 'Desentrañando los misterios del gato vomitador. Parte 1',
+          exhibitorName: 'by Nicole K. Martell-Moran,',
+          image: 'https://tlavc-peru.org/tlavc/vista/upload/expositores/MartellMoran.png',
           eventDescription:
-            'John Clark, the founder of iStep, one of the most successful American IT companies, will teach you how to plan the work of your startup the right way and get successful.',
-          location: 'Hall #1'
+            'Desentrañando los misterios del gato...',
+          location: 'Sala #1'
         },
         {
-          hour: '9:00 am - 11:00 am',
-          issue: 'Efficient Business Management Techniques',
-          exhibitorName: 'by Jane Smith, JCole Co.',
-          image: 'https://tlavc-peru.org/tlavc/vista/upload/expositores/Enie%20Ward.jpg',
-          eventDescription: '',
-          location: ''
+          facultad: 'medicina-felina',
+          hour: '10:00 am - 12:00 pm',
+          issue: 'Desentrañando los misterios del gato vomitador. Parte 2',
+          exhibitorName: 'by Nicole K. Martell-Moran,',
+          image: 'https://tlavc-peru.org/tlavc/vista/upload/expositores/MartellMoran.png',
+          eventDescription: 'Desentrañando los misterios del gato... Parte 2',
+          location: 'Sala #1'
         },
         {
-          hour: '9:00 am - 11:00 am',
-          issue: 'Efficient Business Management Techniques',
-          exhibitorName: 'by Jane Smith, JCole Co.',
-          image: 'https://tlavc-peru.org/tlavc/vista/upload/expositores/esther-klok.png',
-          eventDescription:
-            'John Clark, the founder of iStep, one of the most successful American IT companies, will teach you how to plan the work of your startup the right way and get successful.',
-          location: 'Hall #1'
+          type: 'separator',
+          hour: '12:00 pm - 1:00 pm',
+          issue: 'Almuerzo',
+          exhibitorName: 'by Nicole K. Martell-Moran,',
+          image: 'https://tlavc-peru.org/tlavc/vista/upload/expositores/MartellMoran.png',
+          eventDescription: 'Desentrañando los misterios del gato... Parte 2',
+          location: 'Sala #1'
         },
         {
-          hour: '9:00 am - 11:00 am',
-          issue: 'Efficient Business Management Techniques',
-          exhibitorName: 'by Jane Smith, JCole Co.',
-          image: 'https://tlavc-peru.org/tlavc/vista/upload/expositores/BENITA.jpg',
-          eventDescription: '',
-          location: ''
+          facultad: 'medicina-felina',
+          hour: '1:00 pm - 02:00 pm',
+          issue: 'Efectos de la extirpación de garras en gatos y por qué no debe realizarse',
+          exhibitorName: 'by Nicole K. Martell-Moran,',
+          image: 'https://tlavc-peru.org/tlavc/vista/upload/expositores/MartellMoran.png',
+          eventDescription: 'Efectos de la extirpación de garras en gatos... ',
+          location: 'Sala #1'
+        },
+        {
+          facultad: 'medicina-felina',
+          hour: '02:00 pm - 04:00 pm',
+          issue: 'Diagnóstico y manejo del hipertiroidismo en gatos',
+          exhibitorName: 'by Nicole K. Martell-Moran,',
+          image: 'https://tlavc-peru.org/tlavc/vista/upload/expositores/MartellMoran.png',
+          eventDescription: 'Diagnóstico y manejo del hipertiroidismo en gatos...',
+          location: 'Sala #1'
+        }
+        ,
+        {
+          facultad: 'medicina-felina',
+          hour: '04:00 pm - 05:00 pm',
+          issue: 'Rinitis crónica en gatos',
+          exhibitorName: 'by Nicole K. Martell-Moran,',
+          image: 'https://tlavc-peru.org/tlavc/vista/upload/expositores/MartellMoran.png',
+          eventDescription: 'Rinitis crónica en gatos...',
+          location: 'Sala #1'
+        }
+        ,
+        {
+          facultad: 'medicina-felina',
+          hour: '05:00 pm - 06:00 pm',
+          issue: 'Presentaciones y gestión de FIP',
+          exhibitorName: 'by Nicole K. Martell-Moran,',
+          image: 'https://tlavc-peru.org/tlavc/vista/upload/expositores/MartellMoran.png',
+          eventDescription: 'Presentaciones y gestión de FIP...',
+          location: 'Sala #2'
+        },
+        {
+          facultad: 'enfermedades-respiratorias',
+          hour: '8:00 am - 10:00 am',
+          issue: 'Uso de los Patrones de Respiración en la Evaluación de la Dificultad Respiratoria en Gatos.',
+          exhibitorName: 'by Carol Reinero,,',
+          image: 'https://tlavc-peru.org/tlavc/vista/upload/expositores/reinero.png',
+          eventDescription: 'Uso de los Patrones de Respiración en la Evaluación de la Dificultad Respiratoria en Gatos...',
+          location: 'Sala #2'
+        },
+        {
+          facultad: 'enfermedades-respiratorias',
+          hour: '10:00 am - 12:00 pm',
+          issue: 'Neumonía Bacteriana Canina: ¿Qué Hay de Nuevo?.',
+          exhibitorName: 'by Carol Reinero,,',
+          image: 'https://tlavc-peru.org/tlavc/vista/upload/expositores/reinero.png',
+          eventDescription: 'Neumonía Bacteriana Canina: ¿Qué Hay de Nuevo?...',
+          location: 'Sala #2'
+        },
+        {
+          type: 'separator',
+          hour: '12:00 pm - 1:00 pm',
+          issue: 'Principios Farmacológicos para el Manejo de Enfermedades Respiratorias.',
+          exhibitorName: 'by Carol Reinero,,',
+          image: 'https://tlavc-peru.org/tlavc/vista/upload/expositores/reinero.png',
+          eventDescription: 'Principios Farmacológicos para el Manejo de Enfermedades Respiratorias...',
+          location: 'Sala #2'
+        },
+        {
+          facultad: 'enfermedades-respiratorias',
+          hour: '1:00 pm - 02:00 pm',
+          issue: 'Enfermedades Respiratorias que Puede Que No Haya Aprendido en la Escuela Veterinaria.',
+          exhibitorName: 'by Carol Reinero,,',
+          image: 'https://tlavc-peru.org/tlavc/vista/upload/expositores/reinero.png',
+          eventDescription: 'Enfermedades Respiratorias que Puede Que No Haya Aprendido en la Escuela Veterinaria...',
+          location: 'Sala #2'
+        },
+        {
+          facultad: 'enfermedades-respiratorias',
+          hour: '02:00 pm - 04:00 pm',
+          issue: 'Casos Respiratorios Desafiantes en Perros y Gatos.',
+          exhibitorName: 'by Carol Reinero,,',
+          image: 'https://tlavc-peru.org/tlavc/vista/upload/expositores/reinero.png',
+          eventDescription: 'Casos Respiratorios Desafiantes en Perros y Gatos...',
+          location: 'Sala #2'
+        }
+        ,
+        {
+          facultad: 'enfermedades-respiratorias',
+          hour: '04:00 pm - 05:00 pm',
+          issue: 'Enfermedad de las Grandes Vías Respiratorias (bronquial) en gatos..',
+          exhibitorName: 'by Carol Reinero,,',
+          image: 'https://tlavc-peru.org/tlavc/vista/upload/expositores/reinero.png',
+          eventDescription: 'Enfermedad de las Grandes Vías Respiratorias (bronquial) en gatos....',
+          location: 'Sala #2'
         }
       ]
     },
@@ -195,7 +284,7 @@ export const EventProgram = () => {
           }}
         >
           <Typography
-            className='global-padding'
+            className='global-padding hidden md:block '
             variant='h1'
             component='div'
             sx={{
@@ -203,10 +292,10 @@ export const EventProgram = () => {
               fontWeight: 800,
               textAlign: 'center',
               width: '100%',
-              color: 'var(--second-color-purple)'
+              color: '#3a3480'
             }}
           >
-            <PetsIcon sx={{ fontSize: { xs: '3rem', sm: '3rem', md: '4rem' } }}></PetsIcon> Lavc 2025
+            <PetsIcon sx={{ fontSize: { xs: '3rem', sm: '3rem', md: '4rem' } }}></PetsIcon> LAVC 2026
           </Typography>
         </Box>
 
@@ -216,11 +305,10 @@ export const EventProgram = () => {
             display: 'flex',
             width: { xs: '100%', md: '55%' }, // Ocupa el 100% en pantallas pequeñas y 60% en medianas y grandes
             height: '100px',
-            bgcolor: 'var(--second-color-purple)',
+            bgcolor: '#f9c426',
             justifyContent: 'center',
             alignItems: 'center',
             position: 'relative',
-            mt: { xs: 2, md: 0 }, // Añade un margen superior en pantallas pequeñas para separar los elementos
             paddingRight: 'var(--global-padding-inline)'
           }}
         >
@@ -237,19 +325,35 @@ export const EventProgram = () => {
               }
             }}
           >
-            {days.map((day, index) => (
-              <Tab
-                key={index}
-                sx={{
-                  fontSize: { xs: '0.7rem', sm: '0.8rem', md: '1rem' },
-                  fontWeight: 700,
-                  color: 'var(--letter-color)',
-                  mr: { xs: 1, sm: 3, md: 6 }
-                }}
-                label={day.day}
-                {...a11yProps(index)}
-              />
-            ))}
+{days.map((day, index) => {
+  
+  const isEnabled = index === 0 // Solo el primer día está habilitado
+  
+  return (
+    <Tab
+      key={index}
+      disabled={!isEnabled}
+      sx={{
+        fontSize: { xs: '0.7rem', sm: '0.8rem', md: '1rem' },
+        fontWeight: 700,
+        color: 'var(--letter-color)',
+        mr: { xs: 1, sm: 3, md: 6 },
+        display: 'flex',
+        alignItems: 'center',
+        gap: 1,
+        opacity: isEnabled ? 1 : 0.5, // Visualmente más tenue
+        pointerEvents: isEnabled ? 'auto' : 'none' // Por si acaso
+      }}
+      label={
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+          {!isEnabled && <Icon icon="streamline-pixel:interface-essential-waiting-hourglass-loading" fontSize="1.2rem" />}
+          {day.day}
+        </Box>
+      }
+      {...a11yProps(index)}
+    />
+  )
+})}
           </Tabs>
         </Box>
       </Box>

@@ -8,7 +8,7 @@ export function middleware(req: any) {
   const pathSegments = url.pathname.split('/').filter(Boolean)
 
   const isApiRoute = url.pathname.startsWith('/api/')
-  const isStaticResource = /\.(css|js|jpg|jpeg|png|gif|svg|ico|woff|woff2|json|map)$/.test(url.pathname)
+  const isStaticResource = /\.(css|js|jpg|jpeg|png|gif|svg|ico|woff|woff2|json|map|mp4|webm|ogg)$/.test(url.pathname)
 
   if (isApiRoute || isStaticResource) {
     return NextResponse.next()

@@ -1,0 +1,6 @@
+.huellaDecorativa {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}

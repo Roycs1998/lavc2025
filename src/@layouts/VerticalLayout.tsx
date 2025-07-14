@@ -8,7 +8,7 @@ import classnames from 'classnames'
 import type { ChildrenType } from '@core/types'
 
 // Component Imports
-import LayoutContent from './components/vertical/LayoutContent'
+import LayoutContent from './vertical/LayoutContent'
 
 // Util Imports
 import { verticalLayoutClasses } from './utils/layoutClasses'

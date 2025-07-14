@@ -4,7 +4,7 @@ import { Card, CardContent, Divider, Grid, Typography } from '@mui/material'
 
 export const PostCard = () => {
   return (
-    <Card sx={{ boxShadow: 'none', border: 'none', paddingTop: '1%', width: '90%', borderRadius: '10px' }}>
+    <Card >
       <CardContent>
         <Grid container spacing={2} justifyContent='center' alignItems='flex-start'>
           {/* Soporte al cliente */}

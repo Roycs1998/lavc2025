@@ -9,6 +9,7 @@ import Providers from '@components/Providers'
 import BlankLayout from '@layouts/BlankLayout'
 
 import 'react-toastify/dist/ReactToastify.css'
+import BackToHomeButton from '@/components/ui/BackToHomeButton'
 
 const Layout = ({ children }: ChildrenType) => {
   // Vars
@@ -37,6 +38,7 @@ const Layout = ({ children }: ChildrenType) => {
           }}
           
         />
+        <BackToHomeButton />
         {children}</BlankLayout>
     </Providers>
   )

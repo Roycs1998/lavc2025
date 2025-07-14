@@ -167,10 +167,10 @@ const VerticalMenu = ({ scrollMenu, session }: {
 
         {session?.user?.user?.profileCode === 1 && (
           <>
-            <MenuItem href={`/my-profile`} icon={<i className='ri-user-settings-line' />}>
+       {/*      <MenuItem href={`/my-profile`} icon={<i className='ri-user-settings-line' />}>
               Account Settings
             </MenuItem>
-
+ */}
             <MenuItem
               icon={<i className='ri-home-smile-line' />}
               href={`/my-events/${session?.user?.user?.userCode}`}
@@ -178,6 +178,13 @@ const VerticalMenu = ({ scrollMenu, session }: {
             >
               Mis tickets
             </MenuItem>
+            {/* <MenuItem
+              icon={<i className='ri-home-smile-line' />}
+              href={`/my-certificates`}
+              suffix={<Chip size='small' color='primary' variant='tonal' />}
+            >
+              Mis Certificados
+            </MenuItem> */}
 {/*             <SubMenu
                 label='My Events'
                 icon={<i className='ri-home-smile-line' />}

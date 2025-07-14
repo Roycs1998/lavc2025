@@ -148,3 +148,27 @@ code {
   background-color: rgb(var(--mui-palette-info-mainChannel) / 0.08);
   border: 0;
 }
+
+.swiper-slide-active .slide-content h3 {
+  transform: translateX(0);
+  opacity: 1;
+  transition-delay: 0s;
+}
+
+.swiper-slide-active .slide-content p {
+  transform: translateX(0);
+  opacity: 1;
+  transition-delay: 0.3s;
+}
+
+.swiper-slide-next .slide-content h3,
+.swiper-slide-next .slide-content p {
+  transform: translateX(100px);
+  opacity: 0;
+}
+
+.swiper-slide-prev .slide-content h3,
+.swiper-slide-prev .slide-content p {
+  transform: translateX(-100px);
+  opacity: 0;
+}

@@ -160,6 +160,7 @@ const Eventos = ({ params }: EventParameters) => {
               }}
             >
               <PurchaseLetter
+                eventos={Number(eventos)}
                 route={`/compra/ticket?EventoId=${workshop?.codeWorkshop}`}
                 typeOfEvent={workshop?.workshopType.workshopTypeCode ?? 0}
                 costProfessionals={workshop?.workshopCostProfessionals}

@@ -3,12 +3,14 @@ import { useEffect, useState } from 'react'
 
 import Link from 'next/link'
 
-import { Box, Button, Grid, Typography, useMediaQuery } from '@mui/material'
+import { Box, Grid, Typography, useMediaQuery } from '@mui/material'
 
 import { PurchaseEventLetter } from '@/components/components-home/components-buys/purchase-event-letter'
-import { CardImage } from '@/components/components-home/components-ponentes/CardImage'
+
 import { AdditionalInformationLetter } from '@/components/components-home/components-buys/components-additional/AdditionalInformationLetter'
 import { SubtitleTag } from '@/components/components-home/components-reusable/SubtitleTag'
+import CustomButton from '@/components/ui/CustomButton'
+import { formatDate } from '@/libs/utils'
 
 const Additional = () => {
   const [eventName, setEventName] = useState<string>('')
@@ -47,12 +49,6 @@ const Additional = () => {
 
   return (
     <Box>
-      <Box>
-        <CardImage
-          image='https://images.reporteindigo.com/wp-content/uploads/2019/11/devoluciones-pymes.jpg'
-          title='ADICIONALES'
-        />
-      </Box>
       <Box sx={{}}>
         <Grid container spacing={0} sx={{}}>
           <Grid
@@ -60,8 +56,23 @@ const Additional = () => {
             xs={12}
             sm={12}
             md={isSmallScreen ? 12 : 6.5}
-            sx={{ marginBottom: '7%', marginTop: '7%', paddingLeft: 'var(--global-padding-inline)' }}
+            sx={{ marginBottom: '7%', marginTop:isSmallScreen ? '20%' : '7%', paddingLeft: 'var(--global-padding-inline)' }}
           >
+            <Box sx={{ paddingLeft: '30px', marginBottom: '40px' }}>
+              <Typography variant='body1' fontWeight='bold' sx={{ fontSize: '14px' }}>
+                {eventPlace}
+              </Typography>
+              <Typography
+                variant='h6'
+                fontWeight='bold'
+                sx={{ paddingTop: '12px', fontSize: '1.9rem', fontWeight: 700 }}
+              >
+                {eventName}
+              </Typography>
+              <Typography variant='body1' sx={{ color: 'text.secondary', fontSize: '13px', paddingTop: '5px' }}>
+                {formatDate(eventStartDate)}
+              </Typography>
+            </Box>
             {isSmallScreen && (
               <Box sx={{ paddingLeft: '30px', marginBottom: '40px' }}>
                 <Typography variant='body1' fontWeight='bold' sx={{ fontSize: '14px' }}>
@@ -88,22 +99,9 @@ const Additional = () => {
               {isSmallScreen && (
                 <Typography sx={{ width: '100%', marginTop: '50px' }}>
                   <Link href='/compra/pago'>
-                    <Button
-                      sx={{
-                        bgcolor: 'var(--primary-color-purple)',
-                        color: 'var(--letter-color)',
-                        width: '100%',
-                        height: 55,
-                        fontWeight: 'bold',
-                        fontSize: '15px',
-                        '&:hover': {
-                          color: 'var(--letter-color)', // Cambiar color si es necesario
-                          bgcolor: '#7f76d9'
-                        }
-                      }}
-                    >
+                    <CustomButton>
                       CONTINUAR
-                    </Button>
+                    </CustomButton>
                   </Link>
                 </Typography>
               )}

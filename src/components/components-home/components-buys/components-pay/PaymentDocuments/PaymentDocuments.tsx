@@ -1,136 +1,108 @@
 'use client'
-import type { SetStateAction } from 'react'
-import { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 
-import { Box, FormControl, FormControlLabel, Radio, RadioGroup, TextField, Typography } from '@mui/material'
+import type { FC } from 'react'
 
-export const PaymentDocuments = () => {
-  const [selectedOption, setSelectedOption] = useState('Boleta')
-  const [inputValue, setInputValue] = useState('')
-  const [companyName, setCompanyName] = useState('')
+import {
+  Box,
+  FormControl,
+  FormControlLabel,
+  Radio,
+  RadioGroup,
+  TextField,
+  Typography,
+} from '@mui/material'
 
-  const handleChange = (event: { target: { value: SetStateAction<string> } }) => {
-    setSelectedOption(event.target.value)
-  }
+interface PaymentDocumentsProps {
+  
+  /** Valor seleccionado: 'Boleta' o 'Factura' */
+  value: 'Boleta' | 'Factura'
+  
+  /** Callback cuando cambia el tipo de documento */
+  onTypeChange: (type: 'Boleta' | 'Factura') => void
+  
+  /** Callback con datos de factura: { ruc, companyName } cuando es Factura */
+  onInvoiceDataChange?: (data: { ruc: string; companyName: string }) => void
+}
 
+export const PaymentDocuments: FC<PaymentDocumentsProps> = ({
+  value,
+  onTypeChange,
+  onInvoiceDataChange,
+}) => {
+  // Internal state only for controlled inputs
+  const [ruc, setRuc] = React.useState('')
+  const [companyName, setCompanyName] = React.useState('')
+
+  // Disparar callback de datos de factura
   useEffect(() => {
-    const storedEvent = localStorage.getItem('eventData')
-
-    if (storedEvent) {
-      const event = JSON.parse(storedEvent)
-
-      const updatedEventData = {
-        ...event, // Copiamos las propiedades del evento original
-        typeOfPayment: selectedOption,
-        ruc: selectedOption === 'Factura' ? inputValue : '',
-        companyName: companyName
-      }
-
-      localStorage.setItem('eventData', JSON.stringify(updatedEventData))
+    if (value === 'Factura' && onInvoiceDataChange) {
+      onInvoiceDataChange({ ruc, companyName })
     }
-  }, [inputValue, companyName, selectedOption])
+  }, [ruc, companyName, value, onInvoiceDataChange])
 
   return (
     <Box>
       <FormControl component='fieldset'>
-        <RadioGroup row value={selectedOption} onChange={handleChange}>
-          <FormControlLabel
-            value='Boleta'
-            control={<Radio sx={{ '& .MuiSvgIcon-root': { fontSize: 18 }, paddingRight: '4px' }} />}
-            label='Boleta'
-            sx={{ '& .MuiTypography-root': { fontSize: '0.75rem' }, marginRight: '30px' }}
-          />
-          <FormControlLabel
-            value='Factura'
-            control={<Radio sx={{ '& .MuiSvgIcon-root': { fontSize: 18 }, paddingRight: '4px' }} />}
-            label='Factura'
-            sx={{ '& .MuiTypography-root': { fontSize: '0.75rem' } }}
-          />
+        <RadioGroup
+          row
+          value={value}
+          onChange={(e) => onTypeChange(e.target.value as 'Boleta' | 'Factura')}
+        >
+          {['Boleta', 'Factura'].map((opt) => (
+            <FormControlLabel
+              key={opt}
+              value={opt}
+              control={
+                <Radio
+                  sx={{  paddingRight: '4px' }}
+                />
+              }
+              label={opt}
+              sx={{ marginRight: '30px' }}
+            />
+          ))}
         </RadioGroup>
 
-        <Box mt={1} p={0} border='none'>
-          {selectedOption === 'Boleta' && (
-            <Box>
-              <Typography variant='body1' sx={{ fontSize: '0.9rem' }}>
-                Las entradas son vendidas por TELETICKET, por cuenta y orden de la empresa organizadora del evento,
-                correspondiéndole la entrega de Comprobante de Pago (boleta o factura) únicamente por el monto de la
-                comisión por servicio de venta.
+        {value === 'Factura' && (
+          <Box mt={2}>
+            <Typography variant='subtitle1' sx={{ marginBottom: 1 }}>
+              Ingresa tus datos para generar factura por S/ 3.00
+            </Typography>
+            <TextField
+              size='small'
+              fullWidth
+              label='RUC de la Empresa'
+              placeholder='Ingresa el RUC de la empresa'
+              value={ruc}
+              onChange={(e) => setRuc(e.target.value)}
+              sx={{ mb: 2 }}
+            />
+            <TextField
+              size='small'
+              fullWidth
+              label='Nombre de la Empresa'
+              placeholder='Ingresa el Nombre de la empresa'
+              value={companyName}
+              onChange={(e) => setCompanyName(e.target.value)}
+              sx={{ mb: 2 }}
+            />
+            <Box sx={{ pl: 1 }}>
+              <Typography
+                variant='body2'
+                sx={{ '&::before': { content: '"•"', mr: 0.5, fontWeight: 700 } }}
+              >
+                La factura se realizará por el monto correspondiente a la comisión
               </Typography>
-              <Typography variant='body1' sx={{ fontSize: '0.9rem', marginTop: '25px' }}>
-                Para descargar tu Boleta ingresa a “MI CUENTA”
+              <Typography
+                variant='body2'
+                sx={{ '&::before': { content: '"•"', mr: 0.5, fontWeight: 700 } }}
+              >
+                Si requieres factura por el monto restante, deberás solicitarlo directamente a la empresa organizadora.
               </Typography>
             </Box>
-          )}
-          {selectedOption === 'Factura' && (
-            <Box>
-              <Typography variant='h5' sx={{ marginBottom: '10px' }}>
-                Ingresa tus datos para generar factura por S/ 3.00
-              </Typography>
-              <Typography variant='body1' sx={{ fontSize: '0.7rem', fontWeight: 700, marginBottom: '5px' }}>
-                RUC Empresa
-              </Typography>
-              <Box sx={{ marginBottom: '20px' }}>
-                <TextField
-                  id='outlined-basic'
-                  value={inputValue}
-                  onChange={e => setInputValue(e.target.value)}
-                  variant='outlined'
-                  placeholder='Ingresa el RUC de la empresa'
-                  type='number'
-                  sx={{
-                    width: '100%', // Ajusta el ancho
-                    '& .MuiInputBase-root': {
-                      height: '26px',
-                      borderRadius: '0',
-                      '& input': {
-                        fontSize: '0.8rem' // Cambia este valor al tamaño de letra que desees
-                      }
-                    }
-                  }}
-                />
-              </Box>
-              <Typography variant='body1' sx={{ fontSize: '0.7rem', fontWeight: 700, marginBottom: '5px' }}>
-                Nombre de empresa
-              </Typography>
-              <Box sx={{ marginBottom: '20px' }}>
-                <TextField
-                  id='outlined-basic'
-                  value={companyName}
-                  onChange={e => setCompanyName(e.target.value)}
-                  variant='outlined'
-                  placeholder='Ingresa el RUC de la empresa'
-                  type='text'
-                  sx={{
-                    width: '100%', // Ajusta el ancho
-                    '& .MuiInputBase-root': {
-                      height: '26px',
-                      borderRadius: '0',
-                      '& input': {
-                        fontSize: '0.8rem' // Cambia este valor al tamaño de letra que desees
-                      }
-                    }
-                  }}
-                />
-              </Box>
-
-              <Box sx={{ paddingLeft: '10px' }}>
-                <Typography
-                  variant='body1'
-                  sx={{ '&::before': { content: '"•"', marginRight: '4px', fontWeight: 700 }, fontSize: '0.9rem' }}
-                >
-                  La factura se realizará por el monto correspondiente a la comisión
-                </Typography>
-                <Typography
-                  variant='body1'
-                  sx={{ '&::before': { content: '"•"', marginRight: '4px', fontWeight: 700 }, fontSize: '0.9rem' }}
-                >
-                  Si requieres factura por el monto restante, deberás solicitarlo directamente a la empresa
-                  organizadora.
-                </Typography>
-              </Box>
-            </Box>
-          )}
-        </Box>
+          </Box>
+        )}
       </FormControl>
     </Box>
   )

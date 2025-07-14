@@ -1,11 +1,12 @@
 'use client'
 import { useState } from 'react'
 
-import { Box, Button, Card, CardContent, Grid, Typography } from '@mui/material'
+import { Box, Card, CardContent, Grid, Typography } from '@mui/material'
 
 import { CheckPaymentGateway } from './PaymentGateway'
 import { AlertIndications } from '@/components/components-home/components-reusable/AlertIndications'
 import { formatDate } from '@/libs/utils'
+import CustomButton from '@/components/ui/CustomButton'
 
 interface EventInformation {
   image: string
@@ -53,7 +54,8 @@ export const ConfirmPayment = ({
         sx={{
           maxWidth: 400,
           borderRadius: 0,
-          boxShadow: 'none'
+          boxShadow: 'none',
+          marginTop: '15%',
         }}
       >
         <Box sx={{ height: '210px', width: '100%', overflow: 'hidden' }}>
@@ -90,24 +92,12 @@ export const ConfirmPayment = ({
                   )}
 
               <Typography sx={{ minWidth: '300px', width: '400px', marginTop: '30px' }}>
-                <Button
+              <CustomButton                   
                   onClick={handlerClickOpenPay}
                   disabled={disableButton}
-                  sx={{
-                    bgcolor: 'var(--primary-color-purple)',
-                    color: 'var(--letter-color)',
-                    width: '100%',
-                    height: 55,
-                    fontWeight: 'bold',
-                    fontSize: '15px',
-                    '&:hover': {
-                      color: 'var(--letter-color)', // Cambiar color si es necesario
-                      bgcolor: '#7f76d9'
-                    }
-                  }}
-                >
-                  CONTINUAR
-                </Button>
+                  >
+                    CONTINUAR
+                  </CustomButton>
               </Typography>
             </Grid>
           </Grid>

@@ -5,32 +5,7 @@ import { Form } from './Form'
 export const Medium = () => {
   return (
     <Box
-      sx={{
-        maxWidth: '90%',
-        paddingBottom: '3%',
-        paddingTop: '3%',
-        background: 'var(--color-card-background)',
-        borderRadius: '10px'
-      }}
     >
-{/*       <Box sx={{ marginBottom: { xs: '0px', md: '30px' } }}>
-        <Typography
-          variant='h2'
-          component='h2'
-          sx={{
-            textAlign: 'center',
-            fontWeight: 'bold',
-            background: 'linear-gradient(to right, #d8d8d8 40%, #7f76d9 60%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent'
-          }}
-        >
-          Get in touch
-        </Typography>
-        <Typography variant='h6' sx={{ textAlign: 'center' }}>
-          Reach out, and let s create a universe of possibilities together!
-        </Typography>
-      </Box> */}
       <Box>
         <Grid
           container

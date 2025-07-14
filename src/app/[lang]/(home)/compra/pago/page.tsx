@@ -1,16 +1,16 @@
 'use client'
 import { useEffect, useState } from 'react'
 
-import { Box, Button, Grid, Link, Typography, useMediaQuery } from '@mui/material'
+import { Box, Grid, Link, Typography, useMediaQuery } from '@mui/material'
 
 import { PurchaseEventLetter } from '@/components/components-home/components-buys/purchase-event-letter'
-import { CardImage } from '@/components/components-home/components-ponentes/CardImage'
 import { PaymentDocuments } from '@/components/components-home/components-buys/components-pay/PaymentDocuments'
 import { PaymentMethod } from '@/components/components-home/components-buys/components-pay/PaymentMethod'
 import { CostTable } from '@/components/components-home/components-buys/CostTable'
 import { SubtitleTag } from '@/components/components-home/components-reusable/SubtitleTag'
 import { AlertIndications } from '@/components/components-home/components-reusable/AlertIndications'
 import { formatDate } from '@/libs/utils'
+import CustomButton from '@/components/ui/CustomButton'
 
 const Payments = () => {
   const [eventName, setEventName] = useState<string>('')
@@ -21,6 +21,8 @@ const Payments = () => {
   const [ticketPrice, setTicketPrice] = useState<string>('')
   const isSmallScreen = useMediaQuery('(max-width:1275px)')
   const [ticketCurrency, setTicketCurrency] = useState<string>('')
+  const [docType, setDocType] = useState<'Boleta' | 'Factura'>('Boleta');
+  const [invoiceData, setInvoiceData] = useState({ ruc: '', companyName: '' });
 
   const [offsetY, setOffsetY] = useState(0)
   const maxOffsetY = 300
@@ -45,12 +47,17 @@ const Payments = () => {
       setTicketCurrency(event.currency)
 
       const updatedEventData = {
-        ...event, // Copiamos las propiedades del evento original
-        paymentMethod: expandedId
+        ...event,
+        paymentMethod: expandedId,
+        typeOfPayment: docType,
+        ruc: invoiceData.ruc || '',
+        companyName: invoiceData.companyName || ''
       }
 
       localStorage.setItem('eventData', JSON.stringify(updatedEventData))
     }
+
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [expandedId])
 
   const handleScroll = () => {
@@ -69,14 +76,13 @@ const Payments = () => {
     localStorage.setItem('typeOfPayment', String(expandedId))
   }, [expandedId])
 
+  const canContinue = Boolean(expandedId) && (
+    docType === 'Boleta'
+    || (docType === 'Factura' && invoiceData.ruc.trim() !== '' && invoiceData.companyName.trim() !== '')
+  );
+
   return (
     <Box>
-      <Box>
-        <CardImage
-          image='https://finanzasycredito.mx/sites/finanzasycredito.mx/files/styles/article_hero/public/mx-guide-formas-de-pago-825x293.png?itok=ROmhTvnQ'
-          title='TIPOS DE PAGOS'
-        />
-      </Box>
       <Box sx={{}}>
         <Grid container spacing={0} sx={{}}>
           <Grid
@@ -84,8 +90,23 @@ const Payments = () => {
             xs={12}
             sm={12}
             md={isSmallScreen ? 12 : 6.5}
-            sx={{ marginBottom: '7%', marginTop: '7%', paddingLeft: 'var(--global-padding-inline)' }}
+            sx={{ marginBottom: '7%', marginTop: isSmallScreen ? '20%' : '7%', paddingLeft: 'var(--global-padding-inline)' }}
           >
+            <Box sx={{ paddingLeft: '30px', marginBottom: '40px' }}>
+              <Typography variant='body1' fontWeight='bold' sx={{ fontSize: '14px' }}>
+                Centro de Exposiciones Jockey - CEJ
+              </Typography>
+              <Typography
+                variant='h6'
+                fontWeight='bold'
+                sx={{ paddingTop: '12px', fontSize: '1.9rem', fontWeight: 700 }}
+              >
+                {eventName}
+              </Typography>
+              <Typography variant='body1' sx={{ color: 'text.secondary', fontSize: '13px', paddingTop: '5px' }}>
+                {formatDate(eventStartDate)}
+              </Typography>
+            </Box>
             {isSmallScreen && (
               <Box sx={{ paddingLeft: '30px', marginBottom: '40px' }}>
                 <Typography variant='body1' fontWeight='bold' sx={{ fontSize: '14px' }}>
@@ -105,24 +126,23 @@ const Payments = () => {
             )}
             <Box sx={{ paddingRight: '10px', paddingLeft: '30px' }}>
               <Box>
-                <SubtitleTag caption='Selecciona documento' />
-                <PaymentDocuments />
+                <SubtitleTag caption='TIPO DE COMPROBANTE' />
+                <PaymentDocuments
+                  value={docType}
+                  onTypeChange={setDocType}
+                  onInvoiceDataChange={setInvoiceData}
+                />
                 <Box sx={{ marginTop: '50px' }}>
                   <SubtitleTag caption='SELECCIONA TU MEDIO DE PAGO' />
                 </Box>
+                {!expandedId && (
+                  <Box sx={{ paddingLeft: '2%', paddingRight: '2%', marginTop: '30px' }}>
+                    <AlertIndications alert='Debe seleccionar un medio de pago' />
+                  </Box>
+                )}
                 <Box sx={{ marginTop: '10px' }}>
                   {eventTicket !== 'EXTRANJERO' ? (
                     <Box>
-{/*                       <PaymentMethod
-                        id='NIUBIZ'
-                        expandedId={expandedId}
-                        onChange={handleChange}
-                        image='https://teleticket.com.pe/content/images/mediopago/mp112.png?v=20241104'
-                        name='NIUBIZ'
-                        paymentInstitutions='Tarjeta de crédito / débito / Yape'
-                        description='Revisa el detalle de la compra y el monto a pagar antes de Continuar, una vez procesado el pago no existen cambios ni devoluciones'
-                        paymentTypeImage='https://cdnp.teleticket.com.pe/Content/images/mediopago/opd_niubiz.png'
-                      /> */}
                       <PaymentMethod
                         id='CULQI'
                         expandedId={expandedId}
@@ -155,56 +175,6 @@ const Payments = () => {
                         ]}
                         informationThree='Revisa el detalle de la compra y el monto a pagar antes de Continuar, una vez procesado el pago no existen cambios ni devoluciones'
                       />
-{/*                       <PaymentMethod
-                        id='PagoEfectivo'
-                        expandedId={expandedId}
-                        onChange={handleChange}
-                        image='https://teleticket.com.pe/content/images/mediopago/mp106.png?v=20241101'
-                        name='PagoEfectivo'
-                        paymentInstitutions='Banca móvil, Agentes y Bodegas vía PagoEfectivo'
-                        description='Genera un código de 9 dígitos y págalo a través de:'
-                        informationOne='Banca Móvil / Internet: Paga en BBVA, BCP, Interbank, Scotiabank, BanBif, Caja Arequipa y Banco Pichincha, a través de la banca por internet o banca móvil en la opción pago de servicios.'
-                        informationTwo='Agentes y Bodegas: Deposita en BBVA, BCP, Interbank, Scotiabank, BanBif, Wester Union, Tambo+, Kasanet, Ya Ganaste, Red Digital, Comercio Multiservicios Niubiz, MoneyGram, Caja Arequipa, Disashop, Cellpower.'
-                        listOfPaymentEntities={[
-                          {
-                            paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_1.png'
-                          },
-                          {
-                            paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_7.png'
-                          },
-                          {
-                            paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_2.png'
-                          },
-                          {
-                            paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_8.png'
-                          },
-                          {
-                            paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_3.png'
-                          },
-                          {
-                            paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_9.png'
-                          },
-                          {
-                            paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_4.png'
-                          },
-                          {
-                            paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_10.png'
-                          },
-                          {
-                            paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_5.png'
-                          },
-                          {
-                            paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_11.png'
-                          },
-                          {
-                            paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_6.png'
-                          },
-                          {
-                            paymentEntity: 'https://cdnp.teleticket.com.pe/Content/images/mediopago/pagoefectivo_12.png'
-                          }
-                        ]}
-                        informationThree='Revisa el detalle de la compra y el monto a pagar antes de Continuar, una vez procesado el pago no existen cambios ni devoluciones'
-                      /> */}
                     </Box>
                   ) : (
                     <PaymentMethod
@@ -239,36 +209,19 @@ const Payments = () => {
                     />
                   )}
                 </Box>
-                {!expandedId && (
-                  <Box sx={{ paddingLeft: '2%', paddingRight: '2%', marginTop: '30px' }}>
-                    <AlertIndications alert='Debe seleccionar un medio de pago' />
-                  </Box>
-                )}
+
                 <Box>
-                <CostTable ticketName={eventTicket} price={Number(ticketPrice)} currency={ticketCurrency} />
+                  <CostTable ticketName={eventTicket} price={Number(ticketPrice)} currency={ticketCurrency} />
                 </Box>
               </Box>
 
               {isSmallScreen && (
                 <Typography sx={{ width: '100%', marginTop: '50px' }}>
-                  <Link href={expandedId ? '/compra/confirmar' : '#'}>
-                    <Button
-                      disabled={expandedId ? false : true}
-                      sx={{
-                        bgcolor: 'var(--primary-color-purple)',
-                        color: 'var(--letter-color)',
-                        width: '100%',
-                        height: 55,
-                        fontWeight: 'bold',
-                        fontSize: '15px',
-                        '&:hover': {
-                          color: 'var(--letter-color)', // Cambiar color si es necesario
-                          bgcolor: '#7f76d9'
-                        }
-                      }}
-                    >
+                  <Link href={canContinue ? '/compra/confirmar' : '#'}>
+                    <CustomButton
+                      disabled={!canContinue}>
                       CONTINUAR
-                    </Button>
+                    </CustomButton>
                   </Link>
                 </Typography>
               )}
@@ -304,7 +257,7 @@ const Payments = () => {
                   eventDate={eventStartDate}
                   eventName={eventName}
                   pageRoute='/compra/confirmar'
-                  disableButton={expandedId ? false : true}
+                  disableButton={!canContinue}
                 />
               </Box>
             </Grid>

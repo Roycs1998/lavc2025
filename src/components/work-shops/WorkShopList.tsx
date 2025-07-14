@@ -4,7 +4,7 @@ import type{ Key } from 'react';
 
 import Link from 'next/link';
 
-import { Box, Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 
 import type{ Workshop } from '@/interfaces';
 
@@ -18,8 +18,8 @@ const WorkShopList = ({workShopsList}:Props)=>{
 
   return (
     <>
-    <Box>
-          <Box className='global-padding' sx={{ paddingTop: '3%', paddingBottom: '3%', backgroundColor: '#ffffff' }}>
+        <div className="w-full text-base font-light bg-[#ffffff] text-white ">
+        <div className="max-w-7xl w-full mx-auto px-4 md:px-6 lg:px-8 flex flex-col justify-center py-20 gap-10">
         <Grid container spacing={4} justifyContent='center' alignItems='center'>
           {workShopsList.map((event: { codeWorkshop: Key | null | undefined; workshopPhoto: string; location: string; workshopStartDate: string | number | Date; workshopName: string; }) => (
             <Grid item xs={11.5} sm={6} md={5} key={event.codeWorkshop}>
@@ -38,8 +38,8 @@ const WorkShopList = ({workShopsList}:Props)=>{
             </Grid>
           ))}
         </Grid>
-      </Box>
-    </Box>
+      </div>
+    </div>
     </>
   )
 }

@@ -2,7 +2,9 @@
 
 import Link from 'next/link'
 
-import { Box, Button, Card, CardContent, Grid, Typography } from '@mui/material'
+import { Box, Card, CardContent, Grid, Typography } from '@mui/material'
+
+import CustomButton from '@/components/ui/CustomButton'
 
 interface EventInformation {
   image: string
@@ -27,13 +29,14 @@ export const PurchaseEventLetter = ({
         sx={{
           maxWidth: 400,
           borderRadius: 0,
-          boxShadow: 'none'
+          boxShadow: 'none',
+          marginTop: '15%',
         }}
       >
         <Box sx={{ height: '210px', width: '100%', overflow: 'hidden' }}>
           <Box
             component='img'
-            src={image ? `https://tlavc-peru.org/tlavc/vista/${image}`: ''}
+            src={image ? `https://tlavc-peru.org/tlavc/vista/${image}` : ''}
             alt=''
             className='card-media'
             sx={{
@@ -62,23 +65,9 @@ export const PurchaseEventLetter = ({
               </Typography>
               <Typography sx={{ minWidth: '300px', width: '400px', marginTop: '30px' }}>
                 <Link href={!disableButton && pageRoute ? pageRoute : '#'}>
-                  <Button
-                    disabled={disableButton}
-                    sx={{
-                      bgcolor: 'var(--primary-color-purple)',
-                      color: 'var(--letter-color)',
-                      width: '100%',
-                      height: 55,
-                      fontWeight: 'bold',
-                      fontSize: '15px',
-                      '&:hover': {
-                        color: 'var(--letter-color)', // Cambiar color si es necesario
-                        bgcolor: '#7f76d9'
-                      }
-                    }}
-                  >
+                  <CustomButton disabled={disableButton}>
                     CONTINUAR
-                  </Button>
+                  </CustomButton>
                 </Link>
               </Typography>
             </Grid>

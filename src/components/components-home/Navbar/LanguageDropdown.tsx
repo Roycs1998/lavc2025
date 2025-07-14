@@ -9,8 +9,6 @@ import { usePathname, useParams } from 'next/navigation'
 
 import { TbLanguage } from 'react-icons/tb'
 
-// MUI Imports
-import IconButton from '@mui/material/IconButton'
 import Popper from '@mui/material/Popper'
 import Fade from '@mui/material/Fade'
 import Paper from '@mui/material/Paper'
@@ -58,7 +56,7 @@ const languageData: LanguageDataType[] = [
   }
 ]
 
-const LanguageDropdown = ({ isScroled, className }: Props) => {
+const LanguageDropdown = ({ className }: Props) => {
   // States
   const [open, setOpen] = useState(false)
 
@@ -88,13 +86,13 @@ const LanguageDropdown = ({ isScroled, className }: Props) => {
 
   return (
     <>
-      <IconButton
+      <button
         ref={anchorRef}
         onClick={handleToggle}
-        className={`${className} ${isScroled ? 'text-white' : pathName.toString() === '/en' || pathName.toString() === '/es' || pathName.toString() === '/pt' ? 'text-white' : 'text-white'}`}
+        className={`backdrop-blur-sm bg-[#f1c82e] hover:bg-[#dcbf2c] text-white px-2 py-1 mr-1 rounded-md flex items-center gap-1 ${className}`}
       >
-        <TbLanguage />
-      </IconButton>
+        <TbLanguage size={20} />
+      </button>
       <Popper
         open={open}
         transition

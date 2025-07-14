@@ -9,7 +9,7 @@ const Program = async () => {
       <Box>
         <CardImage
           image='https://www.mdzol.com/u/fotografias/m/2022/9/9/f1456x819-1279355_1449725_5050.jpg'
-          title='PROGRAMA'
+          title='PROGRAMA PRELIMINAR'
         />
       </Box>
       <Box sx={{ paddingTop: '3%' }}>

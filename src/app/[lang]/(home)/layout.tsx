@@ -2,7 +2,7 @@ import 'react-toastify/dist/ReactToastify.css'
 
 import { ToastContainer } from 'react-toastify'
 
-import { FooterTwo } from '@/components/components-home/FooterTwo'
+
 
 import { Navbar } from '@/components/components-home/Navbar'
 
@@ -13,6 +13,9 @@ import type { Locale } from '@/configs/i18n'
 import BlankLayout from '@/@layouts/BlankLayout'
 
 import Providers from '@components/Providers'
+
+import { FooterTwo } from '@/components/components-home/FooterTwo/FooterTwo'
+import SocialWidget from '@/components/social/SocialWidgetProps'
 
 export default async function HomeLayout({ children, params }: Readonly<{ children: React.ReactNode , params: { lang: Locale } }>) {
 
@@ -46,6 +49,7 @@ export default async function HomeLayout({ children, params }: Readonly<{ childr
       {children}
 
     </BlankLayout>
+    <SocialWidget phoneNumber="+51985174876" message="¡Hola! ¿En qué puedo ayudarte?" />
     <FooterTwo dictionary={dictionary} />
   </Providers>
 )

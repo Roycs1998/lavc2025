@@ -12,3 +12,14 @@ export const getAllPonentes = async () => {
   }
 }
 
+
+export const getPonente = async (id:string) => {
+  try {
+    const response = await Api.get<any>(`/ponente/${id}`)
+
+    return response.data
+  } catch (error) {
+    toast.error(`No se obtuvo los ponentes: ${error}`)
+  }
+}
+

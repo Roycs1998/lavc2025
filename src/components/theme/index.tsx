@@ -67,8 +67,10 @@ const ThemeProvider = (props: Props) => {
         }
       }
     }
+    
+    const mode = settings.mode === 'dark' ? 'dark' : 'light' // fuerza 'system' a 'light'
 
-    const coreTheme = deepmerge(defaultCoreTheme(settings.mode || 'light', direction), newColorScheme)
+    const coreTheme = deepmerge(defaultCoreTheme(mode, direction), newColorScheme)
 
     return extendTheme(coreTheme)
 
