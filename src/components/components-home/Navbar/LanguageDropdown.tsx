@@ -89,9 +89,9 @@ const LanguageDropdown = ({ className }: Props) => {
       <button
         ref={anchorRef}
         onClick={handleToggle}
-        className={`backdrop-blur-sm bg-[#f1c82e] hover:bg-[#dcbf2c] text-white px-2 py-1 mr-1 rounded-md flex items-center gap-1 ${className}`}
+        className={`backdrop-blur-sm bg-[#3a3480] hover:bg-[#3a3480]/80 text-white hover:text-[#3a3480] px-2 py-1 mr-1 rounded-md flex items-center gap-1 ${className}`}
       >
-        <TbLanguage size={20} />
+         <TbLanguage size={20} className="text-white hover:text-[#3a3480]" />
       </button>
       <Popper
         open={open}

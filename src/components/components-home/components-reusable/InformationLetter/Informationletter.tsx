@@ -2,7 +2,14 @@
 
 import { useState } from 'react'
 
-import { Box, Button, Card, CardContent, CardMedia, Grid, Link, Typography } from '@mui/material'
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Grid,
+  Typography
+} from '@mui/material'
 
 import SectionTitle from '@/components/SectionTitle'
 
@@ -39,214 +46,146 @@ export const Informationletter = ({
 }: Speaker) => {
   const [isExpanded, setIsExpanded] = useState(false)
   const toggleExpand = () => setIsExpanded(!isExpanded)
-
   const truncatedText = paragraphTwo ? paragraphTwo.slice(0, 100) : ''
 
   return (
-    <Card className="z-2 max-w-7xl w-full mx-auto px-4 md:px-6 lg:px-8 flex flex-col justify-center py-10 gap-10">
-      <Grid container spacing={0} sx={{ bgcolor: 'var(--color-card-background)', padding: '5%' }}>
-        <Grid xs={12} md={12}>
-        <SectionTitle
-                    title={title}
-                    subTitle={<span className="">Más Información</span>}
-                    showIcon={false}
-                />
+    <Card className="max-w-7xl w-full mx-auto px-4 md:px-6 lg:px-8 py-10">
+      <Grid container sx={{ bgcolor: 'var(--color-card-background)' }}>
+        <Grid item xs={12}>
+          <SectionTitle
+            title={title}
+            subTitle={<span>Más Información</span>}
+            showIcon={false}
+          />
         </Grid>
-        <Grid item xs={12} sm={12} md={5.5}>
-          <CardContent>
-            {/* Imagen en pantallas pequeñas */}
+
+        <Grid item xs={12}>
+          <CardContent sx={{ position: 'relative' }}>
+            {/* Imagen flotada a la derecha en desktop */}
             <Box
+              component="img"
+              src={image}
+              alt={title}
               sx={{
-                display: { xs: 'flex', md: 'none' }, // Mostrar solo en pantallas pequeñas
-                justifyContent: 'center',
-                marginTop: '20px',
-                marginBottom: '30px'
+                display: { xs: 'none', md: 'block' },
+                float: 'right',
+                width: 300,
+                height: 'auto',
+                ml: 3,
+                mb: 2,
+                borderRadius: 2
               }}
-            >
-              <CardMedia
-                component='img'
-                image={image} // Asegúrate de que 'image' contiene una URL válida
-                alt='Descripción de la imagen'
-                sx={{ maxWidth: '100%', height: 'auto' }} // Se adapta al tamaño del contenedor
-              />
-            </Box>
+            />
+
+            {/* Imagen centrada en mobile */}
+            <Box
+              component="img"
+              src={image}
+              alt={title}
+              sx={{
+                display: { xs: 'block', md: 'none' },
+                width: '100%',
+                height: 'auto',
+                mb: 2,
+                borderRadius: 2
+              }}
+            />
 
             {description && (
-              <Typography
-                variant='body1'
-                sx={{
-                  textAlign: { xs: 'center', md: 'left' },
-                  marginTop: '10px'
-                }}
-              >
+              <Typography variant="body1" mb={2}>
                 {description}
               </Typography>
             )}
 
-            {/* Especializaciones */}
-            <Box sx={{ textAlign: { xs: 'center', md: 'left' }, marginTop: '15px' }}>
-              <Typography
-                variant='body1'
-                component='span'
-                sx={{
-                  fontWeight: 'bold',
-                  fontSize: '1.2rem',
-                  textTransform: 'uppercase'
-                }}
-              >
-                {subtitleOne || ''}
-              </Typography>
-              <Typography variant='body1' component='span' sx={{ marginLeft: '8px' }}>
-                {paragraphOne}
-              </Typography>
-            </Box>
+            {subtitleOne && (
+              <>
+                <Typography
+                  variant="body1"
+                  sx={{ fontWeight: 'bold', mt: 4, mb: 1 }}
+                >
+                  {subtitleOne}
+                </Typography>
+                <Typography variant="body1" mb={2}>
+                  {paragraphOne}
+                </Typography>
+              </>
+            )}
 
-            {/* Intereses científicos */}
-            <Box
-              sx={{
-                textAlign: { xs: 'center', md: 'left' },
-                marginTop: '15px',
-                marginBottom: '20px'
-              }}
-            >
-              {paragraphTwo && (
-                <Box>
-                  <Typography
-                    variant='body1'
-                    component='span'
-                    sx={{
-                      fontWeight: 'bold',
-                      fontSize: '1.2rem',
-                      textTransform: 'uppercase'
-                    }}
-                  >
-                    {subtitleTwo}
-                  </Typography>
-                  <Typography variant='body1' component='span' sx={{ marginLeft: '8px' }}>
-                    {isExpanded ? paragraphTwo : `${truncatedText}...`}
-                  </Typography>
+            {subtitleTwo && (
+              <>
+                <Typography
+                  variant="body1"
+                  sx={{ fontWeight: 'bold', mt: 4, mb: 1 }}
+                >
+                  {subtitleTwo}
+                </Typography>
+                <Typography variant="body1" mb={1}>
+                  {isExpanded ? paragraphTwo : `${truncatedText}...`}
+                </Typography>
+                <Button
+                  onClick={toggleExpand}
+                  variant="text"
+                  sx={{ fontSize: '0.9rem', fontWeight: 'bold' }}
+                >
+                  {isExpanded ? 'Mostrar menos' : 'Leer más'}
+                </Button>
+              </>
+            )}
 
+            {subtitleThree && (
+              <>
+                <Typography
+                  variant="body1"
+                  sx={{ fontWeight: 'bold', mt: 4, mb: 1 }}
+                >
+                  {subtitleThree}
+                </Typography>
+                {stepsThree
+                  ?.split('.')
+                  .map((s, i) =>
+                    s.trim() ? (
+                      <Typography key={i} variant="body1" mb={1} ml={2}>
+                        {`${i + 1}. ${s.trim()}`}
+                      </Typography>
+                    ) : null
+                  )}
+                {stepsFour
+                  ?.split('.')
+                  .map((s, i) =>
+                    s.trim() ? (
+                      <Typography key={i} variant="body1" mb={1} ml={2}>
+                        {s.trim()}
+                      </Typography>
+                    ) : null
+                  )}
+              </>
+            )}
+
+            {formText && (
+              <>
+                <Typography variant="body1" sx={{ mt: 4, mb: 2 }}>
+                  {formText}
+                </Typography>
+                <Box textAlign="center" mt={2}>
                   <Button
-                    onClick={toggleExpand}
-                    variant='text'
+                    href={linkButton || '#'}
+                    variant="contained"
                     sx={{
-                      fontSize: '0.9rem',
+                      bgcolor: 'var(--primary-color-purple)',
+                      color: 'var(--letter-color)',
+                      px: 5,
+                      py: 1.5,
                       fontWeight: 'bold',
-                      textTransform: 'none'
+                      fontSize: '0.875rem',
+                      '&:hover': { bgcolor: '#7f76d9' }
                     }}
                   >
-                    {isExpanded ? 'Mostrar menos' : 'Leer más'}
+                    {forButton}
                   </Button>
                 </Box>
-              )}
-
-              {subtitleThree && (
-                <Box sx={{ marginTop: '20px' }}>
-                  <Typography
-                    variant='body1'
-                    sx={{
-                      fontWeight: 'bold',
-                      fontSize: '1rem',
-                      textTransform: 'uppercase',
-
-                      marginBottom: '10px'
-                    }}
-                  >
-                    {subtitleThree}
-                  </Typography>
-
-                  {stepsThree &&
-                    stepsThree.split('.').map(
-                      (sentence, index) =>
-                        sentence.trim() && (
-                          <Typography key={index} variant='body1' sx={{ marginLeft: '8px', marginBottom: '5px' }}>
-                            {`${index + 1}. ${sentence.trim()}`}
-                          </Typography>
-                        )
-                    )}
-
-                  {stepsFour &&
-                    stepsFour.split('.').map(
-                      (sentence, index) =>
-                        sentence.trim() && (
-                          <Typography key={index} variant='body1' sx={{ marginLeft: '8px', marginBottom: '5px' }}>
-                            {sentence.trim()}
-                          </Typography>
-                        )
-                    )}
-                </Box>
-              )}
-
-              {formText && (
-                <Box>
-                  <Typography
-                    variant='body1'
-                    sx={{
-                      fontSize: '1rem',
-                      marginTop: '50px'
-                    }}
-                  >
-                    {formText}
-                  </Typography>
-                  <Typography sx={{ marginTop: '40px', textAlign: { xs: 'center', md: 'center' } }}>
-                    <Link href={linkButton || '#'}>
-                      <Button
-                        sx={{
-                          bgcolor: 'var(--primary-color-purple)',
-                          color: 'var(--letter-color)',
-                          width: 360,
-                          height: 65,
-                          fontWeight: 'bold',
-                          fontSize: '14px',
-                          '&:hover': {
-                            color: 'var(--letter-color)', // Cambiar color si es necesario
-                            bgcolor: '#7f76d9'
-                          }
-                        }}
-                      >
-                        {forButton}
-                      </Button>
-                    </Link>
-                  </Typography>
-                </Box>
-              )}
-            </Box>
+              </>
+            )}
           </CardContent>
-        </Grid>
-
-        <Grid
-          item
-          xs={12} // Ahora ocupa toda la fila en pantallas pequeñas
-          sm={12}
-          md={6.5}
-          sx={{
-            display: { xs: 'none', md: 'flex' }, // Ocultar en pantallas pequeñas
-            justifyContent: 'center',
-            alignItems: 'center'
-          }}
-        >
-          <Box
-            sx={{
-              position: 'relative',
-              overflow: 'hidden',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              width: '600px',
-              height: '490px'
-            }}
-          >
-            <CardMedia
-              component='img'
-              image={image} // Asegúrate de que 'image' contiene una URL válida
-              alt='Descripción de la imagen'
-              sx={{
-                maxWidth: '100%',
-                height: '100%',
-                objectFit: 'contain'
-              }} // Se adapta al tamaño del contenedor
-            />
-          </Box>
         </Grid>
       </Grid>
     </Card>

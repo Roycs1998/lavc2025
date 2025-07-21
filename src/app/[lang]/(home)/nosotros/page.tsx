@@ -21,7 +21,7 @@ const Us = async () => {
       <Box className="max-w-7xl w-full mx-auto px-4 md:px-6 lg:px-8 flex flex-col justify-center py-10 gap-10">
       <Huellas position={{ top: '400px', left: '40px' }} rotateDeg={30} tipoHuellas="pato" color="#3a3480" opacity={0.7} />
         <Informationletter
-          title='La Conferencia Veterinaria Latinoamericana'
+          title='Conferencia Veterinaria Latinoamericana'
           image='http://www.blogerin.com/wp-content/uploads/2012/10/Fotos-tiernas-de-perritos-wallpapers-2.jpg'
           description='El LAVC nace del North American Veterinary Community (NAVC) basada en Gainesville, Florida, USA.
           El objetivo desde su inicio fue traer a Lima una pequeña porción del NAVC Conference (ahora VMX) en Orlando continuando la misión del NAVC de desarrollar mejores profesionales veterinarios en el mundo.
@@ -46,8 +46,7 @@ const Us = async () => {
             titleTwo='VISIÓN'
             descriptionTwo=' La Organización de educación continua más enfocada en el médico veterinario de américa latina.
             Una Organización en constante búsqueda hacia la excelencia y eficiencia organizacional.
-            Ser la Mejor Organización de educación Veterinaria a nivel mundial.
-            '
+            Ser la Mejor Organización de educación Veterinaria a nivel mundial.'
           />
         </Box>
       </Box>

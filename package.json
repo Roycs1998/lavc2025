@@ -27,6 +27,7 @@
     "classnames": "^2.5.1",
     "dotenv": "^16.4.5",
     "framer-motion": "^12.23.0",
+    "html-entities": "^2.6.0",
     "jspdf": "^3.0.1",
     "leaflet": "^1.9.4",
     "next": "^14.2.3",

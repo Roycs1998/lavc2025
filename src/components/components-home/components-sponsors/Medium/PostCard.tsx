@@ -122,27 +122,6 @@ export const PostCard = () => {
               variant='h6'
               sx={{ fontWeight: 'bold', paddingLeft: { xs: '0', md: '40px' }, fontSize: '1rem' }}
             >
-              Recepción de Posters y trabajos libres
-            </Typography>
-            <Typography
-              sx={{
-                paddingLeft: { xs: '0', md: '40px' },
-                marginBottom: '1%',
-                color: '#3a3480',
-                '&:hover': {
-                  color: 'var(--color-on-hover)'
-                }
-              }}
-              variant='body1'
-            >
-              <Link href='mailto:informes@ellatin.com?subject=Informacion%20sobre%20PatrocinioLAVC'>
-                jguerrero@tlavc-peru.org
-              </Link>
-            </Typography>
-            <Typography
-              variant='h6'
-              sx={{ fontWeight: 'bold', paddingLeft: { xs: '0', md: '40px' }, fontSize: '1rem' }}
-            >
               Consulta de Hospedaje y Paquetes de Viaje
             </Typography>
             <Typography

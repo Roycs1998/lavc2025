@@ -43,7 +43,7 @@ export const EventProgram = () => {
 
   const days = [
     {
-      day: 'PRIMER DIA',
+      day: 'Lunes 18',
       content: [
         {
           facultad: 'medicina-felina',
@@ -169,7 +169,7 @@ export const EventProgram = () => {
       ]
     },
     {
-      day: 'SEUNDO DIA',
+      day: 'Martes 19',
       content: [
         {
           hour: '9:00 am - 11:00 am',
@@ -214,7 +214,7 @@ export const EventProgram = () => {
       ]
     },
     {
-      day: 'TERCER DIA',
+      day: 'Miércoles 20',
       content: [
         {
           hour: '9:00 am - 11:00 am',
@@ -235,7 +235,7 @@ export const EventProgram = () => {
       ]
     },
     {
-      day: 'CUARTO DIA',
+      day: 'Jueves 21',
       content: [
         {
           hour: '9:00 am - 11:00 am',

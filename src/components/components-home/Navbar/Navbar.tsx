@@ -35,12 +35,19 @@ type Props = {
   dictionary: Awaited<ReturnType<typeof getDictionary>>
 }
 
+type MenuItem = {
+  text: any
+  link?: any
+  image?: any
+  subMenu?: any[]
+}
+
 export const Navbar = ({ dictionary }: Props) => {
   const [scrolled, setScrolled] = useState(false)
   const { data: session, status } = useSession()
   const [openSideBar, setOpenSideBar] = useState(false)
 
-  const getMenuItems = (dictionary: any) => [
+  const getMenuItems = (dictionary: any): MenuItem[]  => [
     {
       text: dictionary?.nav_main?.navbar.contact_us,
       subMenu: [
@@ -62,21 +69,16 @@ export const Navbar = ({ dictionary }: Props) => {
             { text: 'Becario Rippie', link: '/brippie' }
           ]
         },
-
-        /*         {
-          text: dictionary?.nav_main?.navbar.companies,
-          subMenu: [
-            { text: dictionary?.nav_main?.navbar.sponsors, link: '/patrocinadores' },
-            { text: dictionary?.nav_main?.navbar.official_sponsors, link: '/patrocinadoresoficiales' },
-            { text: dictionary?.nav_main?.navbar.official_supplier, link: '/proveedor-oficial' }
-          ]
-        }, */
       ],
       image: 'https://4.bp.blogspot.com/-atz5WgBqCys/VxasgrWNCEI/AAAAAAAB9Ao/ClzFWC9eEEcOWygTP4l3m0rEXVpRTX1ggCKgB/s1600/Perritos-cachorros-162.jpg'
     },
     {
-      text: 'Libreria LAVC',
-      href: '/libreria'
+      text: 'Galería LAVC',
+      subMenu: [
+        { text: "Fotos historicas", link: '/gallery' },
+        { text: "Material educativo", link: '/libreria' },    
+      ],
+      image: 'https://4.bp.blogspot.com/-atz5WgBqCys/VxasgrWNCEI/AAAAAAAB9Ao/ClzFWC9eEEcOWygTP4l3m0rEXVpRTX1ggCKgB/s1600/Perritos-cachorros-162.jpg'
     }
   ]
 
@@ -108,7 +110,7 @@ export const Navbar = ({ dictionary }: Props) => {
       <nav
         className={` ${styles.navbar} ${scrolled ? styles.scrolled : ''} top-0 w-full z-50 transition-colors duration-300 ease-in-out h-auto min-h-[70px] py-3`}
         style={{
-          backgroundColor:'#3a3480',
+          backgroundColor:'#ffffff',
           transition: 'background-color 0.3s ease',
         }}
       >
@@ -141,7 +143,7 @@ export const Navbar = ({ dictionary }: Props) => {
                     />
                   ) : (
                     <Link
-                      href={item.href ? item.href : '#'}
+                      href={item.link ? item.link : '#'}
                       className="
                           whitespace-nowrap 
                           overflow-hidden 
@@ -170,7 +172,7 @@ export const Navbar = ({ dictionary }: Props) => {
                 <>
                   <Link href="/login">
                     <Button
-                      className="bg-[#f1c82e] hover:bg-[#dcbf2c] text-white font-semibold rounded-l-md sm:rounded-l-md sm:rounded-r-none rounded-md"
+                      className="bg-[#3a3480] hover:bg-[#3a3480]/80 text-[#ffffff] font-semibold rounded-l-md sm:rounded-l-md sm:rounded-r-none rounded-md"
                       startIcon={<PersonIcon className='hidden sm:block' />}
                     >
                       {dictionary.nav_main.navbar.login}
@@ -179,7 +181,7 @@ export const Navbar = ({ dictionary }: Props) => {
 
                   <Link href="/register">
                     <Button
-                      className="hidden sm:block backdrop-blur-sm bg-[#f1c82e]/20 hover:bg-[#f1c82e]/40 text-white font-semibold rounded-r-md sm:rounded-r-md sm:rounded-l-none"
+                      className="hidden sm:block backdrop-blur-sm bg-[#3a3480]/20 hover:bg-[#f1c82e]/40 text-[#3a3480] font-semibold rounded-r-md sm:rounded-r-md sm:rounded-l-none"
                     >
                       Register
                     </Button>

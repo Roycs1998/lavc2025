@@ -35,10 +35,7 @@ const PonenteInfo = ({ ponente }: PonenteParams) => {
             <CardImage
                 image='https://buenavibra.es/wp-content/uploads/2017/10/razas-de-perros_opt_opt_opt_opt.jpg'
                 title='Información del ponente'
-            />
-              
-               
-
+            />                      
 
             <Box className='global-padding' sx={{ position: 'relative', bgcolor: 'var(--background-form)', paddingTop: 10, paddingBottom: 10 }}>
             <Huellas height='2000px' position={{ top: '-470px', left: '-10px' }} rotateDeg={20} tipoHuellas="pato" color="#3a3480" opacity={1} />

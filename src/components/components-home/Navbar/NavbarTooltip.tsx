@@ -20,7 +20,7 @@ interface SecondLevel {
 interface LinkItem {
   subMenu?: SecondLevel[]
   text: string
-  link?: string // Enlace correspondiente
+  link?: string 
 }
 
 interface TransitionsPopperProps {
@@ -84,7 +84,7 @@ export const NavbarTooltip = ({ start, links, image }: TransitionsPopperProps) =
         sx={{
           cursor: 'pointer',
           whiteSpace: 'nowrap',
-          color: open ? '#f1c82e' : 'inherit',
+          color: open ? '#f1c82e' : '#3a3480',
           display: 'flex',
           alignItems: 'center',
           gap: 1,
@@ -104,7 +104,7 @@ export const NavbarTooltip = ({ start, links, image }: TransitionsPopperProps) =
             transition: 'transform 0.3s ease',
             transform: open ? 'rotate(180deg)' : 'rotate(0deg)',
             strokeWidth: 1.5,
-            stroke: open ? '#f1c82e' : 'inherit',
+            stroke: open ? '#f1c82e' : '#3a3480',
           }}
         />
       </Box>
@@ -212,7 +212,7 @@ export const NavbarTooltip = ({ start, links, image }: TransitionsPopperProps) =
                                 transition: 'transform 0.3s ease',
                                 transform: hoveredIndex === index ? 'rotate(180deg)' : 'rotate(0deg)',
                                 strokeWidth: 1.5,
-                                stroke: hoveredIndex === index ? '#f1c82e' : 'inherit'
+                                stroke: hoveredIndex === index ? '#f1c82e' : '3a3480'
                               }}
                             />
                           )}

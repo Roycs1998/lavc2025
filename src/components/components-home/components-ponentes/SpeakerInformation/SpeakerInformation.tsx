@@ -4,6 +4,7 @@ import { Icon } from '@iconify/react/dist/iconify.js'
 
 import CustomButton from '@/components/ui/CustomButton'
 import SectionTitle from '@/components/SectionTitle'
+import normalizeText from '@/helper/normalizeText'
 
 interface Speaker {
   name: string
@@ -26,7 +27,6 @@ export const SpeakerInformation = ({
   description,
   specializations,
 }: Speaker) => {
-  const stripHtmlTags = (html: string = '') => html.replace(/<[^>]*>?/gm, '').trim()
 
   return (
     <Box maxWidth="lg" mx="auto" px={{ xs: 6, md: 0, lg: 0 }}>
@@ -81,7 +81,7 @@ export const SpeakerInformation = ({
                 textAlign: 'justify'
               }}
             >
-              {stripHtmlTags(description)}
+             {normalizeText(description)}
             </Typography>
           </Box>
 
