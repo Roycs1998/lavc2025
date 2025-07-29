@@ -2,7 +2,7 @@ import { IoIosAirplane } from 'react-icons/io'
 
 
 interface Props {
-  title: any
+  title?: any
   subTitle: any
   icon?: any
   showIcon?: boolean
@@ -31,7 +31,10 @@ const SectionTitle = ({ title, subTitle, icon, showIcon = true, lineaColor = "f5
           )}
         </div>
       </div>
-      <h2 className='text-3xl md:text-4xl font-bold text-[#f5c72c] z-1'>{title}</h2>
+      {title && (
+            <h2 className='text-3xl md:text-4xl font-bold text-[#f5c72c] z-1'>{title}</h2>
+          )}
+     
     </div>
   )
 }

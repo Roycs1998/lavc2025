@@ -1,22 +1,20 @@
 import React from 'react';
 
 import { Button, type ButtonProps, styled } from '@mui/material';
-
 import { darken } from '@mui/material/styles';
 
 interface CustomButtonProps extends ButtonProps {
-
   bgColor?: string;
-
   textColor?: string;
-
   hoverBgColor?: string;
-  
   hoverTextColor?: string;
-
   size?: 'small' | 'medium' | 'large';
-  
   width?: string | number;
+
+  mode?: 'default' | 'link' | 'download';
+  href?: string;
+  newTab?: boolean;
+  fileName?: string;
 }
 
 const sizeStyles = {
@@ -71,20 +69,49 @@ const CustomButton: React.FC<CustomButtonProps> = ({
   width,
   className,
   children,
+  mode = 'default',
+  href,
+  newTab = false,
+  fileName,
+  onClick,
   ...props
-}) => (
-  <StyledButton
-    bgColor={bgColor}
-    textColor={textColor}
-    hoverBgColor={hoverBgColor}
-    hoverTextColor={hoverTextColor}
-    size={size}
-    width={width}
-    className={className}
-    {...props}
-  >
-    {children}
-  </StyledButton>
-);
+}) => {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (mode === 'link' && href) {
+      window.open(href, newTab ? '_blank' : '_self');
+    } else if (mode === 'download' && href) {
+      if (newTab) {
+        window.open(href, '_blank');
+      } else {
+        const link = document.createElement('a');
+        
+        link.href = href;
+        if (fileName) link.download = fileName;
+        link.style.display = 'none';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+    }
+    
+    if (onClick) onClick(e);
+  };
+
+  return (
+    <StyledButton
+      bgColor={bgColor}
+      textColor={textColor}
+      hoverBgColor={hoverBgColor}
+      hoverTextColor={hoverTextColor}
+      size={size}
+      width={width}
+      className={className}
+      onClick={handleClick}
+      {...props}
+    >
+      {children}
+    </StyledButton>
+  );
+};
 
 export default CustomButton;

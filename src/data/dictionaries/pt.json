@@ -61,5 +61,12 @@
       "motto": "A maior conferência de educação continuada em medicina veterinária da costa do Pacífico da América do Sul",
       "co": "Eugene O'Neill, Diretor Executivo"
     }
+  },
+  "tourism": {
+    "description1": "Durante sua participação no LAVC 2026, você terá a oportunidade de descobrir alguns dos destinos mais fascinantes do Peru. Explore Lima, uma capital vibrante à beira-mar, com uma rica herança colonial e uma gastronomia reconhecida mundialmente. Mergulhe na história dos incas em Cusco, no Vale Sagrado e na majestosa cidadela de Machu Picchu. E para os amantes da natureza, Puerto Maldonado espera por você com suas selvas tropicais e a biodiversidade única da Reserva Nacional de Tambopata.",
+    "description2": "Prepare-se para viver uma experiência inesquecível antes ou depois do congresso!",
+    "itinerary": "Roteiro",
+    "contact": "Contato",
+    "visit_site": "Ir para o site"
   }
 }

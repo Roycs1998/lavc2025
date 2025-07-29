@@ -50,11 +50,13 @@ const EventExperience = ({  }: Props) => {
   
           <div className="flex flex-col gap-3">
             <div className="rounded-2xl w-full">
-              <div className="w-full md:w-1/2 flex flex-col gap-4 isolate">
-                <Typography variant="body1" className="text-white" fontSize="1.125rem">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde error a saepe dolore voluptatum libero
-                  pariatur nisi, vero ducimus, sed natus! Accusamus quos saepe ducimus rerum quisquam esse quaerat
-                  sapiente.
+              <div className="w-full md:w-3/4 flex flex-col gap-4 isolate">
+                <Typography variant="body1" className="text-white text-justify" fontSize="1.125rem" >
+                El LAVC 2025 fue una edición histórica. Más de 5,500 asistentes vivieron cuatro días intensos de aprendizaje, 
+                conexión y descubrimiento. Se realizaron más de 20 conferencias con ponentes internacionales, se presentaron 
+                nuevos tratamientos, productos y tecnologías, y se fortalecieron lazos entre profesionales de toda Latinoamérica.
+                <br />
+                No te pierdas la próxima edición: LAVC 2026 promete ser aún más grande, más enriquecedora y más impactante.
                 </Typography>
                 <CustomButton onClick={handleClick}>Ver video <Icon className='ml-2' icon="icon-park-twotone:play" width="26" height="26"/></CustomButton>
               </div>

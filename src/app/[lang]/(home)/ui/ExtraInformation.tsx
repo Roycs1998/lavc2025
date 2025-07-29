@@ -25,7 +25,7 @@ const ExtraInformation = ({ dictionary }: Props) => {
         },
         {
             title: dictionary?.nav_main?.informationLetters.tourism,
-            href: "/#",
+            href: "/tourism",
             image: "/images/machu-pichu-2.png",
         },
     ]

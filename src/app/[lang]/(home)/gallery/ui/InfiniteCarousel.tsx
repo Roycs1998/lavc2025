@@ -16,19 +16,27 @@ interface InfiniteCarouselProps {
   onSlideChange?: (activeIndex: number) => void
 }
 
+const isValidImage = (url: string) => {
+  if (!url) return false
+  const allowedExtensions = ['.jpg', '.jpeg', '.png', '.webp', '.gif', '.bmp', '.svg']
+  const lower = url.toLowerCase()
+  
+  return allowedExtensions.some(ext => lower.endsWith(ext))
+}
+
 export default function InfiniteCarousel({
   items = [],
   reserveDirection = false,
   onSlideChange,
 }: InfiniteCarouselProps) {
-  const slides = Array.isArray(items) ? items : []
 
+  const slides = Array.isArray(items) ? items.filter(isValidImage) : []
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
 
   return (
     <>
       <div className="space-y-6 relative z-0">
-        {/* Gradientes laterales */}
+
         <div className="absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-black to-transparent pointer-events-none z-10" />
         <div className="absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-black to-transparent pointer-events-none z-10" />
 
@@ -43,7 +51,7 @@ export default function InfiniteCarousel({
           }}
           slidesPerView="auto"
           speed={3000}
-          onSlideChange={(swiper) => onSlideChange?.(swiper.realIndex)}
+          onSlideChange={swiper => onSlideChange?.(swiper.realIndex)}
         >
           {slides.map((src, idx) => (
             <SwiperSlide
@@ -58,6 +66,12 @@ export default function InfiniteCarousel({
                   fill
                   className="object-cover rounded"
                   loading="lazy"
+                  onError={e => {
+
+                    const slideEl = e.currentTarget.closest('.swiper-slide') as HTMLElement
+                    
+                    if (slideEl) slideEl.style.display = 'none'
+                  }}
                 />
               </div>
             </SwiperSlide>
@@ -65,21 +79,19 @@ export default function InfiniteCarousel({
         </Swiper>
       </div>
 
-      {/* Modal grande con fondo oscuro */}
       {selectedImage && (
         <div
           className="fixed inset-0 bg-black/80 z-[9999] flex items-center justify-center p-4"
-          onClick={() => setSelectedImage(null)} // Cerrar al hacer clic fuera
+          onClick={() => setSelectedImage(null)}
         >
           <div
             className="relative w-full max-w-5xl max-h-[90vh] bg-black rounded overflow-hidden"
-            onClick={(e) => e.stopPropagation()} // Evitar cierre al hacer clic sobre imagen
+            onClick={e => e.stopPropagation()}
           >
-            <Button       
-
-            onClick={() => setSelectedImage(null)}       
+            <Button
+              onClick={() => setSelectedImage(null)}
               variant="contained"
-              color='warning'
+              color="warning"
               className="absolute top-3 right-3 text-white text-1xl z-10 hover:text-yellow-400 transition"
             >
               Close

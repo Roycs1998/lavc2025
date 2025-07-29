@@ -72,7 +72,7 @@ export default function EventsGallery() {
                         flex 
                         items-center
                       "
-                      style={{ backgroundImage: `url(${backgroundUrl})` }}
+                      style={{ backgroundImage: `url("${encodeURI(backgroundUrl)}")` }}
                     >
                       {/* Capa oscura transparente */}
                       <div className="absolute inset-0" style={overlayStyle} />

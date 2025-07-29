@@ -32,7 +32,7 @@ export const CardImage = ({ image, title }: Attributes) => {
         alignItems: 'center',
         justifyContent: 'center',
         overflow: 'hidden',
-        paddingTop: { xs: '20px'}
+        paddingTop: { xs: '30px',sm: '30px', md: '30px',lg: '60px'}
       }}
     >
       <Box
