@@ -24,7 +24,6 @@ export const Huellas = ({
   rotateDeg = -20,
   color = '#3a3480',
   opacity = 0.3,
-  height = '800px',
   className = ''
 }: Props) => {
 
@@ -33,7 +32,6 @@ export const Huellas = ({
     transform: `rotate(${rotateDeg}deg)`,
     fill: color,
     opacity: opacity,
-    height,
   }
 
   const HuellaComponent = tipoHuellas === "pato" ? HuellaPatoSVG : HuellaSVG
