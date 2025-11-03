@@ -16,6 +16,9 @@ interface Props {
 }
 
 const InfiniteCarousel = ({ items, reserveDirection = false }: Props) => {
+
+  const URL = process.env.NEXT_PUBLIC_SPACE_URL || ''
+
   return (
     <div className='space-y-6 relative'>
       <div className='absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-backgroundDefault to-transparent pointer-events-none z-10'></div>
@@ -42,7 +45,7 @@ const InfiniteCarousel = ({ items, reserveDirection = false }: Props) => {
           >
             <div className='relative w-full h-full'>
               <Image
-                src={"https://tlavc-peru.org/"+item}
+                src={`${URL.replace(/\/?$/, '/')}${item}`}
                 alt={`Logo ${index + 1}`}
                 fill
                 className='object-contain'

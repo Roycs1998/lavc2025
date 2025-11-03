@@ -30,7 +30,7 @@ export const ProgramLetters = ({
       }}
     >
       <Avatar
-        src={image} // Reemplaza con la URL de tu imagen
+        src={image} 
         sx={{
           width: 170,
           height: 170,
