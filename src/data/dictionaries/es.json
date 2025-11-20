@@ -7,6 +7,7 @@
       "tracking": "Rastreo",
       "contact_us": "Nosotros",
       "login": "Iniciar Sesión",
+      "register": "Registrarse",
       "lacv_2025": "LAVC 2025",
       "frequently_asked_questions": "Preguntas Frecuentes",
       "publications": "Publicaciones",
@@ -16,6 +17,12 @@
       "speakers": "Ponentes",
       "program": "Programa",
       "stand_out": "¡DIFERÉNCIATE!",
+      "lavc_2026": "LAVC 2026",
+      "ambassador": "Embajador",
+      "scholarship": "Becario Rippie",
+      "lavc_gallery": "Galería LAVC",
+      "historic_photos": "Fotos históricas",
+      "educational_material": "Material educativo",
       "companies": "Empresas",
       "news": "Noticias",
       "gallery": "Galeria",
@@ -50,7 +57,14 @@
       "advertise_with_us": "Publicite Con Nosotros",
       "navc_brand": "Directrices de la marca LAVC",
       "comunity_veterinary": "© 2025 Latin American Veterinary conference",
-      "media_kits": "Kits de medios"
+      "media_kits": "Kits de medios",
+      "we_are": "Somos",
+      "contact_us_button": "Contáctanos",
+      "support": "Soporte",
+      "talks_program": "Programa de charlas",
+      "scholarship": "Beca Rippie",
+      "become_ambassador": "Conviértete en embajador",
+      "speakers_label": "Ponentes"
     },
     "location_letter": {
       "event_location": "UBICACIÓN DEL EVENTO",
@@ -60,13 +74,85 @@
     "horizontal_card": {
       "motto": "La conferencia de educación continua en medicina veterinaria más grande de la costa del Pacífico de Sudamérica",
       "co": "Eugene O'Neill, director ejecutivo"
+    },
+    "social_widget_message": "¡Hola! ¿En qué puedo ayudarte?"
+  },
+  "home": {
+    "hero": {
+      "highlight_title": "LAVC 2026",
+      "tagline": "¡El evento más importante de medicina veterinaria!",
+      "description": "Estás a solo un paso de inscribirte. ¡No te pierdas esta oportunidad única!",
+      "cta": "Inscríbete aquí"
+    },
+    "extra_information": {
+      "title": "Información adicional",
+      "subtitle": "Más Información"
+    },
+    "benefits": {
+      "title": "Estos son algunos de los beneficios que te ofrecemos",
+      "subtitle": "¿Por qué ir al LAVC?",
+      "items": {
+        "exclusive_talks": {
+          "title": "🎓 Charlas exclusivas con ponentes internacionales",
+          "description": "Temas actualizados, casos clínicos reales y tendencias que marcarán el futuro de la profesión."
+        },
+        "networking": {
+          "title": "🤝 Networking con miles de colegas y expertos",
+          "description": "Intercambia experiencias, amplía tu red de contactos y fortalece la comunidad veterinaria."
+        },
+        "commercial_zone": {
+          "title": "🧪 Zona comercial con más de 60 empresas",
+          "description": "Explora lo último en productos, servicios e innovación para la medicina veterinaria. Desde equipamiento hasta farmacología, tecnología y más."
+        },
+        "specialized_event": {
+          "title": "🌎 Evento 100% especializado",
+          "description": "A diferencia de otros congresos, el LAVC está diseñado exclusivamente para médicos veterinarios. Aquí cada charla, stand y actividad tiene un solo objetivo: mejorar tu práctica profesional."
+        }
+      },
+      "cta": "Sobre nuestro evento"
+    },
+    "experience": {
+      "title": "Así fue el LAVC 2025",
+      "subtitle": "Experiencia inolvidable",
+      "description": "El LAVC 2025 fue una edición histórica. Más de 5,500 asistentes vivieron cuatro días intensos de aprendizaje, conexión y descubrimiento. Se realizaron más de 20 conferencias con ponentes internacionales, se presentaron nuevos tratamientos, productos y tecnologías, y se fortalecieron lazos entre profesionales de toda Latinoamérica. No te pierdas la próxima edición: LAVC 2026 promete ser aún más grande, más enriquecedora y más impactante.",
+      "cta": "Ver video"
+    },
+    "location": {
+      "title": "Ubícanos en",
+      "subtitle": "¿Dónde se realizará?",
+      "description": "El evento se realizará en el Centro de Exposiciones Jockey Club, ubicado cerca de la carretera panamericana, en el sector de la Avenida 3 de Mayo.",
+      "open_waze": "Abrir en Waze",
+      "open_maps": "Abrir en Google Maps"
+    },
+    "numbers": {
+      "participants": "Participantes",
+      "companies": "Empresas",
+      "years_experience": "Años de experiencia"
+    },
+    "partners": {
+      "title_prefix": "Principales",
+      "title_highlight": "Patrocinadores",
+      "subtitle": "Patrocinadores"
     }
   },
   "tourism":{
+    "title": "Turismo",
+    "subtitle": "Lo mejor del Perú para tu experiencia en LAVC 2026",
     "description1": "Durante tu participación en el LAVC 2026, tendrás la oportunidad de descubrir algunos de los destinos más fascinantes del Perú. Explora Lima, una capital vibrante junto al mar, con una rica herencia colonial y una gastronomía reconocida mundialmente. Sumérgete en la historia de los incas en Cusco, el Valle Sagrado y la majestuosa ciudadela de Machu Picchu. Y para los amantes de la naturaleza, Puerto Maldonado te espera con sus selvas tropicales y la biodiversidad única de la Reserva Nacional Tambopata.",
     "description2": "¡Prepárate para vivir una experiencia inolvidable antes o después del congreso!",
+    "visit_lima": "Visita Lima",
+    "visit_cusco": "Visita Cusco",
+    "visit_amazon": "Visita Amazonas",
     "itinerary": "Itinerario",
+    "lodging": "Hospedajes",
+    "cusco_express": "Cusco Express 3d2n",
+    "discover_cusco": "Discover Cusco 4d3n",
+    "amazon_lodge": "Refugio amazonas lodge",
+    "more_information": "Más información",
     "contact": "Contacto",
+    "contact_whatsapp": "Whatsapp",
+    "contact_email": "E-mail",
+    "contact_website": "Web",
     "visit_site": "Ir al sitio web"
   }
 

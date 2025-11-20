@@ -7,6 +7,7 @@
       "tracking": "Tracking",
       "contact_us": "About Us",
       "login": "Log In",
+      "register": "Register",
       "lacv_2025": "LAVC 2025",
       "frequently_asked_questions": "Frequently Asked Questions",
       "publications": "Publications",
@@ -16,6 +17,12 @@
       "speakers": "Speakers",
       "program": "Program",
       "stand_out": "Stand Out!",
+      "lavc_2026": "LAVC 2026",
+      "ambassador": "Ambassador",
+      "scholarship": "Rippie Scholar",
+      "lavc_gallery": "LAVC Gallery",
+      "historic_photos": "Historic Photos",
+      "educational_material": "Educational Material",
       "companies": "Companies",
       "news": "News",
       "gallery": "Gallery",
@@ -50,7 +57,14 @@
       "advertise_with_us": "Advertise With Us",
       "navc_brand": "LAVC Brand Guidelines",
       "comunity_veterinary": "© 2025 Latin American Veterinary conference",
-      "media_kits": "Media Kits"
+      "media_kits": "Media Kits",
+      "we_are": "We are",
+      "contact_us_button": "Contact us",
+      "support": "Support",
+      "talks_program": "Talks program",
+      "scholarship": "Rippie Scholarship",
+      "become_ambassador": "Become an ambassador",
+      "speakers_label": "Speakers"
     },
     "location_letter": {
       "event_location": "EVENT LOCATION",
@@ -60,13 +74,85 @@
     "horizontal_card": {
       "motto": "The largest continuing education conference in veterinary medicine on the Pacific coast of South America",
       "co": "Eugene O'Neill, Executive Director"
+    },
+    "social_widget_message": "Hi! How can I help you?"
+  },
+  "home": {
+    "hero": {
+      "highlight_title": "LAVC 2026",
+      "tagline": "The most important veterinary medicine event!",
+      "description": "You're just one step away from registering. Don't miss this unique opportunity!",
+      "cta": "Register here"
+    },
+    "extra_information": {
+      "title": "Additional information",
+      "subtitle": "More Information"
+    },
+    "benefits": {
+      "title": "These are some of the benefits we offer you",
+      "subtitle": "Why attend LAVC?",
+      "items": {
+        "exclusive_talks": {
+          "title": "🎓 Exclusive talks with international speakers",
+          "description": "Up-to-date topics, real clinical cases, and trends that will shape the future of the profession."
+        },
+        "networking": {
+          "title": "🤝 Networking with thousands of colleagues and experts",
+          "description": "Exchange experiences, expand your network, and strengthen the veterinary community."
+        },
+        "commercial_zone": {
+          "title": "🧪 Commercial zone with more than 60 companies",
+          "description": "Explore the latest in products, services, and innovation for veterinary medicine—from equipment to pharmacology, technology, and more."
+        },
+        "specialized_event": {
+          "title": "🌎 100% specialized event",
+          "description": "Unlike other conferences, LAVC is designed exclusively for veterinarians. Every talk, booth, and activity has one goal: improving your professional practice."
+        }
+      },
+      "cta": "About our event"
+    },
+    "experience": {
+      "title": "This was LAVC 2025",
+      "subtitle": "Unforgettable experience",
+      "description": "LAVC 2025 was a historic edition. More than 5,500 attendees enjoyed four intense days of learning, connection, and discovery. Over 20 conferences with international speakers showcased new treatments, products, and technologies, strengthening ties among professionals across Latin America. Don't miss the next edition—LAVC 2026 promises to be even bigger, richer, and more impactful.",
+      "cta": "Watch video"
+    },
+    "location": {
+      "title": "Find us at",
+      "subtitle": "Where will it take place?",
+      "description": "The event will take place at the Jockey Club Exhibition Center, located near the Panamericana highway, in the area of Avenida 3 de Mayo.",
+      "open_waze": "Open in Waze",
+      "open_maps": "Open in Google Maps"
+    },
+    "numbers": {
+      "participants": "Participants",
+      "companies": "Companies",
+      "years_experience": "Years of experience"
+    },
+    "partners": {
+      "title_prefix": "Main",
+      "title_highlight": "Sponsors",
+      "subtitle": "Sponsors"
     }
   },
   "tourism": {
+    "title": "Tourism",
+    "subtitle": "The best of Peru for your LAVC 2026 experience",
     "description1": "During your participation in LAVC 2026, you'll have the opportunity to discover some of the most fascinating destinations in Peru. Explore Lima, a vibrant capital by the sea with a rich colonial heritage and world-renowned gastronomy. Immerse yourself in Inca history in Cusco, the Sacred Valley, and the majestic citadel of Machu Picchu. And for nature lovers, Puerto Maldonado awaits with its tropical jungles and the unique biodiversity of the Tambopata National Reserve.",
     "description2": "Get ready for an unforgettable experience before or after the conference!",
+    "visit_lima": "Visit Lima",
+    "visit_cusco": "Visit Cusco",
+    "visit_amazon": "Visit Amazonas",
     "itinerary": "Itinerary",
+    "lodging": "Lodging",
+    "cusco_express": "Cusco Express 3d2n",
+    "discover_cusco": "Discover Cusco 4d3n",
+    "amazon_lodge": "Refugio Amazonas Lodge",
+    "more_information": "More information",
     "contact": "Contact",
+    "contact_whatsapp": "WhatsApp",
+    "contact_email": "E-mail",
+    "contact_website": "Website",
     "visit_site": "Visit website"
   }
 }

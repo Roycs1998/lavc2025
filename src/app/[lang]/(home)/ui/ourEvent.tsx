@@ -17,12 +17,24 @@ interface Props {
     dictionary: Awaited<ReturnType<typeof getDictionary>>;
 }
 
-const OurEvent = ({ }: Props) => {
+const OurEvent = ({ dictionary }: Props) => {
     const benefits = [
-        { text: '🎓 Charlas exclusivas con ponentes internacionales', description: 'Temas actualizados, casos clínicos reales y tendencias que marcarán el futuro de la profesión.' },
-        { text: '🤝 Networking con miles de colegas y expertos', description: 'Intercambia experiencias, amplía tu red de contactos y fortalece la comunidad veterinaria.' },
-        { text: '🧪 Zona comercial con más de 60 empresas', description: 'Explora lo último en productos, servicios e innovación para la medicina veterinaria. Desde equipamiento hasta farmacología, tecnología y más.' },
-        { text: '🌎 Evento 100% especializado', description: 'A diferencia de otros congresos, el LAVC está diseñado exclusivamente para médicos veterinarios. Aquí cada charla, stand y actividad tiene un solo objetivo: mejorar tu práctica profesional.' },
+        {
+            text: dictionary?.home?.benefits.items.exclusive_talks.title,
+            description: dictionary?.home?.benefits.items.exclusive_talks.description
+        },
+        {
+            text: dictionary?.home?.benefits.items.networking.title,
+            description: dictionary?.home?.benefits.items.networking.description
+        },
+        {
+            text: dictionary?.home?.benefits.items.commercial_zone.title,
+            description: dictionary?.home?.benefits.items.commercial_zone.description
+        },
+        {
+            text: dictionary?.home?.benefits.items.specialized_event.title,
+            description: dictionary?.home?.benefits.items.specialized_event.description
+        },
     ];
 
     return (
@@ -52,8 +64,8 @@ const OurEvent = ({ }: Props) => {
                     </Grid>
                     <Grid item xs={12} lg={6} order={{ xs: 1, lg: 2 }}>
                         <SectionTitle
-                            title={'Estos son algunos de los beneficios que te ofrecemos'}
-                            subTitle={'¿Por qué ir al LAVC?'}
+                            title={dictionary?.home?.benefits.title}
+                            subTitle={dictionary?.home?.benefits.subtitle}
                             showIcon={false}
                         />
                         <Box display="flex" flexDirection="column" gap={4} py={3}>
@@ -69,7 +81,7 @@ const OurEvent = ({ }: Props) => {
                                 variant="contained"
                                 className="px-7 py-3 text-white flex items-center gap-2 text-lg font-bold"
                             >
-                                <span>Sobre nuestro evento</span>
+                                <span>{dictionary?.home?.benefits.cta}</span>
                                 <FaArrowRightLong size={14} />
                             </CustomButton>
                         </Link>

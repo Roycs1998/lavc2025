@@ -15,7 +15,7 @@ interface Props {
   dictionary: Awaited<ReturnType<typeof getDictionary>>
 }
 
-const PartnersSection = ({ }: Props) => {
+const PartnersSection = ({ dictionary }: Props) => {
   const logosRow1 = [
     "upload/companies/invetsa.webp",
     "upload/companies/HALLMARK.webp",
@@ -100,11 +100,11 @@ const PartnersSection = ({ }: Props) => {
       <div className={`max-w-7xl mx-auto w-full px-4 md:px-6 lg:px-8 flex flex-col gap-2 py-10 md:py-20`}>
         <SectionTitle
           title={
-            <>
-              Principales <span className='text-[#3a3480] '>Patrocinadores</span>
-            </>
+            <span>
+              {dictionary?.home?.partners.title_prefix} <span className='text-[#3a3480] '>{dictionary?.home?.partners.title_highlight}</span>
+            </span>
           }
-          subTitle={<span >Patrocinadores</span>}
+          subTitle={<span >{dictionary?.home?.partners.subtitle}</span>}
           showIcon={false}
         />
 

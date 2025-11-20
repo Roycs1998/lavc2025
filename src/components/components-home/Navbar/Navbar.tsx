@@ -57,7 +57,7 @@ export const Navbar = ({ dictionary }: Props) => {
       image: 'https://tse2.mm.bing.net/th?id=OIP.33VqJRpi2PsJuc9mcRwcCQHaE9&pid=Api&P=0&h=180'
     },
     {
-      text: 'LAVC 2026',
+      text: dictionary?.nav_main?.navbar.lavc_2026,
       subMenu: [
         { text: dictionary?.nav_main?.navbar.event_and_workshops, link: '/eventos-talleres' },
         { text: dictionary?.nav_main?.navbar.speakers, link: '/ponentes' },
@@ -65,18 +65,18 @@ export const Navbar = ({ dictionary }: Props) => {
         {
           text: dictionary?.nav_main?.navbar.stand_out,
           subMenu: [
-            { text: 'Embajador', link: '/embajador' },
-            { text: 'Becario Rippie', link: '/brippie' }
+            { text: dictionary?.nav_main?.navbar.ambassador, link: '/embajador' },
+            { text: dictionary?.nav_main?.navbar.scholarship, link: '/brippie' }
           ]
         },
       ],
       image: 'https://4.bp.blogspot.com/-atz5WgBqCys/VxasgrWNCEI/AAAAAAAB9Ao/ClzFWC9eEEcOWygTP4l3m0rEXVpRTX1ggCKgB/s1600/Perritos-cachorros-162.jpg'
     },
     {
-      text: 'Galería LAVC',
+      text: dictionary?.nav_main?.navbar.lavc_gallery,
       subMenu: [
-        { text: "Fotos historicas", link: '/gallery' },
-        { text: "Material educativo", link: '/libreria' },    
+        { text: dictionary?.nav_main?.navbar.historic_photos, link: '/gallery' },
+        { text: dictionary?.nav_main?.navbar.educational_material, link: '/libreria' },
       ],
       image: 'https://4.bp.blogspot.com/-atz5WgBqCys/VxasgrWNCEI/AAAAAAAB9Ao/ClzFWC9eEEcOWygTP4l3m0rEXVpRTX1ggCKgB/s1600/Perritos-cachorros-162.jpg'
     }
@@ -183,7 +183,7 @@ export const Navbar = ({ dictionary }: Props) => {
                     <Button
                       className="hidden sm:block backdrop-blur-sm bg-[#3a3480]/20 hover:bg-[#f1c82e]/40 text-[#3a3480] font-semibold rounded-r-md sm:rounded-r-md sm:rounded-l-none"
                     >
-                      Register
+                      {dictionary.nav_main.navbar.register}
                     </Button>
                   </Link>
                 </>

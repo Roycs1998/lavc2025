@@ -96,7 +96,9 @@ export const Carrucel = ({ dictionary }: Props) => {
             textAlign: 'center'
           }}
         >
-          <span className='text-[#f5c72c] font-bold'>LAVC 2026</span> <br /><span className='hidden sm:block'>¡El evento más importante de <br /> medicina veterinaria!</span>
+          <span className='text-[#f5c72c] font-bold'>{dictionary?.home?.hero.highlight_title}</span>
+          <br />
+          <span className='hidden sm:block'>{dictionary?.home?.hero.tagline}</span>
         </Typography>
 
         <Typography
@@ -108,12 +110,12 @@ export const Carrucel = ({ dictionary }: Props) => {
             textAlign: 'center'
           }}
         >
-          Estas a solo un paso de inscribirte. <br /> ¡No te pierdas esta oportunidad única!
+          {dictionary?.home?.hero.description}
         </Typography>
 
         {/* Botones */}
         <Box display='flex' justifyContent='center' sx={{ marginTop: '10px' }}>
-        <CustomButton onClick={redirection} bgColor='#f5c72c' hoverBgColor="#3a3480" size='large' >Inscríbete aquí<Icon className='ml-1' icon="dashicons:pets" width="25" height="22" /></CustomButton>
+          <CustomButton onClick={redirection} bgColor='#f5c72c' hoverBgColor="#3a3480" size='large' >{dictionary?.home?.hero.cta}<Icon className='ml-1' icon="dashicons:pets" width="25" height="22" /></CustomButton>
         </Box>
       </Box>
     </Box>
