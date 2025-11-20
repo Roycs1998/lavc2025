@@ -16,6 +16,10 @@ interface TabPanelProps {
   value: number
 }
 
+interface EventProgramProps {
+  locationLabel?: string
+}
+
 function CustomTabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props
   
@@ -453,7 +457,7 @@ const getDiasOrdenados = (diasObj: Record<string, any>) => {
   return indexed.map(x => x.d)
 }
 
-export const EventProgram: React.FC = () => {
+export const EventProgram: React.FC<EventProgramProps> = ({ locationLabel = 'Location:' }) => {
   const programaObj = getProgramaObj()
   const salas = getSalas(programaObj)
 
@@ -800,10 +804,11 @@ export const EventProgram: React.FC = () => {
                       <ProgramLetters
                         hour={item.hora || ''}
                         issue={item.tema || ''}
-                        exhibitorName={first.name}     
-                        image={first.image}            
+                        exhibitorName={first.name}
+                        image={first.image}
                         eventDescription={item.tema || ''}
                         location={sala}
+                        locationLabel={locationLabel}
                       />
                     </Box>
                   )

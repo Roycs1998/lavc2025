@@ -20,7 +20,7 @@ const TourismPage = async ({ params }: Props) => {
         <>
             <CardImage
                 image='https://lavcfiles.nyc3.digitaloceanspaces.com/upload/extra-files/tourism.jpg'
-                title='Turismo'
+                title={dictionary.tourism.title}
             />
             <Tourism dictionary={dictionary}/>
         </>

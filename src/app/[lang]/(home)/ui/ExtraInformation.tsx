@@ -34,8 +34,8 @@ const ExtraInformation = ({ dictionary }: Props) => {
         <div className="w-full text-base font-light bg-[#3a3480] text-white ">
             <div className="max-w-7xl w-full mx-auto px-4 md:px-6 lg:px-8 flex flex-col justify-center py-10 gap-10">
                 <SectionTitle
-                    title={'Información adicional'}
-                    subTitle={<span className="text-backgroundPaper">Más Información</span>}
+                    title={dictionary?.home?.extra_information.title}
+                    subTitle={<span className="text-backgroundPaper">{dictionary?.home?.extra_information.subtitle}</span>}
                     showIcon={false}
                 />
 

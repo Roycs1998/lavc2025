@@ -59,7 +59,7 @@ export const FooterTwo = ({ dictionary }: Props) => {
                                     marginBottom: '1%'
                                 }}
                             >
-                               Somos
+                               {dictionary?.nav_main?.footer.we_are}
                             </Item>
                             <Item
                                 className={style.footerOne}
@@ -102,7 +102,7 @@ export const FooterTwo = ({ dictionary }: Props) => {
                                         }
                                     }}
                                 >
-                                    Contactanos
+                                    {dictionary?.nav_main?.footer.contact_us_button}
                                 </Button>
                             </Item>
                         </Grid>
@@ -124,7 +124,7 @@ export const FooterTwo = ({ dictionary }: Props) => {
                                     className={`${style.hoverColor} ${style.footerOne}`}
                                     sx={{ backgroundColor: 'var(--primary-color-purple)', fontSize: '1rem', color: 'var(--letter-color)' }}
                                 >
-                                    Soporte
+                                    {dictionary?.nav_main?.footer.support}
                                 </Item>
                             </Link>
                             <Link href="/programa">
@@ -132,7 +132,7 @@ export const FooterTwo = ({ dictionary }: Props) => {
                                     className={`${style.hoverColor} ${style.footerOne}`}
                                     sx={{ backgroundColor: 'var(--primary-color-purple)', fontSize: '1rem', color: 'var(--letter-color)' }}
                                 >
-                                    Programa de charlas
+                                    {dictionary?.nav_main?.footer.talks_program}
                                 </Item>
                             </Link>
                         </Grid>
@@ -154,7 +154,7 @@ export const FooterTwo = ({ dictionary }: Props) => {
                                     className={`${style.hoverColor} ${style.footerOne}`}
                                     sx={{ backgroundColor: 'var(--primary-color-purple)', fontSize: '1rem', color: 'var(--letter-color)' }}
                                 >
-                                    Beca Rippie
+                                    {dictionary?.nav_main?.footer.scholarship}
                                 </Item>
                             </Link>
                             <Link href="/embajador">
@@ -162,7 +162,7 @@ export const FooterTwo = ({ dictionary }: Props) => {
                                     className={`${style.hoverColor} ${style.footerOne}`}
                                     sx={{ backgroundColor: 'var(--primary-color-purple)', fontSize: '1rem', color: 'var(--letter-color)' }}
                                 >
-                                    Convierteté en embajador
+                                    {dictionary?.nav_main?.footer.become_ambassador}
                                 </Item>
                             </Link>
                             <Link href="/ponentes">
@@ -170,7 +170,7 @@ export const FooterTwo = ({ dictionary }: Props) => {
                                     className={`${style.hoverColor} ${style.footerOne}`}
                                     sx={{ backgroundColor: 'var(--primary-color-purple)', fontSize: '1rem', color: 'var(--letter-color)' }}
                                 >
-                                    Ponentes
+                                    {dictionary?.nav_main?.footer.speakers_label}
                                 </Item>
                             </Link>
                         </Grid>

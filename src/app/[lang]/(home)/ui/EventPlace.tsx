@@ -22,7 +22,7 @@ interface Props {
     dictionary: Awaited<ReturnType<typeof getDictionary>>;
 }
 
-const EventPlace = ({ }: Props) => {
+const EventPlace = ({ dictionary }: Props) => {
 
     const latitude = -12.092146981428527
     const longitude = -76.98001657796974
@@ -38,8 +38,8 @@ const EventPlace = ({ }: Props) => {
                 <Grid container spacing={4}>
                     <Grid item xs={12} lg={6}>
                         <SectionTitle
-                            title={<span className='text-[#3a3480] '>Ubícanos en</span>}
-                            subTitle={<span className='text-[#ffffff] '>¿Dónde se realizará?</span>}
+                            title={<span className='text-[#3a3480] '>{dictionary?.home?.location.title}</span>}
+                            subTitle={<span className='text-[#ffffff] '>{dictionary?.home?.location.subtitle}</span>}
                             showIcon={false}
                             lineaColor="3a3480"
                         />
@@ -48,7 +48,7 @@ const EventPlace = ({ }: Props) => {
                         </Box>
 
                         <Typography zIndex={1} className="z-2" variant="body1" fontSize="1.125rem">
-                            El evento se realizará en el Centro de Exposiciones Jockey Club, ubicado cerca de la carretera panamericana, en el sector de la Avenida 3 de Mayo.
+                            {dictionary?.home?.location.description}
                         </Typography>
 
                         <Box mt={10} display="flex" flexDirection="column" gap={2}>
@@ -58,7 +58,7 @@ const EventPlace = ({ }: Props) => {
                                     className="px-7 py-3 text-white flex items-center gap-2 text-lg font-bold"
                                 >
                                     <Icon icon={'simple-icons:waze'} width={20} height={20} />
-                                    <span>Abrir en Waze</span>
+                                    <span>{dictionary?.home?.location.open_waze}</span>
                                     <FaArrowRightLong size={14} />
                                 </CustomButton>
                             </Link>
@@ -69,7 +69,7 @@ const EventPlace = ({ }: Props) => {
                                     className="px-7 py-3 text-white flex items-center gap-2 text-lg font-bold"
                                 >
                                     <Icon icon={'simple-icons:googlemaps'} width={20} height={20} />
-                                    <span>Abrir en Google Maps</span>
+                                    <span>{dictionary?.home?.location.open_maps}</span>
                                     <FaArrowRightLong size={14} />
                                 </CustomButton>
                             </Link>
