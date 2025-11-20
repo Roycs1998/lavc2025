@@ -135,6 +135,35 @@
       "subtitle": "Patrocinadores"
     }
   },
+  "about": {
+    "hero_title": "NOSOTROS SOMOS LAVC",
+    "story": {
+      "title": "Conferencia Veterinaria Latinoamericana",
+      "description": "El LAVC nace del North American Veterinary Community (NAVC) basada en Gainesville, Florida, USA. El objetivo desde su inicio fue traer a Lima una pequeña porción del NAVC Conference (ahora VMX) en Orlando continuando la misión del NAVC de desarrollar mejores profesionales veterinarios en el mundo. Para cumplir nuestros objetivos el LAVC recibe participantes de todas partes del Perú y de distintas regiones de Latinoamérica. El esfuerzo del LAVC además ha servido para acercar a los profesionales y estudiantes de Medicina Veterinaria con la industria de salud animal, contribuyendo así al desarrollo y crecimiento de este segmento en los últimos años. El objetivo de llevar educación basada en calidad ha permitido que desde el 2017 la organización cuente con la certificación RACE (Registry of Approved Continuing Education). El LAVC es la primera y única organización con este tipo de certificación en toda Latinoamérica.",
+      "subtitle_one": "¿SABÍAS QUE?",
+      "paragraph_one": "El LAVC es una organización peruana sin fines de lucro que desde el 2005 reúne a los médicos veterinarios de Perú y Latinoamérica para ofrecerles educación continua de primer nivel y así contribuir al desarrollo de los profesionales y de la región.",
+      "subtitle_two": "Certificación RACE",
+      "paragraph_two": "Es un placer anunciar que el Latin American Veterinary Conference ha logrado alcanzar una de las certificaciones de calidad en Educación Continua más importantes a nivel mundial: la certificación otorgada por el American Association of Veterinary State Boards (AAVSB) denominada RACE (Registry of Approved Continuing Education). Una certificación de calidad mundial que se otorga a prestigiosos eventos de educación continua de nivel mundial como el North American Veterinary Community, Western States Veterinary Conference, World Veterinary Association, World Association of Veterinary Dermatology, British Small Animal Veterinary Association, entre otras. Esta importante aprobación confirma los casi 14 años de actividad continua e ininterrumpida de primera calidad y de mejora continua. Para el programa del 2019 tenemos aprobadas 84 horas de Educación Continua en la que un colega norteamericano o canadiense podrá acumular hasta un máximo de 18 horas de CE que le servirán para renovar su licencia profesional. Es un privilegio para Latinoamérica tener una organización con este tipo de certificación. Ahora el LAVC entre sus certificaciones de calidad incluye la RACE otorgada por la AAVSB.",
+      "image_alt": "Veterinarios asistiendo a la Conferencia Veterinaria Latinoamericana"
+    },
+    "mission": {
+      "title": "MISIÓN",
+      "description": "Ofrecer educación continua de primer nivel para todos los miembros de la comunidad de salud animal de América Latina."
+    },
+    "vision": {
+      "title": "VISIÓN",
+      "description": "Ser la organización de educación continua más enfocada en el médico veterinario de América Latina. Una organización en constante búsqueda hacia la excelencia y eficiencia organizacional. Ser la mejor organización de educación veterinaria a nivel mundial."
+    },
+    "labels": {
+      "more_info": "Más información",
+      "read_more": "Leer más",
+      "show_less": "Mostrar menos"
+    }
+  },
+  "program": {
+    "title": "PROGRAMA PRELIMINAR",
+    "location_label": "Ubicación:"
+  },
   "tourism":{
     "title": "Turismo",
     "subtitle": "Lo mejor del Perú para tu experiencia en LAVC 2026",

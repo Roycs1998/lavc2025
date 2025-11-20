@@ -27,6 +27,9 @@ interface Speaker {
   forButton?: string
   stepsFour?: string
   linkButton?: string
+  subTitleLabel?: string
+  readMoreLabel?: string
+  showLessLabel?: string
 }
 
 export const Informationletter = ({
@@ -42,7 +45,10 @@ export const Informationletter = ({
   formText,
   forButton,
   stepsFour,
-  linkButton
+  linkButton,
+  subTitleLabel,
+  readMoreLabel,
+  showLessLabel
 }: Speaker) => {
   const [isExpanded, setIsExpanded] = useState(false)
   const toggleExpand = () => setIsExpanded(!isExpanded)
@@ -54,7 +60,7 @@ export const Informationletter = ({
         <Grid item xs={12}>
           <SectionTitle
             title={title}
-            subTitle={<span>Más Información</span>}
+            subTitle={<span>{subTitleLabel || 'Más Información'}</span>}
             showIcon={false}
           />
         </Grid>
@@ -127,7 +133,7 @@ export const Informationletter = ({
                   variant="text"
                   sx={{ fontSize: '0.9rem', fontWeight: 'bold' }}
                 >
-                  {isExpanded ? 'Mostrar menos' : 'Leer más'}
+                  {isExpanded ? (showLessLabel || 'Mostrar menos') : (readMoreLabel || 'Leer más')}
                 </Button>
               </>
             )}

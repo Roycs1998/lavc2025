@@ -135,6 +135,35 @@
       "subtitle": "Sponsors"
     }
   },
+  "about": {
+    "hero_title": "WE ARE LAVC",
+    "story": {
+      "title": "Latin American Veterinary Conference",
+      "description": "LAVC was born from the North American Veterinary Community (NAVC) based in Gainesville, Florida, USA. From the beginning, the goal was to bring to Lima a small portion of the NAVC Conference (now VMX) in Orlando, continuing NAVC's mission of developing better veterinary professionals worldwide. To achieve our objectives, LAVC welcomes participants from all over Peru and Latin America. The effort of LAVC has also helped connect veterinary professionals and students with the animal health industry, contributing to this segment's development and growth in recent years. The goal of delivering quality-based education has allowed the organization to hold RACE (Registry of Approved Continuing Education) certification since 2017. LAVC is the first and only organization with this type of certification in all of Latin America.",
+      "subtitle_one": "DID YOU KNOW?",
+      "paragraph_one": "LAVC is a Peruvian non-profit organization that has brought together veterinarians from Peru and Latin America since 2005 to offer them top-level continuing education and thus contribute to the development of professionals and the region.",
+      "subtitle_two": "RACE Certification",
+      "paragraph_two": "We are pleased to announce that the Latin American Veterinary Conference has achieved one of the most important quality certifications in Continuing Education worldwide: the certification granted by the American Association of Veterinary State Boards (AAVSB), known as RACE (Registry of Approved Continuing Education). This world-class quality certification is awarded to prestigious continuing education events such as the North American Veterinary Community, Western States Veterinary Conference, World Veterinary Association, World Association of Veterinary Dermatology, and the British Small Animal Veterinary Association, among others. This important approval confirms nearly 14 years of continuous, high-quality activity and ongoing improvement. For the 2019 program, we have 84 hours of Continuing Education approved, in which a North American or Canadian colleague can accumulate up to a maximum of 18 CE hours to renew their professional license. It is a privilege for Latin America to have an organization with this type of certification. Now LAVC's quality certifications include the RACE granted by the AAVSB.",
+      "image_alt": "Veterinarians attending a Latin American Veterinary Conference"
+    },
+    "mission": {
+      "title": "MISSION",
+      "description": "Offer top-level continuing education for all members of the animal health community in Latin America."
+    },
+    "vision": {
+      "title": "VISION",
+      "description": "The continuing education organization most focused on Latin American veterinarians. An organization in constant pursuit of excellence and organizational efficiency. To be the best veterinary education organization worldwide."
+    },
+    "labels": {
+      "more_info": "More information",
+      "read_more": "Read more",
+      "show_less": "Show less"
+    }
+  },
+  "program": {
+    "title": "PRELIMINARY PROGRAM",
+    "location_label": "Location:"
+  },
   "tourism": {
     "title": "Tourism",
     "subtitle": "The best of Peru for your LAVC 2026 experience",

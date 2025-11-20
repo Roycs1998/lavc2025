@@ -7,6 +7,7 @@ interface ProgramInformation {
   image: string
   eventDescription?: string
   location?: string
+  locationLabel?: string
 }
 
 export const ProgramLetters = ({
@@ -15,7 +16,8 @@ export const ProgramLetters = ({
   exhibitorName,
   image,
   eventDescription,
-  location
+  location,
+  locationLabel
 }: ProgramInformation) => {
   return (
     <Card
@@ -73,7 +75,7 @@ export const ProgramLetters = ({
         {location && (
           <Typography variant='caption' sx={{ fontSize: '1.1rem', display: 'inline' }}>
             <Typography component='span' sx={{ marginRight: '5px' }}>
-              Location:
+              {locationLabel || 'Location:'}
             </Typography>
             <Typography component='span' sx={{ color: 'var(--yellow-color-lavc)' }}>
               {location}
