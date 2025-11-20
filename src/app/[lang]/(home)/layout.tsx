@@ -49,7 +49,7 @@ export default async function HomeLayout({ children, params }: Readonly<{ childr
       {children}
 
     </BlankLayout>
-    <SocialWidget phoneNumber="+51985174876" message="¡Hola! ¿En qué puedo ayudarte?" />
+    <SocialWidget phoneNumber="+51985174876" message={dictionary?.nav_main?.social_widget_message ?? '¡Hola! ¿En qué puedo ayudarte?'} />
     <FooterTwo dictionary={dictionary} />
   </Providers>
 )

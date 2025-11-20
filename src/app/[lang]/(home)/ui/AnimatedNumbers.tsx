@@ -16,11 +16,11 @@ interface Props {
   dictionary: Awaited<ReturnType<typeof getDictionary>>
 }
 
-const AnimatedNumbers = ({ }: Props) => {
+const AnimatedNumbers = ({ dictionary }: Props) => {
   const numbers = [
-    { title: 5500, icon: FaPeopleGroup , iconSize: 70, description: "Participantes" },
-    { title: 60, icon: IoBusiness, iconSize: 85, description: "Empresas" },
-    { title: 20, icon: MdOutlineEmojiEvents, iconSize: 75, description: "Años de experiencia"}
+    { title: 5500, icon: FaPeopleGroup , iconSize: 70, description: dictionary?.home?.numbers.participants },
+    { title: 60, icon: IoBusiness, iconSize: 85, description: dictionary?.home?.numbers.companies },
+    { title: 20, icon: MdOutlineEmojiEvents, iconSize: 75, description: dictionary?.home?.numbers.years_experience}
   ]
 
   const ref = useRef(null)

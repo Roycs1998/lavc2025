@@ -21,8 +21,8 @@ const Tourism = ({ dictionary }: Props) => {
                 <Grid container sx={{ bgcolor: 'var(--color-card-background)' }}>
                     <Grid item xs={12} className='p-10'>
                         <SectionTitle
-                            title={'Lima, Cusco y Puerto Maldonado'}
-                            subTitle={<span className="">Lo mejor del Perú para tu experiencia en LAVC 2026</span>}
+                            title={dictionary?.tourism.title}
+                            subTitle={<span className="">{dictionary?.tourism.subtitle}</span>}
                             showIcon={false}
                         />
 
@@ -45,7 +45,7 @@ const Tourism = ({ dictionary }: Props) => {
                         </div>
 
                         <SectionTitle
-                            subTitle={<span className="">Visita Lima</span>}
+                            subTitle={<span className="">{dictionary?.tourism.visit_lima}</span>}
                             showIcon={false}
                         />
                         <Grid container spacing={2} className="mb-5">
@@ -56,7 +56,7 @@ const Tourism = ({ dictionary }: Props) => {
                                     fileName="Tours Lima.pdf"
                                     newTab
                                 >
-                                    Itinerario
+                                    {dictionary?.tourism.itinerary}
                                 </CustomButton>
                             </Grid>
                             <Grid item xs={12} lg={6}>
@@ -66,13 +66,13 @@ const Tourism = ({ dictionary }: Props) => {
                                     fileName="Hotels Lima.pdf"
                                     newTab
                                 >
-                                    Hospedajes
+                                    {dictionary?.tourism.lodging}
                                 </CustomButton>
                             </Grid>
                         </Grid>
 
                         <SectionTitle
-                            subTitle={<span className="">Visita Cusco</span>}
+                            subTitle={<span className="">{dictionary?.tourism.visit_cusco}</span>}
                             showIcon={false}
                         />
                         <Grid container spacing={2} className="mb-5">
@@ -83,7 +83,7 @@ const Tourism = ({ dictionary }: Props) => {
                                     fileName="Cusco Express.pdf"
                                     newTab
                                 >
-                                    Cusco Express 3d2n
+                                    {dictionary?.tourism.cusco_express}
                                 </CustomButton>
                             </Grid>
                             <Grid item xs={12} lg={6}>
@@ -93,13 +93,13 @@ const Tourism = ({ dictionary }: Props) => {
                                     fileName="Discover Cusco.pdf"
                                     newTab
                                 >
-                                    Discover Cusco 4d3n
+                                    {dictionary?.tourism.discover_cusco}
                                 </CustomButton>
                             </Grid>
                         </Grid>
 
                         <SectionTitle
-                            subTitle={<span className="">Visita Amazonas</span>}
+                            subTitle={<span className="">{dictionary?.tourism.visit_amazon}</span>}
                             showIcon={false}
                         />
                         <Grid container spacing={2} className="mb-5">
@@ -110,22 +110,22 @@ const Tourism = ({ dictionary }: Props) => {
                                     fileName="Refugio Amazonas.pdf"
                                     newTab
                                 >
-                                    Refugio amazonas lodge
+                                    {dictionary?.tourism.amazon_lodge}
                                 </CustomButton>
                             </Grid>
                         </Grid>
 
 
                         <SectionTitle
-                            subTitle={<span className="">Más información</span>}
+                            subTitle={<span className="">{dictionary?.tourism.more_information}</span>}
                             showIcon={false}
                         />
                         <Typography variant='body1' className='text-justify mt-2' fontSize="1.125rem" >
-                            Whatsapp: +51 999357421
+                            {dictionary?.tourism.contact_whatsapp}: +51 999357421
                             <br />
-                            E-mail: eventos@impactaevents.com | congresos@impactatravel.com
+                            {dictionary?.tourism.contact_email}: eventos@impactaevents.com | congresos@impactatravel.com
                             <br />
-                            Web: <a href="https://www.impactatravel.com" target="_target">www.impactatravel.com</a>
+                            {dictionary?.tourism.contact_website}: <a href="https://www.impactatravel.com" target="_target">www.impactatravel.com</a>
                         </Typography>
                     </Grid>
                 </Grid>

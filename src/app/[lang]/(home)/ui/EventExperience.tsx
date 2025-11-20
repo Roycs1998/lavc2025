@@ -13,7 +13,7 @@ interface Props {
     dictionary: Awaited<ReturnType<typeof getDictionary>>
 }
 
-const EventExperience = ({  }: Props) => {
+const EventExperience = ({ dictionary }: Props) => {
 
 
     const handleClick = () => {
@@ -42,8 +42,8 @@ const EventExperience = ({  }: Props) => {
         {/* CONTENIDO */}
         <div className="relative z-10 max-w-7xl w-full mx-auto px-4 md:px-6 lg:px-8 flex flex-col justify-center py-10 gap-10">
           <SectionTitle
-            title={<span className='text-[#3a3480] '>Así fue el LAVC 2025</span>}
-            subTitle={<span className="text-backgroundPaper">Experiencia inolvidable</span>}
+            title={<span className='text-[#3a3480] '>{dictionary?.home?.experience.title}</span>}
+            subTitle={<span className="text-backgroundPaper">{dictionary?.home?.experience.subtitle}</span>}
             showIcon={false}
             lineaColor='3a3480'
           />
@@ -52,13 +52,9 @@ const EventExperience = ({  }: Props) => {
             <div className="rounded-2xl w-full">
               <div className="w-full md:w-3/4 flex flex-col gap-4 isolate">
                 <Typography variant="body1" className="text-white text-justify" fontSize="1.125rem" >
-                El LAVC 2025 fue una edición histórica. Más de 5,500 asistentes vivieron cuatro días intensos de aprendizaje, 
-                conexión y descubrimiento. Se realizaron más de 20 conferencias con ponentes internacionales, se presentaron 
-                nuevos tratamientos, productos y tecnologías, y se fortalecieron lazos entre profesionales de toda Latinoamérica.
-                <br />
-                No te pierdas la próxima edición: LAVC 2026 promete ser aún más grande, más enriquecedora y más impactante.
+                {dictionary?.home?.experience.description}
                 </Typography>
-                <CustomButton onClick={handleClick}>Ver video <Icon className='ml-2' icon="icon-park-twotone:play" width="26" height="26"/></CustomButton>
+                <CustomButton onClick={handleClick}>{dictionary?.home?.experience.cta} <Icon className='ml-2' icon="icon-park-twotone:play" width="26" height="26"/></CustomButton>
               </div>
             </div>
           </div>
