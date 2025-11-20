@@ -77,6 +77,7 @@ export const Navbar = ({ dictionary }: Props) => {
       subMenu: [
         { text: dictionary?.nav_main?.navbar.historic_photos, link: '/gallery' },
         { text: dictionary?.nav_main?.navbar.educational_material, link: '/libreria' },
+        { text: "Videos", link: '/videos' },
       ],
       image: 'https://4.bp.blogspot.com/-atz5WgBqCys/VxasgrWNCEI/AAAAAAAB9Ao/ClzFWC9eEEcOWygTP4l3m0rEXVpRTX1ggCKgB/s1600/Perritos-cachorros-162.jpg'
     }
