@@ -15,6 +15,9 @@ interface EventInformation {
 }
 
 export const EventLetter = ({ image, eventLocation, eventDate, eventName }: EventInformation) => {
+
+  const path = process.env.NEXT_PUBLIC_SPACE_URL || ''
+
   return (
     <Card
       sx={{
@@ -29,7 +32,7 @@ export const EventLetter = ({ image, eventLocation, eventDate, eventName }: Even
       <Box sx={{ height: '260px', width: '100%', overflow: 'hidden' }}>
         <Box
           component='img'
-          src={'https://tlavc-peru.org/tlavc/vista/'+image}
+          src={path+"/" + image}
           alt=''
           className='card-media'
           sx={{

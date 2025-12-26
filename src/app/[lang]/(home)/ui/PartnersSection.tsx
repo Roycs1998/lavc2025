@@ -36,7 +36,8 @@ const PartnersSection = ({ dictionary }: Props) => {
     "upload/companies/inaba.webp",
     "upload/companies/petNutricion.webp",
     "upload/companies/elanco.webp",
-    "upload/companies/MULTIVET.webp"
+    "upload/companies/MULTIVET.webp",
+    "upload/companies/catalysis.png"
   ]
 
   const logosRow2 = [

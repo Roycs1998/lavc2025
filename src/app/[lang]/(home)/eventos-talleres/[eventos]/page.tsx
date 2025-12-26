@@ -31,6 +31,7 @@ export interface Event {
 }
 
 const Eventos = ({ params }: EventParameters) => {
+  const path = process.env.NEXT_PUBLIC_SPACE_URL || ''
 
   const { eventos } = params
   const [workshop, setWorkshop] = useState<Workshop>()
@@ -90,7 +91,7 @@ const Eventos = ({ params }: EventParameters) => {
   return (
     <Box>
       <Box>
-        <CardImage image={workshop?.workshopPhoto ? `https://tlavc-peru.org/tlavc/vista/${workshop?.workshopPhoto}`: ''} title={workshop?.workshopName ?? ''} />
+        <CardImage image={workshop?.workshopPhoto ? `${path}/${workshop?.workshopPhoto}`: ''} title={workshop?.workshopName ?? ''} />
       </Box>
       <Box sx={{ bgcolor: 'var(--color-card-background)' }}>
         <Grid container spacing={5}>
@@ -126,7 +127,7 @@ const Eventos = ({ params }: EventParameters) => {
               <Divider sx={{ borderColor: 'gray', width: '100%' }} />
               <Box sx={{ marginTop: '6%' }}>
                 <EventDescriptionLetter
-                  eventImage={workshop?.workshopPhoto ? `https://tlavc-peru.org/tlavc/vista/${workshop?.workshopPhoto}`: ''}
+                  eventImage={workshop?.workshopPhoto ? `${path}/${workshop?.workshopPhoto}`: ''}
                   eventName={workshop?.workshopName.toUpperCase() ?? ''}
                   eventDescription={workshop?.workshopDescription ?? 'No cuenta con descripcion'}
                   startOfEvent={
